@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller=function() {
+  /* widget controller */
+  var c = this;
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.facility-card {&#13;
+&#13;
+    background: #ffffff;&#13;
+&#13;
+    border-radius: 16px;&#13;
+&#13;
+    padding: 20px;&#13;
+&#13;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);&#13;
+&#13;
+    height: 100%;&#13;
+}&#13;
+&#13;
+.facility-header {&#13;
+&#13;
+    font-size: 20px;&#13;
+&#13;
+    font-weight: 600;&#13;
+&#13;
+    color: #0d2d62;&#13;
+&#13;
+    margin-bottom: 15px;&#13;
+}&#13;
+&#13;
+.facility-status {&#13;
+&#13;
+    background: #eef5ff;&#13;
+&#13;
+    border-radius: 10px;&#13;
+&#13;
+    padding: 10px;&#13;
+&#13;
+    font-weight: 600;&#13;
+&#13;
+    color: #0d2d62;&#13;
+&#13;
+    margin-bottom: 15px;&#13;
+}&#13;
+&#13;
+.status-circle {&#13;
+&#13;
+    display: inline-block;&#13;
+&#13;
+    width: 10px;&#13;
+&#13;
+    height: 10px;&#13;
+&#13;
+    border-radius: 50%;&#13;
+&#13;
+    background: #28a745;&#13;
+&#13;
+    margin-right: 8px;&#13;
+}&#13;
+&#13;
+.facility-summary {&#13;
+&#13;
+    background: #f8fbff;&#13;
+&#13;
+    border-left: 4px solid #1f6bff;&#13;
+&#13;
+    padding: 12px;&#13;
+&#13;
+    border-radius: 8px;&#13;
+&#13;
+    margin-bottom: 15px;&#13;
+&#13;
+    color: #444;&#13;
+}&#13;
+&#13;
+.facility-metrics {&#13;
+&#13;
+    display: flex;&#13;
+&#13;
+    justify-content: space-between;&#13;
+&#13;
+    gap: 10px;&#13;
+&#13;
+    margin-bottom: 15px;&#13;
+}&#13;
+&#13;
+.metric-box {&#13;
+&#13;
+    flex: 1;&#13;
+&#13;
+    background: linear-gradient(&#13;
+        135deg,&#13;
+        #0d2d62,&#13;
+        #1f6bff&#13;
+    );&#13;
+&#13;
+    color: white;&#13;
+&#13;
+    text-align: center;&#13;
+&#13;
+    border-radius: 12px;&#13;
+&#13;
+    padding: 12px;&#13;
+}&#13;
+&#13;
+.metric-value {&#13;
+&#13;
+    font-size: 24px;&#13;
+&#13;
+    font-weight: bold;&#13;
+}&#13;
+&#13;
+.metric-label {&#13;
+&#13;
+    font-size: 12px;&#13;
+}&#13;
+&#13;
+.priority-section ul {&#13;
+&#13;
+    padding-left: 18px;&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>facility_health_center</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Facility Health Center</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    data.status = "Facility Operating Normally";
+
+    data.adherence = 96;
+
+    data.attention = 3;
+
+    data.refills = 2;
+
+    data.summary =
+        "Overall medication adherence remains strong today. Three residents require follow-up and two refill requests are awaiting approval.";
+
+    data.priorityPatients = [
+
+        {name: "Samantha - Missed morning medication"},
+
+        {name: "Lakshmi - Refill request pending"},
+
+        {name: "Robert Brown - Delayed medication administration"}
+
+    ];
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>meghanaa.penumetsa</sys_created_by>
+        <sys_created_on>2026-06-12 05:21:25</sys_created_on>
+        <sys_id>e338dba3e41903107f4444f39d0290c6</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>Facility Health Center</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_widget_e338dba3e41903107f4444f39d0290c6</sys_update_name>
+        <sys_updated_by>meghanaa.penumetsa</sys_updated_by>
+        <sys_updated_on>2026-06-12 05:25:28</sys_updated_on>
+        <template><![CDATA[<div class="facility-card">
+
+    <div class="facility-header">
+        ]]>🏥<![CDATA[ Facility Health Center
+    </div>
+
+    <div class="facility-status">
+        <span class="status-circle"></span>
+        {{data.status}}
+    </div>
+
+    <div class="facility-summary">
+        {{data.summary}}
+    </div>
+
+    <div class="facility-metrics">
+
+        <div class="metric-box">
+            <div class="metric-value">{{data.adherence}}%</div>
+            <div class="metric-label">Adherence</div>
+        </div>
+
+        <div class="metric-box">
+            <div class="metric-value">{{data.attention}}</div>
+            <div class="metric-label">Need Attention</div>
+        </div>
+
+        <div class="metric-box">
+            <div class="metric-value">{{data.refills}}</div>
+            <div class="metric-label">Pending Refills</div>
+        </div>
+
+    </div>
+
+    <div class="priority-section">
+
+        <h5>❤️ Residents Requiring Attention</h5>
+
+        <ul>
+            <li ng-repeat="patient in data.priorityPatients">
+                {{patient.name}}
+            </li>
+        </ul>
+
+    </div>
+
+</div>]]></template>
+    </sp_widget>
+</record_update>

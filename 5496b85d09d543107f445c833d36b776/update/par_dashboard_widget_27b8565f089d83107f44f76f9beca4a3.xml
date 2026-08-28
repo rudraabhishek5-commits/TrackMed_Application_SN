@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="par_dashboard_widget">
+    <par_dashboard_widget action="INSERT_OR_UPDATE">
+        <canvas display_value="">f945cbf2bd1907107f446e5ccea4076c</canvas>
+        <component display_value="Donut">a2b0596cec6b9d49dd1ff9bf76b5084b</component>
+        <component_props>{"showLoadingIndicator":false,"sharedContext":{"colorDetails":{"1b62e7b70f0002104919700d7b767eda":[{"sysId":"1b62e7b70f0002104919700d7b767eda","defaultColor":"0,153,25","cssCustomProperty":""}],"f721ab7b9f5c73001bb9baac757fcf09":[{"sysId":"f721ab7b9f5c73001bb9baac757fcf09","defaultColor":"40,78,109","cssCustomProperty":"--now-datavis_color--blue-9"}]},"datasourceConfigurations":{"table":{"timeZone":"SESSION","useSeriesLabels":false}}},"componentId":"lsabwddv","showTotalAggregate":false,"showSubAggregate":false,"showFirstGroupAggregate":false,"showSecondGroupAggregate":false,"hideMatrixAggregate":false,"newReporting":false,"bareBorder":false,"filterPerMetric":[],"sortBy":"value","configVersion":"23.0.0-ci-SNAPSHOT","showMaximumRange":false,"showDateRangeByDefault":false,"allowChangeDateRange":false,"scoreType":null,"enableRealTimeUpdate":false,"allowAdditionalGroupByPerMetric":false,"showMetricLabel":true,"showTotalValue":false,"rangesConfig":{},"colorConfig":{"type":"default"},"showSparkline":false,"applyDateRange":false,"dataSources":[{"isDatabaseView":false,"allowRealTime":true,"label":"Dose log","sourceType":"table","tableOrViewName":"x_snc_trackmed_dose_log","filterQuery":"","preferredVisualizations":["d24d53f60350de7a652caf3188a46ed2"],"id":"dGFibGV4X3NuY190cmFja21lZF9kb3NlX2xvZzE3ODEyMDUyODc4ODI=","dataCategories":["trend","group","simple"]}],"groupBy":[{"groupBy":[{"dataSource":"dGFibGV4X3NuY190cmFja21lZF9kb3NlX2xvZzE3ODEyMDUyODc4ODI=","groupByField":"status","isRange":false,"isChoice":true,"isPaBucket":false}],"maxNumberOfGroups":10,"numberOfGroupsBasedOn":"NO_OF_GROUP_BASED_ON_PER_METRIC","showOthers":false,"disableRanges":false}],"metrics":[{"dataSource":"dGFibGV4X3NuY190cmFja21lZF9kb3NlX2xvZzE3ODEyMDUyODc4ODI=","id":"ZEdGaWJHVjRYM051WTE5MGNtRmphMjFsWkY5a2IzTmxYMnh2WnpFM09ERXlNRFV5T0RjNE9EST0xNzgxMjA1MjkwMDAw","aggregateFunction":"COUNT","numberFormat":{"customFormat":false},"axisId":"primary"}],"sortByOrder":"desc","headerTitle":"✅ Medication Compliance","headerColor":{"themeVariable":"--now-color_background--primary","value":"#ffffff"},"showRegisterValue":true,"showRegisterOnSameLine":true,"showRegisterPercentage":true,"showRegister":false,"legendExpandToFit":false,"followFilters":false,"showFilterIcon":false,"showFilterAsSeparateSeries":false,"showDataTable":false,"showDataLabels":false,"dataLabelsType":"percent","truncationType":"start"}</component_props>
+        <h>16</h>
+        <name/>
+        <required_translations>[{"comment":"","code":"PAR_DASHBOARD.f1450bf2bd1907107f446e5ccea40779.27b8565f089d83107f44f76f9beca4a3","message":"Dose log"},{"comment":"","code":"PAR_DASHBOARD.f1450bf2bd1907107f446e5ccea40779.27b8565f089d83107f44f76f9beca4a3","message":"✅ Medication Compliance"}]</required_translations>
+        <stored_component/>
+        <sys_class_name>par_dashboard_widget</sys_class_name>
+        <sys_created_by>meghanaa.penumetsa</sys_created_by>
+        <sys_created_on>2026-06-11 05:58:22</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>27b8565f089d83107f44f76f9beca4a3</sys_id>
+        <sys_mod_count>8</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>par_dashboard_widget_27b8565f089d83107f44f76f9beca4a3</sys_update_name>
+        <sys_updated_by>meghanaa.penumetsa</sys_updated_by>
+        <sys_updated_on>2026-06-11 19:42:10</sys_updated_on>
+        <visualization/>
+        <w>12</w>
+        <widget_props/>
+        <x>13</x>
+        <y>12</y>
+    </par_dashboard_widget>
+</record_update>

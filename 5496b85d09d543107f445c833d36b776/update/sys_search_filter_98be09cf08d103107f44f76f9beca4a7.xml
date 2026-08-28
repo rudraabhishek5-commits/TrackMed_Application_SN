@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_search_filter">
+    <sys_search_filter action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <ais_search_source display_value="Now Assist Q&amp;A">6ead854f08d103107f44f76f9beca4a5</ais_search_source>
+        <label>Knowledge</label>
+        <name>Now Assist Q&amp;A</name>
+        <order>400</order>
+        <search_context_config display_value="TrackMed Buddy">daad854f08d103107f44f76f9beca436</search_context_config>
+        <sys_class_name>sys_search_filter</sys_class_name>
+        <sys_created_by>rangewar.ashirwad</sys_created_by>
+        <sys_created_on>2026-06-10 05:56:22</sys_created_on>
+        <sys_id>98be09cf08d103107f44f76f9beca4a7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Now Assist Q&amp;A</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sys_search_filter_98be09cf08d103107f44f76f9beca4a7</sys_update_name>
+        <sys_updated_by>rangewar.ashirwad</sys_updated_by>
+        <sys_updated_on>2026-06-10 05:56:22</sys_updated_on>
+    </sys_search_filter>
+</record_update>

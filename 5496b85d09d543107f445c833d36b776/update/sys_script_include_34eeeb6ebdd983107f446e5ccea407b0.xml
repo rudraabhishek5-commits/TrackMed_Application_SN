@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_snc_trackmed.AutoMedUtils</api_name>
+        <caller_access/>
+        <client_callable>true</client_callable>
+        <description/>
+        <mobile_callable>false</mobile_callable>
+        <name>AutoMedUtils</name>
+        <sandbox_callable>false</sandbox_callable>
+        <script><![CDATA[var AutoMedUtils = Class.create();
+AutoMedUtils.prototype = Object.extendsObject(AbstractAjaxProcessor, {
+    getScheduleDetails: function() {
+        var scheduleId = this.getParameter("sysparm_schedule_id");
+        var gr = new GlideRecord("x_snc_trackmed_medication_schedule_table");
+        if (gr.get(scheduleId)) {
+            var result = {
+                patient: gr.getValue("patient"),
+                caretaker: gr.getValue("caretaker"),
+                medication: gr.getValue("medication_name"),
+                frequency: gr.getValue("frequency")
+            };
+            return JSON.stringify(result);
+        }
+        return JSON.stringify({});
+    },
+    getLowStockSchedules: function() {
+        var results = [];
+        var gr = new GlideRecord("x_snc_trackmed_medication_schedule_table");
+        gr.addQuery("state", "active");
+        gr.addEncodedQuery(
+            "stock_quantityLEFIELDlow_stock_threshold");
+        gr.query();
+        while (gr.next()) {
+            results.push({
+                sysId: gr.getUniqueValue(),
+                patient: gr.getDisplayValue("patient"),
+                medication: gr.getValue("medication_name"),
+                stock: gr.getValue("stock_quantity")
+            });
+        }
+        return JSON.stringify(results);
+    },
+    type: "AutoMedUtils"
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>vignesh.pitchai</sys_created_by>
+        <sys_created_on>2026-06-09 04:40:13</sys_created_on>
+        <sys_id>34eeeb6ebdd983107f446e5ccea407b0</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>AutoMedUtils</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sys_script_include_34eeeb6ebdd983107f446e5ccea407b0</sys_update_name>
+        <sys_updated_by>vignesh.pitchai</sys_updated_by>
+        <sys_updated_on>2026-06-10 09:29:27</sys_updated_on>
+    </sys_script_include>
+</record_update>

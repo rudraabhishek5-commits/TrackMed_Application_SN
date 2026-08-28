@@ -1,0 +1,2413 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_hub_action_type_definition">
+    <sys_hub_action_type_definition action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <acls/>
+        <action_status/>
+        <action_template/>
+        <active>true</active>
+        <annotation/>
+        <attributes>{labelCacheCleanUpExecuted=true}</attributes>
+        <authored_on_release_version>28100</authored_on_release_version>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Calculate Dose Times Based on Frequency</description>
+        <flow_priority/>
+        <ih_action>false</ih_action>
+        <internal_name>script_step</internal_name>
+        <label_cache>[{"name":"{{action.reminder_time}}","label":"action➛reminder_time","type":"action","ref":"","reference_display":"","base_type":"glide_date_time","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.frequency}}","label":"action➛frequency","type":"action","ref":"","reference_display":"","base_type":"choice","parent_table_name":"","column_name":"","choices":[{"label":"Once Daily","value":"once_Daily","order":0.0},{"label":"Twice Day","value":"twice_Daily","order":1.0},{"label":"Thrice Daily","value":"thrice_Daily","order":2.0},{"label":"As Needed","value":"as_Needed","order":3.0}],"attributes":{"uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"choice","uiUniqueId":"1c7ba26b-4393-4ede-86d0-4032814ec43f"}},{"name":"{{step[bc692834-50f7-423d-8978-241af6ecd9be].dose_times}}","label":"step➛Script step➛dose_times","type":"step","ref":"","reference_display":"","base_type":"array.string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","sourceUiUniqueId":"","sourceType":"","uiType":"string","uiUniqueId":"3165fc78-ae63-454c-a82b-c3b5fe6c0fc4"}}]</label_cache>
+        <master_snapshot>35cc44f2bd11c3107f446e5ccea40760</master_snapshot>
+        <master_snapshot_digest/>
+        <name>Script Step</name>
+        <natlang/>
+        <outputs/>
+        <outputs/>
+        <pre_compiled>false</pre_compiled>
+        <state>published</state>
+        <sys_class_name>sys_hub_action_type_definition</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 05:59:01</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>ddb5c0f2bddd83107f446e5ccea40768</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Script Step</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sys_hub_action_type_definition_ddb5c0f2bddd83107f446e5ccea40768</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 00:45:50</sys_updated_on>
+        <system_level>false</system_level>
+        <type/>
+    </sys_hub_action_type_definition>
+    <sys_translated_text action="delete_multiple" query="documentkey=ddb5c0f2bddd83107f446e5ccea40768"/>
+    <sys_variable_value action="delete_multiple" query="document_key=ddb5c0f2bddd83107f446e5ccea40768"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_type_definition</document>
+        <document_key>ddb5c0f2bddd83107f446e5ccea40768</document_key>
+        <order>2</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:01:35</sys_created_on>
+        <sys_id>47468076bddd83107f446e5ccea4079c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:01:35</sys_updated_on>
+        <value>0</value>
+        <variable display_value="Don't Treat as Error">8b468076bddd83107f446e5ccea40767</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_type_definition</document>
+        <document_key>ddb5c0f2bddd83107f446e5ccea40768</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:01:35</sys_created_on>
+        <sys_id>8b468076bddd83107f446e5ccea4079c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:01:35</sys_updated_on>
+        <value>{"version":"1.0","serializationFormat":"JSON","complexObjectSchema":{"FlowDesigner:FDACTIONSTATUS":{"code":"Integer","code.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"Integer\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"integer\",\"default_value\":\"\",\"label\":\"Code\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"1\",\"max_length\":\"40\"}"},"message":"String","message.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"String\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"string\",\"default_value\":\"\",\"label\":\"Message\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"2\",\"max_length\":\"4000\"}"}},"FlowDesigner:FDACTIONSTATUS.$type_facets":{"SimpleMapFacet":"{\"default_value\":\"\",\"label\":\"Action Status\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"uiUniqueId\":\"794bc342-9c9d-444b-a3f2-dd4b6a5a0173\",\"uiTypeLabel\":\"Object\",\"co_type_name\":\"FDACTIONSTATUS\",\"element_mapping_provider\":\"com.glide.flow_design.action.data.FlowDesignVariableMapper\",\"read_only\":\"false\",\"hint\":null,\"uiType\":\"object\",\"order\":\"1\",\"max_length\":\"65000\"}"}},"complexObject":{"code":{"$cv":{"$c":"java.lang.String","$v":""}},"message":{"$cv":{"$c":"java.lang.String","$v":""}}}}</value>
+        <variable display_value="Action Status">87468076bddd83107f446e5ccea40760</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=ddb5c0f2bddd83107f446e5ccea40768"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>dose_times</field>
+        <id>ddb5c0f2bddd83107f446e5ccea40768</id>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 07:18:52</sys_created_on>
+        <sys_id>07f79cfabd51c3107f446e5ccea407b5</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 07:26:04</sys_updated_on>
+        <table>var__m_sys_hub_action_output_ddb5c0f2bddd83107f446e5ccea40768</table>
+        <value>{{step[bc692834-50f7-423d-8978-241af6ecd9be].dose_times}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>__action_status__</field>
+        <id>ddb5c0f2bddd83107f446e5ccea40768</id>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:01:35</sys_created_on>
+        <sys_id>83468076bddd83107f446e5ccea4079c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:01:35</sys_updated_on>
+        <table>var__m_sys_hub_action_output_ddb5c0f2bddd83107f446e5ccea40768</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>__dont_treat_as_error__</field>
+        <id>ddb5c0f2bddd83107f446e5ccea40768</id>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:01:35</sys_created_on>
+        <sys_id>8f468076bddd83107f446e5ccea4079b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:01:35</sys_updated_on>
+        <table>var__m_sys_hub_action_output_ddb5c0f2bddd83107f446e5ccea40768</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_hub_step_instance action="delete_multiple" query="action=ddb5c0f2bddd83107f446e5ccea40768^sys_idNOT INba468076bddd83107f446e5ccea4073b"/>
+    <sys_hub_step_instance action="INSERT_OR_UPDATE">
+        <action display_value="Script Step">ddb5c0f2bddd83107f446e5ccea40768</action>
+        <cid>bc692834-50f7-423d-8978-241af6ecd9be</cid>
+        <error_handling_type>1</error_handling_type>
+        <extended_inputs/>
+        <extended_inputs/>
+        <extended_outputs/>
+        <icon/>
+        <inputs/>
+        <label>Script step</label>
+        <order>1</order>
+        <outputs/>
+        <section/>
+        <step_type display_value="Script">106afb6647032200b4fad7527c9a71e7</step_type>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:01:34</sys_created_on>
+        <sys_id>ba468076bddd83107f446e5ccea4073b</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:29:01</sys_updated_on>
+    </sys_hub_step_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=ba468076bddd83107f446e5ccea4073b"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>ba468076bddd83107f446e5ccea4073b</document_key>
+        <order>400</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:01:34</sys_created_on>
+        <sys_id>3a468076bddd83107f446e5ccea4075b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:01:34</sys_updated_on>
+        <value>35aa573fd7802200bdbaee5b5e610375</value>
+        <variable display_value="MID Application">f5e56d79b3101300176b051a16a8dce4</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>ba468076bddd83107f446e5ccea4073b</document_key>
+        <order>600</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:01:34</sys_created_on>
+        <sys_id>72468076bddd83107f446e5ccea4075c</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:29:01</sys_updated_on>
+        <value>(function execute(inputs, outputs) {&#13;
+var times = []; &#13;
+var base = new GlideDateTime(inputs.reminder_time); &#13;
+if (inputs.frequency === 'once_Daily') { &#13;
+times.push(base.getValue()); &#13;
+} else if (inputs.frequency === 'twice_Daily') { &#13;
+times.push(base.getValue()); &#13;
+var second = new GlideDateTime(inputs.reminder_time); &#13;
+second.addSeconds(43200); // +12 hours &#13;
+times.push(second.getValue()); &#13;
+} else if (inputs.frequency === 'thrice_Daily') { &#13;
+times.push(base.getValue()); &#13;
+var dose2 = new GlideDateTime(inputs.reminder_time); &#13;
+dose2.addSeconds(28800); // +8 hours &#13;
+times.push(dose2.getValue()); &#13;
+var dose3 = new GlideDateTime(inputs.reminder_time); &#13;
+dose3.addSeconds(57600); // +16 hours &#13;
+times.push(dose3.getValue()); &#13;
+} &#13;
+outputs.dose_times = JSON.stringify(times);&#13;
+})(inputs, outputs);&#13;
+</value>
+        <variable display_value="Script">71aa7f6647032200b4fad7527c9a719b</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>ba468076bddd83107f446e5ccea4073b</document_key>
+        <order>0</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:29:01</sys_created_on>
+        <sys_id>c19c4cb2bd11c3107f446e5ccea40793</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:29:01</sys_updated_on>
+        <value/>
+        <variable display_value="">3c9c4cb2bd11c3107f446e5ccea4074e</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=ba468076bddd83107f446e5ccea4073b"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>frequency</field>
+        <id>ba468076bddd83107f446e5ccea4073b</id>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:29:01</sys_created_on>
+        <sys_id>019c4cb2bd11c3107f446e5ccea40793</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:29:01</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_ba468076bddd83107f446e5ccea4073b</table>
+        <value>{{action.frequency}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>reminder_time</field>
+        <id>ba468076bddd83107f446e5ccea4073b</id>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:29:01</sys_created_on>
+        <sys_id>059c4cb2bd11c3107f446e5ccea40792</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:29:01</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_ba468076bddd83107f446e5ccea4073b</table>
+        <value>{{action.reminder_time}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_step_ext_output_ba468076bddd83107f446e5ccea4073b^id=ba468076bddd83107f446e5ccea4073b"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7^id=ba468076bddd83107f446e5ccea4073b"/>
+    <sys_translated_text action="delete_multiple" query="documentkey=ba468076bddd83107f446e5ccea4073b"/>
+    <sys_hub_step_ext_input action="delete_multiple" query="model=ba468076bddd83107f446e5ccea4073b^sys_idNOT IN3c9c4cb2bd11c3107f446e5ccea4074e,b09c4cb2bd11c3107f446e5ccea40780"/>
+    <sys_hub_step_ext_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=glide_date_time,uiTypeLabel=Date/Time</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>reminder_time</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">glide_date_time</internal_type>
+        <label/>
+        <mandatory>true</mandatory>
+        <max_length>40</max_length>
+        <model display_value="Script step">ba468076bddd83107f446e5ccea4073b</model>
+        <model_id>ba468076bddd83107f446e5ccea4073b</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_input_ba468076bddd83107f446e5ccea4073b</name>
+        <next_element/>
+        <order>0</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_input</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:29:01</sys_created_on>
+        <sys_id>3c9c4cb2bd11c3107f446e5ccea4074e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:29:01</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_input>
+    <sys_hub_step_ext_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=choice,uiTypeLabel=Choice</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice>1</choice>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>frequency</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Choice">choice</internal_type>
+        <label/>
+        <mandatory>true</mandatory>
+        <max_length>40</max_length>
+        <model display_value="Script step">ba468076bddd83107f446e5ccea4073b</model>
+        <model_id>ba468076bddd83107f446e5ccea4073b</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_input_ba468076bddd83107f446e5ccea4073b</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_input</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:29:01</sys_created_on>
+        <sys_id>b09c4cb2bd11c3107f446e5ccea40780</sys_id>
+        <sys_mod_count>19</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 08:30:19</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_input>
+    <sys_hub_step_ext_output action="delete_multiple" query="model=ba468076bddd83107f446e5ccea4073b^sys_idNOT IN0ae71cfabd51c3107f446e5ccea4074d"/>
+    <sys_complex_object action="INSERT_OR_UPDATE">
+        <label/>
+        <name>FD789954fef751c3106d34d9ec7b63d231</name>
+        <namespace>FlowDesigner</namespace>
+        <scope_name>5496b85d09d543107f445c833d36b776</scope_name>
+        <serialized_content>{"FlowDesigner:FD789954fef751c3106d34d9ec7b63d231":{"$COCollectionField":["String"],"$COCollectionField.$field_facets":{"SimpleMapFacet":"{\"up-shift-collection-level\":\"true\"}"}},"FlowDesigner:FD789954fef751c3106d34d9ec7b63d231.$type_facets":{"SimpleMapFacet":"{\"sourceId\":\"\",\"choiceOption\":\"\",\"default_value\":\"\",\"child_hint\":\"\",\"child_maxsize\":\"\",\"label\":\"dose_times\",\"mandatory\":\"false\",\"child_name\":\"dose_times_child0\",\"uiUniqueId\":\"3165fc78-ae63-454c-a82b-c3b5fe6c0fc4\",\"uiTypeLabel\":\"Array.String\",\"co_type_name\":\"FD789954fef751c3106d34d9ec7b63d231\",\"child_label\":\"dose_times_child0\",\"child_type_label\":\"String\",\"element_mapping_provider\":\"com.glide.flow_design.action.data.FlowDesignVariableMapper\",\"read_only\":\"false\",\"sourceUiUniqueId\":\"\",\"sourceType\":\"\",\"hint\":\"\",\"uiType\":\"array.string\",\"child_defaultValue\":\"\",\"child_type\":\"string\",\"order\":\"1\",\"max_length\":\"65000\",\"child_uiUniqueId\":\"6e04ce5e-a58f-40a8-9722-93535e38977c\"}"}}</serialized_content>
+        <sys_class_name>sys_complex_object</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 07:25:49</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>7c9954febd51c3107f446e5ccea40731</sys_id>
+        <sys_mod_count>8</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 08:30:19</sys_updated_on>
+        <type>complex_object_collection</type>
+    </sys_complex_object>
+    <sys_hub_step_ext_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>child_label=dose_times_child0,child_name=dose_times_child0,child_type=string,child_type_label=String,child_uiUniqueId=6e04ce5e-a58f-40a8-9722-93535e38977c,co_type_name=FD789954fef751c3106d34d9ec7b63d231,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=array.string,uiTypeLabel=Array.String,uiUniqueId=3165fc78-ae63-454c-a82b-c3b5fe6c0fc4</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>dose_times</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>dose_times</label>
+        <mandatory>false</mandatory>
+        <max_length>65000</max_length>
+        <model display_value="Script step">ba468076bddd83107f446e5ccea4073b</model>
+        <model_id>ba468076bddd83107f446e5ccea4073b</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_output_ba468076bddd83107f446e5ccea4073b</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_output</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 07:18:32</sys_created_on>
+        <sys_id>0ae71cfabd51c3107f446e5ccea4074d</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 07:25:49</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_output>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=ba468076bddd83107f446e5ccea4073b"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>dose_times</element>
+        <help/>
+        <hint/>
+        <label>dose_times</label>
+        <language>en</language>
+        <name>var__m_sys_hub_step_ext_output_ba468076bddd83107f446e5ccea4073b</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 07:18:32</sys_created_on>
+        <sys_id>c2e71cfabd51c3107f446e5ccea40752</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>dose_times</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sys_documentation_var__m_sys_hub_step_ext_output_ba468076bddd83107f446e5ccea4073b_dose_times_en</sys_update_name>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 07:18:32</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_hub_action_input action="delete_multiple" query="model=ddb5c0f2bddd83107f446e5ccea40768^sys_idNOT IN2c9c0cb2bd11c3107f446e5ccea407de,709c4cb2bd11c3107f446e5ccea4070c"/>
+    <sys_hub_action_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=glide_date_time,uiTypeLabel=Date/Time,uiUniqueId=aebad344-3bbd-4dca-8194-95ec82da2290</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>reminder_time</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">glide_date_time</internal_type>
+        <label>reminder_time</label>
+        <mandatory>false</mandatory>
+        <max_length>40</max_length>
+        <model display_value="Script Step">ddb5c0f2bddd83107f446e5ccea40768</model>
+        <model_id>ddb5c0f2bddd83107f446e5ccea40768</model_id>
+        <model_table>sys_hub_action_type_definition</model_table>
+        <name>var__m_sys_hub_action_input_ddb5c0f2bddd83107f446e5ccea40768</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_input</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:29:00</sys_created_on>
+        <sys_id>2c9c0cb2bd11c3107f446e5ccea407de</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:29:00</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=2c9c0cb2bd11c3107f446e5ccea407de"/>
+    <sys_hub_action_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=choice,uiTypeLabel=Choice,uiUniqueId=1c7ba26b-4393-4ede-86d0-4032814ec43f</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice>3</choice>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value>as_Needed</default_value>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>frequency</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Choice">choice</internal_type>
+        <label>frequency</label>
+        <mandatory>false</mandatory>
+        <max_length>32</max_length>
+        <model display_value="Script Step">ddb5c0f2bddd83107f446e5ccea40768</model>
+        <model_id>ddb5c0f2bddd83107f446e5ccea40768</model_id>
+        <model_table>sys_hub_action_type_definition</model_table>
+        <name>var__m_sys_hub_action_input_ddb5c0f2bddd83107f446e5ccea40768</name>
+        <next_element/>
+        <order>2</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_input</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:29:00</sys_created_on>
+        <sys_id>709c4cb2bd11c3107f446e5ccea4070c</sys_id>
+        <sys_mod_count>36</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 08:30:18</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=709c4cb2bd11c3107f446e5ccea4070c"/>
+    <sys_hub_action_output action="delete_multiple" query="model=ddb5c0f2bddd83107f446e5ccea40768^sys_idNOT IN87468076bddd83107f446e5ccea40760,8b468076bddd83107f446e5ccea40767,9eb0143ebd11c3107f446e5ccea40783"/>
+    <sys_hub_action_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>action_error_output=true,co_type_name=FDACTIONSTATUS,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=object,uiTypeLabel=Object,uiUniqueId=11a84926-6a14-40f2-82d5-809fcb21fea0</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>__action_status__</element>
+        <element_prototype/>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_link/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Action Status</label>
+        <mandatory>false</mandatory>
+        <max_length>65000</max_length>
+        <model display_value="Script Step">ddb5c0f2bddd83107f446e5ccea40768</model>
+        <model_id>ddb5c0f2bddd83107f446e5ccea40768</model_id>
+        <model_table>sys_hub_action_type_definition</model_table>
+        <name>var__m_sys_hub_action_output_ddb5c0f2bddd83107f446e5ccea40768</name>
+        <next_element/>
+        <order>2</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_output</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:01:35</sys_created_on>
+        <sys_id>87468076bddd83107f446e5ccea40760</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:47:08</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_output>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=87468076bddd83107f446e5ccea40760"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=87468076bddd83107f446e5ccea40760"/>
+    <sys_hub_action_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>action_error_output=true,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=boolean,uiTypeLabel=True/False,uiUniqueId=237f8c70-8fef-47aa-899f-61190529bcca,visible_in_ui=false</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value>true</default_value>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>__dont_treat_as_error__</element>
+        <element_prototype/>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_link/>
+        <internal_type display_value="">boolean</internal_type>
+        <label>Don't Treat as Error</label>
+        <mandatory>false</mandatory>
+        <max_length>40</max_length>
+        <model display_value="Script Step">ddb5c0f2bddd83107f446e5ccea40768</model>
+        <model_id>ddb5c0f2bddd83107f446e5ccea40768</model_id>
+        <model_table>sys_hub_action_type_definition</model_table>
+        <name>var__m_sys_hub_action_output_ddb5c0f2bddd83107f446e5ccea40768</name>
+        <next_element/>
+        <order>3</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_output</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:01:35</sys_created_on>
+        <sys_id>8b468076bddd83107f446e5ccea40767</sys_id>
+        <sys_mod_count>39</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 08:30:19</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_output>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=8b468076bddd83107f446e5ccea40767"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=8b468076bddd83107f446e5ccea40767"/>
+    <sys_complex_object action="INSERT_OR_UPDATE">
+        <label/>
+        <name>FDcf7bd4f21991c310cef8dbe095e9ff97</name>
+        <namespace>FlowDesigner</namespace>
+        <scope_name>5496b85d09d543107f445c833d36b776</scope_name>
+        <serialized_content>{"FlowDesigner:FDcf7bd4f21991c310cef8dbe095e9ff97":{"$COCollectionField":["String"],"$COCollectionField.$field_facets":{"SimpleMapFacet":"{\"up-shift-collection-level\":\"true\"}"}},"FlowDesigner:FDcf7bd4f21991c310cef8dbe095e9ff97.$type_facets":{"SimpleMapFacet":"{\"sourceId\":\"\",\"child_hint\":\"\",\"child_maxsize\":\"\",\"mandatory\":\"false\",\"child_name\":\"dose_times_child0\",\"uiTypeLabel\":\"Array.String\",\"co_type_name\":\"FDcf7bd4f21991c310cef8dbe095e9ff97\",\"child_label\":\"dose_times_child0\",\"element_mapping_provider\":\"com.glide.flow_design.action.data.FlowDesignVariableMapper\",\"read_only\":\"false\",\"order\":\"1\",\"max_length\":\"65000\",\"pwd2droppable\":\"true\",\"choiceOption\":\"\",\"default_value\":\"\",\"label\":\"dose_times\",\"uiUniqueId\":\"13c72155-94f0-401e-904e-c0d8cd18a755\",\"child_type_label\":\"String\",\"sourceUiUniqueId\":\"\",\"sourceType\":\"\",\"hint\":\"\",\"uiType\":\"array.string\",\"child_defaultValue\":\"\",\"child_type\":\"string\",\"child_uiUniqueId\":\"a827fdcd-8f96-45b2-b7bd-d84575e3cb21\"}"}}</serialized_content>
+        <sys_class_name>sys_complex_object</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 07:34:09</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>c37bd4f2bd91c3107f446e5ccea40798</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 08:30:19</sys_updated_on>
+        <type>complex_object_collection</type>
+    </sys_complex_object>
+    <sys_hub_action_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>child_label=dose_times_child0,child_name=dose_times_child0,child_type=string,child_type_label=String,child_uiUniqueId=a827fdcd-8f96-45b2-b7bd-d84575e3cb21,co_type_name=FDcf7bd4f21991c310cef8dbe095e9ff97,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,pwd2droppable=true,uiType=array.string,uiTypeLabel=Array.String,uiUniqueId=13c72155-94f0-401e-904e-c0d8cd18a755</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>dose_times</element>
+        <element_prototype/>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_link/>
+        <internal_type display_value="String">string</internal_type>
+        <label>dose_times</label>
+        <mandatory>false</mandatory>
+        <max_length>65000</max_length>
+        <model display_value="Script Step">ddb5c0f2bddd83107f446e5ccea40768</model>
+        <model_id>ddb5c0f2bddd83107f446e5ccea40768</model_id>
+        <model_table>sys_hub_action_type_definition</model_table>
+        <name>var__m_sys_hub_action_output_ddb5c0f2bddd83107f446e5ccea40768</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_output</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:47:08</sys_created_on>
+        <sys_id>9eb0143ebd11c3107f446e5ccea40783</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 07:34:09</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_output>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=9eb0143ebd11c3107f446e5ccea40783"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=9eb0143ebd11c3107f446e5ccea40783"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=ddb5c0f2bddd83107f446e5ccea40768"/>
+    <sys_hub_action_status_metadata action="delete_multiple" query="action_type_id=ddb5c0f2bddd83107f446e5ccea40768^sys_idNOT IN87468076bddd83107f446e5ccea4079e"/>
+    <sys_hub_action_status_metadata action="INSERT_OR_UPDATE">
+        <action_type_id display_value="Script Step">ddb5c0f2bddd83107f446e5ccea40768</action_type_id>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:01:35</sys_created_on>
+        <sys_id>87468076bddd83107f446e5ccea4079e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:01:35</sys_updated_on>
+    </sys_hub_action_status_metadata>
+    <sys_hub_status_condition action="delete_multiple" query="action_status_metadata_id=87468076bddd83107f446e5ccea4079e"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>frequency</element>
+        <help/>
+        <hint/>
+        <label>frequency</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_input_ddb5c0f2bddd83107f446e5ccea40768</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:29:00</sys_created_on>
+        <sys_id>b89c4cb2bd11c3107f446e5ccea40717</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>frequency</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_input_ddb5c0f2bddd83107f446e5ccea40768_frequency_en</sys_update_name>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:29:00</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>reminder_time</element>
+        <help/>
+        <hint/>
+        <label>reminder_time</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_input_ddb5c0f2bddd83107f446e5ccea40768</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:29:00</sys_created_on>
+        <sys_id>f49c0cb2bd11c3107f446e5ccea407e5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>reminder_time</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_input_ddb5c0f2bddd83107f446e5ccea40768_reminder_time_en</sys_update_name>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:29:00</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_action_input_ddb5c0f2bddd83107f446e5ccea40768^sys_idNOT IN349c4cb2bd11c3107f446e5ccea40710,749c4cb2bd11c3107f446e5ccea40712,b89c4cb2bd11c3107f446e5ccea40711,fc9c4cb2bd11c3107f446e5ccea40710"/>
+    <sys_choice field="frequency" table="var__m_sys_hub_action_input_ddb5c0f2bddd83107f446e5ccea40768">
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>frequency</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Once Daily</label>
+            <language>en</language>
+            <name>var__m_sys_hub_action_input_ddb5c0f2bddd83107f446e5ccea40768</name>
+            <sequence>0</sequence>
+            <synonyms/>
+            <sys_created_by>abhishek.pathak</sys_created_by>
+            <sys_created_on>2026-06-09 06:29:00</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>349c4cb2bd11c3107f446e5ccea40710</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>abhishek.pathak</sys_updated_by>
+            <sys_updated_on>2026-06-09 06:29:48</sys_updated_on>
+            <value>once_Daily</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>frequency</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>As Needed</label>
+            <language>en</language>
+            <name>var__m_sys_hub_action_input_ddb5c0f2bddd83107f446e5ccea40768</name>
+            <sequence>3</sequence>
+            <synonyms/>
+            <sys_created_by>abhishek.pathak</sys_created_by>
+            <sys_created_on>2026-06-09 06:29:00</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>749c4cb2bd11c3107f446e5ccea40712</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>abhishek.pathak</sys_updated_by>
+            <sys_updated_on>2026-06-09 06:29:48</sys_updated_on>
+            <value>as_Needed</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>frequency</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Thrice Daily</label>
+            <language>en</language>
+            <name>var__m_sys_hub_action_input_ddb5c0f2bddd83107f446e5ccea40768</name>
+            <sequence>2</sequence>
+            <synonyms/>
+            <sys_created_by>abhishek.pathak</sys_created_by>
+            <sys_created_on>2026-06-09 06:29:00</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>b89c4cb2bd11c3107f446e5ccea40711</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>abhishek.pathak</sys_updated_by>
+            <sys_updated_on>2026-06-09 06:29:48</sys_updated_on>
+            <value>thrice_Daily</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>frequency</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Twice Day</label>
+            <language>en</language>
+            <name>var__m_sys_hub_action_input_ddb5c0f2bddd83107f446e5ccea40768</name>
+            <sequence>1</sequence>
+            <synonyms/>
+            <sys_created_by>abhishek.pathak</sys_created_by>
+            <sys_created_on>2026-06-09 06:29:00</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>fc9c4cb2bd11c3107f446e5ccea40710</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>abhishek.pathak</sys_updated_by>
+            <sys_updated_on>2026-06-09 06:29:48</sys_updated_on>
+            <value>twice_Daily</value>
+        </sys_choice>
+    </sys_choice>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>dose_times</element>
+        <help/>
+        <hint/>
+        <label>dose_times</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_output_ddb5c0f2bddd83107f446e5ccea40768</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:47:08</sys_created_on>
+        <sys_id>12b0143ebd11c3107f446e5ccea40789</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>dose_times</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_output_ddb5c0f2bddd83107f446e5ccea40768_dose_times_en</sys_update_name>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:47:08</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>__action_status__</element>
+        <help/>
+        <hint/>
+        <label>Action Status</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_output_ddb5c0f2bddd83107f446e5ccea40768</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:01:35</sys_created_on>
+        <sys_id>47468076bddd83107f446e5ccea40766</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Action Status</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_output_ddb5c0f2bddd83107f446e5ccea40768___action_status___en</sys_update_name>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:01:35</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>__dont_treat_as_error__</element>
+        <help/>
+        <hint/>
+        <label>Don't Treat as Error</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_output_ddb5c0f2bddd83107f446e5ccea40768</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:01:35</sys_created_on>
+        <sys_id>87468076bddd83107f446e5ccea40795</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Don't Treat as Error</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_output_ddb5c0f2bddd83107f446e5ccea40768___dont_treat_as_error___en</sys_update_name>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:01:35</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_action_output_ddb5c0f2bddd83107f446e5ccea40768"/>
+    <sys_hub_action_plan action="delete_multiple" query="action_id=ddb5c0f2bddd83107f446e5ccea40768^sys_idNOT IN92cc84f2bd11c3107f446e5ccea40704"/>
+    <sys_hub_action_plan action="INSERT_OR_UPDATE">
+        <action_id display_value="Script Step">ddb5c0f2bddd83107f446e5ccea40768</action_id>
+        <plan>{"type":"PlanProxy","persistor":{"@class":".ChunkingPlanPersistor","table":"sys_hub_action_plan","id":"92cc84f2bd11c3107f446e5ccea40704","name":"plan","plan_signature":null}}</plan>
+        <snapshot>ce586832bd15c3107f446e5ccea4071f</snapshot>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:29:56</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>92cc84f2bd11c3107f446e5ccea40704</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope/>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 08:30:21</sys_updated_on>
+    </sys_hub_action_plan>
+    <sys_hub_action_type_snapshot action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <acls/>
+        <action_status/>
+        <action_template/>
+        <annotation/>
+        <attributes>{labelCacheCleanUpExecuted=true}</attributes>
+        <authored_on_release_version>28100</authored_on_release_version>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Calculate Dose Times Based on Frequency</description>
+        <flow_priority/>
+        <internal_name>script_step</internal_name>
+        <label_cache>[{"name":"{{action.reminder_time}}","label":"action➛reminder_time","type":"action","ref":"","reference_display":"","base_type":"glide_date_time","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.frequency}}","label":"action➛frequency","type":"action","ref":"","reference_display":"","base_type":"choice","parent_table_name":"","column_name":"","choices":[{"label":"Once Daily","value":"once_Daily","order":0.0},{"label":"Twice Day","value":"twice_Daily","order":1.0},{"label":"Thrice Daily","value":"thrice_Daily","order":2.0},{"label":"As Needed","value":"as_Needed","order":3.0}],"attributes":{"uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"choice","uiUniqueId":"1c7ba26b-4393-4ede-86d0-4032814ec43f"}},{"name":"{{step[bc692834-50f7-423d-8978-241af6ecd9be].dose_times}}","label":"step➛Script step➛dose_times","type":"step","ref":"","reference_display":"","base_type":"array.string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","sourceUiUniqueId":"","sourceType":"","uiType":"string","uiUniqueId":"3165fc78-ae63-454c-a82b-c3b5fe6c0fc4"}}]</label_cache>
+        <master>true</master>
+        <name>Script Step</name>
+        <natlang/>
+        <outputs/>
+        <outputs/>
+        <parent_action display_value="Script Step">ddb5c0f2bddd83107f446e5ccea40768</parent_action>
+        <sys_class_name>sys_hub_action_type_snapshot</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:29:54</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>35cc44f2bd11c3107f446e5ccea40760</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 07:26:09</sys_updated_on>
+        <system_level>false</system_level>
+        <type/>
+    </sys_hub_action_type_snapshot>
+    <sys_translated_text action="delete_multiple" query="documentkey=35cc44f2bd11c3107f446e5ccea40760"/>
+    <sys_variable_value action="delete_multiple" query="document_key=35cc44f2bd11c3107f446e5ccea40760"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_type_snapshot</document>
+        <document_key>35cc44f2bd11c3107f446e5ccea40760</document_key>
+        <order>2</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:29:55</sys_created_on>
+        <sys_id>02cc44f2bd11c3107f446e5ccea407c6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:29:55</sys_updated_on>
+        <value>0</value>
+        <variable display_value="Don't Treat as Error">42cc44f2bd11c3107f446e5ccea407b9</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_type_snapshot</document>
+        <document_key>35cc44f2bd11c3107f446e5ccea40760</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:29:55</sys_created_on>
+        <sys_id>06cc44f2bd11c3107f446e5ccea407c6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:29:55</sys_updated_on>
+        <value>{"version":"1.0","serializationFormat":"JSON","complexObjectSchema":{"FlowDesigner:FDACTIONSTATUS":{"code":"Integer","code.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"Integer\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"integer\",\"default_value\":\"\",\"label\":\"Code\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"1\",\"max_length\":\"40\"}"},"message":"String","message.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"String\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"string\",\"default_value\":\"\",\"label\":\"Message\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"2\",\"max_length\":\"4000\"}"}},"FlowDesigner:FDACTIONSTATUS.$type_facets":{"SimpleMapFacet":"{\"default_value\":\"\",\"label\":\"Action Status\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"uiUniqueId\":\"794bc342-9c9d-444b-a3f2-dd4b6a5a0173\",\"uiTypeLabel\":\"Object\",\"co_type_name\":\"FDACTIONSTATUS\",\"element_mapping_provider\":\"com.glide.flow_design.action.data.FlowDesignVariableMapper\",\"read_only\":\"false\",\"hint\":null,\"uiType\":\"object\",\"order\":\"1\",\"max_length\":\"65000\"}"}},"complexObject":{"code":{"$cv":{"$c":"java.lang.String","$v":""}},"message":{"$cv":{"$c":"java.lang.String","$v":""}}}}</value>
+        <variable display_value="Action Status">8ecc44f2bd11c3107f446e5ccea407b2</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=35cc44f2bd11c3107f446e5ccea40760"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>dose_times</field>
+        <id>35cc44f2bd11c3107f446e5ccea40760</id>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 07:18:58</sys_created_on>
+        <sys_id>e808103ebd51c3107f446e5ccea4078d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 07:18:58</sys_updated_on>
+        <table>var__m_sys_hub_action_output_35cc44f2bd11c3107f446e5ccea40760</table>
+        <value>{{step[bc692834-50f7-423d-8978-241af6ecd9be].dose_times}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>__action_status__</field>
+        <id>35cc44f2bd11c3107f446e5ccea40760</id>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:29:55</sys_created_on>
+        <sys_id>4ecc44f2bd11c3107f446e5ccea407c5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:29:55</sys_updated_on>
+        <table>var__m_sys_hub_action_output_35cc44f2bd11c3107f446e5ccea40760</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>__dont_treat_as_error__</field>
+        <id>35cc44f2bd11c3107f446e5ccea40760</id>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:29:55</sys_created_on>
+        <sys_id>4acc44f2bd11c3107f446e5ccea407c5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:29:55</sys_updated_on>
+        <table>var__m_sys_hub_action_output_35cc44f2bd11c3107f446e5ccea40760</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_hub_step_instance action="delete_multiple" query="action=35cc44f2bd11c3107f446e5ccea40760^sys_idNOT IN82cc44f2bd11c3107f446e5ccea40794"/>
+    <sys_hub_step_instance action="INSERT_OR_UPDATE">
+        <action display_value="Script Step">35cc44f2bd11c3107f446e5ccea40760</action>
+        <cid>bc692834-50f7-423d-8978-241af6ecd9be</cid>
+        <error_handling_type>1</error_handling_type>
+        <extended_inputs/>
+        <extended_inputs/>
+        <extended_outputs/>
+        <icon/>
+        <inputs/>
+        <label>Script step</label>
+        <order>1</order>
+        <outputs/>
+        <section/>
+        <step_type display_value="Script">106afb6647032200b4fad7527c9a71e7</step_type>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:29:55</sys_created_on>
+        <sys_id>82cc44f2bd11c3107f446e5ccea40794</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:29:55</sys_updated_on>
+    </sys_hub_step_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=82cc44f2bd11c3107f446e5ccea40794"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>82cc44f2bd11c3107f446e5ccea40794</document_key>
+        <order>400</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:29:55</sys_created_on>
+        <sys_id>02cc44f2bd11c3107f446e5ccea407ae</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:29:55</sys_updated_on>
+        <value>35aa573fd7802200bdbaee5b5e610375</value>
+        <variable display_value="MID Application">f5e56d79b3101300176b051a16a8dce4</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>82cc44f2bd11c3107f446e5ccea40794</document_key>
+        <order>600</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:29:55</sys_created_on>
+        <sys_id>06cc44f2bd11c3107f446e5ccea407ae</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:29:55</sys_updated_on>
+        <value>(function execute(inputs, outputs) {&#13;
+var times = []; &#13;
+var base = new GlideDateTime(inputs.reminder_time); &#13;
+if (inputs.frequency === 'once_Daily') { &#13;
+times.push(base.getValue()); &#13;
+} else if (inputs.frequency === 'twice_Daily') { &#13;
+times.push(base.getValue()); &#13;
+var second = new GlideDateTime(inputs.reminder_time); &#13;
+second.addSeconds(43200); // +12 hours &#13;
+times.push(second.getValue()); &#13;
+} else if (inputs.frequency === 'thrice_Daily') { &#13;
+times.push(base.getValue()); &#13;
+var dose2 = new GlideDateTime(inputs.reminder_time); &#13;
+dose2.addSeconds(28800); // +8 hours &#13;
+times.push(dose2.getValue()); &#13;
+var dose3 = new GlideDateTime(inputs.reminder_time); &#13;
+dose3.addSeconds(57600); // +16 hours &#13;
+times.push(dose3.getValue()); &#13;
+} &#13;
+outputs.dose_times = JSON.stringify(times);&#13;
+})(inputs, outputs);&#13;
+</value>
+        <variable display_value="Script">71aa7f6647032200b4fad7527c9a719b</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>82cc44f2bd11c3107f446e5ccea40794</document_key>
+        <order>0</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:29:55</sys_created_on>
+        <sys_id>c6cc44f2bd11c3107f446e5ccea407af</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:29:55</sys_updated_on>
+        <value/>
+        <variable display_value="reminder_time">46cc44f2bd11c3107f446e5ccea40798</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=82cc44f2bd11c3107f446e5ccea40794"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>frequency</field>
+        <id>82cc44f2bd11c3107f446e5ccea40794</id>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:29:55</sys_created_on>
+        <sys_id>06cc44f2bd11c3107f446e5ccea407af</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:29:55</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_82cc44f2bd11c3107f446e5ccea40794</table>
+        <value>{{action.frequency}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>reminder_time</field>
+        <id>82cc44f2bd11c3107f446e5ccea40794</id>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:29:55</sys_created_on>
+        <sys_id>02cc44f2bd11c3107f446e5ccea407af</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:29:55</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_82cc44f2bd11c3107f446e5ccea40794</table>
+        <value>{{action.reminder_time}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_step_ext_output_82cc44f2bd11c3107f446e5ccea40794^id=82cc44f2bd11c3107f446e5ccea40794"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7^id=82cc44f2bd11c3107f446e5ccea40794"/>
+    <sys_translated_text action="delete_multiple" query="documentkey=82cc44f2bd11c3107f446e5ccea40794"/>
+    <sys_hub_step_ext_input action="delete_multiple" query="model=82cc44f2bd11c3107f446e5ccea40794^sys_idNOT IN46cc44f2bd11c3107f446e5ccea40798,cecc44f2bd11c3107f446e5ccea4079c"/>
+    <sys_hub_step_ext_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=glide_date_time,uiTypeLabel=Date/Time</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>reminder_time</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">glide_date_time</internal_type>
+        <label>reminder_time</label>
+        <mandatory>true</mandatory>
+        <max_length>40</max_length>
+        <model display_value="Script step">82cc44f2bd11c3107f446e5ccea40794</model>
+        <model_id>82cc44f2bd11c3107f446e5ccea40794</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_input_82cc44f2bd11c3107f446e5ccea40794</name>
+        <next_element/>
+        <order>0</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_input</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:29:55</sys_created_on>
+        <sys_id>46cc44f2bd11c3107f446e5ccea40798</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:29:55</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_input>
+    <sys_hub_step_ext_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=choice,uiTypeLabel=Choice</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice>1</choice>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>frequency</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Choice">choice</internal_type>
+        <label>frequency</label>
+        <mandatory>true</mandatory>
+        <max_length>40</max_length>
+        <model display_value="Script step">82cc44f2bd11c3107f446e5ccea40794</model>
+        <model_id>82cc44f2bd11c3107f446e5ccea40794</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_input_82cc44f2bd11c3107f446e5ccea40794</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_input</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:29:55</sys_created_on>
+        <sys_id>cecc44f2bd11c3107f446e5ccea4079c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:29:55</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_input>
+    <sys_hub_step_ext_output action="delete_multiple" query="model=82cc44f2bd11c3107f446e5ccea40794^sys_idNOT IN0ecc44f2bd11c3107f446e5ccea407a2"/>
+    <sys_complex_object action="INSERT_OR_UPDATE">
+        <label/>
+        <name>FD3da958fe9a51c310fba759c18d8c895a</name>
+        <namespace>FlowDesigner</namespace>
+        <scope_name>5496b85d09d543107f445c833d36b776</scope_name>
+        <serialized_content>{"FlowDesigner:FD3da958fe9a51c310fba759c18d8c895a":{"$COCollectionField":["String"],"$COCollectionField.$field_facets":{"SimpleMapFacet":"{\"up-shift-collection-level\":\"true\"}"}},"FlowDesigner:FD3da958fe9a51c310fba759c18d8c895a.$type_facets":{"SimpleMapFacet":"{\"choiceOption\":\"\",\"default_value\":\"\",\"label\":\"dose_times\",\"mandatory\":\"false\",\"child_name\":\"dose_times_child0\",\"uiUniqueId\":\"3165fc78-ae63-454c-a82b-c3b5fe6c0fc4\",\"uiTypeLabel\":\"Array.String\",\"co_type_name\":\"FD3da958fe9a51c310fba759c18d8c895a\",\"child_label\":\"dose_times_child0\",\"child_type_label\":\"String\",\"element_mapping_provider\":\"com.glide.flow_design.action.data.FlowDesignVariableMapper\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"array.string\",\"child_type\":\"string\",\"order\":\"1\",\"max_length\":\"65000\",\"child_uiUniqueId\":\"6e04ce5e-a58f-40a8-9722-93535e38977c\"}"}}</serialized_content>
+        <sys_class_name>sys_complex_object</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 07:26:09</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>31a958febd51c3107f446e5ccea4075b</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 08:30:20</sys_updated_on>
+        <type>complex_object_collection</type>
+    </sys_complex_object>
+    <sys_hub_step_ext_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>child_label=dose_times_child0,child_name=dose_times_child0,child_type=string,child_type_label=String,child_uiUniqueId=6e04ce5e-a58f-40a8-9722-93535e38977c,co_type_name=FD3da958fe9a51c310fba759c18d8c895a,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=array.string,uiTypeLabel=Array.String,uiUniqueId=3165fc78-ae63-454c-a82b-c3b5fe6c0fc4</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>dose_times</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>dose_times</label>
+        <mandatory>false</mandatory>
+        <max_length>65000</max_length>
+        <model display_value="Script step">82cc44f2bd11c3107f446e5ccea40794</model>
+        <model_id>82cc44f2bd11c3107f446e5ccea40794</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_output_82cc44f2bd11c3107f446e5ccea40794</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_output</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:29:55</sys_created_on>
+        <sys_id>0ecc44f2bd11c3107f446e5ccea407a2</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 07:26:09</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_output>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=82cc44f2bd11c3107f446e5ccea40794"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>dose_times</element>
+        <help/>
+        <hint/>
+        <label>dose_times</label>
+        <language>en</language>
+        <name>var__m_sys_hub_step_ext_output_82cc44f2bd11c3107f446e5ccea40794</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:29:55</sys_created_on>
+        <sys_id>8acc44f2bd11c3107f446e5ccea407a6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>dose_times</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sys_documentation_var__m_sys_hub_step_ext_output_82cc44f2bd11c3107f446e5ccea40794_dose_times_en</sys_update_name>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:29:55</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_hub_action_input action="delete_multiple" query="model=35cc44f2bd11c3107f446e5ccea40760^sys_idNOT IN39cc44f2bd11c3107f446e5ccea40765,4acc44f2bd11c3107f446e5ccea40777"/>
+    <sys_hub_action_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=glide_date_time,uiTypeLabel=Date/Time,uiUniqueId=aebad344-3bbd-4dca-8194-95ec82da2290</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>reminder_time</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">glide_date_time</internal_type>
+        <label>reminder_time</label>
+        <mandatory>false</mandatory>
+        <max_length>40</max_length>
+        <model display_value="Script Step">35cc44f2bd11c3107f446e5ccea40760</model>
+        <model_id>35cc44f2bd11c3107f446e5ccea40760</model_id>
+        <model_table>sys_hub_action_type_snapshot</model_table>
+        <name>var__m_sys_hub_action_input_35cc44f2bd11c3107f446e5ccea40760</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_input</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:29:54</sys_created_on>
+        <sys_id>39cc44f2bd11c3107f446e5ccea40765</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:29:54</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=39cc44f2bd11c3107f446e5ccea40765"/>
+    <sys_hub_action_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=choice,uiTypeLabel=Choice,uiUniqueId=1c7ba26b-4393-4ede-86d0-4032814ec43f</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice>3</choice>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value>as_Needed</default_value>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>frequency</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Choice">choice</internal_type>
+        <label>frequency</label>
+        <mandatory>false</mandatory>
+        <max_length>32</max_length>
+        <model display_value="Script Step">35cc44f2bd11c3107f446e5ccea40760</model>
+        <model_id>35cc44f2bd11c3107f446e5ccea40760</model_id>
+        <model_table>sys_hub_action_type_snapshot</model_table>
+        <name>var__m_sys_hub_action_input_35cc44f2bd11c3107f446e5ccea40760</name>
+        <next_element/>
+        <order>2</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_input</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:29:54</sys_created_on>
+        <sys_id>4acc44f2bd11c3107f446e5ccea40777</sys_id>
+        <sys_mod_count>13</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 08:30:20</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=4acc44f2bd11c3107f446e5ccea40777"/>
+    <sys_hub_action_output action="delete_multiple" query="model=35cc44f2bd11c3107f446e5ccea40760^sys_idNOT IN2808103ebd51c3107f446e5ccea40779,42cc44f2bd11c3107f446e5ccea407b9,8ecc44f2bd11c3107f446e5ccea407b2"/>
+    <sys_complex_object action="INSERT_OR_UPDATE">
+        <label/>
+        <name>FDa88b58f25491c3100e9fcaefe82c7a09</name>
+        <namespace>FlowDesigner</namespace>
+        <scope_name>5496b85d09d543107f445c833d36b776</scope_name>
+        <serialized_content>{"FlowDesigner:FDa88b58f25491c3100e9fcaefe82c7a09":{"$COCollectionField":["String"],"$COCollectionField.$field_facets":{"SimpleMapFacet":"{\"up-shift-collection-level\":\"true\"}"}},"FlowDesigner:FDa88b58f25491c3100e9fcaefe82c7a09.$type_facets":{"SimpleMapFacet":"{\"pwd2droppable\":\"true\",\"choiceOption\":\"\",\"default_value\":\"\",\"label\":\"dose_times\",\"mandatory\":\"false\",\"child_name\":\"dose_times_child0\",\"uiUniqueId\":\"13c72155-94f0-401e-904e-c0d8cd18a755\",\"uiTypeLabel\":\"Array.String\",\"co_type_name\":\"FDa88b58f25491c3100e9fcaefe82c7a09\",\"child_label\":\"dose_times_child0\",\"child_type_label\":\"String\",\"element_mapping_provider\":\"com.glide.flow_design.action.data.FlowDesignVariableMapper\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"array.string\",\"child_type\":\"string\",\"order\":\"1\",\"max_length\":\"65000\",\"child_uiUniqueId\":\"a827fdcd-8f96-45b2-b7bd-d84575e3cb21\"}"}}</serialized_content>
+        <sys_class_name>sys_complex_object</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 07:34:15</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>ac8b58f2bd91c3107f446e5ccea40709</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 08:30:20</sys_updated_on>
+        <type>complex_object_collection</type>
+    </sys_complex_object>
+    <sys_hub_action_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>child_label=dose_times_child0,child_name=dose_times_child0,child_type=string,child_type_label=String,child_uiUniqueId=a827fdcd-8f96-45b2-b7bd-d84575e3cb21,co_type_name=FDa88b58f25491c3100e9fcaefe82c7a09,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,pwd2droppable=true,uiType=array.string,uiTypeLabel=Array.String,uiUniqueId=13c72155-94f0-401e-904e-c0d8cd18a755</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>dose_times</element>
+        <element_prototype/>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_link/>
+        <internal_type display_value="String">string</internal_type>
+        <label>dose_times</label>
+        <mandatory>false</mandatory>
+        <max_length>65000</max_length>
+        <model display_value="Script Step">35cc44f2bd11c3107f446e5ccea40760</model>
+        <model_id>35cc44f2bd11c3107f446e5ccea40760</model_id>
+        <model_table>sys_hub_action_type_snapshot</model_table>
+        <name>var__m_sys_hub_action_output_35cc44f2bd11c3107f446e5ccea40760</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_output</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 07:18:58</sys_created_on>
+        <sys_id>2808103ebd51c3107f446e5ccea40779</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 07:34:15</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_output>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=2808103ebd51c3107f446e5ccea40779"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=2808103ebd51c3107f446e5ccea40779"/>
+    <sys_hub_action_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>action_error_output=true,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=boolean,uiTypeLabel=True/False,uiUniqueId=237f8c70-8fef-47aa-899f-61190529bcca,visible_in_ui=false</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value>true</default_value>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>__dont_treat_as_error__</element>
+        <element_prototype/>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_link/>
+        <internal_type display_value="">boolean</internal_type>
+        <label>Don't Treat as Error</label>
+        <mandatory>false</mandatory>
+        <max_length>40</max_length>
+        <model display_value="Script Step">35cc44f2bd11c3107f446e5ccea40760</model>
+        <model_id>35cc44f2bd11c3107f446e5ccea40760</model_id>
+        <model_table>sys_hub_action_type_snapshot</model_table>
+        <name>var__m_sys_hub_action_output_35cc44f2bd11c3107f446e5ccea40760</name>
+        <next_element/>
+        <order>3</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_output</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:29:55</sys_created_on>
+        <sys_id>42cc44f2bd11c3107f446e5ccea407b9</sys_id>
+        <sys_mod_count>13</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 08:30:20</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_output>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=42cc44f2bd11c3107f446e5ccea407b9"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=42cc44f2bd11c3107f446e5ccea407b9"/>
+    <sys_hub_action_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>action_error_output=true,co_type_name=FDACTIONSTATUS,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=object,uiTypeLabel=Object,uiUniqueId=11a84926-6a14-40f2-82d5-809fcb21fea0</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>__action_status__</element>
+        <element_prototype/>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_link/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Action Status</label>
+        <mandatory>false</mandatory>
+        <max_length>65000</max_length>
+        <model display_value="Script Step">35cc44f2bd11c3107f446e5ccea40760</model>
+        <model_id>35cc44f2bd11c3107f446e5ccea40760</model_id>
+        <model_table>sys_hub_action_type_snapshot</model_table>
+        <name>var__m_sys_hub_action_output_35cc44f2bd11c3107f446e5ccea40760</name>
+        <next_element/>
+        <order>2</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_output</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:29:55</sys_created_on>
+        <sys_id>8ecc44f2bd11c3107f446e5ccea407b2</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 07:18:58</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_output>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=8ecc44f2bd11c3107f446e5ccea407b2"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=8ecc44f2bd11c3107f446e5ccea407b2"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=35cc44f2bd11c3107f446e5ccea40760"/>
+    <sys_hub_action_status_metadata action="delete_multiple" query="action_type_id=35cc44f2bd11c3107f446e5ccea40760^sys_idNOT INcacc44f2bd11c3107f446e5ccea407c7"/>
+    <sys_hub_action_status_metadata action="INSERT_OR_UPDATE">
+        <action_type_id display_value="Script Step">35cc44f2bd11c3107f446e5ccea40760</action_type_id>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:29:55</sys_created_on>
+        <sys_id>cacc44f2bd11c3107f446e5ccea407c7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:29:55</sys_updated_on>
+    </sys_hub_action_status_metadata>
+    <sys_hub_status_condition action="delete_multiple" query="action_status_metadata_id=cacc44f2bd11c3107f446e5ccea407c7"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>frequency</element>
+        <help/>
+        <hint/>
+        <label>frequency</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_input_35cc44f2bd11c3107f446e5ccea40760</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:29:55</sys_created_on>
+        <sys_id>42cc44f2bd11c3107f446e5ccea4078d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>frequency</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_input_35cc44f2bd11c3107f446e5ccea40760_frequency_en</sys_update_name>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:29:55</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>reminder_time</element>
+        <help/>
+        <hint/>
+        <label>reminder_time</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_input_35cc44f2bd11c3107f446e5ccea40760</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:29:54</sys_created_on>
+        <sys_id>86cc44f2bd11c3107f446e5ccea40776</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>reminder_time</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_input_35cc44f2bd11c3107f446e5ccea40760_reminder_time_en</sys_update_name>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:29:54</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_action_input_35cc44f2bd11c3107f446e5ccea40760^sys_idNOT IN02cc44f2bd11c3107f446e5ccea4077b,4acc44f2bd11c3107f446e5ccea4077b,82cc44f2bd11c3107f446e5ccea4077c,cacc44f2bd11c3107f446e5ccea4077c"/>
+    <sys_choice field="frequency" table="var__m_sys_hub_action_input_35cc44f2bd11c3107f446e5ccea40760">
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>frequency</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Once Daily</label>
+            <language>en</language>
+            <name>var__m_sys_hub_action_input_35cc44f2bd11c3107f446e5ccea40760</name>
+            <sequence>0</sequence>
+            <synonyms/>
+            <sys_created_by>abhishek.pathak</sys_created_by>
+            <sys_created_on>2026-06-09 06:29:54</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>02cc44f2bd11c3107f446e5ccea4077b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>abhishek.pathak</sys_updated_by>
+            <sys_updated_on>2026-06-09 06:29:54</sys_updated_on>
+            <value>once_Daily</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>frequency</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Twice Day</label>
+            <language>en</language>
+            <name>var__m_sys_hub_action_input_35cc44f2bd11c3107f446e5ccea40760</name>
+            <sequence>1</sequence>
+            <synonyms/>
+            <sys_created_by>abhishek.pathak</sys_created_by>
+            <sys_created_on>2026-06-09 06:29:54</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>4acc44f2bd11c3107f446e5ccea4077b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>abhishek.pathak</sys_updated_by>
+            <sys_updated_on>2026-06-09 06:29:54</sys_updated_on>
+            <value>twice_Daily</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>frequency</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Thrice Daily</label>
+            <language>en</language>
+            <name>var__m_sys_hub_action_input_35cc44f2bd11c3107f446e5ccea40760</name>
+            <sequence>2</sequence>
+            <synonyms/>
+            <sys_created_by>abhishek.pathak</sys_created_by>
+            <sys_created_on>2026-06-09 06:29:54</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>82cc44f2bd11c3107f446e5ccea4077c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>abhishek.pathak</sys_updated_by>
+            <sys_updated_on>2026-06-09 06:29:54</sys_updated_on>
+            <value>thrice_Daily</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>frequency</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>As Needed</label>
+            <language>en</language>
+            <name>var__m_sys_hub_action_input_35cc44f2bd11c3107f446e5ccea40760</name>
+            <sequence>3</sequence>
+            <synonyms/>
+            <sys_created_by>abhishek.pathak</sys_created_by>
+            <sys_created_on>2026-06-09 06:29:54</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>cacc44f2bd11c3107f446e5ccea4077c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>abhishek.pathak</sys_updated_by>
+            <sys_updated_on>2026-06-09 06:29:54</sys_updated_on>
+            <value>as_Needed</value>
+        </sys_choice>
+    </sys_choice>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>__dont_treat_as_error__</element>
+        <help/>
+        <hint/>
+        <label>Don't Treat as Error</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_output_35cc44f2bd11c3107f446e5ccea40760</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:29:55</sys_created_on>
+        <sys_id>8ecc44f2bd11c3107f446e5ccea407bf</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Don't Treat as Error</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_output_35cc44f2bd11c3107f446e5ccea40760___dont_treat_as_error___en</sys_update_name>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:29:55</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>dose_times</element>
+        <help/>
+        <hint/>
+        <label>dose_times</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_output_35cc44f2bd11c3107f446e5ccea40760</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 07:18:58</sys_created_on>
+        <sys_id>a008103ebd51c3107f446e5ccea4077e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>dose_times</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_output_35cc44f2bd11c3107f446e5ccea40760_dose_times_en</sys_update_name>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 07:18:58</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>__action_status__</element>
+        <help/>
+        <hint/>
+        <label>Action Status</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_output_35cc44f2bd11c3107f446e5ccea40760</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-09 06:29:55</sys_created_on>
+        <sys_id>cecc44f2bd11c3107f446e5ccea407b7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Action Status</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_output_35cc44f2bd11c3107f446e5ccea40760___action_status___en</sys_update_name>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:29:55</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_action_output_35cc44f2bd11c3107f446e5ccea40760"/>
+    <sys_hub_action_type_definition action="UPDATE">
+        <sys_id>ddb5c0f2bddd83107f446e5ccea40768</sys_id>
+        <latest_snapshot>35cc44f2bd11c3107f446e5ccea40760</latest_snapshot>
+        <compiler_build>glide-zurich-07-01-2025__patch4-hotfix1-12-19-2025_12-20-2025_0947.zip</compiler_build>
+    </sys_hub_action_type_definition>
+</record_update>

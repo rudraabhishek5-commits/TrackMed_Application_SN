@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_css">
+    <sp_css action="INSERT_OR_UPDATE">
+        <css>body { background: $body-bg; font-family: $font-family-base; }&#13;
+/* Card look used by every TrackMed widget */&#13;
+.tm-card {&#13;
+background: $card-bg; border-radius: $border-radius-base;&#13;
+box-shadow: 0 1px 4px rgba(16,32,70,.08);&#13;
+padding: 16px 20px; margin-bottom: 16px;&#13;
+}&#13;
+/* Status pills (matches mock-up) */&#13;
+.tm-pill { border-radius: 999px; padding: 2px 12px; font-size: 12px; font-weight: 600; }&#13;
+.tm-pill.active, .tm-pill.taken, .tm-pill.completed { background:#E7F7EE; color:$success; }&#13;
+.tm-pill.pending, .tm-pill.medium { background:#FFF4E0; color:$warning; }&#13;
+.tm-pill.missed, .tm-pill.high, .tm-pill.inactive,&#13;
+.tm-pill.rejected { background:#FDE8E8; color:$danger; }&#13;
+.tm-pill.approved { background:#E7F7EE; color:$success; }&#13;
+/* Primary buttons */&#13;
+.btn-primary { background:$brand-primary; border-color:$brand-primary; border-radius:8px; }</css>
+        <name>TrackMed Styles</name>
+        <sys_class_name>sp_css</sys_class_name>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-11 00:28:41</sys_created_on>
+        <sys_id>0a2d4913085583107f44f76f9beca4df</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>TrackMed Styles</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_css_0a2d4913085583107f44f76f9beca4df</sys_update_name>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-11 00:28:41</sys_updated_on>
+        <turn_off_scss_compilation>false</turn_off_scss_compilation>
+    </sp_css>
+</record_update>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="question_choice">
+    <question_choice action="INSERT_OR_UPDATE">
+        <inactive>false</inactive>
+        <misc>0</misc>
+        <order>11</order>
+        <published_ref/>
+        <question display_value="Refill Priority">9bf85327e41903107f4444f39d0290ef</question>
+        <rec_misc>0</rec_misc>
+        <sys_class_name>question_choice</sys_class_name>
+        <sys_created_by>navata.sri</sys_created_by>
+        <sys_created_on>2026-06-12 05:20:01</sys_created_on>
+        <sys_id>9939db27e41903107f4444f39d029058</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Routine</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>question_choice_9939db27e41903107f4444f39d029058</sys_update_name>
+        <sys_updated_by>navata.sri</sys_updated_by>
+        <sys_updated_on>2026-06-12 05:20:01</sys_updated_on>
+        <text>Routine</text>
+        <value>routine</value>
+    </question_choice>
+    <fx_price action="delete_multiple" query="id=9939db27e41903107f4444f39d029058"/>
+    <fx_price action="INSERT_OR_UPDATE">
+        <amount>0</amount>
+        <currency display_value="USD">USD</currency>
+        <field>misc</field>
+        <id>9939db27e41903107f4444f39d029058</id>
+        <parent/>
+        <reference_amount>0</reference_amount>
+        <reference_currency display_value="USD">USD</reference_currency>
+        <sys_created_by>navata.sri</sys_created_by>
+        <sys_created_on>2026-06-12 05:20:02</sys_created_on>
+        <sys_id>23895b67e41903107f4444f39d029049</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>navata.sri</sys_updated_by>
+        <sys_updated_on>2026-06-12 05:20:02</sys_updated_on>
+        <table>question_choice</table>
+        <type>calculated</type>
+    </fx_price>
+    <fx_price action="INSERT_OR_UPDATE">
+        <amount>0</amount>
+        <currency display_value="USD">USD</currency>
+        <field>rec_misc</field>
+        <id>9939db27e41903107f4444f39d029058</id>
+        <parent/>
+        <reference_amount>0</reference_amount>
+        <reference_currency display_value="USD">USD</reference_currency>
+        <sys_created_by>navata.sri</sys_created_by>
+        <sys_created_on>2026-06-12 05:20:02</sys_created_on>
+        <sys_id>67895b67e41903107f4444f39d029048</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>navata.sri</sys_updated_by>
+        <sys_updated_on>2026-06-12 05:20:02</sys_updated_on>
+        <table>question_choice</table>
+        <type>calculated</type>
+    </fx_price>
+</record_update>

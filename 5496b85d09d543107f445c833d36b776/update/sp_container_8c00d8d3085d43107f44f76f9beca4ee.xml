@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_container">
+    <sp_container action="INSERT_OR_UPDATE">
+        <aria_label/>
+        <background_color/>
+        <background_image/>
+        <background_style>default</background_style>
+        <bootstrap_alt>false</bootstrap_alt>
+        <class_name/>
+        <container_class_name/>
+        <name>AutoMed Home - Container 1</name>
+        <order>1</order>
+        <semantic_tag/>
+        <sp_page display_value="automed_home">101d057ebd19c3107f446e5ccea40732</sp_page>
+        <subheader>false</subheader>
+        <sys_class_name>sp_container</sys_class_name>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-10 20:00:56</sys_created_on>
+        <sys_id>8c00d8d3085d43107f44f76f9beca4ee</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>AutoMed Home - Container 1</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_container_8c00d8d3085d43107f44f76f9beca4ee</sys_update_name>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-10 20:00:56</sys_updated_on>
+        <title/>
+        <width>container</width>
+    </sp_container>
+</record_update>

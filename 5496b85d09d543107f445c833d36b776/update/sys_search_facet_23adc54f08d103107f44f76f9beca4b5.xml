@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_search_facet">
+    <sys_search_facet action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <ais_facet_name>kb_knowledge.kb_category</ais_facet_name>
+        <label>KB Category</label>
+        <name>KB Category</name>
+        <option_limit>10</option_limit>
+        <order>10</order>
+        <search_context_config display_value="TrackMed Buddy">daad854f08d103107f44f76f9beca436</search_context_config>
+        <sort_by>count</sort_by>
+        <sys_class_name>sys_search_facet</sys_class_name>
+        <sys_created_by>rangewar.ashirwad</sys_created_by>
+        <sys_created_on>2026-06-10 05:51:56</sys_created_on>
+        <sys_id>23adc54f08d103107f44f76f9beca4b5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>kb_knowledge.kb_category</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sys_search_facet_23adc54f08d103107f44f76f9beca4b5</sys_update_name>
+        <sys_updated_by>rangewar.ashirwad</sys_updated_by>
+        <sys_updated_on>2026-06-10 05:51:56</sys_updated_on>
+        <type>single_select</type>
+    </sys_search_facet>
+</record_update>

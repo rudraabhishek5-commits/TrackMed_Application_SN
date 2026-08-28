@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="status" table="x_snc_trackmed_dose_log" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>status</element>
+            <name>x_snc_trackmed_dose_log</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>meghanaa.penumetsa</sys_created_by>
+            <sys_created_on>2026-06-05 09:53:48</sys_created_on>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>status</sys_name>
+            <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+            <sys_update_name>sys_choice_x_snc_trackmed_dose_log_status</sys_update_name>
+            <sys_updated_by>meghanaa.penumetsa</sys_updated_by>
+            <sys_updated_on>2026-06-05 09:53:48</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>status</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Taken</label>
+            <language>en</language>
+            <name>x_snc_trackmed_dose_log</name>
+            <sequence>0</sequence>
+            <synonyms/>
+            <sys_created_by>rangewar.ashirwad</sys_created_by>
+            <sys_created_on>2026-06-06 20:50:33</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>rangewar.ashirwad</sys_updated_by>
+            <sys_updated_on>2026-06-06 20:50:33</sys_updated_on>
+            <value>Taken</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>status</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Not taken</label>
+            <language>en</language>
+            <name>x_snc_trackmed_dose_log</name>
+            <sequence>1</sequence>
+            <synonyms/>
+            <sys_created_by>rangewar.ashirwad</sys_created_by>
+            <sys_created_on>2026-06-06 20:50:33</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>rangewar.ashirwad</sys_updated_by>
+            <sys_updated_on>2026-06-06 20:50:33</sys_updated_on>
+            <value>Not taken</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>status</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Scheduled</label>
+            <language>en</language>
+            <name>x_snc_trackmed_dose_log</name>
+            <sequence>2</sequence>
+            <synonyms/>
+            <sys_created_by>meghanaa.penumetsa</sys_created_by>
+            <sys_created_on>2026-06-09 10:26:07</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>meghanaa.penumetsa</sys_updated_by>
+            <sys_updated_on>2026-06-09 10:26:07</sys_updated_on>
+            <value>Scheduled</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

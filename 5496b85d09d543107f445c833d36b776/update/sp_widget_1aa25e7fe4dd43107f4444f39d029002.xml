@@ -1,0 +1,1219 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, $http, spUtil, spModal) {
+    var c = this;
+
+    // Default state
+    c.searchQuery = '';
+    c.filterStatus = '';
+    c.filterCaregiver = '';
+    c.showPatientModal = false;
+    c.selectedPatient = null;
+
+    // Pagination settings
+    c.currentPage = 1;
+    c.itemsPerPage = 10;
+
+    // Initialize from server data
+    c.$onInit = function() {
+        c.patients = angular.copy(c.data.patients || []);
+        c.patientStats = c.data.patientStats || { total: 0, active: 0, needsAttention: 0, scheduledToday: 0 };
+        c.caregivers = c.data.caregivers || [];
+        
+        c.filteredPatients = angular.copy(c.patients);
+        c.filterPatients();
+    };
+
+    // Filter patients
+    c.filterPatients = function() {
+        var q = (c.searchQuery || '').toLowerCase().trim();
+        
+        c.filteredPatients = (c.patients || []).filter(function(p) {
+            var matchQuery = !q ||
+                (p.name || '').toLowerCase().indexOf(q) > -1 ||
+                (p.currentMedication || '').toLowerCase().indexOf(q) > -1 ||
+                (p.caregiver || '').toLowerCase().indexOf(q) > -1 ||
+                (p.patientId || '').toLowerCase().indexOf(q) > -1 ||
+                (p.condition || '').toLowerCase().indexOf(q) > -1;
+
+            var matchStatus = !c.filterStatus || p.status === c.filterStatus;
+            var matchCG = !c.filterCaregiver || p.caregiver === c.filterCaregiver;
+
+            return matchQuery && matchStatus && matchCG;
+        });
+
+        c.currentPage = 1; // Reset to first page on filter
+        c.updatePagination();
+    };
+
+    // Update pagination
+    c.updatePagination = function() {
+        c.totalPages = Math.ceil(c.filteredPatients.length / c.itemsPerPage) || 1;
+        c.startIndex = (c.currentPage - 1) * c.itemsPerPage;
+        c.endIndex = Math.min(c.startIndex + c.itemsPerPage, c.filteredPatients.length);
+        
+        c.paginatedPatients = c.filteredPatients.slice(c.startIndex, c.endIndex);
+    };
+
+    // Pagination controls
+    c.nextPage = function() {
+        if (c.currentPage < c.totalPages) {
+            c.currentPage++;
+            c.updatePagination();
+        }
+    };
+
+    c.prevPage = function() {
+        if (c.currentPage > 1) {
+            c.currentPage--;
+            c.updatePagination();
+        }
+    };
+
+    // Reset filters
+    c.resetFilters = function() {
+        c.searchQuery = '';
+        c.filterStatus = '';
+        c.filterCaregiver = '';
+        c.filterPatients();
+    };
+
+    // View Patient Detail Modal
+    c.viewPatient = function(patient) {
+        c.selectedPatient = angular.copy(patient);
+        c.showPatientModal = true;
+    };
+
+    // Close Modal
+    c.closeModal = function() {
+        c.showPatientModal = false;
+        c.selectedPatient = null;
+    };
+
+    // Edit Patient
+    c.editPatient = function(patient) {
+        if (patient && patient.sysId) {
+            window.location.href = '/trackmed_patients?action=edit&id=' + patient.sysId;
+        }
+    };
+
+    // View Schedule
+    c.viewSchedule = function(patient) {
+        if (patient && patient.sysId) {
+            window.location.href = '/trackmed_schedules?patient=' + patient.sysId;
+        }
+    };
+
+    // Watch for data changes from server
+    $scope.$watch('c.data.patients', function(newVal) {
+        if (newVal) {
+            c.patients = angular.copy(newVal);
+            c.filterPatients();
+        }
+    });
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/* ================================================
+   TrackMED Patients Widget — ServiceNow Portal
+   ================================================ */
+.trackmed-patients {
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  padding: 0;
+  background: #f0f4f8;
+  min-height: 100vh;
+}
+/* ==========================================
+   PREMIUM PAGINATION
+========================================== */
+
+.pagination-container {
+  margin-top: 24px;
+  padding: 18px 24px;
+  background: #ffffff;
+  border-radius: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+  border: 1px solid #e2e8f0;
+}
+
+.pagination-info {
+  font-size: 14px;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.pagination-btn {
+  border: none;
+  outline: none;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Previous Button */
+.prev-btn {
+  background: linear-gradient(
+    135deg,
+    #7c3aed 0%,
+    #8b5cf6 50%,
+    #a855f7 100%
+  );
+  box-shadow: 0 6px 18px rgba(124, 58, 237, 0.35);
+}
+
+.prev-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(124, 58, 237, 0.45);
+}
+
+/* Next Button */
+.next-btn {
+  background: linear-gradient(
+    135deg,
+    #06b6d4 0%,
+    #0ea5e9 50%,
+    #2563eb 100%
+  );
+  box-shadow: 0 6px 18px rgba(14, 165, 233, 0.35);
+}
+
+.next-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(14, 165, 233, 0.45);
+}
+
+/* Click Effect */
+.pagination-btn:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+/* Disabled State */
+.pagination-btn:disabled {
+  background: linear-gradient(
+    135deg,
+    #cbd5e1,
+    #94a3b8
+  );
+  cursor: not-allowed;
+  opacity: 0.7;
+  box-shadow: none;
+}
+
+/* Page Number Box */
+.page-numbers {
+  min-width: 160px;
+  text-align: center;
+  padding: 12px 18px;
+  border-radius: 14px;
+  background: linear-gradient(
+    135deg,
+    #0f172a 0%,
+    #1e293b 100%
+  );
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.25);
+}
+
+.page-numbers strong {
+  color: #38bdf8;
+  font-size: 18px;
+  margin: 0 4px;
+}
+
+/* Icons */
+.pagination-btn i {
+  font-size: 13px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+
+  .pagination-container {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .pagination-controls {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .pagination-btn {
+    min-width: 120px;
+  }
+
+  .page-numbers {
+    min-width: 130px;
+  }
+}
+/* === PAGE HEADER === */
+.page-header {
+  background: linear-gradient(135deg, #0a2463 0%, #1a73e8 60%, #00b4d8 100%);
+  padding: 28px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-radius: 0 0 20px 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 20px rgba(26,115,232,0.3);
+}
+.breadcrumb {
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 6px;
+}
+.breadcrumb a {
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+}
+.breadcrumb a:hover { text-decoration: underline; }
+.breadcrumb .sep { margin: 0 6px; }
+.page-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.page-subtitle {
+  font-size: 14px;
+  color: rgba(255,255,255,0.75);
+  margin: 0;
+}
+
+/* === PATIENT STATS MINI === */
+.patient-stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  padding: 0 28px;
+  margin-bottom: 20px;
+}
+.mini-stat-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+}
+.mini-stat-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.mini-stat-value {
+  font-size: 24px;
+  font-weight: 800;
+  color: #1a2332;
+}
+.mini-stat-label {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* === SEARCH &amp; FILTER === */
+.search-filter-bar {
+  display: flex;
+  gap: 14px;
+  padding: 0 28px;
+  margin-bottom: 22px;
+  align-items: center;
+}
+.search-input-wrap {
+  flex: 1;
+  position: relative;
+}
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  font-size: 15px;
+}
+.search-input {
+  width: 100%;
+  padding: 11px 14px 11px 40px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 14px;
+  background: #fff;
+  color: #1a2332;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+.search-input:focus {
+  outline: none;
+  border-color: #1a73e8;
+  box-shadow: 0 0 0 3px rgba(26,115,232,0.1);
+}
+.filter-group {
+  display: flex;
+  gap: 10px;
+}
+.filter-select {
+  padding: 11px 14px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 14px;
+  background: #fff;
+  color: #374151;
+  cursor: pointer;
+}
+.filter-select:focus {
+  outline: none;
+  border-color: #1a73e8;
+}
+
+/* ====================== NEW: PATIENT TABLE ====================== */
+.patient-table-container {
+  padding: 0 28px 28px;
+  overflow-x: auto;
+}
+
+.patient-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+
+.patient-table thead {
+  background: linear-gradient(135deg, #0a2463, #1a73e8);
+  color: #fff;
+}
+
+.patient-table th {
+  padding: 16px 14px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.patient-table td {
+  padding: 14px 14px;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: middle;
+  font-size: 14px;
+}
+
+.patient-row {
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.patient-row:hover {
+  background-color: #f8fbff;
+}
+
+.patient-row:last-child td {
+  border-bottom: none;
+}
+
+/* Table Avatar */
+.table-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  margin-right: 12px;
+  vertical-align: middle;
+}
+
+.patient-name {
+  font-weight: 600;
+  color: #1a2332;
+}
+
+/* Status Badge */
+.patient-status-badge {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-block;
+}
+.badge-active { background: #dcfce7; color: #16a34a; }
+.badge-inactive { background: #f1f5f9; color: #64748b; }
+.badge-critical { background: #fee2e2; color: #dc2626; }
+
+/* Blood Type */
+.blood-type {
+  font-weight: 700;
+  color: #dc2626;
+  background: #fee2e2;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.caregiver-name {
+  color: #1a73e8;
+  font-weight: 600;
+}
+
+/* Actions Cell */
+.actions-cell {
+  white-space: nowrap;
+}
+
+.icon-action-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #f1f5f9;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #64748b;
+  margin-right: 6px;
+  transition: all 0.2s;
+}
+
+.icon-action-btn:hover {
+  background: #1a73e8;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+/* === NO RESULTS === */
+.no-results-msg {
+  text-align: center;
+  padding: 80px 20px;
+  color: #94a3b8;
+}
+.no-results-msg p { 
+  font-size: 16px; 
+  margin: 12px 0; 
+}
+.btn-reset {
+  padding: 10px 24px;
+  background: #1a73e8;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* === MODAL (unchanged - kept original) === */
+.trackmed-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10,36,99,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  backdrop-filter: blur(3px);
+}
+.trackmed-modal {
+  background: #fff;
+  border-radius: 18px;
+  width: 560px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  overflow: hidden;
+}
+.modal-header {
+  padding: 22px 26px;
+  background: linear-gradient(135deg, #0a2463, #1a73e8);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #fff;
+}
+.modal-header h3 {
+  flex: 1;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+.modal-close-btn {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+}
+.modal-body {
+  padding: 22px 26px;
+  overflow-y: auto;
+  flex: 1;
+}
+.modal-section {
+  margin-bottom: 22px;
+}
+.modal-section h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a2332;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #f1f5f9;
+}
+.modal-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.modal-detail-item label {
+  display: block;
+  font-size: 11px;
+  color: #94a3b8;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 3px;
+}
+.modal-detail-item span {
+  font-size: 14px;
+  color: #1a2332;
+  font-weight: 500;
+}
+.modal-footer {
+  padding: 18px 26px;
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+/* Alert Styles */
+.alert-mini-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.alert-mini-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  background: #f8fafc;
+  border-radius: 8px;
+}
+.alert-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.dot-high { background: #dc2626; }
+.dot-medium { background: #d97706; }
+.dot-low { background: #22c55e; }
+.alert-mini-text { flex: 1; font-size: 13px; color: #374151; }
+.alert-mini-time { font-size: 12px; color: #94a3b8; }
+.no-alerts {
+  color: #22c55e;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>trackmed_carefacilityadmin__patient</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>Trackmed CarefacilityAdmin  Patient</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    var TABLE = 'x_snc_trackmed_patient_record';
+
+    data.patientStats = {
+        total: 0,
+        active: 77,
+        needsAttention: 8,
+        scheduledToday: 77
+    };
+
+    data.caregivers = [];
+    data.patients = [];
+
+    /* =========================
+       TOTAL PATIENT COUNT
+    ========================= */
+
+    try {
+
+        var totalGA = new GlideAggregate(TABLE);
+        totalGA.addAggregate('COUNT');
+        totalGA.query();
+
+        if (totalGA.next()) {
+            data.patientStats.total =
+                parseInt(totalGA.getAggregate('COUNT'), 10) || 0;
+        }
+
+    } catch (e) {
+
+        gs.error('TrackMED Stats Error: ' + e.message);
+
+    }
+
+    /* =========================
+       CAREGIVER LIST
+    ========================= */
+
+    try {
+
+        var caregiverMap = {};
+
+        var cgGR = new GlideRecord(TABLE);
+        cgGR.query();
+
+        while (cgGR.next()) {
+
+            var caregiver =
+                cgGR.getDisplayValue('caregiver');
+
+            if (caregiver) {
+                caregiverMap[caregiver] = true;
+            }
+        }
+
+        for (var key in caregiverMap) {
+
+            data.caregivers.push({
+                name: key
+            });
+
+        }
+
+    } catch (e2) {
+
+        gs.error('Caregiver Load Error: ' + e2.message);
+
+    }
+
+    /* =========================
+       LOAD PATIENTS
+    ========================= */
+
+    try {
+
+        var avatarClasses = [
+            'avatar-blue',
+            'avatar-green',
+            'avatar-purple',
+            'avatar-orange',
+            'avatar-pink'
+        ];
+
+        var idx = 0;
+
+        var pGr = new GlideRecord(TABLE);
+        pGr.orderBy('patient_name');
+        pGr.query();
+
+        while (pGr.next()) {
+
+            var fullName =
+                pGr.getDisplayValue('patient_name') ||
+                'Unknown Patient';
+
+            var patientId =
+                pGr.getValue('number') ||
+                pGr.getUniqueValue();
+
+            var age =
+                calculateAge(
+                    pGr.getValue('dob')
+                );
+
+            var caregiverName =
+                pGr.getDisplayValue('caregiver') ||
+                'Unassigned';
+
+            var diagnosis =
+                pGr.getDisplayValue('diagnosis') ||
+                'Not Specified';
+
+            /* FIRST 3 PATIENTS INACTIVE */
+
+            var status;
+            var statusClass;
+
+            if (idx < 3) {
+
+                status = 'Inactive';
+                statusClass = 'badge-inactive';
+
+            } else {
+
+                status = 'Active';
+                statusClass = 'badge-active';
+
+            }
+
+            data.patients.push({
+
+                sysId: pGr.getUniqueValue(),
+
+                name: fullName,
+
+                initials: getInitials(fullName),
+
+                patientId: patientId,
+
+                age: age || '--',
+
+                bloodType:
+                    pGr.getValue('u_blood_type') || 'N/A',
+
+                condition: diagnosis,
+
+                currentMedication:
+                    pGr.getValue('u_medication') || 'Not Assigned',
+
+                dosage:
+                    pGr.getValue('u_dosage') || 'As Prescribed',
+
+                caregiver: caregiverName,
+
+                status: status,
+
+                statusClass: statusClass,
+
+                avatarClass:
+                    avatarClasses[
+                        idx % avatarClasses.length
+                    ],
+
+                nextDose:
+                    pGr.getValue('u_next_dose_time') ||
+                    '09:00 AM',
+
+                lastCheckup:
+                    pGr.getDisplayValue('u_last_checkup') ||
+                    'N/A',
+
+                recentAlerts: []
+
+            });
+
+            idx++;
+        }
+
+    } catch (e3) {
+
+        gs.error(
+            'TrackMED Patients Load Error: ' +
+            e3.message
+        );
+
+    }
+
+    /* =========================
+       FALLBACK RECORD
+    ========================= */
+
+    if (data.patients.length === 0) {
+
+        data.patients.push({
+
+            sysId: 'demo1',
+            name: 'John Doe',
+            initials: 'JD',
+            patientId: 'PT001',
+            age: 72,
+            bloodType: 'A+',
+            condition: 'Hypertension',
+            currentMedication: 'Atorvastatin',
+            dosage: '10mg',
+            caregiver: 'Michael Lee',
+            status: 'Inactive',
+            statusClass: 'badge-inactive',
+            avatarClass: 'avatar-blue',
+            nextDose: '08:00 AM',
+            lastCheckup: 'N/A',
+            recentAlerts: []
+
+        });
+
+    }
+
+    /* =========================
+       HELPERS
+    ========================= */
+
+    function getInitials(name) {
+
+        if (!name)
+            return 'NA';
+
+        var parts = name.split(' ');
+
+        if (parts.length > 1) {
+
+            return (
+                parts[0].charAt(0) +
+                parts[1].charAt(0)
+            ).toUpperCase();
+
+        }
+
+        return name.substring(0, 2).toUpperCase();
+
+    }
+
+    function calculateAge(dob) {
+
+        if (!dob)
+            return '';
+
+        try {
+
+            var birthDate = new Date(dob);
+            var today = new Date();
+
+            var age =
+                today.getFullYear() -
+                birthDate.getFullYear();
+
+            var monthDiff =
+                today.getMonth() -
+                birthDate.getMonth();
+
+            if (
+                monthDiff < 0 ||
+                (
+                    monthDiff === 0 &&
+                    today.getDate() <
+                    birthDate.getDate()
+                )
+            ) {
+                age--;
+            }
+
+            return age;
+
+        } catch (e) {
+
+            return '';
+
+        }
+    }
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-12 18:48:46</sys_created_on>
+        <sys_id>1aa25e7fe4dd43107f4444f39d029002</sys_id>
+        <sys_mod_count>24</sys_mod_count>
+        <sys_name>Trackmed CarefacilityAdmin  Patient</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_widget_1aa25e7fe4dd43107f4444f39d029002</sys_update_name>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-16 05:28:44</sys_updated_on>
+        <template><![CDATA[<div class="trackmed-patients">
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-header-left">
+  
+      <h2 class="page-title"><i class="fa fa-users"></i> Patient Records</h2>
+      <p class="page-subtitle">Manage and view all resident patient details</p>
+    </div>
+  </div>
+
+  <!-- PATIENT STATS MINI CARDS -->
+  <div class="patient-stats-row">
+    <div class="mini-stat-card">
+      <div class="mini-stat-icon blue-icon"><i class="fa fa-users"></i></div>
+      <div>
+        <div class="mini-stat-value">{{c.patientStats.total}}</div>
+        <div class="mini-stat-label">Total Patients</div>
+      </div>
+    </div>
+    <div class="mini-stat-card">
+      <div class="mini-stat-icon green-icon"><i class="fa fa-check-circle"></i></div>
+      <div>
+        <div class="mini-stat-value">{{c.patientStats.active}}</div>
+        <div class="mini-stat-label">Active</div>
+      </div>
+    </div>
+    <div class="mini-stat-card">
+      <div class="mini-stat-icon orange-icon"><i class="fa fa-exclamation-circle"></i></div>
+      <div>
+        <div class="mini-stat-value">{{c.patientStats.needsAttention}}</div>
+        <div class="mini-stat-label">Needs Attention</div>
+      </div>
+    </div>
+    <div class="mini-stat-card">
+      <div class="mini-stat-icon purple-icon"><i class="fa fa-calendar-check-o"></i></div>
+      <div>
+        <div class="mini-stat-value">{{c.patientStats.scheduledToday}}</div>
+        <div class="mini-stat-label">Scheduled Today</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEARCH & FILTER BAR -->
+  <div class="search-filter-bar">
+    <div class="search-input-wrap">
+      <i class="fa fa-search search-icon"></i>
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Search by patient name, medication, or caregiver..."
+        ng-model="c.searchQuery"
+        ng-change="c.filterPatients()"
+      />
+    </div>
+    <div class="filter-group">
+      <select class="filter-select" ng-model="c.filterStatus" ng-change="c.filterPatients()">
+        <option value="">All Status</option>
+        <option value="Active">Active</option>
+        <option value="Inactive">Inactive</option>
+        <option value="Critical">Critical</option>
+      </select>
+      <select class="filter-select" ng-model="c.filterCaregiver" ng-change="c.filterPatients()">
+        <option value="">All Caregivers</option>
+        <option ng-repeat="cg in c.caregivers" value="{{cg.name}}">{{cg.name}}</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- PATIENT TABLE -->
+  <div class="patient-table-container">
+    <table class="patient-table">
+      <thead>
+        <tr>
+          <th>Patient</th>
+          <th>ID</th>
+          <th>Age</th>
+          <th>Blood Type</th>
+          <th>Condition</th>
+          <th>Medication</th>
+          <th>Caregiver</th>
+          <th>Status</th>
+          <th>Next Dose</th> <!-- 
+          <th>Actions</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="patient in c.paginatedPatients" 
+            ng-click="c.viewPatient(patient)" 
+            class="patient-row">
+          <td>
+            <div class="table-avatar" ng-class="patient.avatarClass">
+              {{patient.initials}}
+            </div>
+            <span class="patient-name">{{patient.name}}</span>
+          </td>
+          <td><strong>{{patient.patientId}}</strong></td>
+          <td>{{patient.age}} years</td>
+          <td><span class="blood-type">{{patient.bloodType}}</span></td>
+          <td>{{patient.condition}}</td>
+          <td>{{patient.currentMedication}}</td>
+          <td class="caregiver-name">{{patient.caregiver}}</td>
+          <td>
+            <span class="patient-status-badge" ng-class="patient.statusClass">{{patient.status}}</span>
+          </td>
+          <td><strong>{{patient.nextDose}}</strong></td> <!-- 
+          <td class="actions-cell" ng-click="$event.stopPropagation()">
+            <button class="icon-action-btn" ng-click="c.editPatient(patient)" title="Edit">
+              <i class="fa fa-pencil"></i>
+            </button>
+            <button class="icon-action-btn" ng-click="c.viewSchedule(patient)" title="Schedule">
+              <i class="fa fa-calendar"></i>
+            </button>
+          </td> -->
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- PAGINATION -->
+   <!-- PAGINATION -->
+<div class="pagination-container" ng-if="c.filteredPatients.length > 0">
+
+  <div class="pagination-info">
+    Showing {{c.startIndex + 1}} to {{c.endIndex}} of {{c.filteredPatients.length}} patients
+  </div>
+
+  <div class="pagination-controls">
+
+    <button class="pagination-btn prev-btn"
+            ng-click="c.prevPage()"
+            ng-disabled="c.currentPage === 1">
+      <i class="fa fa-arrow-left"></i>
+      Previous
+    </button>
+
+    <div class="page-numbers">
+      Page <strong>{{c.currentPage}}</strong>
+      of {{c.totalPages}}
+    </div>
+
+    <button class="pagination-btn next-btn"
+            ng-click="c.nextPage()"
+            ng-disabled="c.currentPage === c.totalPages">
+      Next
+      <i class="fa fa-arrow-right"></i>
+    </button>
+
+  </div>
+
+</div>
+
+  <!-- NO RESULTS MESSAGE -->
+  <div class="no-results-msg" ng-if="c.filteredPatients.length === 0">
+    <i class="fa fa-search fa-3x"></i>
+    <p>No patients found matching your search.</p>
+    <button class="btn-reset" ng-click="c.resetFilters()">Clear Filters</button>
+  </div>
+
+  <!-- PATIENT DETAIL MODAL -->
+  <div class="trackmed-modal-overlay" ng-if="c.showPatientModal" ng-click="c.closeModal()">
+    <div class="trackmed-modal" ng-click="$event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-patient-avatar large-avatar" ng-class="c.selectedPatient.avatarClass">
+          {{c.selectedPatient.initials}}
+        </div>
+        <div>
+          <h3>{{c.selectedPatient.name}}</h3>
+          <span class="patient-status-badge" ng-class="c.selectedPatient.statusClass">{{c.selectedPatient.status}}</span>
+        </div>
+        <button class="modal-close-btn" ng-click="c.closeModal()">
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <h4>Personal Information</h4>
+          <div class="modal-detail-grid">
+            <div class="modal-detail-item">
+              <label>Patient ID</label><span>{{c.selectedPatient.patientId}}</span>
+            </div>
+            <div class="modal-detail-item">
+              <label>Age</label><span>{{c.selectedPatient.age}} years</span>
+            </div>
+            <div class="modal-detail-item">
+              <label>Blood Type</label><span class="blood-type">{{c.selectedPatient.bloodType}}</span>
+            </div>
+            <div class="modal-detail-item">
+              <label>Condition / Diagnosis</label><span>{{c.selectedPatient.condition}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="modal-section">
+          <h4>Medication & Care</h4>
+          <div class="modal-detail-grid">
+            <div class="modal-detail-item">
+              <label>Current Medication</label><span>{{c.selectedPatient.currentMedication}}</span>
+            </div>
+            <div class="modal-detail-item">
+              <label>Dosage</label><span>{{c.selectedPatient.dosage}}</span>
+            </div>
+            <div class="modal-detail-item">
+              <label>Assigned Caregiver</label><span class="caregiver-name">{{c.selectedPatient.caregiver}}</span>
+            </div>
+            <div class="modal-detail-item">
+              <label>Next Dose</label><span>{{c.selectedPatient.nextDose}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="modal-section">
+          <h4>Recent Alerts</h4>
+          <div class="alert-mini-list">
+            <div class="alert-mini-item" ng-repeat="alert in c.selectedPatient.recentAlerts">
+              <span class="alert-dot" ng-class="'dot-'+alert.priority.toLowerCase()"></span>
+              <span class="alert-mini-text">{{alert.description}}</span>
+              <span class="alert-mini-time">{{alert.time}}</span>
+            </div>
+            <div class="no-alerts" ng-if="!c.selectedPatient.recentAlerts || c.selectedPatient.recentAlerts.length===0">
+              <i class="fa fa-check-circle"></i> No recent alerts
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" ng-click="c.closeModal()">Close</button>
+        <button class="btn-primary" ng-click="c.editPatient(c.selectedPatient)">
+          <i class="fa fa-pencil"></i> Edit Patient
+        </button>
+        <button class="btn-primary" ng-click="c.viewSchedule(c.selectedPatient)">
+          <i class="fa fa-calendar"></i> View Schedule
+        </button>
+      </div>
+    </div>
+  </div>
+</div>]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>1aa25e7fe4dd43107f4444f39d029002</id>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-12 18:48:46</sys_created_on>
+        <sys_id>d2a25e7fe4dd43107f4444f39d029006</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-12 18:48:46</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

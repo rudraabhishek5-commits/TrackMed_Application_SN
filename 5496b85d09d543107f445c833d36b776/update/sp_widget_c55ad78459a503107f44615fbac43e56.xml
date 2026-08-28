@@ -1,0 +1,678 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function() {
+
+    var c = this;
+
+    /* Filter */
+    c.filter = "All";
+
+    /* Pagination */
+    c.currentPage = 1;
+    c.pageSize = 5;
+
+    c.setFilter = function(status) {
+
+        c.filter = status;
+        c.currentPage = 1;
+
+    };
+
+    c.filteredSchedules = function() {
+
+        if (!c.data.schedules)
+            return [];
+
+        if (c.filter == "All")
+            return c.data.schedules;
+
+        return c.data.schedules.filter(function(item) {
+            return item.status == c.filter;
+        });
+
+    };
+
+    c.paginatedSchedules = function() {
+
+        var records = c.filteredSchedules();
+
+        var start = (c.currentPage - 1) * c.pageSize;
+        var end = start + c.pageSize;
+
+        return records.slice(start, end);
+
+    };
+
+    c.totalPages = function() {
+
+        return Math.max(
+            Math.ceil(c.filteredSchedules().length / c.pageSize),
+            1
+        );
+
+    };
+
+    c.nextPage = function() {
+
+        if (c.currentPage < c.totalPages())
+            c.currentPage++;
+
+    };
+
+    c.prevPage = function() {
+
+        if (c.currentPage > 1)
+            c.currentPage--;
+
+    };
+
+    /* Mark As Given */
+
+    c.markTaken = function(sysId) {
+
+        c.data.action = "markTaken";
+        c.data.sys_id = sysId;
+
+        c.server.update().then(function() {
+
+            c.server.refresh();
+
+        });
+
+    };
+
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.tm-schedule-wrapper {
+    background: #fff;
+    border-radius: 20px;
+    padding: 28px;
+    margin-top: 24px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+
+/* Header */
+
+.schedule-header {
+    margin-bottom: 24px;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 16px;
+}
+
+.schedule-header h2 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.schedule-header p {
+    margin-top: 6px;
+    color: #64748b;
+    font-size: 14px;
+}
+
+/* Filter Tabs */
+
+.filter-tabs {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+
+.tab-btn {
+    border: none;
+    background: #f1f5f9;
+    color: #475569;
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.tab-btn:hover {
+    background: #e2e8f0;
+}
+
+.tab-btn.active {
+    background: #14b8a6;
+    color: #fff;
+}
+
+/* Table */
+
+.tm-table {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.tm-table thead th {
+    background: #f8fafc;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 14px;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.tm-table td {
+    padding: 16px 14px;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: middle;
+}
+
+.tm-table tbody tr:hover {
+    background: #f8fafc;
+}
+
+/* Patient */
+
+.patient-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg,#14b8a6,#06b6d4);
+    color: #fff;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.patient-name {
+    font-weight: 600;
+    color: #0f172a;
+}
+
+/* Status */
+
+.status-pill {
+    min-width: 100px;
+    text-align: center;
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    display: inline-block;
+}
+
+.scheduled {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.taken {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.nottaken {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* Confirm */
+
+.text-success {
+    color: #10b981;
+    font-size: 20px;
+}
+
+.text-danger {
+    color: #ef4444;
+    font-size: 20px;
+}
+
+/* Button */
+
+.btn-given {
+    border: none;
+    background: #10b981;
+    color: #fff;
+    padding: 9px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.btn-given:hover {
+    background: #059669;
+}
+
+.btn-given i {
+    margin-right: 5px;
+}
+
+/* Labels */
+
+.given-label {
+    color: #10b981;
+    font-weight: 600;
+}
+
+.missed-label {
+    color: #ef4444;
+    font-weight: 600;
+}
+
+/* Empty */
+
+.empty-row {
+    text-align: center;
+    padding: 30px !important;
+    color: #64748b;
+}
+
+/* Pagination */
+
+.pagination-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.page-btn {
+    border: none;
+    background: #14b8a6;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.page-btn:hover:not(:disabled) {
+    background: #0f766e;
+}
+
+.page-btn:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+.page-info {
+    font-weight: 600;
+    color: #475569;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+
+    .tm-schedule-wrapper {
+        padding: 18px;
+    }
+
+    .tm-table {
+        min-width: 900px;
+    }
+
+    .filter-tabs {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+    }
+
+    .pagination-wrapper {
+        justify-content: center;
+    }
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>trackmed_cargiver_assigned_schedule</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>Trackmed Cargiver Assigned Schedule</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    data.schedules = [];
+
+    data.total = 0;
+    data.taken = 0;
+    data.scheduled = 0;
+    data.notTaken = 0;
+
+    var isAdmin = gs.hasRole('admin') ||
+                  gs.hasRole('x_snc_trackmed.admin') ||
+                  gs.hasRole('x_snc_trackmed.hospital_admin');
+
+    /* Mark As Given */
+
+    if (input && input.action == "markTaken" && input.sys_id) {
+
+        var upd = new GlideRecord('x_snc_trackmed_dose_log');
+
+        if (upd.get(input.sys_id)) {
+
+            // Optional: prevent admins from updating doses
+            if (!isAdmin) {
+                upd.setValue('status', 'Taken');
+                upd.setValue('caregiver_confirmed', true);
+                upd.update();
+            }
+        }
+    }
+
+    /* Load Records */
+
+    var gr = new GlideRecord('x_snc_trackmed_dose_log');
+
+    // Caregiver → own records only
+    // Admin → all records
+    if (!isAdmin) {
+        gr.addQuery('care_taker', gs.getUserID());
+    }
+
+    gr.orderBy('work_start');
+    gr.query();
+
+    while (gr.next()) {
+
+        var patient = gr.getDisplayValue('patient');
+        var status = gr.getDisplayValue('status');
+
+        if (status == 'Taken') {
+            data.taken++;
+        } else if (status == 'Scheduled') {
+            data.scheduled++;
+        } else if (status == 'Not Taken') {
+            data.notTaken++;
+        }
+
+        data.total++;
+
+        data.schedules.push({
+
+            sys_id: gr.getUniqueValue(),
+
+            patient: patient,
+
+            medication: gr.getDisplayValue('medication'),
+
+            caregiver: gr.getDisplayValue('care_taker'),
+
+            work_start: gr.getDisplayValue('work_start'),
+
+            status: status,
+
+            confirmed: gr.caregiver_confirmed == true,
+
+            initial: patient ?
+                patient.substring(0, 1).toUpperCase() : ''
+
+        });
+    }
+
+    data.isAdmin = isAdmin;
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>vignesh.pitchai</sys_created_by>
+        <sys_created_on>2026-06-13 18:40:23</sys_created_on>
+        <sys_id>c55ad78459a503107f44615fbac43e56</sys_id>
+        <sys_mod_count>10</sys_mod_count>
+        <sys_name>Trackmed Cargiver Assigned Schedule</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_widget_c55ad78459a503107f44615fbac43e56</sys_update_name>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-17 06:49:31</sys_updated_on>
+        <template><![CDATA[<div class="tm-schedule-wrapper">
+
+    <!-- Header -->
+    <div class="schedule-header">
+        <div>
+            <h2>
+                {{c.data.isAdmin ? 'All Medication Schedules' : 'My Assigned Schedules'}}
+            </h2>
+            <p>{{c.data.total}} Medication Records</p>
+        </div>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="filter-tabs">
+
+        <button class="tab-btn"
+                ng-class="{active:c.filter=='All'}"
+                ng-click="c.setFilter('All')">
+            All ({{c.data.total}})
+        </button>
+
+        <button class="tab-btn"
+                ng-class="{active:c.filter=='Scheduled'}"
+                ng-click="c.setFilter('Scheduled')">
+            Scheduled ({{c.data.scheduled}})
+        </button>
+
+        <button class="tab-btn"
+                ng-class="{active:c.filter=='Taken'}"
+                ng-click="c.setFilter('Taken')">
+            Taken ({{c.data.taken}})
+        </button>
+
+        <button class="tab-btn"
+                ng-class="{active:c.filter=='Not Taken'}"
+                ng-click="c.setFilter('Not Taken')">
+            Not Taken ({{c.data.notTaken}})
+        </button>
+
+    </div>
+
+    <!-- Table -->
+    <div class="table-responsive">
+
+        <table class="table tm-table">
+
+            <thead>
+                <tr>
+
+                    <th>Patient</th>
+
+                    <th ng-if="c.data.isAdmin">
+                        Caregiver
+                    </th>
+
+                    <th>Medication</th>
+
+                    <th>Schedule Time</th>
+
+                    <th>Status</th>
+
+                    <th>Confirmed</th>
+
+                    <th>Action</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr ng-repeat="s in c.paginatedSchedules()">
+
+                    <!-- Patient -->
+                    <td>
+
+                        <div class="patient-cell">
+
+                            <div class="avatar">
+                                {{s.initial}}
+                            </div>
+
+                            <div class="patient-name">
+                                {{s.patient}}
+                            </div>
+
+                        </div>
+
+                    </td>
+
+                    <!-- Caregiver (Admin only) -->
+                    <td ng-if="c.data.isAdmin">
+                        {{s.caregiver}}
+                    </td>
+
+                    <!-- Medication -->
+                    <td>
+                        {{s.medication}}
+                    </td>
+
+                    <!-- Time -->
+                    <td>
+                        {{s.work_start}}
+                    </td>
+
+                    <!-- Status -->
+                    <td>
+
+                        <span class="status-pill"
+                              ng-class="{
+                                  'scheduled': s.status=='Scheduled',
+                                  'taken': s.status=='Taken',
+                                  'nottaken': s.status=='Not Taken'
+                              }">
+
+                            {{s.status}}
+
+                        </span>
+
+                    </td>
+
+                    <!-- Confirmed -->
+                    <td class="text-center">
+
+                        <i class="fa fa-check-circle text-success"
+                           ng-if="s.confirmed"></i>
+
+                        <i class="fa fa-times-circle text-danger"
+                           ng-if="!s.confirmed"></i>
+
+                    </td>
+
+                    <!-- Action -->
+                    <td>
+
+                        <!-- Caregiver Only -->
+                        <button class="btn-given"
+                                ng-if="!c.data.isAdmin && s.status=='Scheduled'"
+                                ng-click="c.markTaken(s.sys_id)">
+
+                            <i class="fa fa-check"></i>
+                            Mark As Given
+
+                        </button>
+
+                        <span class="given-label"
+                              ng-if="s.status=='Taken'">
+
+                            <i class="fa fa-check-circle"></i>
+                            Given
+
+                        </span>
+
+                        <span class="missed-label"
+                              ng-if="s.status=='Not Taken'">
+
+                            <i class="fa fa-times-circle"></i>
+                            Missed
+
+                        </span>
+
+                        <span ng-if="c.data.isAdmin && s.status=='Scheduled'"
+                              class="text-muted">
+
+                            Pending Action
+
+                        </span>
+
+                    </td>
+
+                </tr>
+
+                <tr ng-if="c.paginatedSchedules().length == 0">
+
+                    <td colspan="{{c.data.isAdmin ? 7 : 6}}"
+                        class="empty-row">
+
+                        No Records Found
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination-wrapper"
+         ng-if="c.filteredSchedules().length > c.pageSize">
+
+        <button class="page-btn"
+                ng-click="c.prevPage()"
+                ng-disabled="c.currentPage == 1">
+
+            <i class="fa fa-chevron-left"></i>
+            Previous
+
+        </button>
+
+        <span class="page-info">
+
+            Page {{c.currentPage}}
+            of
+            {{c.totalPages()}}
+
+        </span>
+
+        <button class="page-btn"
+                ng-click="c.nextPage()"
+                ng-disabled="c.currentPage == c.totalPages()">
+
+            Next
+            <i class="fa fa-chevron-right"></i>
+
+        </button>
+
+    </div>
+
+</div>]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>c55ad78459a503107f44615fbac43e56</id>
+        <sys_created_by>vignesh.pitchai</sys_created_by>
+        <sys_created_on>2026-06-13 18:40:23</sys_created_on>
+        <sys_id>0d5ad78459a503107f44615fbac43e59</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>vignesh.pitchai</sys_updated_by>
+        <sys_updated_on>2026-06-13 18:40:23</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

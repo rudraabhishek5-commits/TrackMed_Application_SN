@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller=function() {  /* widget controller */  var c = this;};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/* ==========================================
+   ALERTS CONTAINER
+========================================== */
+
+.alerts-container{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+/* ==========================================
+   ALERT CARD
+========================================== */
+
+.alert-card{
+    display:flex;
+    align-items:center;
+    gap:14px;
+
+    padding:14px 16px;
+
+    background:#FFFFFF;
+
+    border:1px solid #E5E7EB;
+
+    border-radius:14px;
+
+    transition:.2s;
+
+    cursor:pointer;
+}
+
+.alert-card:hover{
+    background:#F8FAFC;
+    border-color:#CBD5E1;
+}
+
+/* ==========================================
+   ICON
+========================================== */
+
+.alert-icon{
+    width:42px;
+    height:42px;
+
+    border-radius:12px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:18px;
+
+    flex-shrink:0;
+}
+
+/* ==========================================
+   CONTENT
+========================================== */
+
+.alert-content{
+    flex:1;
+}
+
+.alert-title{
+    font-size:14px;
+    font-weight:600;
+    margin-bottom:2px;
+    color:#0F172A;
+}
+
+.alert-message{
+    font-size:13px;
+    color:#64748B;
+}
+
+/* ==========================================
+   WARNING
+========================================== */
+
+.warning-card{
+    border-left:4px solid #F59E0B;
+}
+
+.warning-card .alert-icon{
+    background:#FFFBEB;
+    color:#D97706;
+}
+
+/* ==========================================
+   INFO
+========================================== */
+
+.info-card{
+    border-left:4px solid #2563EB;
+}
+
+.info-card .alert-icon{
+    background:#EFF6FF;
+    color:#2563EB;
+}
+
+/* ==========================================
+   SUCCESS
+========================================== */
+
+.success-card{
+    border-left:4px solid #16A34A;
+}
+
+.success-card .alert-icon{
+    background:#ECFDF5;
+    color:#16A34A;
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media(max-width:768px){
+
+    .alert-card{
+        padding:12px;
+    }
+
+    .alert-icon{
+        width:38px;
+        height:38px;
+        font-size:16px;
+    }
+
+    .alert-title{
+        font-size:13px;
+    }
+
+    .alert-message{
+        font-size:12px;
+    }
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>trackmed_alerts</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>TrackMed Alerts</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    data.alerts = [
+
+        {
+            type: 'Warning',
+            message: '2 patients missed scheduled doses today'
+        },
+
+        {
+            type: 'Info',
+            message: '1 medication refill request awaiting approval'
+        },
+
+        {
+            type: 'Success',
+            message: '15 medication schedules completed successfully'
+        },
+
+        {
+            type: 'Warning',
+            message: 'Upcoming refill required within 3 days'
+        }
+
+    ];
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-09 16:43:09</sys_created_on>
+        <sys_id>89291af6bd9107107f446e5ccea4077a</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>TrackMed Alerts</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_widget_89291af6bd9107107f446e5ccea4077a</sys_update_name>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-11 15:45:21</sys_updated_on>
+        <template><![CDATA[<div class="alerts-container">
+
+    <div class="alert-card"
+         ng-repeat="a in data.alerts"
+         ng-class="{
+            'warning-card': a.type == 'Warning',
+            'info-card': a.type == 'Info',
+            'success-card': a.type == 'Success'
+         }">
+
+        <div class="alert-icon">
+
+            <i class="fa fa-exclamation-triangle"
+               ng-if="a.type=='Warning'"></i>
+
+            <i class="fa fa-info-circle"
+               ng-if="a.type=='Info'"></i>
+
+            <i class="fa fa-check-circle"
+               ng-if="a.type=='Success'"></i>
+
+        </div>
+
+        <div class="alert-content">
+
+            <div class="alert-title">
+                {{a.type}}
+            </div>
+
+            <div class="alert-message">
+                {{a.message}}
+            </div>
+
+        </div>
+
+    </div>
+
+</div>]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>89291af6bd9107107f446e5ccea4077a</id>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-09 16:43:09</sys_created_on>
+        <sys_id>49299af6bd9107107f446e5ccea40756</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-09 16:43:09</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

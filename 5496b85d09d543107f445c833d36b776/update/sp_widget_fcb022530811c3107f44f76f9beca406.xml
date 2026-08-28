@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function() {
+    var c = this;
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.tm-card{
+    background:#ffffff;
+    border-radius:20px;
+    padding:24px;
+    border:1px solid #E5E7EB;
+    box-shadow:0 10px 30px rgba(15,23,42,.05);
+}
+
+.tm-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.tm-header h4{
+    margin:0;
+    font-size:18px;
+    font-weight:700;
+    color:#0F172A;
+}
+
+.tm-badge{
+    background:#ECFDF5;
+    color:#16A34A;
+    padding:6px 12px;
+    border-radius:30px;
+    font-size:12px;
+    font-weight:600;
+}
+
+.tm-donut-container{
+    display:flex;
+    justify-content:center;
+    margin:20px 0;
+}
+
+.tm-donut{
+    width:240px;
+    height:240px;
+    border-radius:50%;
+    position:relative;
+    transition:.3s;
+}
+
+.tm-donut:hover{
+    transform:scale(1.03);
+}
+
+.tm-donut:before{
+    content:'';
+    position:absolute;
+    width:150px;
+    height:150px;
+    background:#fff;
+    border-radius:50%;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}
+
+.tm-center{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+    z-index:10;
+}
+
+.tm-total{
+    font-size:40px;
+    font-weight:800;
+    color:#0F172A;
+}
+
+.tm-label{
+    font-size:13px;
+    color:#64748B;
+}
+
+.tm-rate{
+    margin-top:8px;
+    color:#16A34A;
+    font-weight:700;
+}
+
+.tm-stats{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:10px;
+    margin-top:25px;
+}
+
+.tm-stat{
+    border-radius:14px;
+    padding:12px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.tm-dot{
+    width:12px;
+    height:12px;
+    border-radius:50%;
+}
+
+.tm-stat strong{
+    display:block;
+    font-size:18px;
+}
+
+.tm-stat small{
+    color:#64748B;
+}
+
+.success{
+    background:#F0FDF4;
+}
+.success .tm-dot{
+    background:#22C55E;
+}
+
+.active{
+    background:#EFF6FF;
+}
+.active .tm-dot{
+    background:#3B82F6;
+}
+
+.warning{
+    background:#FFFBEB;
+}
+.warning .tm-dot{
+    background:#F59E0B;
+}
+
+.draft{
+    background:#F5F3FF;
+}
+.draft .tm-dot{
+    background:#A855F7;
+}
+
+.danger{
+    background:#FEF2F2;
+}
+.danger .tm-dot{
+    background:#EF4444;
+}
+
+@media(max-width:1200px){
+    .tm-stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>trackmed_status_donut</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>TrackMed Status Donut</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    data.counts = {
+        completed: 0,
+        active: 0,
+        paused: 0,
+        draft: 0,
+        cancelled: 0
+    };
+
+    var gr = new GlideRecord('x_snc_trackmed_medication_schedule_table');
+    gr.query();
+
+    while (gr.next()) {
+
+        var state = gr.getValue('state');
+
+        switch(state) {
+
+            case 'completed':
+                data.counts.completed++;
+                break;
+
+            case 'active':
+                data.counts.active++;
+                break;
+
+            case 'paused':
+                data.counts.paused++;
+                break;
+
+            case 'draft':
+                data.counts.draft++;
+                break;
+
+            case 'cancelled':
+                data.counts.cancelled++;
+                break;
+        }
+    }
+
+    data.total =
+        data.counts.completed +
+        data.counts.active +
+        data.counts.paused +
+        data.counts.draft +
+        data.counts.cancelled;
+
+    if (data.total == 0) {
+
+        data.completedDeg = 0;
+        data.activeDeg = 0;
+        data.pausedDeg = 0;
+        data.draftDeg = 0;
+        data.completionRate = 0;
+        return;
+    }
+
+    data.completedDeg =
+        Math.round((data.counts.completed / data.total) * 360);
+
+    data.activeDeg =
+        data.completedDeg +
+        Math.round((data.counts.active / data.total) * 360);
+
+    data.pausedDeg =
+        data.activeDeg +
+        Math.round((data.counts.paused / data.total) * 360);
+
+    data.draftDeg =
+        data.pausedDeg +
+        Math.round((data.counts.draft / data.total) * 360);
+
+    data.completionRate =
+        Math.round(
+            (data.counts.completed / data.total) * 100
+        );
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-11 06:33:08</sys_created_on>
+        <sys_id>fcb022530811c3107f44f76f9beca406</sys_id>
+        <sys_mod_count>16</sys_mod_count>
+        <sys_name>TrackMed Status Donut</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_widget_fcb022530811c3107f44f76f9beca406</sys_update_name>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-12 09:40:42</sys_updated_on>
+        <template><![CDATA[<div class="tm-card">
+
+    <div class="tm-header">
+        <h4>Medication Schedules by Status</h4>
+        <span class="tm-badge">Live</span>
+    </div>
+
+    <div class="tm-donut-container">
+
+        <div class="tm-donut"
+             ng-style="{
+             'background':
+             'conic-gradient(' +
+             '#22C55E 0deg ' + c.data.completedDeg + 'deg,' +
+             '#3B82F6 ' + c.data.completedDeg + 'deg ' + c.data.activeDeg + 'deg,' +
+             '#F59E0B ' + c.data.activeDeg + 'deg ' + c.data.pausedDeg + 'deg,' +
+             '#A855F7 ' + c.data.pausedDeg + 'deg ' + c.data.draftDeg + 'deg,' +
+             '#EF4444 ' + c.data.draftDeg + 'deg 360deg)'
+             }">
+
+            <div class="tm-center">
+
+                <div class="tm-total">
+                    {{c.data.total}}
+                </div>
+
+                <div class="tm-label">
+                    Schedules
+                </div>
+
+                <div class="tm-rate">
+                    {{c.data.completionRate}}%
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="tm-stats">
+
+        <div class="tm-stat success">
+            <span class="tm-dot"></span>
+            <div>
+                <strong>{{c.data.counts.completed}}</strong>
+                <small>Completed</small>
+            </div>
+        </div>
+
+        <div class="tm-stat active">
+            <span class="tm-dot"></span>
+            <div>
+                <strong>{{c.data.counts.active}}</strong>
+                <small>Active</small>
+            </div>
+        </div>
+
+        <div class="tm-stat warning">
+            <span class="tm-dot"></span>
+            <div>
+                <strong>{{c.data.counts.paused}}</strong>
+                <small>Paused</small>
+            </div>
+        </div>
+
+        <div class="tm-stat draft">
+            <span class="tm-dot"></span>
+            <div>
+                <strong>{{c.data.counts.draft}}</strong>
+                <small>Draft</small>
+            </div>
+        </div>
+
+        <div class="tm-stat danger">
+            <span class="tm-dot"></span>
+            <div>
+                <strong>{{c.data.counts.cancelled}}</strong>
+                <small>Cancelled</small>
+            </div>
+        </div>
+
+    </div>
+
+</div>]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>fcb022530811c3107f44f76f9beca406</id>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-11 06:33:08</sys_created_on>
+        <sys_id>f4b0a2530811c3107f44f76f9beca4cf</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-11 06:33:08</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller=function() {
+  /* widget controller */
+  var c = this;
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.adherence-card{
+    background:#fff;
+    padding:20px;
+    border-radius:16px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.08);
+}
+
+.section-title{
+    margin-bottom:20px;
+    color:#1B5E20;
+    font-weight:600;
+}
+
+.section-title i{
+    margin-right:8px;
+}
+
+.patient-row{
+    margin-bottom:20px;
+}
+
+.patient-header{
+    display:flex;
+    align-items:center;
+    margin-bottom:10px;
+}
+
+.patient-avatar{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:#1B5E20;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+    margin-right:12px;
+}
+
+.patient-info{
+    flex:1;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.patient-name{
+    font-weight:600;
+    color:#333;
+}
+
+.patient-percent{
+    color:#1B5E20;
+    font-weight:700;
+}
+
+.progress{
+    height:12px;
+    background:#EAEAEA;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:100%;
+    background:linear-gradient(
+        90deg,
+        #1B5E20,
+        #4CAF50
+    );
+    border-radius:20px;
+    transition:width .5s ease;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>trackmed_patient_adherence</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>TrackMed Patient Adherence</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    data.patients = [
+        {
+            name: "John",
+            adherence: 95
+        },
+        {
+            name: "David",
+            adherence: 80
+        },
+        {
+            name: "Mary",
+            adherence: 60
+        }
+    ];
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-09 16:51:01</sys_created_on>
+        <sys_id>94fa1ebabd9107107f446e5ccea407b7</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>TrackMed Patient Adherence</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_widget_94fa1ebabd9107107f446e5ccea407b7</sys_update_name>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-09 17:33:37</sys_updated_on>
+        <template><![CDATA[<div class="adherence-card">
+
+    <h3 class="section-title">
+        <i class="fa fa-heartbeat"></i>
+        Patient Adherence
+    </h3>
+
+    <div class="patient-row" ng-repeat="p in data.patients">
+
+        <div class="patient-header">
+
+            <div class="patient-avatar">
+                {{p.name.charAt(0)}}
+            </div>
+
+            <div class="patient-info">
+                <div class="patient-name">
+                    {{p.name}}
+                </div>
+
+                <div class="patient-percent">
+                    {{p.adherence}}%
+                </div>
+            </div>
+
+        </div>
+
+        <div class="progress">
+
+            <div class="progress-bar"
+                 ng-style="{'width': p.adherence + '%'}">
+            </div>
+
+        </div>
+
+    </div>
+
+</div>]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>94fa1ebabd9107107f446e5ccea407b7</id>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-09 16:51:01</sys_created_on>
+        <sys_id>94fa12fabd9107107f446e5ccea40778</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-09 16:51:01</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

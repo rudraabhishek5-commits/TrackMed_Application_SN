@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="enforce_dot_walk_cross_scope_access=true" db_object_id="3dab27bd819943107f44e314ec616f01" extends="task" label="Dose log" max_length="40" name="x_snc_trackmed_dose_log" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Medication Schedule" max_length="32" name="medication" reference="x_snc_trackmed_medication_schedule_table" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Confirmed by" max_length="32" name="confirmed_by" reference="sys_user" type="reference"/>
+        <element label="Dose log id" max_length="40" name="dose_log_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Caregiver confirmed" max_length="255" name="caregiver_confirmed" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Patient" max_length="32" name="patient" reference="x_snc_trackmed_patient_record" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Care taker" max_length="32" name="care_taker" reference="sys_user" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" choice="3" label="Status" max_length="40" name="status" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Scheduled" sequence="2" value="Scheduled"/>
+                <element inactive_on_update="false" label="Taken" sequence="0" value="Taken"/>
+                <element inactive_on_update="false" label="Not taken" sequence="1" value="Not taken"/>
+            </choice>
+        </element>
+    </element>
+</database>

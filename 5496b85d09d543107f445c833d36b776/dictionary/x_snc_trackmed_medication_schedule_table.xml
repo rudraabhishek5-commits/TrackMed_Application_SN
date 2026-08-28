@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="enforce_dot_walk_cross_scope_access=true" db_object_id="69b2dc61745d03107f445266d691c79d" label="Medication Schedule Table" max_length="40" name="x_snc_trackmed_medication_schedule_table" type="collection">
+        <element attributes="edge_encryption_enabled=true" label="Stock Quantity" max_length="40" name="stock_quantity" type="integer"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Prescribed By" max_length="40" name="prescribed_by" reference="sys_user" type="reference"/>
+        <element label="Dosage" max_length="40" name="dosage" type="string"/>
+        <element label="Start Date" max_length="40" name="start_date" type="glide_date_time"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Caretaker" max_length="32" name="caretaker" reference="sys_user" type="reference"/>
+        <element label="End Date" max_length="40" name="end_date" type="glide_date_time"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Care facility" max_length="32" name="care_facility" reference="core_company" type="reference"/>
+        <element label="Medication ID" max_length="40" name="medication_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Frequency" max_length="40" name="frequency" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="As Needed" sequence="4" value="as_Needed"/>
+                <element inactive_on_update="false" label="Twice Daily" sequence="1" value="twice_Daily"/>
+                <element inactive_on_update="false" label="Thrice Daily" sequence="2" value="thrice_Daily"/>
+                <element inactive_on_update="false" label="Weekly" sequence="3" value="weekly"/>
+                <element inactive_on_update="false" label="Once Daily" sequence="0" value="once_Daily"/>
+            </choice>
+        </element>
+        <element display="true" label="Medication Name" max_length="40" name="medication_name" type="string"/>
+        <element attributes="edge_encryption_enabled=true" default="30" label="Low Stock Threshold(%)" mandatory="true" max_length="40" name="low_stock_threshold" type="integer"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" display="true" label="Patient" max_length="32" name="patient" reference="x_snc_trackmed_patient_record" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="State" max_length="40" name="state" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Paused" sequence="2" value="paused"/>
+                <element inactive_on_update="false" label="Cancelled" sequence="3" value="cancelled"/>
+                <element inactive_on_update="false" label="Completed" sequence="1" value="completed"/>
+                <element inactive_on_update="false" label="Active" sequence="0" value="active"/>
+                <element inactive_on_update="false" label="Draft" sequence="4" value="draft"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" choice="3" label="Route of administration" max_length="40" name="route_of_administration" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Inhaled" sequence="3" value="Inhaled"/>
+                <element inactive_on_update="false" label="Injectable" sequence="1" value="Injectable"/>
+                <element inactive_on_update="false" label="Oral" sequence="0" value="Oral"/>
+                <element inactive_on_update="false" label="Topical" sequence="2" value="Topical"/>
+            </choice>
+        </element>
+        <element label="Reminder Time" max_length="40" name="reminder_time" type="glide_date_time"/>
+        <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Medication id" max_length="40" name="number" type="string"/>
+        <index name="index">
+            <element name="care_facility"/>
+        </index>
+        <index name="index2">
+            <element name="caretaker"/>
+        </index>
+        <index name="index3">
+            <element name="patient"/>
+        </index>
+        <index name="index4">
+            <element name="prescribed_by"/>
+        </index>
+    </element>
+</database>

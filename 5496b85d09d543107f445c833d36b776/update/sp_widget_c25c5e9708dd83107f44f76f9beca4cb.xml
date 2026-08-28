@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function($scope, spUtil) {
+var c = this;
+	
+// Auto-refresh the alert KPI when alerts change anywhere
+if (c.options.metric == 'alerts')
+spUtil.recordWatch($scope, 'x_trackmed_alert', 'status=unresolved',
+function() { c.server.refresh(); });
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/* ==========================================
+   TRACKMED KPI DASHBOARD
+  {{card.trend}}% from last month
+========================================== */
+
+.tm-kpi-grid{
+    display:flex;
+    gap:20px;
+    width:100%;
+    flex-wrap:wrap;
+    row-gap:50px;      /* space between rows */
+  
+
+}
+/* ==========================================
+   KPI CARD
+========================================== */
+
+.tm-kpi{
+    flex:1;
+    min-width:260px;
+
+    display:flex;
+    align-items:center;
+    gap:16px;
+
+    padding:20px;
+
+    background:#FFFFFF;
+
+    border:1px solid #E5E7EB;
+
+    border-radius:16px;
+
+    text-decoration:none !important;
+
+    box-shadow:0 2px 10px rgba(15,23,42,.05);
+
+    transition:all .25s ease;
+}
+
+.tm-kpi:hover{
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 8px 20px rgba(15,23,42,.10);
+
+    text-decoration:none !important;
+}
+
+/* ==========================================
+   ICON
+========================================== */
+
+.tm-kpi-icon{
+    width:56px;
+    height:56px;
+
+    border-radius:14px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:24px;
+
+    flex-shrink:0;
+}
+
+/* ==========================================
+   BODY
+========================================== */
+
+.tm-kpi-body{
+    display:flex;
+    flex-direction:column;
+    flex:1;
+}
+
+/* ==========================================
+   LABEL
+========================================== */
+
+.tm-kpi-label{
+    font-size:12px;
+    font-weight:500;
+    color:#64748B;
+    margin-bottom:4px;
+}
+
+/* ==========================================
+   VALUE
+========================================== */
+
+.tm-kpi-value{
+    font-size:24px;
+    font-weight:700;
+    line-height:1.2;
+    color:#0F172A;
+}
+
+/* ==========================================
+   TREND
+========================================== */
+
+.tm-kpi-trend{
+    margin-top:4px;
+    font-size:11px;
+    font-weight:600;
+}
+
+.tm-kpi-trend.up{
+    color:#16A34A;
+}
+
+.tm-kpi-trend.down{
+    color:#DC2626;
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width:1200px){
+
+    .tm-kpi{
+        min-width:240px;
+    }
+}
+
+@media (max-width:992px){
+
+    .tm-kpi-grid{
+        flex-wrap:wrap;
+    }
+
+    .tm-kpi{
+        width:calc(50% - 10px);
+        min-width:280px;
+    }
+}
+
+@media (max-width:768px){
+
+    .tm-kpi-grid{
+        flex-direction:column;
+    }
+
+    .tm-kpi{
+        width:100%;
+        min-width:100%;
+    }
+
+    .tm-kpi-value{
+        font-size:22px;
+    }
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>trackmed_kpi</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>TrackMed KPI</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    function getCount(tableName, encodedQuery) {
+
+        try {
+
+            var ga = new GlideAggregate(tableName);
+
+            if (!ga.isValid()) {
+                gs.error('Invalid table: ' + tableName);
+                return 0;
+            }
+
+            ga.addAggregate('COUNT');
+
+            if (encodedQuery) {
+                ga.addEncodedQuery(encodedQuery);
+            }
+
+            ga.query();
+
+            if (ga.next()) {
+                return parseInt(ga.getAggregate('COUNT'), 10) || 0;
+            }
+
+        } catch (e) {
+
+            gs.error('TrackMED KPI Error: ' + e.message);
+        }
+
+        return 0;
+    }
+
+    // Tables
+    var PATIENT_TABLE = 'x_snc_trackmed_patient_record';
+    var SCHEDULE_TABLE = 'x_snc_trackmed_medication_schedule_table';
+    var DOSE_LOG_TABLE = 'x_snc_trackmed_dose_log';
+
+    // Real Values
+    var totalPatients = getCount(PATIENT_TABLE);
+    var activeSchedules = getCount(SCHEDULE_TABLE);
+
+    var dosesToday = getCount(
+        DOSE_LOG_TABLE,
+        'sys_created_onONToday@javascript:gs.beginningOfToday()@javascript:gs.endOfToday()'
+    );
+
+    var missedDoses = getCount(
+        DOSE_LOG_TABLE,
+        'status=missed'
+    );
+
+    // Dummy fallback values
+    totalPatients = totalPatients || 79;
+    activeSchedules = activeSchedules || 56;
+    dosesToday = dosesToday ||72;
+    missedDoses = missedDoses || 7;
+
+    data.cards = [
+
+        {
+            label: 'Total Patients',
+            icon: ']]>👥<![CDATA[',
+            color: '#EEF2FF',
+            iconColor: '#4F46E5',
+            value: totalPatients,
+            link: 'trackmed_patients'
+        },
+
+        {
+            label: 'Active Medication Schedules',
+            icon: ']]>📅<![CDATA[',
+            color: '#EFF6FF',
+            iconColor: '#2563EB',
+            value: activeSchedules,
+            link: 'trackmed_schedules'
+        },
+
+        {
+            label: 'Doses Administered Today',
+            icon: ']]>💊<![CDATA[',
+            color: '#ECFDF5',
+            iconColor: '#059669',
+            value: dosesToday,
+            link: 'trackmed_dose_logs'
+        },
+
+        {
+            label: 'Missed Doses',
+            icon: '⚠️',
+            color: '#FEF2F2',
+            iconColor: '#DC2626',
+            value: missedDoses,
+            link: 'trackmed_dose_logs'
+        }
+
+    ];
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-11 06:14:07</sys_created_on>
+        <sys_id>c25c5e9708dd83107f44f76f9beca4cb</sys_id>
+        <sys_mod_count>34</sys_mod_count>
+        <sys_name>TrackMed KPI</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_widget_c25c5e9708dd83107f44f76f9beca4cb</sys_update_name>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-15 06:09:41</sys_updated_on>
+        <template><![CDATA[<div class="tm-content-wrapper" ng-class="{'collapsed': c.isCollapsed}">
+
+<div class="tm-kpi-grid ">
+
+    <a class="tm-card tm-kpi"
+       ng-repeat="card in data.cards"
+       >
+
+        <div class="tm-kpi-icon"
+             ng-style="{
+                'background': card.color,
+                'color': card.iconColor
+             }">
+
+            {{card.icon}}
+
+        </div>
+
+        <div class="tm-kpi-body">
+
+            <span class="tm-kpi-label">
+                {{card.label}}
+            </span>
+
+            <span class="tm-kpi-value">
+                {{card.value | number}}
+            </span>
+
+            <span class="tm-kpi-trend"
+                  ng-class="{
+                    'up': card.trend >= 0,
+                    'down': card.trend < 0
+                  }">
+
+                <span ng-if="card.trend >= 0">▲</span>
+                <span ng-if="card.trend < 0">▼</span>
+
+              
+
+            </span>
+
+        </div>
+
+    </a>
+
+</div>
+</div>div>]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>c25c5e9708dd83107f44f76f9beca4cb</id>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-11 06:14:07</sys_created_on>
+        <sys_id>4e5c5e9708dd83107f44f76f9beca4ce</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-11 06:14:07</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller=function() {  /* widget controller */  var c = this;};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.tm-detail-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-header h3 {
+    margin: 0 0 20px 0;
+    font-size: 19px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+/* Priority Badge */
+.priority-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 13.5px;
+    margin-bottom: 18px;
+}
+
+.high-priority {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+/* Main Alert Info */
+.alert-main-info h4 {
+    margin: 0 0 6px 0;
+    font-size: 17px;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.missed-time {
+    color: #ef4444;
+    font-size: 14px;
+    margin: 0;
+    font-weight: 500;
+}
+
+.detail-divider {
+    border: none;
+    border-top: 1px solid #e2e8f0;
+    margin: 22px 0;
+}
+
+/* Form Styling */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #475569;
+    margin-bottom: 8px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #1e2937;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #14b8a6;
+    box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.15);
+    outline: none;
+}
+
+textarea.form-control {
+    resize: vertical;
+}
+
+/* Footer Button */
+.detail-footer {
+    margin-top: auto;
+    padding-top: 12px;
+    text-align: right;
+}
+
+.btn-resolve {
+    background: #10b981;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-resolve:hover {
+    background: #059669;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>trackmed_cargiver_alerts_details</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>TrackMed Cargiver Alerts Details</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {  /* populate the 'data' object */  /* e.g., data.table = $sp.getValue('table'); */})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>vignesh.pitchai</sys_created_by>
+        <sys_created_on>2026-06-13 18:41:33</sys_created_on>
+        <sys_id>5a9adb4059a503107f44615fbac43eab</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>TrackMed Cargiver Alerts Details</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_widget_5a9adb4059a503107f44615fbac43eab</sys_update_name>
+        <sys_updated_by>vignesh.pitchai</sys_updated_by>
+        <sys_updated_on>2026-06-14 07:41:39</sys_updated_on>
+        <template><![CDATA[<div class="tm-detail-card">
+    <div class="detail-header">
+        <h3>Alert Details</h3>
+    </div>
+    
+    <div class="priority-badge high-priority">
+        <i class="fa fa-exclamation-triangle"></i>
+        High Priority
+    </div>
+    
+    <div class="alert-main-info">
+        <h4>John Doe - Atorvastatin 10mg</h4>
+        <p class="missed-time">Missed dose at 08:00 PM • May 16, 2024</p>
+    </div>
+    
+    <hr class="detail-divider">
+    
+    <div class="form-group">
+        <label>Action Taken</label>
+        <select class="form-control">
+            <option>Contacted Resident</option>
+            <option>Escalated to Supervisor</option>
+            <option>No Response</option>
+            <option>Other</option>
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label>Notes</label>
+        <textarea class="form-control" rows="4" placeholder="Add notes here...">Patient will take immediately.</textarea>
+    </div>
+    
+    <div class="detail-footer">
+        <button class="btn btn-success btn-resolve">
+            <i class="fa fa-check"></i>
+            Mark as Resolved
+        </button>
+    </div>
+</div>]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>5a9adb4059a503107f44615fbac43eab</id>
+        <sys_created_by>vignesh.pitchai</sys_created_by>
+        <sys_created_on>2026-06-13 18:41:33</sys_created_on>
+        <sys_id>d69a93c459a503107f44615fbac43efd</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>vignesh.pitchai</sys_updated_by>
+        <sys_updated_on>2026-06-13 18:41:33</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

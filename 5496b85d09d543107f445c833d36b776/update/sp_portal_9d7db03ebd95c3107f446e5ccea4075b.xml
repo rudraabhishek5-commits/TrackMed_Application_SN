@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_portal">
+    <sp_portal action="INSERT_OR_UPDATE">
+        <alternate_portal/>
+        <communication_channels/>
+        <css_variables>$brand-primary:#1B5E20;
+$body-bg:#F5F9F5;
+$state-success-text:#2E7D32;
+$sp-homepage-bg:#fff;
+$sp-navbar-divider-color:#4CAF50;
+$text-color:#333333;
+$sp-logo-margin-y:.5rem;
+$navbar-inverse-link-hover-color:#E8F5E9;
+$panel-bg:#FFFFFF;
+$brand-success:#2E7D32;
+$navbar-inverse-bg:#1B5E20;
+$brand-warning:#F0AD4E;
+$brand-danger:#D9534F;
+$sp-tagline-color:#717171;
+$navbar-inverse-link-color:#FFFFFF;
+$brand-info:#4CAF50;
+$link-color:#2E7D32;
+$sp-logo-margin-x:1.5rem;
+$btn-default-bg:#4CAF50;
+$text-muted:#757575;
+</css_variables>
+        <dark_theme/>
+        <default>false</default>
+        <embeddable_macroponents/>
+        <enable_ais>true</enable_ais>
+        <enable_certificate_based_authentication>false</enable_certificate_based_authentication>
+        <enable_embeddables>false</enable_embeddables>
+        <enable_favorites>false</enable_favorites>
+        <hide_portal_name>false</hide_portal_name>
+        <homepage/>
+        <icon/>
+        <inactive>false</inactive>
+        <kb_knowledge_base/>
+        <kb_knowledge_page/>
+        <login_page/>
+        <logo>ce6702b2bd1107107f446e5ccea407c4</logo>
+        <logo_alt_text>Automed Caregiver Portal</logo_alt_text>
+        <notfound_page/>
+        <quick_start_config/>
+        <rtl_enabled>false</rtl_enabled>
+        <sc_catalog/>
+        <sc_catalog_page/>
+        <sc_category_page/>
+        <search_application display_value="Service Portal Default Search Application">00731b9d5b231010d9a5ce1a8581c7dd</search_application>
+        <search_results_configuration display_value="Service Portal Search">80eb579d53671010968addeeff7b1215</search_results_configuration>
+        <sp_chat_queue/>
+        <sp_rectangle_menu/>
+        <sys_class_name>sp_portal</sys_class_name>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-09 10:04:49</sys_created_on>
+        <sys_id>9d7db03ebd95c3107f446e5ccea4075b</sys_id>
+        <sys_mod_count>40</sys_mod_count>
+        <sys_name>Automed Caregiver Portal</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_portal_9d7db03ebd95c3107f446e5ccea4075b</sys_update_name>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-09 15:25:40</sys_updated_on>
+        <theme display_value="Stock">79315153cb33310000f8d856634c9c4b</theme>
+        <title>Automed Caregiver Portal</title>
+        <ts_index_group/>
+        <url_suffix>automed</url_suffix>
+    </sp_portal>
+    <sys_translated_text action="delete_multiple" query="documentkey=9d7db03ebd95c3107f446e5ccea4075b"/>
+    <sys_attachment action="INSERT_OR_UPDATE">
+        <average_image_color>#265e68</average_image_color>
+        <chunk_size_bytes>700000</chunk_size_bytes>
+        <compressed>true</compressed>
+        <content_type>image/png</content_type>
+        <file_name>logo</file_name>
+        <hash>57fcc976534dfb6558522a0e74315e2399bd30ddad21f22f80539022469be8b9</hash>
+        <image_height>50</image_height>
+        <image_width>200</image_width>
+        <size_bytes>4103</size_bytes>
+        <size_compressed>4088</size_compressed>
+        <state/>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-09 15:25:40</sys_created_on>
+        <sys_id>ce6702b2bd1107107f446e5ccea407c4</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-09 15:25:40</sys_updated_on>
+        <table_name>ZZ_YYsp_portal</table_name>
+        <table_sys_id>9d7db03ebd95c3107f446e5ccea4075b</table_sys_id>
+    </sys_attachment>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>H4sIAAAAAAAA/w==</data>
+        <length>16</length>
+        <position>0</position>
+        <sys_attachment display_value="logo" sys_id="ce6702b2bd1107107f446e5ccea407c4">ce6702b2bd1107107f446e5ccea407c4</sys_attachment>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-09 15:25:40</sys_created_on>
+        <sys_id>426702b2bd1107107f446e5ccea407c5</sys_id>
+    </sys_attachment_doc>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>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</data>
+        <length>5440</length>
+        <position>1</position>
+        <sys_attachment display_value="logo" sys_id="ce6702b2bd1107107f446e5ccea407c4">ce6702b2bd1107107f446e5ccea407c4</sys_attachment>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-09 15:25:40</sys_created_on>
+        <sys_id>066702b2bd1107107f446e5ccea407c5</sys_id>
+    </sys_attachment_doc>
+</record_update>

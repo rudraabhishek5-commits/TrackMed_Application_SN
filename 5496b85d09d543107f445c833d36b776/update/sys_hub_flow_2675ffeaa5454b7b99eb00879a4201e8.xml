@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_hub_flow">
+    <sys_hub_flow action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>false</active>
+        <allow_high_security_roles>false</allow_high_security_roles>
+        <annotation/>
+        <attributes>timeFromCreateToActivate=6607000</attributes>
+        <authored_on_release_version/>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description/>
+        <display_name_after_preview/>
+        <flow_priority>MEDIUM</flow_priority>
+        <generation_source>fluent</generation_source>
+        <internal_name>trackmed_daily_dose_log_engine</internal_name>
+        <label_cache>[{"name":"cde4b961-751b-468f-914c-1cd3925f08fd.Records","label":"cde4b961-751b-468f-914c-1cd3925f08fd➛Records","type":"array.object","base_type":"array.object","column_name":"Records","usedInstances":{"bd38b8c9-282a-4ca9-8f5a-f4f063e8370f":["items"]},"attributes":{}},{"name":"bd38b8c9-282a-4ca9-8f5a-f4f063e8370f.item.patient","label":"2 - For Each - ➛item➛Patient","type":"reference","base_type":"reference","usedInstances":{"21975403-72c5-4209-b34c-19d450c71227":["values"],"0ff91f03-3ec8-426d-a310-1818280d48c4":["values"],"40cba1dd-04c7-45af-a557-9f7bb0dad362":["values"]},"attributes":{}},{"name":"bd38b8c9-282a-4ca9-8f5a-f4f063e8370f.item.caretaker","label":"2 - For Each - ➛item➛Caretaker","type":"reference","base_type":"reference","usedInstances":{"21975403-72c5-4209-b34c-19d450c71227":["values"],"0ff91f03-3ec8-426d-a310-1818280d48c4":["values"],"40cba1dd-04c7-45af-a557-9f7bb0dad362":["values"]},"attributes":{}},{"name":"bd38b8c9-282a-4ca9-8f5a-f4f063e8370f.item.sys_id","label":"2 - For Each - ➛item➛Sys Id","type":"string","base_type":"string","usedInstances":{"21975403-72c5-4209-b34c-19d450c71227":["values"],"0ff91f03-3ec8-426d-a310-1818280d48c4":["values"],"40cba1dd-04c7-45af-a557-9f7bb0dad362":["values"]},"attributes":{}},{"name":"bd38b8c9-282a-4ca9-8f5a-f4f063e8370f.item.frequency","label":"2 - For Each - ➛item➛Frequency","type":"string","base_type":"string","usedInstances":{"a40602da-d9d8-41e5-a017-a51f20bb23ba":["condition"],"1d70dead-b84a-4b57-8238-681360e94e38":["condition"]},"attributes":{}}]</label_cache>
+        <master_snapshot>d741e00047430f104134ef6c716d435d</master_snapshot>
+        <master_snapshot_digest/>
+        <name>TrackMed Daily Dose Log Engine</name>
+        <natlang/>
+        <outputs/>
+        <pre_compiled>false</pre_compiled>
+        <remote_trigger_id>e741e00047430f104134ef6c716d43b3</remote_trigger_id>
+        <run_as>system</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <show_draft_actions>false</show_draft_actions>
+        <show_triggered_flows>false</show_triggered_flows>
+        <status>published</status>
+        <substatus/>
+        <sys_class_name>sys_hub_flow</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:45:33</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>2675ffeaa5454b7b99eb00879a4201e8</sys_id>
+        <sys_mod_count>10</sys_mod_count>
+        <sys_name>TrackMed Daily Dose Log Engine</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sys_hub_flow_2675ffeaa5454b7b99eb00879a4201e8</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-28 19:31:41</sys_updated_on>
+        <type>flow</type>
+        <updation_source/>
+        <version>2</version>
+        <version_record>5aee322c470743504134ef6c716d431a</version_record>
+    </sys_hub_flow>
+    <sys_translated_text action="delete_multiple" query="documentkey=2675ffeaa5454b7b99eb00879a4201e8"/>
+    <sys_variable_value action="delete_multiple" query="document_key=2675ffeaa5454b7b99eb00879a4201e8"/>
+    <sys_flow_timer_trigger action="INSERT_OR_UPDATE">
+        <active>false</active>
+        <day_of_month>1</day_of_month>
+        <day_of_week/>
+        <name/>
+        <published_version/>
+        <run_period/>
+        <run_start>2026-08-26 18:46:11</run_start>
+        <sys_class_name>sys_flow_timer_trigger</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:11</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>e741e00047430f104134ef6c716d43b3</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-28 19:31:42</sys_updated_on>
+        <time>1970-01-01 08:05:00</time>
+        <timer_type>11</timer_type>
+        <trigger_definition display_value="Daily">89142dc0c32222002841b63b12d3ae8a</trigger_definition>
+    </sys_flow_timer_trigger>
+    <sys_trigger_runner_mapping action="delete_multiple" query="identifier=2675ffeaa5454b7b99eb00879a4201e8"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=2675ffeaa5454b7b99eb00879a4201e8"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=2675ffeaa5454b7b99eb00879a4201e8"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=2675ffeaa5454b7b99eb00879a4201e8"/>
+    <sys_hub_flow_output action="delete_multiple" query="model=2675ffeaa5454b7b99eb00879a4201e8"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=2675ffeaa5454b7b99eb00879a4201e8"/>
+    <sys_hub_trigger_instance_v2 action="delete_multiple" query="flow=2675ffeaa5454b7b99eb00879a4201e8^sys_idNOT IN8c2fcc4c9b4342f493294f73c34e946e"/>
+    <sys_hub_trigger_instance_v2 action="INSERT_OR_UPDATE">
+        <comment/>
+        <display_text/>
+        <flow display_value="TrackMed Daily Dose Log Engine">2675ffeaa5454b7b99eb00879a4201e8</flow>
+        <generation_source/>
+        <name>Daily</name>
+        <published_version/>
+        <remote_sys_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:40:08</sys_created_on>
+        <sys_id>8c2fcc4c9b4342f493294f73c34e946e</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 20:35:40</sys_updated_on>
+        <trigger_definition display_value="Daily">89142dc0c32222002841b63b12d3ae8a</trigger_definition>
+        <trigger_inputs>H4sIAAAAAAAA/31RTWvDMAz9K8PnDJzDGMttl0JhMFjDLqUU1VYSgeMEW+malfz3KU0WsjEGPvjp670n7a+KA5Ulhq2PDN7gro9bqzKlEuXghE6+OdUokDxj8ODyvkWJlo4sHnnKWWzRW/Q8dZqqIYMvFAXvD4mqwVvgJvQq49BhoorQ1DnWrQOWWQW4KMEmWAwqS7VOlId6JJnHn8F1I0yfHvW9TuXdaZ3ph0zrkZyiDOrf/y0yFTkb0E+CWghCwCPd9bfPn9T8h9tZqMjEC4++7eJh5XSOBAT76l2/KrlE+sRbfxfxuNrdXFHsqubjDQsUvQY35G90c9I1BtyCgOV+p44xipNhWJaxIXTzGaMJ1PKzYTp/73o4fAEd0CYT+QEAAA==</trigger_inputs>
+        <trigger_outputs/>
+        <trigger_type>daily</trigger_type>
+        <updation_source/>
+    </sys_hub_trigger_instance_v2>
+    <sys_hub_action_instance_v2 action="delete_multiple" query="flow=2675ffeaa5454b7b99eb00879a4201e8^sys_idNOT IN0ff91f033ec8426da3101818280d48c4,2197540372c54209b34c19d450c71227,40cba1dd04c745afa5579f7bb0dad362,cde4b961751b468f914c1cd3925f08fd"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Create Record">2de05916c31332002841b63b12d3aee1</action_type>
+        <action_type_parent display_value="">2de05916c31332002841b63b12d3aee1</action_type_parent>
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <comment/>
+        <compiled_snapshot>2de05916c31332002841b63b12d3aee1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="TrackMed Daily Dose Log Engine">2675ffeaa5454b7b99eb00879a4201e8</flow>
+        <generation_source/>
+        <order>5</order>
+        <parent_ui_id>a40602da-d9d8-41e5-a017-a51f20bb23ba</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:40:08</sys_created_on>
+        <sys_id>0ff91f033ec8426da3101818280d48c4</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2026-08-27 07:05:11</sys_updated_on>
+        <ui_id>0ff91f03-3ec8-426d-a310-1818280d48c4</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1VXU/bMBT9K5Wf2yhpSpf2DcF4GqCNiRc+ohv7prVw7Mx2gK7qf991EkK1wRDSXpDWN1/fc3zuiX16tWUaKmRL5qFQmLeLMbsH1YTiY+40z70FflehyIVxmCuzog4hXa1gc/lmYw2WOD1attwyvpZKWNRseXUzZlIQcp5gfLBI5jxN0nQax9NslhTztEimIgXEGVEoKFBR6/cgkdYvKfab+sXal33s6KzbMFYEPfGY4aNHLZCElKAcjlkFWoA3dsOW3jZUsAjiXKvN0LGW2hMhC72PTv6kY7M49JVIk3Hs9oZl3jvVlctj8HBBzNw3tm/layM5us4TgSU0yh/t17qG89pLoztIO2aPNqqp9FlnCRsInj4MVRr6FgLrMGdQ3o9RXqzNw7cnlSdSt5b0m8pwUMMKvLeyaHzQs2WosCKivIK6lnqV19bcyxZMWqpopWgRlco80KFOrnQEPAiPyFaITqh+3JYvwcowxSnREHg3Zm7jjhQ49zwLmZj/aIKSbrJ+hryzIUC4lbU/pAPusZe7Gw9Xur3Fbu861+Al4a+bOE7FdluINCsyvphMsylMZhwWk6w8gEk5K+N5iln6KS4j6bGKeuBud8vBYu7hDu37WQK2hRIPvRLJIRjzfh4yKpeCSJwH37iO4IKvUTQKxa1bG+uD+a05wwmnw4mj8DxHk9FhSc9SG6NvP3/980n/N+tvZr0ZawLjxauxlhR7sXYiUQn3nGvDtX3KNKzou3jMu2v8W671m6PLfrPPtuRfZVsyj9vfB0q4brgPH3B7/2WvRN3NL0Wg+hO/BwAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=0ff91f033ec8426da3101818280d48c4"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Create Record">2de05916c31332002841b63b12d3aee1</action_type>
+        <action_type_parent display_value="">2de05916c31332002841b63b12d3aee1</action_type_parent>
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <comment/>
+        <compiled_snapshot>2de05916c31332002841b63b12d3aee1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="TrackMed Daily Dose Log Engine">2675ffeaa5454b7b99eb00879a4201e8</flow>
+        <generation_source/>
+        <order>3</order>
+        <parent_ui_id>bd38b8c9-282a-4ca9-8f5a-f4f063e8370f</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:40:08</sys_created_on>
+        <sys_id>2197540372c54209b34c19d450c71227</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2026-08-27 07:05:11</sys_updated_on>
+        <ui_id>21975403-72c5-4209-b34c-19d450c71227</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1Vy27bMBD8FYNnW5Asx5V9K5Lm1CRoU+SSB7EiVzYRilJJKolr+N+7lBTFaGMEAXoJUN+43BnODqnx9ZYZKJEtmYdcI28XY/YAugnFJ+6M4N6CuC9Rclk55LpaUYdUrtawuXqzsQZLnB4tW26ZWCstLRq2vL4dMyUJOU8wPlokc5EmaTqN42k2S/J5midTmQLijCg05Kip9UeQSOvXFPtN/Wrt6z52dN5tVFYGPfGY4ZNHI5GEFKAdjlkJRoKv7IYtvW2oYBHkhdGboWOtjCdCFnqfnPpFx2Zx6CuQJhPY7Q1L3jvVlYsT8HBJzMI3tm8V60oJdJ0nEgtotD/er3UNF7VXlekg7Zg9utJNac47S9hA8HwxVGnoLiTWYc6gvB+juFxXj9+fVZ4q01rSb+pKgB5W4L1VeeODni1DjSUR8RLqWpkVr231oFowaSmjlaZFVOjqkQ51amUiEEF4RLZCdEr1k7Z8BVaFKc6IhsC7MXMbd6zBuZdZyET+swlKusn6GXhnQ4AIq2r/mQ54wF7ubjw86fYVu73nXINXhL9p4jiV220u0yzPxGIyzaYwmQlYTLLiCCbFrIjnKWbpp7iIlMcy6oG73Z0Ai9zDPdr3swRsCyUe+kqUgGDM+3nIKK4kkTgPvnEdwaVYo2w0yju3rqwP5rfmDCecDSeOwuc5mozOKmvoBu++fPv7g/5v1WGr3ow0ifHiYKQl+V6knSrU0r1k2vBkn/MMS7oVj7x7wn9kWr85uuo3+1xL/lWuJfO4/X2gdOuG+/Dhtvc/diDmbn8D2c2oLrsHAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=2197540372c54209b34c19d450c71227"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Create Record">2de05916c31332002841b63b12d3aee1</action_type>
+        <action_type_parent display_value="">2de05916c31332002841b63b12d3aee1</action_type_parent>
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <comment/>
+        <compiled_snapshot>2de05916c31332002841b63b12d3aee1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="TrackMed Daily Dose Log Engine">2675ffeaa5454b7b99eb00879a4201e8</flow>
+        <generation_source/>
+        <order>7</order>
+        <parent_ui_id>1d70dead-b84a-4b57-8238-681360e94e38</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:40:08</sys_created_on>
+        <sys_id>40cba1dd04c745afa5579f7bb0dad362</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2026-08-27 07:05:11</sys_updated_on>
+        <ui_id>40cba1dd-04c7-45af-a557-9f7bb0dad362</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1Vy27bMBD8FYNnW5Asx5V9K/I4NQnaFLmkCbEiVzYRilJJyolr+N+7lBTFaBMEAXoJUN+43BnODqnxzY4ZKJEtmYdcI28XY7YB3YTiI3dGcG9B3Jcouawccl2tqEMqV2vYXr/ZWIMlTo+WLXdMrJWWFg1b3tyOmZKEnCcYHy2SuUiTNJ3G8TSbJfk8zZOpTAFxRhQactTU+j1IpPVLiv22frH25RA7uug2KiuDnnjM8NGjkUhCCtAOx6wEI8FXdsuW3jZUsAjy0ujt0LFWxhMhC72PTv2iY7M49BVIkwns9oYl753qysUJeLgiZuEb27eKdaUEus4TiQU02h8f1rqGy9qrynSQdsweXemmNBedJWwgeLoYqjR0FxLrMGdQ3o9RXK2rh29PKs+UaS3pN3UlQA8r8N6qvPFBz46hxpKIeAl1rcyK17baqBZMWspopWkRFbp6oEOdWpkIRBAeka0QnVH9pC1fg1VhinOiIfB+zNzWHWtw7nkWMpH/bIKSbrJ+Bt7ZECDCqtp/pgM22Mvdj4cn3b5id/Cca/CK8D+aOE7lbpfLNMszsZhMsylMZgIWk6w4gkkxK+J5iln6KS4i5bGMeuB+fyfAIvdwj/b9LAHbQomHvhIlIBjzfh4yiitJJM6Db1xHcCXWKBuN8s6tK+uD+a05wwnnw4mj8HmOJqPTDRq6wbvTr39/0P+tet2qNyNNYrx4NdKS/CDSzhRq6Z4zbXiyT3mGJd2KR9494T8yrd8cXfebfa4l/yrXknnc/j5QunXDffhwO/gfeyXmbn8DfJ8iOLsHAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=40cba1dd04c745afa5579f7bb0dad362"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Look Up Records">43400a1587003300663ca1bb36cb0b4b</action_type>
+        <action_type_parent display_value="">43400a1587003300663ca1bb36cb0b4b</action_type_parent>
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <comment/>
+        <compiled_snapshot>43400a1587003300663ca1bb36cb0b4b</compiled_snapshot>
+        <display_text/>
+        <flow display_value="TrackMed Daily Dose Log Engine">2675ffeaa5454b7b99eb00879a4201e8</flow>
+        <generation_source/>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:40:08</sys_created_on>
+        <sys_id>cde4b961751b468f914c1cd3925f08fd</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2026-08-27 07:05:11</sys_updated_on>
+        <ui_id>cde4b961-751b-468f-914c-1cd3925f08fd</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VX3U/bMBD/V6o8V1VCS2G8TSCkSQMkQLywybrYTmvhOpnt9IOq//vOcZJmbSh0KxJoD33Iff7u/Luz+7gMFEx4cBbQVDFhRapM0A2mIHMnNBYs/5GHYZ8BtWLKUceEySQsHnaYZKAxqOU6OFsGdCwk01wFZ48/u4Fg6HOaDMIQouPTE3Trh+Fw2KcQxXF/SOMwPg4xhISYSzQ9b8Jqg2oXWavse1uAVDMHKuoGfG65YhzRJCAN7wYTUAxsqhe1RHNgN0quBWOhLEYMnPHciGfMi3WEzjLhWCHlXlt/krJXXpxcgIU7q3Nqc12a0nEqKDe+N4wnkEt73pR5g5vMVeBdLMSy8k5lPlHXvitBHaA6GpTkBkHwzJXqsGNyrCO5G6ez2wrkpVBFU8oiZUpB1l9grRZxbh2cZcAln2AcMoEsE2pEMp1OReGMUCa9kcSPXiLTGeY0YqR6jhGp6mFjoXeJ8otC/ABauCKuMAw6r7qBWZhzCcasS8Eekl+5Q+ILK0sgRRd8C5wf1SKzXz3vPOZVt6a0N1uzeU6MosRqoE8Tzgj+BAUHkBg65iyXnFQuGyTfw/PfuD+IG9y/L0NulFMyvvgkhe5PxhdunWuvKBkfHozxp5+J72UZH4zwCEhIZIjnDDFprotWTgmVuSkUGpTxsf5iPF6fDJNqSwoeNXa9k4Gh2+yHjk07z2/gdrh7r39pcPsOs3XuPYIWUNVWL9iwudErYcnt/sG43T86DLeXdZl161q6XI2mO5fK/tnZw6Y9kqvhEK3aZmevnNG+OY9W27PZ32s4m/TymosXWHbgGU4YSQSXjAglhSo2J96CmOfdhpuRMbqW+YifRDITbMTtOntlxVI7A/nUpi8ZR6qDKsp7l32AE0A0N3gozdffURhuLwMvfG0TDHZugmHU2ARXMO/c1rlbAZXbAAeWj4oWN9fBt1pacnVwwNfdh73rotAfTusoRV2v/RS34bvdb76D2wx+A33pyc6L7LhB3xtHuk682LjH6uQld/0KanmtXTrFxmvt6P98rX3Ifyfdly6QA/9t+fkbXxLp1osPAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=cde4b961751b468f914c1cd3925f08fd"/>
+    <sys_hub_sub_flow_instance_v2 action="delete_multiple" query="flow=2675ffeaa5454b7b99eb00879a4201e8"/>
+    <sys_hub_flow_logic_instance_v2 action="delete_multiple" query="flow=2675ffeaa5454b7b99eb00879a4201e8^sys_idNOT IN1d70deadb84a4b578238681360e94e38,a40602dad9d841e5a017a51f20bb23ba,bd38b8c9282a4ca98f5af4f063e8370f"/>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <block display_value="">d341e00047430f104134ef6c716d4301</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="TrackMed Daily Dose Log Engine">2675ffeaa5454b7b99eb00879a4201e8</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>6</order>
+        <outputs_assigned/>
+        <parent_ui_id>bd38b8c9-282a-4ca9-8f5a-f4f063e8370f</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:40:08</sys_created_on>
+        <sys_id>1d70deadb84a4b578238681360e94e38</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 20:35:40</sys_updated_on>
+        <ui_id>1d70dead-b84a-4b57-8238-681360e94e38</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1VXU/bMBT9K5Of2yhfLWnfEAgJiQ1pIF42FN3YTmvNsYPtAFnU/77rfLRodIJt2tve6mPf63OO72k6ohtXN87e6lNrxUaR9Zf7GRHKY/i7IwoqTtaEasWEE1qRGXkE2Xis6wqWZEVGV/M4i2GeUljNs3IB8zItw2XCs+QkLAPheBWUhj80XNF2t/vahGHC3NYIyvNzELLFnkzYWkJ79w9a062QzPBRWg0GFTluyLr7aUswvHkFi3IRhQuaxMskDsM4S6NimRRRzBLg6RIbSii4xKNnLzw5YpNraw9ZZ4TajOursfRmArVhnkoczgh/dlwxjiRKkJbPSAWKgdOmJWtnGgQMB3atUNR0YiuUw27En3224jv3ncLQnyw56qJ82N0v89HnAS7PwQFSaahrzHiUbjWaZwdHGC+hke7sJTYcuK57lX2Jg0JO1Vo2lfo0mEH2DaZnRaSxSILXXqnnPgopb7b66fPE8kKo3pVxU2oKcr8Ch94VjfN8OsIlr7BRXkFdo6N5bfSj6IuRSxVsJC6CUuonvNTPdwDUEw/QWAguED/v4Tswwqv4iG2wGGfB5pYaUU/a+svJbkZsa88kWHvQiObmD41nOCgeteWDPb6kb3SKFz/yUcZu1hHP6kpvBL1U1gHKvmntpR/BiJ2EDJ+6yFJIi8VJFifZMouSZchXKU8yMo5qGUIZrWh0fFQhOTKWeQ8cIvw6eeTtiLzj3lcR+TBM/q8Z/U5aojfSMiLvisti8T8tf50WT7MAK2jefzmwnf/D+sO4jKZfCC7Z0RE6lqd7P9MDq/1rUGGx7NZjl9MHzW+0OHI+dQfoSZtvXvYB2/0AQ2zfpxoHAAA=</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <block display_value="">1741a00047430f104134ef6c716d43fe</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="TrackMed Daily Dose Log Engine">2675ffeaa5454b7b99eb00879a4201e8</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>4</order>
+        <outputs_assigned/>
+        <parent_ui_id>bd38b8c9-282a-4ca9-8f5a-f4f063e8370f</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:40:08</sys_created_on>
+        <sys_id>a40602dad9d841e5a017a51f20bb23ba</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 20:35:40</sys_updated_on>
+        <ui_id>a40602da-d9d8-41e5-a017-a51f20bb23ba</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1Vy27bMBD8lYJnW6Aky7F9CxIECJA2QBL00qbCig+bKPUIScVRBf97l3rYQeMiaXPpoTdzyF3ODHeslpS1q2pn78pTa9W6IKsv9xOiCo/h75YUkAuyIqwsuHKqLMiEPIKuPda2GY8X2YItp9EigumMwXK6kAlM5UzSeSwW8QmVgXIiD6QRD7UoWLPbfa0pjbnbKibSc1C6+XZ9875WG7PvhfS4spWG5vO/zZJtlOZGDIZXYNBnJwxZtb9sKY4ilpDIJKQJi6N5HFEaLWZhNo+zMOIxiNkcG2rIhMajZ89e6sjjuabykHVGFethfTWU3o5gabinEtEJEU9OFFwgCQnaignJoeDgStOQlTM1AkYAvy5Q1HhiowqH3Yg/+2TVD+E7UepPSoG6mOh398t0eLIelufgAKnUzNVmOMo2JZpne0e4kFBrd/Yc6w9cV53KrsRBpsfqUtd58ak3g+wbjBOCSG2RhKi8Us99ECJvN+X2ZmR5oYrOlWFTlwz0fgUOvctq5/m0RGiRY6M0h6pCR9PKlI+qK0YuebDWuAikLrd4qU9dAMwTD9BYCC4QP+/gz2CUV/ER22AxzoJNLTOqGrV1l5PdhNjGnmmw9qARzU0fas+wVzxoS3t7fEnX6BQvfhSDjN2kJZ7VVblW7LKwDlD2bWMv/QjCjM5pxIEvOQ6fSICGJ5CEMqJZFsUZkGFUJQUZLll4fFQhPjKWaQcc/lhehpi8HpE33PsiIh/6yf89oz9JS/hKWgbkTXFJkv9peXdaPM0MrGJp9z3Ddv4P6y/jMph+oYTmR0foWJ7u/Uz3rPavwZTFsjuPXY6fWb/R4Mj51B2gbWm+e9kHbPcT6716ibAHAAA=</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <block display_value="">9741a00047430f104134ef6c716d43f8</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="TrackMed Daily Dose Log Engine">2675ffeaa5454b7b99eb00879a4201e8</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="For Each">098e1dc5c3e232002841b63b12d3ae33</logic_definition>
+        <order>2</order>
+        <outputs_assigned/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:40:08</sys_created_on>
+        <sys_id>bd38b8c9282a4ca98f5af4f063e8370f</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 20:35:40</sys_updated_on>
+        <ui_id>bd38b8c9-282a-4ca9-8f5a-f4f063e8370f</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/51TwW6jMBD9F58JApKyIbeqVaVKu1sprXpZVWiwh8RaY7O2Scoi/n3HgdCqxz3BPM+8ee9hBmY633bevZhb5+RBs92vt4hJHTB6H5iGBtmOSY+NYxE7gepCPQxc4KYq8nT17SatVpt8W6+KdMNXKRfrIrupk20t4j1yY4UbRxoV0rUK+tf/Z2jBkhqPlu0Gxo9SCYtXxYIo00LURZoUfJ3l6yxJsu0mrfJ1lWZiDShyolBQoaLWx9nPF3u+b0Npp6Uz8H2e2S8oPYKILIkYvnvUAml9DcphxBrQAryxPdt52xFgEcSTVv3ScZTaEx0Lve9O/qWNaZKExhrJEMfpcCnLObkJru/BwzNRc9/ZuZUfjeTopigE1tApf/cZmxqeWi+NnkY8VOo6bVTX6J9TEmwhuH4oQjpHIrANRoP02Uf9fDTn/VXlg9SXUOZDZTiopQLvraw6H/QMDBU2RFQ20LZSH8rWmpO8DJOWJj4oKuJamTMtDZcyBh6Ex5QrxA+E31/gV7AyuPhBNDQ8Rsz17k6Bcx9eKMTyTxeUTM5mD+UUQxjhVrb+lhaccJY7voV7PnEvmXLpSMJLwB6vf0c46OkGSf4ZOhv7O4j/wMZ/RhrFs2cDAAA=</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=2675ffeaa5454b7b99eb00879a4201e8"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=2675ffeaa5454b7b99eb00879a4201e8"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_2675ffeaa5454b7b99eb00879a4201e8"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_2675ffeaa5454b7b99eb00879a4201e8"/>
+    <sys_hub_flow_snapshot action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>false</active>
+        <allow_high_security_roles>false</allow_high_security_roles>
+        <annotation/>
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <authored_on_release_version>-1</authored_on_release_version>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description/>
+        <flow_priority>MEDIUM</flow_priority>
+        <internal_name>trackmed_daily_dose_log_engine</internal_name>
+        <label_cache>[{"name":"cde4b961-751b-468f-914c-1cd3925f08fd.Records","label":"cde4b961-751b-468f-914c-1cd3925f08fd➛Records","type":"array.object","base_type":"array.object","column_name":"Records","usedInstances":{"bd38b8c9-282a-4ca9-8f5a-f4f063e8370f":["items"]},"attributes":{}},{"name":"bd38b8c9-282a-4ca9-8f5a-f4f063e8370f.item.patient","label":"2 - For Each - ➛item➛Patient","type":"reference","base_type":"reference","usedInstances":{"21975403-72c5-4209-b34c-19d450c71227":["values"],"0ff91f03-3ec8-426d-a310-1818280d48c4":["values"],"40cba1dd-04c7-45af-a557-9f7bb0dad362":["values"]},"attributes":{}},{"name":"bd38b8c9-282a-4ca9-8f5a-f4f063e8370f.item.caretaker","label":"2 - For Each - ➛item➛Caretaker","type":"reference","base_type":"reference","usedInstances":{"21975403-72c5-4209-b34c-19d450c71227":["values"],"0ff91f03-3ec8-426d-a310-1818280d48c4":["values"],"40cba1dd-04c7-45af-a557-9f7bb0dad362":["values"]},"attributes":{}},{"name":"bd38b8c9-282a-4ca9-8f5a-f4f063e8370f.item.sys_id","label":"2 - For Each - ➛item➛Sys Id","type":"string","base_type":"string","usedInstances":{"21975403-72c5-4209-b34c-19d450c71227":["values"],"0ff91f03-3ec8-426d-a310-1818280d48c4":["values"],"40cba1dd-04c7-45af-a557-9f7bb0dad362":["values"]},"attributes":{}},{"name":"bd38b8c9-282a-4ca9-8f5a-f4f063e8370f.item.frequency","label":"2 - For Each - ➛item➛Frequency","type":"string","base_type":"string","usedInstances":{"a40602da-d9d8-41e5-a017-a51f20bb23ba":["condition"],"1d70dead-b84a-4b57-8238-681360e94e38":["condition"]},"attributes":{}}]</label_cache>
+        <master>true</master>
+        <name>TrackMed Daily Dose Log Engine</name>
+        <natlang/>
+        <outputs/>
+        <parent_flow display_value="TrackMed Daily Dose Log Engine">2675ffeaa5454b7b99eb00879a4201e8</parent_flow>
+        <remote_trigger_id/>
+        <run_as>system</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <status>draft</status>
+        <sys_class_name>sys_hub_flow_snapshot</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:09</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>d741e00047430f104134ef6c716d435d</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 20:35:42</sys_updated_on>
+        <type>flow</type>
+        <version>2</version>
+    </sys_hub_flow_snapshot>
+    <sys_translated_text action="delete_multiple" query="documentkey=d741e00047430f104134ef6c716d435d"/>
+    <sys_variable_value action="delete_multiple" query="document_key=d741e00047430f104134ef6c716d435d"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=d741e00047430f104134ef6c716d435d"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=d741e00047430f104134ef6c716d435d^sys_idNOT IN9741e00047430f104134ef6c716d435f"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>d741e00047430f104134ef6c716d435d</id>
+        <name>TrackMed Daily Dose Log Engine</name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:10</sys_created_on>
+        <sys_id>9741e00047430f104134ef6c716d435f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:10</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=9741e00047430f104134ef6c716d435f"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=d741e00047430f104134ef6c716d435d"/>
+    <sys_hub_flow_output action="delete_multiple" query="model=d741e00047430f104134ef6c716d435d"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=d741e00047430f104134ef6c716d435d"/>
+    <sys_hub_trigger_instance_v2 action="delete_multiple" query="flow=d741e00047430f104134ef6c716d435d^sys_idNOT INeb41e00047430f104134ef6c716d4382"/>
+    <sys_hub_trigger_instance_v2 action="INSERT_OR_UPDATE">
+        <comment/>
+        <display_text/>
+        <flow display_value="TrackMed Daily Dose Log Engine">d741e00047430f104134ef6c716d435d</flow>
+        <generation_source/>
+        <name>Daily</name>
+        <published_version/>
+        <remote_sys_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:10</sys_created_on>
+        <sys_id>eb41e00047430f104134ef6c716d4382</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:10</sys_updated_on>
+        <trigger_definition display_value="Daily">89142dc0c32222002841b63b12d3ae8a</trigger_definition>
+        <trigger_inputs>H4sIAAAAAAAA/31RTWvDMAz9K8PnDJzDGMttl0JhMFjDLqUU1VYSgeMEW+malfz3KU0WsjEGPvjp670n7a+KA5Ulhq2PDN7gro9bqzKlEuXghE6+OdUokDxj8ODyvkWJlo4sHnnKWWzRW/Q8dZqqIYMvFAXvD4mqwVvgJvQq49BhoorQ1DnWrQOWWQW4KMEmWAwqS7VOlId6JJnHn8F1I0yfHvW9TuXdaZ3ph0zrkZyiDOrf/y0yFTkb0E+CWghCwCPd9bfPn9T8h9tZqMjEC4++7eJh5XSOBAT76l2/KrlE+sRbfxfxuNrdXFHsqubjDQsUvQY35G90c9I1BtyCgOV+p44xipNhWJaxIXTzGaMJ1PKzYTp/73o4fAEd0CYT+QEAAA==</trigger_inputs>
+        <trigger_outputs/>
+        <trigger_type>daily</trigger_type>
+        <updation_source/>
+    </sys_hub_trigger_instance_v2>
+    <sys_hub_action_instance_v2 action="delete_multiple" query="flow=d741e00047430f104134ef6c716d435d^sys_idNOT IN2341e00047430f104134ef6c716d4380,2741e00047430f104134ef6c716d437e,2741e00047430f104134ef6c716d4381,ab41e00047430f104134ef6c716d4380"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Create Record">2de05916c31332002841b63b12d3aee1</action_type>
+        <action_type_parent display_value="Create Record">02f0b88cc3c632002841b63b12d3aeff</action_type_parent>
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <comment/>
+        <compiled_snapshot>2de05916c31332002841b63b12d3aee1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="TrackMed Daily Dose Log Engine">d741e00047430f104134ef6c716d435d</flow>
+        <generation_source/>
+        <order>3</order>
+        <parent_ui_id>bd38b8c9-282a-4ca9-8f5a-f4f063e8370f</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:10</sys_created_on>
+        <sys_id>2341e00047430f104134ef6c716d4380</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 19:34:45</sys_updated_on>
+        <ui_id>21975403-72c5-4209-b34c-19d450c71227</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1Vy27bMBD8FYNnW5Asx5V9K5Lm1CRoU+SSB7EiVzYRilJJKolr+N+7lBTFaGMEAXoJUN+43BnODqnx9ZYZKJEtmYdcI28XY/YAugnFJ+6M4N6CuC9Rclk55LpaUYdUrtawuXqzsQZLnB4tW26ZWCstLRq2vL4dMyUJOU8wPlokc5EmaTqN42k2S/J5midTmQLijCg05Kip9UeQSOvXFPtN/Wrt6z52dN5tVFYGPfGY4ZNHI5GEFKAdjlkJRoKv7IYtvW2oYBHkhdGboWOtjCdCFnqfnPpFx2Zx6CuQJhPY7Q1L3jvVlYsT8HBJzMI3tm8V60oJdJ0nEgtotD/er3UNF7VXlekg7Zg9utJNac47S9hA8HwxVGnoLiTWYc6gvB+juFxXj9+fVZ4q01rSb+pKgB5W4L1VeeODni1DjSUR8RLqWpkVr231oFowaSmjlaZFVOjqkQ51amUiEEF4RLZCdEr1k7Z8BVaFKc6IhsC7MXMbd6zBuZdZyET+swlKusn6GXhnQ4AIq2r/mQ54wF7ubjw86fYVu73nXINXhL9p4jiV220u0yzPxGIyzaYwmQlYTLLiCCbFrIjnKWbpp7iIlMcy6oG73Z0Ai9zDPdr3swRsCyUe+kqUgGDM+3nIKK4kkTgPvnEdwaVYo2w0yju3rqwP5rfmDCecDSeOwuc5mozOKmvoBu++fPv7g/5v1WGr3ow0ifHiYKQl+V6knSrU0r1k2vBkn/MMS7oVj7x7wn9kWr85uuo3+1xL/lWuJfO4/X2gdOuG+/Dhtvc/diDmbn8D2c2oLrsHAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=2341e00047430f104134ef6c716d4380"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Look Up Records">43400a1587003300663ca1bb36cb0b4b</action_type>
+        <action_type_parent display_value="Look Up Records">d1c56ec50b30030085c083eb37673a50</action_type_parent>
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <comment/>
+        <compiled_snapshot>43400a1587003300663ca1bb36cb0b4b</compiled_snapshot>
+        <display_text/>
+        <flow display_value="TrackMed Daily Dose Log Engine">d741e00047430f104134ef6c716d435d</flow>
+        <generation_source/>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:10</sys_created_on>
+        <sys_id>2741e00047430f104134ef6c716d437e</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 19:34:45</sys_updated_on>
+        <ui_id>cde4b961-751b-468f-914c-1cd3925f08fd</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VX3U/bMBD/V6o8V1VCS2G8TSCkSQMkQLywybrYTmvhOpnt9IOq//vOcZJmbSh0KxJoD33Iff7u/Luz+7gMFEx4cBbQVDFhRapM0A2mIHMnNBYs/5GHYZ8BtWLKUceEySQsHnaYZKAxqOU6OFsGdCwk01wFZ48/u4Fg6HOaDMIQouPTE3Trh+Fw2KcQxXF/SOMwPg4xhISYSzQ9b8Jqg2oXWavse1uAVDMHKuoGfG65YhzRJCAN7wYTUAxsqhe1RHNgN0quBWOhLEYMnPHciGfMi3WEzjLhWCHlXlt/krJXXpxcgIU7q3Nqc12a0nEqKDe+N4wnkEt73pR5g5vMVeBdLMSy8k5lPlHXvitBHaA6GpTkBkHwzJXqsGNyrCO5G6ez2wrkpVBFU8oiZUpB1l9grRZxbh2cZcAln2AcMoEsE2pEMp1OReGMUCa9kcSPXiLTGeY0YqR6jhGp6mFjoXeJ8otC/ABauCKuMAw6r7qBWZhzCcasS8Eekl+5Q+ILK0sgRRd8C5wf1SKzXz3vPOZVt6a0N1uzeU6MosRqoE8Tzgj+BAUHkBg65iyXnFQuGyTfw/PfuD+IG9y/L0NulFMyvvgkhe5PxhdunWuvKBkfHozxp5+J72UZH4zwCEhIZIjnDDFprotWTgmVuSkUGpTxsf5iPF6fDJNqSwoeNXa9k4Gh2+yHjk07z2/gdrh7r39pcPsOs3XuPYIWUNVWL9iwudErYcnt/sG43T86DLeXdZl161q6XI2mO5fK/tnZw6Y9kqvhEK3aZmevnNG+OY9W27PZ32s4m/TymosXWHbgGU4YSQSXjAglhSo2J96CmOfdhpuRMbqW+YifRDITbMTtOntlxVI7A/nUpi8ZR6qDKsp7l32AE0A0N3gozdffURhuLwMvfG0TDHZugmHU2ARXMO/c1rlbAZXbAAeWj4oWN9fBt1pacnVwwNfdh73rotAfTusoRV2v/RS34bvdb76D2wx+A33pyc6L7LhB3xtHuk682LjH6uQld/0KanmtXTrFxmvt6P98rX3Ifyfdly6QA/9t+fkbXxLp1osPAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=2741e00047430f104134ef6c716d437e"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Create Record">2de05916c31332002841b63b12d3aee1</action_type>
+        <action_type_parent display_value="Create Record">02f0b88cc3c632002841b63b12d3aeff</action_type_parent>
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <comment/>
+        <compiled_snapshot>2de05916c31332002841b63b12d3aee1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="TrackMed Daily Dose Log Engine">d741e00047430f104134ef6c716d435d</flow>
+        <generation_source/>
+        <order>7</order>
+        <parent_ui_id>1d70dead-b84a-4b57-8238-681360e94e38</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:10</sys_created_on>
+        <sys_id>2741e00047430f104134ef6c716d4381</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 19:34:45</sys_updated_on>
+        <ui_id>40cba1dd-04c7-45af-a557-9f7bb0dad362</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1Vy27bMBD8FYNnW5Asx5V9K/I4NQnaFLmkCbEiVzYRilJJyolr+N+7lBTFaBMEAXoJUN+43BnODqnxzY4ZKJEtmYdcI28XY7YB3YTiI3dGcG9B3Jcouawccl2tqEMqV2vYXr/ZWIMlTo+WLXdMrJWWFg1b3tyOmZKEnCcYHy2SuUiTNJ3G8TSbJfk8zZOpTAFxRhQactTU+j1IpPVLiv22frH25RA7uug2KiuDnnjM8NGjkUhCCtAOx6wEI8FXdsuW3jZUsAjy0ujt0LFWxhMhC72PTv2iY7M49BVIkwns9oYl753qysUJeLgiZuEb27eKdaUEus4TiQU02h8f1rqGy9qrynSQdsweXemmNBedJWwgeLoYqjR0FxLrMGdQ3o9RXK2rh29PKs+UaS3pN3UlQA8r8N6qvPFBz46hxpKIeAl1rcyK17baqBZMWspopWkRFbp6oEOdWpkIRBAeka0QnVH9pC1fg1VhinOiIfB+zNzWHWtw7nkWMpH/bIKSbrJ+Bt7ZECDCqtp/pgM22Mvdj4cn3b5id/Cca/CK8D+aOE7lbpfLNMszsZhMsylMZgIWk6w4gkkxK+J5iln6KS4i5bGMeuB+fyfAIvdwj/b9LAHbQomHvhIlIBjzfh4yiitJJM6Db1xHcCXWKBuN8s6tK+uD+a05wwnnw4mj8HmOJqPTDRq6wbvTr39/0P+tet2qNyNNYrx4NdKS/CDSzhRq6Z4zbXiyT3mGJd2KR9494T8yrd8cXfebfa4l/yrXknnc/j5QunXDffhwO/gfeyXmbn8DfJ8iOLsHAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=2741e00047430f104134ef6c716d4381"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Create Record">2de05916c31332002841b63b12d3aee1</action_type>
+        <action_type_parent display_value="Create Record">02f0b88cc3c632002841b63b12d3aeff</action_type_parent>
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <comment/>
+        <compiled_snapshot>2de05916c31332002841b63b12d3aee1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="TrackMed Daily Dose Log Engine">d741e00047430f104134ef6c716d435d</flow>
+        <generation_source/>
+        <order>5</order>
+        <parent_ui_id>a40602da-d9d8-41e5-a017-a51f20bb23ba</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:10</sys_created_on>
+        <sys_id>ab41e00047430f104134ef6c716d4380</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 19:34:45</sys_updated_on>
+        <ui_id>0ff91f03-3ec8-426d-a310-1818280d48c4</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1VXU/bMBT9K5Wf2yhpSpf2DcF4GqCNiRc+ohv7prVw7Mx2gK7qf991EkK1wRDSXpDWN1/fc3zuiX16tWUaKmRL5qFQmLeLMbsH1YTiY+40z70FflehyIVxmCuzog4hXa1gc/lmYw2WOD1attwyvpZKWNRseXUzZlIQcp5gfLBI5jxN0nQax9NslhTztEimIgXEGVEoKFBR6/cgkdYvKfab+sXal33s6KzbMFYEPfGY4aNHLZCElKAcjlkFWoA3dsOW3jZUsAjiXKvN0LGW2hMhC72PTv6kY7M49JVIk3Hs9oZl3jvVlctj8HBBzNw3tm/layM5us4TgSU0yh/t17qG89pLoztIO2aPNqqp9FlnCRsInj4MVRr6FgLrMGdQ3o9RXqzNw7cnlSdSt5b0m8pwUMMKvLeyaHzQs2WosCKivIK6lnqV19bcyxZMWqpopWgRlco80KFOrnQEPAiPyFaITqh+3JYvwcowxSnREHg3Zm7jjhQ49zwLmZj/aIKSbrJ+hryzIUC4lbU/pAPusZe7Gw9Xur3Fbu861+Al4a+bOE7FdluINCsyvphMsylMZhwWk6w8gEk5K+N5iln6KS4j6bGKeuBud8vBYu7hDu37WQK2hRIPvRLJIRjzfh4yKpeCSJwH37iO4IKvUTQKxa1bG+uD+a05wwmnw4mj8DxHk9FhSc9SG6NvP3/980n/N+tvZr0ZawLjxauxlhR7sXYiUQn3nGvDtX3KNKzou3jMu2v8W671m6PLfrPPtuRfZVsyj9vfB0q4brgPH3B7/2WvRN3NL0Wg+hO/BwAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=ab41e00047430f104134ef6c716d4380"/>
+    <sys_hub_sub_flow_instance_v2 action="delete_multiple" query="flow=d741e00047430f104134ef6c716d435d"/>
+    <sys_hub_flow_logic_instance_v2 action="delete_multiple" query="flow=d741e00047430f104134ef6c716d435d^sys_idNOT IN2b41e00047430f104134ef6c716d437a,a341e00047430f104134ef6c716d4378,ab41e00047430f104134ef6c716d437c"/>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <block display_value="">1741a00047430f104134ef6c716d43fe</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="TrackMed Daily Dose Log Engine">d741e00047430f104134ef6c716d435d</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>4</order>
+        <outputs_assigned/>
+        <parent_ui_id>bd38b8c9-282a-4ca9-8f5a-f4f063e8370f</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:10</sys_created_on>
+        <sys_id>2b41e00047430f104134ef6c716d437a</sys_id>
+        <sys_mod_count>8</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 20:35:42</sys_updated_on>
+        <ui_id>a40602da-d9d8-41e5-a017-a51f20bb23ba</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1Vy27bMBD8lYJnW6Aky7F9CxIECJA2QBL00qbCig+bKPUIScVRBf97l3rYQeMiaXPpoTdzyF3ODHeslpS1q2pn78pTa9W6IKsv9xOiCo/h75YUkAuyIqwsuHKqLMiEPIKuPda2GY8X2YItp9EigumMwXK6kAlM5UzSeSwW8QmVgXIiD6QRD7UoWLPbfa0pjbnbKibSc1C6+XZ9875WG7PvhfS4spWG5vO/zZJtlOZGDIZXYNBnJwxZtb9sKY4ilpDIJKQJi6N5HFEaLWZhNo+zMOIxiNkcG2rIhMajZ89e6sjjuabykHVGFethfTWU3o5gabinEtEJEU9OFFwgCQnaignJoeDgStOQlTM1AkYAvy5Q1HhiowqH3Yg/+2TVD+E7UepPSoG6mOh398t0eLIelufgAKnUzNVmOMo2JZpne0e4kFBrd/Yc6w9cV53KrsRBpsfqUtd58ak3g+wbjBOCSG2RhKi8Us99ECJvN+X2ZmR5oYrOlWFTlwz0fgUOvctq5/m0RGiRY6M0h6pCR9PKlI+qK0YuebDWuAikLrd4qU9dAMwTD9BYCC4QP+/gz2CUV/ER22AxzoJNLTOqGrV1l5PdhNjGnmmw9qARzU0fas+wVzxoS3t7fEnX6BQvfhSDjN2kJZ7VVblW7LKwDlD2bWMv/QjCjM5pxIEvOQ6fSICGJ5CEMqJZFsUZkGFUJQUZLll4fFQhPjKWaQcc/lhehpi8HpE33PsiIh/6yf89oz9JS/hKWgbkTXFJkv9peXdaPM0MrGJp9z3Ddv4P6y/jMph+oYTmR0foWJ7u/Uz3rPavwZTFsjuPXY6fWb/R4Mj51B2gbWm+e9kHbPcT6716ibAHAAA=</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <block display_value="">9741a00047430f104134ef6c716d43f8</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="TrackMed Daily Dose Log Engine">d741e00047430f104134ef6c716d435d</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="For Each">098e1dc5c3e232002841b63b12d3ae33</logic_definition>
+        <order>2</order>
+        <outputs_assigned/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:10</sys_created_on>
+        <sys_id>a341e00047430f104134ef6c716d4378</sys_id>
+        <sys_mod_count>8</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 20:35:42</sys_updated_on>
+        <ui_id>bd38b8c9-282a-4ca9-8f5a-f4f063e8370f</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/51TwW6jMBD9F58JApKyIbeqVaVKu1sprXpZVWiwh8RaY7O2Scoi/n3HgdCqxz3BPM+8ee9hBmY633bevZhb5+RBs92vt4hJHTB6H5iGBtmOSY+NYxE7gepCPQxc4KYq8nT17SatVpt8W6+KdMNXKRfrIrupk20t4j1yY4UbRxoV0rUK+tf/Z2jBkhqPlu0Gxo9SCYtXxYIo00LURZoUfJ3l6yxJsu0mrfJ1lWZiDShyolBQoaLWx9nPF3u+b0Npp6Uz8H2e2S8oPYKILIkYvnvUAml9DcphxBrQAryxPdt52xFgEcSTVv3ScZTaEx0Lve9O/qWNaZKExhrJEMfpcCnLObkJru/BwzNRc9/ZuZUfjeTopigE1tApf/cZmxqeWi+NnkY8VOo6bVTX6J9TEmwhuH4oQjpHIrANRoP02Uf9fDTn/VXlg9SXUOZDZTiopQLvraw6H/QMDBU2RFQ20LZSH8rWmpO8DJOWJj4oKuJamTMtDZcyBh6Ex5QrxA+E31/gV7AyuPhBNDQ8Rsz17k6Bcx9eKMTyTxeUTM5mD+UUQxjhVrb+lhaccJY7voV7PnEvmXLpSMJLwB6vf0c46OkGSf4ZOhv7O4j/wMZ/RhrFs2cDAAA=</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <block display_value="">d341e00047430f104134ef6c716d4301</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="TrackMed Daily Dose Log Engine">d741e00047430f104134ef6c716d435d</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>6</order>
+        <outputs_assigned/>
+        <parent_ui_id>bd38b8c9-282a-4ca9-8f5a-f4f063e8370f</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:10</sys_created_on>
+        <sys_id>ab41e00047430f104134ef6c716d437c</sys_id>
+        <sys_mod_count>8</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 20:35:42</sys_updated_on>
+        <ui_id>1d70dead-b84a-4b57-8238-681360e94e38</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1VXU/bMBT9K5Of2yhfLWnfEAgJiQ1pIF42FN3YTmvNsYPtAFnU/77rfLRodIJt2tve6mPf63OO72k6ohtXN87e6lNrxUaR9Zf7GRHKY/i7IwoqTtaEasWEE1qRGXkE2Xis6wqWZEVGV/M4i2GeUljNs3IB8zItw2XCs+QkLAPheBWUhj80XNF2t/vahGHC3NYIyvNzELLFnkzYWkJ79w9a062QzPBRWg0GFTluyLr7aUswvHkFi3IRhQuaxMskDsM4S6NimRRRzBLg6RIbSii4xKNnLzw5YpNraw9ZZ4TajOursfRmArVhnkoczgh/dlwxjiRKkJbPSAWKgdOmJWtnGgQMB3atUNR0YiuUw27En3224jv3ncLQnyw56qJ82N0v89HnAS7PwQFSaahrzHiUbjWaZwdHGC+hke7sJTYcuK57lX2Jg0JO1Vo2lfo0mEH2DaZnRaSxSILXXqnnPgopb7b66fPE8kKo3pVxU2oKcr8Ch94VjfN8OsIlr7BRXkFdo6N5bfSj6IuRSxVsJC6CUuonvNTPdwDUEw/QWAguED/v4Tswwqv4iG2wGGfB5pYaUU/a+svJbkZsa88kWHvQiObmD41nOCgeteWDPb6kb3SKFz/yUcZu1hHP6kpvBL1U1gHKvmntpR/BiJ2EDJ+6yFJIi8VJFifZMouSZchXKU8yMo5qGUIZrWh0fFQhOTKWeQ8cIvw6eeTtiLzj3lcR+TBM/q8Z/U5aojfSMiLvisti8T8tf50WT7MAK2jefzmwnf/D+sO4jKZfCC7Z0RE6lqd7P9MDq/1rUGGx7NZjl9MHzW+0OHI+dQfoSZtvXvYB2/0AQ2zfpxoHAAA=</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=d741e00047430f104134ef6c716d435d"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=d741e00047430f104134ef6c716d435d"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_d741e00047430f104134ef6c716d435d"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_d741e00047430f104134ef6c716d435d"/>
+    <sys_hub_flow action="UPDATE">
+        <sys_id>2675ffeaa5454b7b99eb00879a4201e8</sys_id>
+        <latest_snapshot>d741e00047430f104134ef6c716d435d</latest_snapshot>
+        <compiler_build>glide-australia-02-11-2026__patch3-05-25-2026_06-12-2026_1106.zip</compiler_build>
+        <version_record/>
+    </sys_hub_flow>
+    <sys_flow_trigger_plan action="delete_multiple" query="plan_id=2675ffeaa5454b7b99eb00879a4201e8^sys_idNOT INfb41e00047430f104134ef6c716d43cf"/>
+    <sys_flow_trigger_plan action="INSERT_OR_UPDATE">
+        <binding_strategy>com.snc.process_flow.engine.binding.RunAlways</binding_strategy>
+        <plan>{"@class":"com.snc.process_flow.engine.serialization.plan_data.ChunkingPlanData","chunk_data":{"table":"sys_flow_trigger_plan","id":"fb41e00047430f104134ef6c716d43cf","name":"plan","plan_signature":null},"plan_data":"CHUNKING_PLAN"}</plan>
+        <plan_id>2675ffeaa5454b7b99eb00879a4201e8</plan_id>
+        <snapshot>107a074c47874f104134ef6c716d4338</snapshot>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:11</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>fb41e00047430f104134ef6c716d43cf</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:11</sys_updated_on>
+        <trigger display_value="">e741e00047430f104134ef6c716d43b3</trigger>
+    </sys_flow_trigger_plan>
+    <sys_flow_subflow_plan action="delete_multiple" query="plan_id=2675ffeaa5454b7b99eb00879a4201e8"/>
+</record_update>

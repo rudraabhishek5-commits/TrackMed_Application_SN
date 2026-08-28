@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="enforce_dot_walk_cross_scope_access=true" db_object_id="3c241bf981d543107f44e314ec616f05" extends="task" label="Refill request" max_length="40" name="x_snc_trackmed_refill_request" type="collection">
+        <element label="Notes" max_length="40" name="notes" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="3" label="State" max_length="40" name="stat0" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Closed" sequence="3" value="Closed"/>
+                <element inactive_on_update="false" label="Pending" sequence="1" value="Pending"/>
+                <element inactive_on_update="false" label="Approved" sequence="2" value="Approved"/>
+                <element inactive_on_update="false" label="New" sequence="0" value="New"/>
+            </choice>
+        </element>
+        <element label="Request id" max_length="40" name="request_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Doctor approval" max_length="32" name="doctor_approval" reference="x_snc_trackmed_doctor_approval_temp" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Requested by" max_length="32" name="requested_by" reference="sys_user" type="reference"/>
+        <element label="Requested date" max_length="40" name="requested_date" type="glide_date_time"/>
+        <element label="Refill request id" max_length="40" name="refill_request_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Medication" max_length="32" name="medication" reference="x_snc_trackmed_medication_schedule_table" reference_qual="medication_nameISNOTEMPTY^EQ" reference_qual_condition="medication_nameISNOTEMPTY^EQ" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Patient" max_length="32" name="patient" reference="x_snc_trackmed_patient_record" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Quantity Needed" max_length="40" name="quantity_needed" type="integer"/>
+        <element label="Medication name" max_length="40" name="medication_name" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Pharmacy" max_length="32" name="pharmacy" reference="sys_user" type="reference"/>
+    </element>
+</database>

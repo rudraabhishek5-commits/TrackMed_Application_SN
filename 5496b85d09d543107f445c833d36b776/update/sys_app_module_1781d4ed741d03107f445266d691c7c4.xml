@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_module">
+    <sys_app_module action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <application display_value="TrackMed">2adc4065741d03107f445266d691c726</application>
+        <assessment/>
+        <device_type/>
+        <filter table="sys_user">x_snc_trackmed_user_type=care_taker^ORx_snc_trackmed_user_type=guardian^EQ<item display_value="Caretaker" endquery="false" field="x_snc_trackmed_user_type" goto="false" newquery="false" operator="=" or="false" value="care_taker"/>
+            <item display_value="Guardian" endquery="false" field="x_snc_trackmed_user_type" goto="false" newquery="false" operator="=" or="true" value="guardian"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </filter>
+        <hint/>
+        <homepage/>
+        <image/>
+        <link_type>LIST</link_type>
+        <map_page/>
+        <mobile_title>Care Taker</mobile_title>
+        <mobile_view_name>Mobile</mobile_view_name>
+        <name>sys_user</name>
+        <order>330</order>
+        <override_menu_roles>false</override_menu_roles>
+        <query/>
+        <report/>
+        <require_confirmation>true</require_confirmation>
+        <roles/>
+        <route/>
+        <screen/>
+        <sys_class_name>sys_app_module</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-05 09:40:13</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>1781d4ed741d03107f445266d691c7c4</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>Care_taker</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sys_app_module_1781d4ed741d03107f445266d691c7c4</sys_update_name>
+        <sys_updated_by>rangewar.ashirwad</sys_updated_by>
+        <sys_updated_on>2026-06-10 17:51:55</sys_updated_on>
+        <timeline_page/>
+        <title>Care_taker</title>
+        <uncancelable>false</uncancelable>
+        <ux_list/>
+        <view_name/>
+        <window_name/>
+    </sys_app_module>
+</record_update>

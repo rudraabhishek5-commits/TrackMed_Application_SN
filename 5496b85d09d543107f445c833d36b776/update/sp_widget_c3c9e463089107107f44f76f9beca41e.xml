@@ -1,0 +1,1218 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function($scope, $uibModal, spUtil) {
+    var c = this;
+    c.search = "";
+
+    /* =====================================================
+       PAGINATION
+    ===================================================== */
+    c.page      = 1;
+    c.pageSize  = 10;
+    c.pageSizes = [5, 10, 25, 50];
+    c.filtered  = [];
+
+    c.totalItems = function() {
+        return c.search ? (c.filtered || []).length
+                        : (c.data.patients || []).length;
+    };
+
+    c.totalPages = function() {
+        return Math.max(1, Math.ceil(c.totalItems() / c.pageSize));
+    };
+
+    c.endIndex = function() {
+        return Math.min(c.page * c.pageSize, c.totalItems());
+    };
+
+    c.goToPage = function(n) {
+        if (n < 1 || n > c.totalPages()) return;
+        c.page = n;
+    };
+
+    // Max 5 page buttons, windowed around the current page
+    c.pageNumbers = function() {
+        var total = c.totalPages();
+        var start = Math.max(1, c.page - 2);
+        var end   = Math.min(total, start + 4);
+        start     = Math.max(1, end - 4);
+        var pages = [];
+        for (var i = start; i <= end; i++) pages.push(i);
+        return pages;
+    };
+
+    // Clamp page when records are deleted or search narrows results
+    $scope.$watch(function() { return c.totalItems(); }, function() {
+        if (c.page > c.totalPages()) c.page = c.totalPages();
+    });
+
+    /* =====================================================
+       HELPERS
+    ===================================================== */
+
+    function openModal() {
+        return $uibModal.open({
+            templateUrl: 'patientModal',
+            scope: $scope,
+            size: 'lg'
+        });
+    }
+
+    // <input type="date"> needs a JS Date object
+    function toDateObject(yyyyMMdd) {
+        if (!yyyyMMdd) return null;
+        var parts = yyyyMMdd.split('-');
+        return new Date(parts[0], parts[1] - 1, parts[2]);
+    }
+
+    // ...and the server needs it back as "yyyy-MM-dd"
+    function toDateString(d) {
+        if (!d) return '';
+        if (typeof d === 'string') return d;
+        var m  = ('0' + (d.getMonth() + 1)).slice(-2);
+        var dd = ('0' + d.getDate()).slice(-2);
+        return d.getFullYear() + '-' + m + '-' + dd;
+    }
+
+    function buildPayload(p) {
+        return {
+            sys_id:         p.sys_id || '',
+            number:         p.number || '',
+            patient_name:   p.patient_name || '',
+            dob:            toDateString(p.dob),
+            gender:         p.gender || '',
+            diagnosis:      p.diagnosis || '',
+            primary_doctor: p.primary_doctor || '',
+            care_facility:  p.care_facility || '',
+            guardian:       p.guardian || '',
+            caregiver:      p.caregiver || ''
+        };
+    }
+
+    /* =====================================================
+       CREATE
+    ===================================================== */
+    c.openPatientModal = function() {
+        $scope.modalTitle = "Create Patient";
+        $scope.patient = {};
+
+        var modal = openModal();
+
+        $scope.savePatient = function() {
+            if (!$scope.patient.patient_name) {
+                spUtil.addErrorMessage('Patient Name is required');
+                return;
+            }
+            c.server.get({
+                action: 'create',
+                patient: buildPayload($scope.patient)
+            }).then(function(r) {
+                c.data.patients = r.data.patients;
+                modal.close();
+                spUtil.addInfoMessage('Patient created successfully');
+            });
+        };
+    };
+
+    /* =====================================================
+       EDIT
+    ===================================================== */
+    c.editPatient = function(patient) {
+        $scope.modalTitle = "Edit Patient";
+
+        // copy the REAL fields of this widget
+        $scope.patient = angular.copy(patient);
+        $scope.patient.dob = toDateObject(patient.dob);
+
+        var modal = openModal();
+
+        $scope.savePatient = function() {
+            c.server.get({
+                action: 'update',
+                patient: buildPayload($scope.patient)
+            }).then(function(r) {
+                c.data.patients = r.data.patients;
+                modal.close();
+                spUtil.addInfoMessage('Patient updated successfully');
+            });
+        };
+    };
+
+    /* =====================================================
+       DELETE  (was missing entirely)
+    ===================================================== */
+    c.deletePatient = function(patient) {
+        if (!confirm('Delete patient "' + patient.patient_name + '"? This cannot be undone.')) {
+            return;
+        }
+        c.server.get({
+            action: 'delete',
+            sys_id: patient.sys_id
+        }).then(function(r) {
+            c.data.patients = r.data.patients;
+            spUtil.addInfoMessage('Patient deleted');
+        });
+    };
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/* ==========================================
+   PAGE
+========================================== */
+
+.tm-page{
+    padding:20px;
+    background:#f1f5f9;
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.tm-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:24px 30px;
+
+    margin-bottom:20px;
+
+    background:linear-gradient(
+        135deg,
+        #2563eb,
+        #4f46e5
+    );
+
+    border-radius:20px;
+
+    color:#fff;
+
+    box-shadow:0 15px 35px rgba(37,99,235,.25);
+}
+
+.tm-header h2{
+    margin:0;
+    font-size:28px;
+    font-weight:700;
+}
+
+.tm-header p{
+    margin:5px 0 0;
+    opacity:.9;
+    font-size:14px;
+}
+
+/* ==========================================
+   CREATE BUTTON
+========================================== */
+
+.tm-create-btn{
+    background:linear-gradient(
+        135deg,
+        #06b6d4,
+        #0891b2
+    ) !important;
+
+    color:#fff !important;
+
+    border:none !important;
+
+    border-radius:12px;
+
+    padding:10px 18px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+    box-shadow:0 10px 25px rgba(8,145,178,.3);
+}
+
+.tm-create-btn:hover{
+    transform:translateY(-2px);
+}
+
+/* ==========================================
+   SEARCH
+========================================== */
+
+.tm-search-section{
+    margin-bottom:18px;
+}
+
+.tm-search-wrapper{
+    position:relative;
+}
+
+.tm-search-wrapper i{
+    position:absolute;
+    left:18px;
+    top:18px;
+    color:#94a3b8;
+}
+
+.tm-search{
+    width:100%;
+    height:54px;
+
+    border:none;
+
+    border-radius:16px;
+
+    padding-left:48px;
+
+    background:#fff;
+
+    box-shadow:
+    0 5px 20px rgba(0,0,0,.05);
+}
+
+.tm-search:focus{
+    outline:none;
+
+    box-shadow:
+    0 0 0 4px rgba(37,99,235,.15);
+}
+
+/* ==========================================
+   TABLE WRAPPER
+========================================== */
+
+.tm-table-wrapper{
+    background:#fff;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    border:1px solid #e2e8f0;
+
+    box-shadow:
+    0 10px 30px rgba(15,23,42,.08);
+}
+
+/* ==========================================
+   TABLE
+========================================== */
+
+.tm-table{
+    margin:0;
+}
+
+.tm-table thead{
+    background:
+    linear-gradient(
+        135deg,
+        #2563eb,
+        #4f46e5
+    );
+}
+
+.tm-table thead th{
+    color:#fff !important;
+
+    padding:12px 16px;
+
+    border:none !important;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+
+    letter-spacing:.5px;
+}
+
+.tm-table tbody tr{
+    transition:.25s;
+}
+
+.tm-table tbody tr:nth-child(even){
+    background:#f8fafc;
+}
+
+.tm-table tbody tr:hover{
+    background:#eff6ff !important;
+    box-shadow:inset 4px 0 0 #2563eb;
+}
+
+.tm-table tbody td{
+    padding:10px 16px;
+
+    border-top:none !important;
+
+    border-bottom:1px solid #eef2f7;
+
+    vertical-align:middle;
+
+    color:#334155;
+}
+
+/* ==========================================
+   PATIENT AVATAR
+========================================== */
+
+.tm-patient-name{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.tm-avatar{
+    width:34px;
+    height:34px;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:white;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    background:
+    linear-gradient(
+        135deg,
+        #2563eb,
+        #7c3aed
+    );
+}
+
+.tm-name{
+    font-weight:700;
+    color:#0f172a;
+}
+
+/* ==========================================
+   ID BADGE
+========================================== */
+
+.tm-id-badge{
+    background:#dbeafe;
+
+    color:#1d4ed8;
+
+    padding:4px 10px;
+
+    border-radius:999px;
+
+    font-size:11px;
+
+    font-weight:700;
+}
+
+/* ==========================================
+   GENDER BADGE
+========================================== */
+
+.tm-gender{
+    background:#ede9fe;
+
+    color:#6d28d9;
+
+    padding:4px 10px;
+
+    border-radius:999px;
+
+    font-size:11px;
+
+    font-weight:700;
+}
+
+/* ==========================================
+   DIAGNOSIS
+========================================== */
+
+.tm-diagnosis{
+    background:#fef3c7;
+
+    color:#92400e;
+
+    padding:4px 10px;
+
+    border-radius:999px;
+
+    font-size:11px;
+
+    font-weight:600;
+}
+
+/* ==========================================
+   DOCTOR
+========================================== */
+
+.tm-doctor{
+    color:#2563eb;
+    font-weight:600;
+}
+
+.tm-doctor i{
+    margin-right:4px;
+}
+
+/* ==========================================
+   EDIT BUTTON
+========================================== */
+
+.tm-edit-btn{
+    background:linear-gradient(
+        135deg,
+        #0ea5e9,
+        #0284c7
+    ) !important;
+
+    color:#fff !important;
+
+    border:none !important;
+
+    border-radius:8px;
+
+    padding:4px 10px;
+}
+
+/* ==========================================
+   DELETE BUTTON
+========================================== */
+
+.tm-delete-btn{
+    background:linear-gradient(
+        135deg,
+        #ef4444,
+        #dc2626
+    ) !important;
+
+    color:#fff !important;
+
+    border:none !important;
+
+    border-radius:8px;
+
+    padding:4px 10px;
+}
+
+/* ==========================================
+   STATUS
+========================================== */
+
+.tm-status{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+
+    padding:4px 10px;
+
+    border-radius:999px;
+
+    font-size:11px;
+
+    font-weight:700;
+}
+
+.tm-status-active{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.tm-status-critical{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.tm-status-pending{
+    background:#fef3c7;
+    color:#92400e;
+}
+
+.tm-status-inactive{
+    background:#e2e8f0;
+    color:#475569;
+}
+
+/* ==========================================
+   EMPTY STATE
+========================================== */
+
+.tm-empty{
+    text-align:center;
+    padding:50px;
+    color:#64748b;
+}
+
+.tm-empty i{
+    font-size:48px;
+    color:#cbd5e1;
+    margin-bottom:10px;
+}
+
+/* ==========================================
+   PAGINATION
+========================================== */
+
+.tm-pagination{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    gap:15px;
+
+    padding:15px 20px;
+
+    background:#f8fafc;
+
+    border-top:1px solid #e2e8f0;
+}
+
+.tm-page-info{
+    color:#64748b;
+    font-size:13px;
+}
+
+.tm-page-size{
+    border:none;
+
+    background:white;
+
+    padding:6px 10px;
+
+    border-radius:8px;
+}
+
+.tm-pager{
+    margin:0;
+}
+
+.tm-pager &gt; li &gt; a{
+    border:none;
+
+    background:white;
+
+    border-radius:8px;
+
+    margin:0 2px;
+
+    min-width:34px;
+
+    color:#475569;
+}
+
+.tm-pager &gt; li.active &gt; a{
+    background:#2563eb;
+    color:white;
+}
+
+.tm-pager &gt; li &gt; a:hover{
+    background:#dbeafe;
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media(max-width:768px){
+
+    .tm-header{
+        flex-direction:column;
+        gap:15px;
+        text-align:center;
+    }
+
+    .tm-create-btn{
+        width:100%;
+    }
+
+    .tm-pagination{
+        flex-direction:column;
+    }
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>trackmed_patient_list</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>Trackmed Patient List</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    var TABLE = 'x_snc_trackmed_patient_record';
+
+    /* =====================================================
+       ⚠️ ADJUST THESE TWO THINGS:
+
+       1) USER_TYPE_FIELD — the column name of your user
+          type field on sys_user. Find it: open a user
+          record → right-click the "User Type" label →
+          Configure Dictionary → copy the "Column name"
+          (e.g. u_user_type, x_snc_trackmed_user_type).
+
+       2) The type VALUES below — if it's a choice field,
+          use the choice *value* (often lowercase), not
+          the label. Right-click the field → Show Choice
+          List to see the values.
+    ===================================================== */
+    var USER_TYPE_FIELD = 'x_snc_trackmed_user_type';
+
+    var USER_TYPES = {
+        doctor:    'doctor',
+        facility:  'organization_admin',
+        guardian:  'guardian',
+        caregiver: 'care_taker'
+    };
+
+    if (input) {
+
+        /* ---------- CREATE ---------- */
+        if (input.action == 'create' && input.patient) {
+            var grCreate = new GlideRecord(TABLE);
+            grCreate.initialize();
+            setFields(grCreate, input.patient);
+            grCreate.insert();
+        }
+
+        /* ---------- UPDATE ---------- */
+        if (input.action == 'update' && input.patient && input.patient.sys_id) {
+            var grUpdate = new GlideRecord(TABLE);
+            if (grUpdate.get(input.patient.sys_id)) {
+                setFields(grUpdate, input.patient);
+                grUpdate.update();
+            }
+        }
+
+        /* ---------- DELETE ---------- */
+        if (input.action == 'delete' && input.sys_id) {
+            var grDelete = new GlideRecord(TABLE);
+            if (grDelete.get(input.sys_id)) {
+                grDelete.deleteRecord();
+            }
+        }
+    }
+
+    /* =====================================================
+       DROPDOWN OPTIONS — all from sys_user,
+       filtered by user type
+    ===================================================== */
+    data.doctors    = getUsersByType(USER_TYPES.doctor);
+    data.facilities = getUsersByType(USER_TYPES.facility);
+    data.guardians  = getUsersByType(USER_TYPES.guardian);
+    data.caregivers = getUsersByType(USER_TYPES.caregiver);
+
+    /* =====================================================
+       PATIENT LIST
+       Reference fields send BOTH:
+       - getValue()        → sys_id (pre-selects edit dropdowns)
+       - getDisplayValue() → name   (shown in table cells)
+    ===================================================== */
+    data.patients = [];
+    var gr = new GlideRecord(TABLE);
+    gr.orderBy('patient_name');
+    gr.query();
+    while (gr.next()) {
+        data.patients.push({
+            sys_id:       gr.getUniqueValue(),
+            number:       gr.getValue('number'),
+            patient_name: gr.getValue('patient_name'),
+            dob:          gr.getValue('dob'),
+            gender:       gr.getDisplayValue('gender'),
+            diagnosis:    gr.getValue('diagnosis'),
+
+            primary_doctor:         gr.getValue('primary_doctor'),
+            primary_doctor_display: gr.getDisplayValue('primary_doctor'),
+
+            care_facility:          gr.getValue('care_facility'),
+            care_facility_display:  gr.getDisplayValue('care_facility'),
+
+            guardian:               gr.getValue('guardian'),
+            guardian_display:       gr.getDisplayValue('guardian'),
+
+            caregiver:              gr.getValue('caregiver'),
+            caregiver_display:      gr.getDisplayValue('caregiver')
+        });
+    }
+
+    /* ---------- HELPERS ---------- */
+
+    function getUsersByType(typeValue) {
+        var list = [];
+        var u = new GlideRecord('sys_user');
+        u.addActiveQuery();                       // skip deactivated users
+        u.addQuery(USER_TYPE_FIELD, typeValue);
+        u.orderBy('name');
+        u.query();
+        while (u.next()) {
+            list.push({
+                sys_id: u.getUniqueValue(),
+                name:   u.getValue('name')
+            });
+        }
+        return list;
+    }
+
+    function setFields(gr, p) {
+        gr.number       = p.number;
+        gr.patient_name = p.patient_name;
+        gr.dob          = p.dob;
+        gr.diagnosis    = p.diagnosis;
+        gr.setDisplayValue('gender', p.gender);
+
+        // sys_ids straight from the dropdowns
+        gr.primary_doctor = p.primary_doctor || '';
+        gr.care_facility  = p.care_facility  || '';
+        gr.guardian       = p.guardian       || '';
+        gr.caregiver      = p.caregiver      || '';
+    }
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-11 16:32:08</sys_created_on>
+        <sys_id>c3c9e463089107107f44f76f9beca41e</sys_id>
+        <sys_mod_count>46</sys_mod_count>
+        <sys_name>Trackmed Patient List</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_widget_c3c9e463089107107f44f76f9beca41e</sys_update_name>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-14 07:53:08</sys_updated_on>
+        <template><![CDATA[<div class="tm-page">
+
+    <!-- HEADER -->
+    <div class="tm-header">
+
+        <div>
+            <h2>
+                <i class="fa fa-user-md"></i>
+                Patient Management
+            </h2>
+            <p>Manage patient records, doctors and care facilities</p>
+        </div>
+
+        <button class="btn tm-create-btn"
+                ng-click="c.openPatientModal()">
+
+            <i class="fa fa-plus"></i>
+            Create Patient
+
+        </button>
+
+    </div>
+
+    <!-- SEARCH -->
+    <div class="tm-search-section">
+
+        <div class="tm-search-wrapper">
+
+            <i class="fa fa-search"></i>
+
+            <input type="text"
+                   class="tm-search"
+                   placeholder="Search patients by name, ID, diagnosis..."
+                   ng-model="c.search"
+                   ng-change="c.page = 1">
+
+        </div>
+
+    </div>
+
+    <!-- TABLE CARD -->
+    <div class="tm-table-wrapper">
+
+        <div class="table-responsive">
+
+            <table class="table tm-table">
+
+                <thead>
+
+                    <tr>
+                        <th>Patient ID</th>
+                        <th>Patient Name</th>
+                        <th>DOB</th>
+                        <th>Gender</th>
+                        <th>Diagnosis</th>
+                        <th>Primary Doctor</th>
+                        <th>Actions</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr ng-repeat="p in c.filtered = (data.patients | filter:c.search)
+                                   | limitTo:c.pageSize:(c.page-1)*c.pageSize">
+
+                        <td>
+                            <span class="tm-id-badge">
+                                {{p.number}}
+                            </span>
+                        </td>
+
+                        <td>
+                            <div class="tm-patient-name">
+
+                                <div class="tm-avatar">
+                                    {{p.patient_name.charAt(0)}}
+                                </div>
+
+                                <div>
+
+                                    <div class="tm-name">
+                                        {{p.patient_name}}
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </td>
+
+                        <td>{{p.dob}}</td>
+
+                        <td>
+
+                            <span class="tm-gender">
+                                {{p.gender}}
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <span class="tm-diagnosis">
+                                {{p.diagnosis}}
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <span class="tm-doctor">
+
+                                <i class="fa fa-user-md"></i>
+                                {{p.primary_doctor_display}}
+
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <button class="btn btn-xs tm-edit-btn"
+                                    ng-click="c.editPatient(p)">
+
+                                <i class="fa fa-pencil"></i>
+                                Edit
+
+                            </button>
+
+                            <button class="btn btn-xs tm-delete-btn"
+                                    ng-click="c.deletePatient(p)">
+
+                                <i class="fa fa-trash"></i>
+                                Delete
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                    <!-- EMPTY STATE -->
+
+                    <tr ng-if="c.totalItems() === 0">
+
+                        <td colspan="7">
+
+                            <div class="tm-empty">
+
+                                <i class="fa fa-folder-open-o"></i>
+
+                                <h4>No Patients Found</h4>
+
+                                <p>
+                                    No matching records available
+                                </p>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <!-- PAGINATION -->
+
+        <div class="tm-pagination"
+             ng-if="c.totalItems() > 0">
+
+            <div class="tm-page-info">
+
+                Showing
+                <b>{{(c.page - 1) * c.pageSize + 1}}</b>
+                -
+                <b>{{c.endIndex()}}</b>
+
+                of
+
+                <b>{{c.totalItems()}}</b>
+
+                patients
+
+            </div>
+
+            <div>
+
+                <select class="tm-page-size"
+                        ng-model="c.pageSize"
+                        ng-options="s for s in c.pageSizes"
+                        ng-change="c.page = 1">
+                </select>
+
+            </div>
+
+            <ul class="pagination pagination-sm tm-pager">
+
+                <li ng-class="{disabled:c.page===1}">
+                    <a ng-click="c.goToPage(c.page-1)">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                </li>
+
+                <li ng-repeat="n in c.pageNumbers()"
+                    ng-class="{active:n===c.page}">
+
+                    <a ng-click="c.goToPage(n)">
+                        {{n}}
+                    </a>
+
+                </li>
+
+                <li ng-class="{disabled:c.page===c.totalPages()}">
+
+                    <a ng-click="c.goToPage(c.page+1)">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ==========================================
+     CREATE / EDIT PATIENT MODAL
+=========================================== -->
+
+<script type="text/ng-template" id="patientModal">
+
+<div class="modal-header">
+
+    <h3 class="modal-title">
+        {{modalTitle}}
+    </h3>
+
+</div>
+
+<div class="modal-body">
+
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <label>Patient ID</label>
+
+            <input class="form-control"
+                   ng-model="patient.number">
+
+        </div>
+
+        <div class="col-md-6">
+
+            <label>Patient Name</label>
+
+            <input class="form-control"
+                   ng-model="patient.patient_name">
+
+        </div>
+
+    </div>
+
+    <br>
+
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <label>Date Of Birth</label>
+
+            <input type="date"
+                   class="form-control"
+                   ng-model="patient.dob">
+
+        </div>
+
+        <div class="col-md-6">
+
+            <label>Gender</label>
+
+            <select class="form-control"
+                    ng-model="patient.gender">
+
+                <option value="">
+                    Select Gender
+                </option>
+
+                <option value="Male">
+                    Male
+                </option>
+
+                <option value="Female">
+                    Female
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+    <br>
+
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <label>Primary Doctor</label>
+
+            <select class="form-control"
+                    ng-model="patient.primary_doctor"
+                    ng-options="d.sys_id as d.name for d in data.doctors">
+
+                <option value="">
+                    Select Doctor
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <label>Care Facility</label>
+
+            <select class="form-control"
+                    ng-model="patient.care_facility"
+                    ng-options="f.sys_id as f.name for f in data.facilities">
+
+                <option value="">
+                    Select Facility
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+    <br>
+
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <label>Guardian</label>
+
+            <select class="form-control"
+                    ng-model="patient.guardian"
+                    ng-options="g.sys_id as g.name for g in data.guardians">
+
+                <option value="">
+                    Select Guardian
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <label>Caregiver</label>
+
+            <select class="form-control"
+                    ng-model="patient.caregiver"
+                    ng-options="cg.sys_id as cg.name for cg in data.caregivers">
+
+                <option value="">
+                    Select Caregiver
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+    <br>
+
+    <label>Diagnosis</label>
+
+    <textarea class="form-control"
+              rows="4"
+              ng-model="patient.diagnosis">
+    </textarea>
+
+</div>
+
+<div class="modal-footer">
+
+    <button class="btn btn-default"
+            ng-click="$dismiss()">
+
+        Cancel
+
+    </button>
+
+    <button class="btn btn-primary"
+            ng-click="savePatient()">
+
+        Save Patient
+
+    </button>
+
+</div>
+
+</script>]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>c3c9e463089107107f44f76f9beca41e</id>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-11 16:32:08</sys_created_on>
+        <sys_id>0fc92c63089107107f44f76f9beca454</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-11 16:32:08</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

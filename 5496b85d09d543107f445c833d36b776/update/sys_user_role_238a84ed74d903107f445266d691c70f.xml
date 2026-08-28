@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_user_role">
+    <sys_user_role action="INSERT_OR_UPDATE">
+        <assignable_by/>
+        <can_delegate>true</can_delegate>
+        <description/>
+        <elevated_privilege>false</elevated_privilege>
+        <federated_id>4CAT8Hdel9OlUBzQ3H8nQnShvk+Zb+H/TGbauVyNFvg=</federated_id>
+        <grantable>true</grantable>
+        <includes_roles/>
+        <name>x_snc_trackmed.General_doctor</name>
+        <scoped_admin>false</scoped_admin>
+        <suffix>General_doctor</suffix>
+        <sys_class_name>sys_user_role</sys_class_name>
+        <sys_created_by>abhishek.pathak</sys_created_by>
+        <sys_created_on>2026-06-05 09:08:39</sys_created_on>
+        <sys_id>238a84ed74d903107f445266d691c70f</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>x_snc_trackmed.General_doctor</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sys_user_role_238a84ed74d903107f445266d691c70f</sys_update_name>
+        <sys_updated_by>navata.sri</sys_updated_by>
+        <sys_updated_on>2026-06-05 13:06:24</sys_updated_on>
+    </sys_user_role>
+</record_update>

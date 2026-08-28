@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="all_tables.text_index_translations=true,allow_data_replicate=true,display_image=photo,global_search_config_handler=UserConfig,ih_process_sync_enabled=true,iterativeDelete=true,kagami_csindex_enabled=true,metadata_link_exempt=true,ref_ac_columns=email,ref_ac_columns_search=true,ref_ac_order_by=name,ref_auto_completer=AJAXTableCompleter,slushbucket_omit_embedded=true" create_roles="user_admin" db_object_id="5d00fa338c1103100a22deb6dd2b4ed1" defaultsort="-1" dynamic_creation_script="dynamicUserCreation(current, value);" label="User" max_length="40" name="sys_user" text_index="true" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Doctor Name" max_length="32" name="x_snc_trackmed_d_doctor_name" reference="sys_user" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Relation" max_length="40" name="x_snc_trackmed_d_rel_care_pat" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Family" sequence="1" value="d_family"/>
+                <element inactive_on_update="false" label="Guardian" sequence="2" value="d_guardian"/>
+                <element inactive_on_update="false" label="Parent" sequence="0" value="d_parent_h"/>
+                <element inactive_on_update="false" label="Volunteer" sequence="3" value="d_volunteer"/>
+            </choice>
+        </element>
+        <element label="Organization" mandatory="true" max_length="40" name="x_snc_trackmed_organization" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Trackmed Company" max_length="32" name="x_snc_trackmed_trackmed_company" reference="core_company" reference_qual="x_snc_trackmed_type=care_center^ORx_snc_trackmed_type=rehabilitation_center^ORx_snc_trackmed_type=hospital^ORx_snc_trackmed_type=alzheimer_care_cacilities^ORx_snc_trackmed_type=old_age_homes^ORx_snc_trackmed_type=parkinsons_are_facility" reference_qual_condition="x_snc_trackmed_type=care_center^ORx_snc_trackmed_type=rehabilitation_center^ORx_snc_trackmed_type=hospital^ORx_snc_trackmed_type=alzheimer_care_cacilities^ORx_snc_trackmed_type=old_age_homes^ORx_snc_trackmed_type=parkinsons_are_facility" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="D_pateint_name" max_length="32" name="x_snc_trackmed_d_pateint_name" reference="sys_user" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="User Type" max_length="40" name="x_snc_trackmed_user_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Carefacility Supervisor" sequence="1" value="organization_admin"/>
+                <element inactive_on_update="false" label="Caretaker" sequence="4" value="care_taker"/>
+                <element inactive_on_update="false" label="Guardian" sequence="5" value="guardian"/>
+                <element inactive_on_update="false" label="Doctor" sequence="2" value="doctor"/>
+                <element inactive_on_update="false" label="Hospital Supervisor" sequence="0" value="hospital_admin"/>
+                <element inactive_on_update="false" label="Pharmacist" sequence="3" value="pharmacist"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Patient name" max_length="32" name="x_snc_trackmed_patient_name" reference="sys_user" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Notify" max_length="255" name="x_snc_trackmed_notify" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Care Facility Center" max_length="32" name="x_snc_trackmed_d_care_facili_centre" reference="core_company" type="reference"/>
+        <element label="Caregiver Of" max_length="40" name="x_snc_trackmed_caregiver_of" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Guardian Name" max_length="32" name="x_snc_trackmed_d_guardian_name" reference="sys_user" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="CareGiver Name" max_length="32" name="x_snc_trackmed_d_caregiver_name" reference="sys_user" type="reference"/>
+        <index name="index">
+            <element name="x_snc_trackmed_patient_name"/>
+        </index>
+        <index name="index2">
+            <element name="x_snc_trackmed_d_guardian_name"/>
+        </index>
+        <index name="index3">
+            <element name="x_snc_trackmed_d_pateint_name"/>
+        </index>
+        <index name="index4">
+            <element name="x_snc_trackmed_d_doctor_name"/>
+        </index>
+    </element>
+</database>

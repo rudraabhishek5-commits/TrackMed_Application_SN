@@ -1,0 +1,607 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function($scope, $timeout, $element) {
+
+var c = this;
+c.data     = { username: '', password: '', remember: false };
+c.showPw   = false;
+c.loading  = false;
+c.errorMsg = '';
+
+c.login = function () {
+  c.errorMsg = '';
+  if (!c.data.username || !c.data.password) {
+    c.errorMsg = 'Please enter your username and password.';
+    return;
+  }
+  c.loading = true;
+  c.server.get({
+    action:   'login',
+    username: c.data.username,
+    password: c.data.password
+  }).then(function (response) {
+    c.loading = false;
+    var res = response.data;
+    if (res.success) {
+      window.location.href = '/trackmed?id=trackmed_dashboard';
+    } else {
+      c.errorMsg = res.message || 'Invalid username or password.';
+    }
+  }).catch(function () {
+    c.loading  = false;
+    c.errorMsg = 'Connection error. Please try again.';
+  });
+};
+
+$timeout(function () {
+
+  /* ── ECG BACKGROUND ── */
+  var pg    = document.getElementById('tmPage');
+  var ecgEl = document.getElementById('tmEcg');
+
+  if (ecgEl && pg) {
+    var ec  = ecgEl.getContext('2d');
+    var EW  = 0;
+    var EH  = 0;
+    var elt = 0;
+
+    var ecgResize = function () {
+      EW = ecgEl.width  = pg.offsetWidth;
+      EH = ecgEl.height = pg.offsetHeight;
+    };
+
+    var makeBeat = function (ox, oy, amp) {
+      return [
+        [ox,      oy],
+        [ox+25,   oy],
+        [ox+30,   oy - amp*0.12],
+        [ox+36,   oy - amp*0.18],
+        [ox+42,   oy - amp*0.12],
+        [ox+48,   oy],
+        [ox+54,   oy],
+        [ox+57,   oy + amp*0.15],
+        [ox+60,   oy - amp*1.00],
+        [ox+63,   oy + amp*0.30],
+        [ox+67,   oy],
+        [ox+74,   oy],
+        [ox+82,   oy - amp*0.30],
+        [ox+92,   oy - amp*0.34],
+        [ox+102,  oy - amp*0.30],
+        [ox+110,  oy],
+        [ox+150,  oy]
+      ];
+    };
+
+    var BW = 210;
+    var ecgRows = [
+      { yf:0.40, amp:50, al:0.55, gal:0.25, lw:2.0, spd:1.0, off:0   },
+      { yf:0.50, amp:50, al:0.28, gal:0.12, lw:1.3, spd:1.0, off:70  },
+      { yf:0.60, amp:50, al:0.13, gal:0.06, lw:0.8, spd:1.0, off:140 }
+    ];
+
+    var ecgDrawRow = function (row) {
+      var by  = EH * row.yf;
+      var sx  = -(row.off % BW);
+      var cnt = Math.ceil(EW / BW) + 2;
+      var i, j, pts, px, py, f, pass;
+
+      for (pass = 0; pass < 2; pass++) {
+        ec.save();
+        if (pass === 0) {
+          ec.shadowBlur  = 24;
+          ec.shadowColor = 'rgba(79,195,247,0.60)';
+          ec.strokeStyle = 'rgba(79,195,247,' + row.gal + ')';
+          ec.lineWidth   = row.lw * 3.5;
+        } else {
+          ec.strokeStyle = 'rgba(79,195,247,' + row.al + ')';
+          ec.lineWidth   = row.lw;
+        }
+        ec.lineJoin = 'round';
+        ec.lineCap  = 'round';
+        ec.beginPath();
+        f = true;
+        for (i = 0; i < cnt; i++) {
+          pts = makeBeat(sx + i * BW, by, row.amp);
+          for (j = 0; j < pts.length; j++) {
+            px = pts[j][0]; py = pts[j][1];
+            if (f) { ec.moveTo(px, py); f = false; }
+            else   { ec.lineTo(px, py); }
+          }
+        }
+        ec.stroke();
+        ec.restore();
+      }
+    };
+
+    var ecgLoop = function (ts) {
+      var dt = ts - elt; elt = ts;
+      ec.clearRect(0, 0, EW, EH);
+      var i;
+      for (i = 0; i < ecgRows.length; i++) {
+        ecgRows[i].off += ecgRows[i].spd * dt * 0.065;
+        ecgDrawRow(ecgRows[i]);
+      }
+      window.requestAnimationFrame(ecgLoop);
+    };
+
+    ecgResize();
+    window.addEventListener('resize', ecgResize);
+    window.requestAnimationFrame(ecgLoop);
+  }
+
+  /* ── QUARTER CLOCK ── */
+  var clkEl = document.getElementById('tmClk');
+
+  if (clkEl) {
+    var cc = clkEl.getContext('2d');
+    var R  = 100;
+
+    var clkHand = function (fullAngle, len, lw, col) {
+      var a = Math.PI / 2 + ((fullAngle % (Math.PI * 2)) / (Math.PI * 2)) * (Math.PI / 2);
+      cc.save();
+      cc.beginPath();
+      cc.moveTo(0, 0);
+      cc.lineTo(len * Math.cos(a), len * Math.sin(a));
+      cc.strokeStyle = col;
+      cc.lineWidth   = lw;
+      cc.lineCap     = 'round';
+      cc.stroke();
+      cc.restore();
+    };
+
+    var clkDraw = function () {
+      cc.clearRect(0, 0, 220, 220);
+      var now = new Date();
+      var h   = now.getHours();
+      var m   = now.getMinutes();
+      var s   = now.getSeconds();
+      var ms  = now.getMilliseconds();
+
+      /* soft fill */
+      cc.save();
+      cc.beginPath();
+      cc.arc(0, 0, R, Math.PI / 2, Math.PI);
+      cc.arc(0, 0, R - 18, Math.PI, Math.PI / 2, true);
+      cc.closePath();
+      cc.fillStyle = 'rgba(10,30,80,0.30)';
+      cc.fill();
+      cc.restore();
+
+      /* arc border */
+      cc.save();
+      cc.beginPath();
+      cc.arc(0, 0, R, Math.PI / 2, Math.PI);
+      cc.strokeStyle = 'rgba(100,165,225,0.30)';
+      cc.lineWidth   = 1.5;
+      cc.stroke();
+      cc.restore();
+
+      /* ticks */
+      var t, a, r1;
+      for (t = 0; t <= 15; t++) {
+        a  = Math.PI / 2 + (t / 15) * (Math.PI / 2);
+        r1 = (t % 5 === 0) ? R - 10 : R - 5;
+        cc.save();
+        cc.beginPath();
+        cc.moveTo(R  * Math.cos(a), R  * Math.sin(a));
+        cc.lineTo(r1 * Math.cos(a), r1 * Math.sin(a));
+        cc.strokeStyle = (t % 5 === 0) ? 'rgba(120,190,240,0.60)' : 'rgba(120,190,240,0.22)';
+        cc.lineWidth   = (t % 5 === 0) ? 1.5 : 0.7;
+        cc.stroke();
+        cc.restore();
+      }
+
+      /* 3 hands */
+      clkHand(((h % 12) / 12 + m / 720) * Math.PI * 2, R * 0.50, 3.5, 'rgba(160,210,250,0.80)');
+      clkHand((m / 60 + s / 3600) * Math.PI * 2,        R * 0.70, 2.2, 'rgba(100,215,255,0.70)');
+      clkHand(((s + ms / 1000) / 60) * Math.PI * 2,     R * 0.82, 1.2, 'rgba(80,240,200,0.60)');
+
+      /* center dot */
+      cc.save();
+      cc.beginPath();
+      cc.arc(0, 0, 5, 0, Math.PI * 2);
+      cc.fillStyle = 'rgba(100,200,240,0.75)';
+      cc.fill();
+      cc.restore();
+    };
+
+    var clkLoop = function () { clkDraw(); window.requestAnimationFrame(clkLoop); };
+    window.requestAnimationFrame(clkLoop);
+  }
+
+}, 500);
+
+}; /* end api.controller */]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.trackmed-page *, .trackmed-page *::before, .trackmed-page *::after {
+  box-sizing: border-box; margin: 0; padding: 0;
+}
+.trackmed-page {
+  width: 100%; min-height: 100vh;
+  background: linear-gradient(135deg, #060f1e 0%, #0b1a35 45%, #0d2550 100%);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px; font-family: 'Segoe UI', Arial, sans-serif;
+  position: relative; overflow: hidden;
+}
+.tm-grid {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(30,100,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg,rgba(30,100,255,0.06) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+.brand-logo {
+  max-width: 200px;
+  height: auto;
+  display: block;
+}
+
+/* Hearts — pure CSS animation, no JS needed */
+.tm-heart {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+}
+.tm-heart svg {
+  animation: tmHbeat 1.5s ease-in-out infinite;
+}
+@keyframes tmHbeat {
+  0%,100% { transform: scale(1);    }
+  50%      { transform: scale(1.18); }
+}
+.tm-hf1 { animation: tmHf1 9s ease-in-out infinite; }
+.tm-hf2 { animation: tmHf2 11s ease-in-out 2.5s infinite; }
+.tm-hf3 { animation: tmHf3 10s ease-in-out 5.5s infinite; }
+
+@keyframes tmHf1 {
+  0%   { opacity:0; transform:translate(0,0) rotate(0deg) scale(0.8); }
+  15%  { opacity:1; }
+  50%  { opacity:0.7; transform:translate(12px,-65px) rotate(12deg) scale(1.1); }
+  85%  { opacity:0.2; }
+  100% { opacity:0; transform:translate(-5px,-130px) rotate(-8deg) scale(0.55); }
+}
+@keyframes tmHf2 {
+  0%   { opacity:0; transform:translate(0,0) rotate(0deg) scale(0.75); }
+  15%  { opacity:0.9; }
+  50%  { opacity:0.65; transform:translate(-10px,-60px) rotate(-14deg) scale(1.12); }
+  85%  { opacity:0.2; }
+  100% { opacity:0; transform:translate(6px,-120px) rotate(10deg) scale(0.5); }
+}
+@keyframes tmHf3 {
+  0%   { opacity:0; transform:translate(0,0) scale(0.85); }
+  15%  { opacity:0.85; }
+  50%  { opacity:0.6; transform:translate(8px,-55px) rotate(-10deg) scale(1.1); }
+  85%  { opacity:0.22; }
+  100% { opacity:0; transform:translate(-10px,-110px) rotate(14deg) scale(0.52); }
+}
+
+/* Main layout */
+.tm-content {
+  display: flex; align-items: center; gap: 48px;
+  width: 100%; max-width: 800px;
+  position: relative; z-index: 10;
+}
+.left-panel {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; gap: 6px;
+}
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-icon {
+  width: 40px; height: 40px;
+  background: linear-gradient(135deg, #1e6fff, #00c8ff);
+  border-radius: 10px; display: flex; align-items: center; justify-content: center;
+}
+.brand-icon svg { width: 24px; height: 24px; }
+.brand-name { font-size: 28px; font-weight: 700; color: #fff; letter-spacing: 1px; }
+.brand-sub  { font-size: 13px; color: #ffffff; }
+
+.brand-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.shield-wrap {
+  position: relative; width: 220px; height: 240px;
+  display: flex; align-items: center; justify-content: center;
+}
+.ring {
+  position: absolute; border-radius: 50%;
+  border: 1px solid rgba(30,150,255,0.3);
+  animation: tmRing 3.2s ease-out infinite;
+}
+.r1 { width:170px; height:170px; animation-delay:0s; }
+.r2 { width:210px; height:210px; animation-delay:0.9s; }
+.r3 { width:250px; height:250px; animation-delay:1.8s; }
+@keyframes tmRing {
+  0%   { transform:scale(0.65); opacity:0.9; }
+  100% { transform:scale(1.15); opacity:0; }
+}
+.shield-svg {
+  width:140px; height:160px;
+  animation: tmShield 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 22px rgba(30,150,255,0.65));
+}
+@keyframes tmShield {
+  0%,100% { transform:translateY(0); }
+  50%     { transform:translateY(-12px); }
+}
+.pill {
+  position:absolute; width:24px; height:11px;
+  border-radius:20px; animation: tmPill 5s ease-in-out infinite;
+}
+.pill-1 { background:linear-gradient(90deg,#1e6fff,#00c8ff); top:30px;    left:18px;  animation-delay:0s;   transform:rotate(30deg); }
+.pill-2 { background:linear-gradient(90deg,#ff6bab,#ff9cf1); bottom:35px; right:12px; animation-delay:1.8s; transform:rotate(-45deg); }
+.pill-3 { background:linear-gradient(90deg,#00e5a0,#00c8ff); bottom:55px; left:8px;   animation-delay:3.2s; transform:rotate(15deg); }
+@keyframes tmPill {
+  0%,100% { opacity:0.35; transform:translateY(0) scale(1); }
+  50%     { opacity:0.8;  transform:translateY(-18px) scale(1.25); }
+}
+.right-panel {
+  background: rgba(255,255,255,0.065);
+  backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
+  border: 1px solid rgba(255,255,255,0.13);
+  border-radius: 22px; padding: 40px 34px;
+  width: 310px; flex-shrink: 0;
+}
+.form-title { font-size:24px; font-weight:700; color:#fff; margin-bottom:5px; }
+.form-sub   { font-size:13px; color:#7ab3e0; margin-bottom:26px; }
+.error-msg {
+  background:rgba(220,50,50,0.18); border:1px solid rgba(220,50,50,0.4);
+  color:#ff8080; border-radius:8px; padding:9px 13px;
+  font-size:12px; margin-bottom:14px;
+}
+.field { margin-bottom:18px; }
+.field label {
+  display:block; font-size:11px; font-weight:600;
+  color:#a0c4e8; margin-bottom:7px; letter-spacing:0.7px;
+}
+.field input {
+  width:100%; padding:11px 14px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:10px; color:#fff; font-size:13px; outline:none;
+  transition:border .25s, box-shadow .25s;
+}
+.field input::placeholder { color:rgba(255,255,255,0.28); }
+.field input:focus {
+  border-color:#1e6fff;
+  box-shadow:0 0 0 3px rgba(30,111,255,0.22);
+}
+.pw-wrap { position:relative; }
+.pw-wrap input { padding-right:40px; }
+.pw-eye {
+  position:absolute; right:12px; top:50%;
+  transform:translateY(-50%);
+  color:rgba(255,255,255,0.38); cursor:pointer;
+  display:flex; align-items:center;
+}
+.pw-eye:hover { color:rgba(255,255,255,0.75); }
+.row-opts {
+  display:flex; align-items:center;
+  justify-content:space-between; margin-bottom:22px;
+}
+.remember {
+  display:flex; align-items:center; gap:7px;
+  font-size:12px; color:#7ab3e0; cursor:pointer;
+}
+.remember input[type=checkbox] { width:14px; height:14px; accent-color:#1e6fff; cursor:pointer; }
+.forgot { font-size:12px; color:#4da3ff; text-decoration:none; }
+.forgot:hover { text-decoration:underline; }
+.btn-signin {
+  width:100%; padding:13px; border:none; border-radius:11px;
+  background:linear-gradient(135deg,#1a5fff 0%,#0040d0 100%);
+  color:#fff; font-size:14px; font-weight:600; letter-spacing:.5px;
+  cursor:pointer; transition:transform .15s;
+  animation:tmBtnGlow 2.2s ease-in-out infinite;
+}
+.btn-signin:hover:not([disabled]) { transform:translateY(-2px); }
+.btn-signin[disabled] { opacity:0.65; cursor:not-allowed; }
+@keyframes tmBtnGlow {
+  0%,100% { box-shadow:0 4px 22px rgba(30,100,255,0.55); }
+  50%     { box-shadow:0 4px 32px rgba(30,100,255,0.90); }
+}
+.help-text { text-align:center; margin-top:20px; font-size:12px; color:rgba(255,255,255,0.35); }
+.help-text a { color:#4da3ff; text-decoration:none; }
+.help-text a:hover { text-decoration:underline; }
+@media (max-width:640px) {
+  .tm-content { flex-direction:column; gap:24px; }
+  .right-panel { width:100%; padding:30px 22px; }
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>navata_login</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>navata_login</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  if (input && input.action === 'login') {
+
+    try {
+      var ga = new GlideRecord('sys_user');
+      ga.addQuery('user_name', input.username);
+      ga.query();
+
+      if (ga.next()) {
+        var userSysId = ga.sys_id.toString();
+        var roleGR    = new GlideRecord('sys_user_has_role');
+        roleGR.addQuery('user', userSysId);
+        roleGR.query();
+
+        // ---- EDIT this list to match your exact role names in ServiceNow ----
+        var rolePriority = ['Hospital Admin', 'Doctor', 'Nurse', 'Pharmacist', 'Patient'];
+        var userRoles    = [];
+
+        while (roleGR.next()) {
+          userRoles.push(roleGR.role.name.toString());
+        }
+
+        var primaryRole = 'General';
+        for (var i = 0; i < rolePriority.length; i++) {
+          if (userRoles.indexOf(rolePriority[i]) !== -1) {
+            primaryRole = rolePriority[i];
+            break;
+          }
+        }
+
+        data.success  = true;
+        data.role     = primaryRole;
+        data.username = ga.name.toString();
+
+      } else {
+        data.success = false;
+        data.message = 'User not found.';
+      }
+
+    } catch(e) {
+      data.success = false;
+      data.message = 'Error: ' + e.message;
+    }
+  }
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>navata.sri</sys_created_by>
+        <sys_created_on>2026-06-14 04:33:40</sys_created_on>
+        <sys_id>4422a158dd2103107f44ab669ac6a9f4</sys_id>
+        <sys_mod_count>37</sys_mod_count>
+        <sys_name>navata_login</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_widget_4422a158dd2103107f44ab669ac6a9f4</sys_update_name>
+        <sys_updated_by>navata.sri</sys_updated_by>
+        <sys_updated_on>2026-06-15 19:39:43</sys_updated_on>
+        <template><![CDATA[<div class="trackmed-page" id="tmPage">  
+  <div class="tm-grid"></div>
+
+  <!-- ECG Canvas background -->
+  <canvas id="tmEcg" style="position:absolute;top:0;left:0;z-index:1;pointer-events:none;"></canvas>
+
+  <!-- Quarter clock top-right -->
+  <div style="position:absolute;top:0;right:0;width:110px;height:110px;overflow:hidden;z-index:6;pointer-events:none;">
+    <canvas id="tmClk" width="220" height="220" style="position:absolute;top:0;right:0;"></canvas>
+  </div>
+
+  <!-- Heart 1 -->
+  <div class="tm-heart tm-hf1" style="left:8%;top:20%;">
+    <svg width="34" height="30" viewBox="0 0 32 29">
+      <path d="M16 27C16 27 2 18 2 9C2 4.5 5.5 1 10 1C12.5 1 14.8 2.2 16 4C17.2 2.2 19.5 1 22 1C26.5 1 30 4.5 30 9C30 18 16 27 16 27Z"
+            fill="rgba(100,170,255,0.32)" stroke="rgba(140,200,255,0.50)" stroke-width="1.2"/>
+    </svg>
+  </div>
+
+  <!-- Heart 2 -->
+  <div class="tm-heart tm-hf2" style="left:80%;top:58%;">
+    <svg width="28" height="25" viewBox="0 0 32 29">
+      <path d="M16 27C16 27 2 18 2 9C2 4.5 5.5 1 10 1C12.5 1 14.8 2.2 16 4C17.2 2.2 19.5 1 22 1C26.5 1 30 4.5 30 9C30 18 16 27 16 27Z"
+            fill="rgba(70,210,185,0.30)" stroke="rgba(90,230,200,0.45)" stroke-width="1.2"/>
+    </svg>
+  </div>
+
+  <!-- Heart 3 -->
+  <div class="tm-heart tm-hf3" style="left:46%;top:74%;">
+    <svg width="26" height="23" viewBox="0 0 32 29">
+      <path d="M16 27C16 27 2 18 2 9C2 4.5 5.5 1 10 1C12.5 1 14.8 2.2 16 4C17.2 2.2 19.5 1 22 1C26.5 1 30 4.5 30 9C30 18 16 27 16 27Z"
+            fill="rgba(155,110,255,0.28)" stroke="rgba(180,145,255,0.45)" stroke-width="1.2"/>
+    </svg>
+  </div>
+
+  <!-- Main content -->
+  <div class="tm-content">
+    <div class="left-panel">
+    <!-- REPLACE with your logo code -->
+<div class="brand">
+  <img src="/trackmed_logo.png"
+       alt="TrackMED Logo"
+       class="brand-logo">
+</div>
+      <div class="brand-sub">Medication Management</div>
+      <div class="shield-wrap">
+        <div class="ring r1"></div>
+        <div class="ring r2"></div>
+        <div class="ring r3"></div>
+        <div class="pill pill-1"></div>
+        <div class="pill pill-2"></div>
+        <div class="pill pill-3"></div>
+        <div class="shield-svg">
+          <svg viewBox="0 0 130 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="sg" cx="50%" cy="30%" r="70%">
+                <stop offset="0%" stop-color="#1e8fff"/>
+                <stop offset="100%" stop-color="#0033a0"/>
+              </radialGradient>
+              <radialGradient id="sglow" cx="50%" cy="50%" r="60%">
+                <stop offset="0%" stop-color="#00c8ff" stop-opacity="0.5"/>
+                <stop offset="100%" stop-color="#1e6fff" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <path d="M65 8 L115 30 L115 75 C115 105 93 128 65 138 C37 128 15 105 15 75 L15 30 Z"
+                  fill="url(#sg)" stroke="#4da3ff" stroke-width="1.5"/>
+            <path d="M65 8 L115 30 L115 75 C115 105 93 128 65 138 C37 128 15 105 15 75 L15 30 Z"
+                  fill="url(#sglow)"/>
+            <circle cx="65" cy="78" r="26" fill="rgba(255,255,255,0.08)"
+                    stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+            <line x1="65" y1="62" x2="65" y2="94" stroke="white" stroke-width="5" stroke-linecap="round"/>
+            <line x1="49" y1="78" x2="81" y2="78" stroke="white" stroke-width="5" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-panel">
+      <div class="form-title">Welcome Back!</div>
+      <div class="form-sub">Please sign in to continue</div>
+      <div ng-if="c.errorMsg" class="error-msg">{{c.errorMsg}}</div>
+      <div class="field">
+        <label>USERNAME</label>
+        <input type="text" ng-model="c.data.username"
+               placeholder="Enter your username" autocomplete="username"/>
+      </div>
+      <div class="field">
+        <label>PASSWORD</label>
+        <div class="pw-wrap">
+          <input ng-attr-type="c.showPw ? 'text' : 'password'"
+                 ng-model="c.data.password"
+                 placeholder="Enter your password"
+                 autocomplete="current-password"/>
+          <span class="pw-eye" ng-click="c.showPw = !c.showPw">
+            <svg ng-if="!c.showPw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+            <svg ng-if="c.showPw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+              <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+              <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+              <line x1="1" y1="1" x2="23" y2="23"/>
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div class="row-opts">
+        <label class="remember">
+          <input type="checkbox" ng-model="c.data.remember"/>
+          <span>Remember me</span>
+        </label>
+        <a href="/forgot_password" class="forgot">Forgot Password?</a>
+      </div>
+      <button class="btn-signin" ng-click="c.login()" ng-disabled="c.loading">
+        <span ng-if="!c.loading">Sign In</span>
+        <span ng-if="c.loading">Signing in…</span>
+      </button>
+      <div class="help-text">Need help? <a href="/contact_support">Contact Support</a></div>
+    </div>
+  </div>
+
+</div>]]></template>
+    </sp_widget>
+</record_update>

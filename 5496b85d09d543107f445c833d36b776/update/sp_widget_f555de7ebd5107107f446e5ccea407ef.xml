@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller=function() {  /* widget controller */  var c = this;};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/* =====================================
+   KPI GRID
+===================================== */
+
+.kpi-grid{
+
+    display:flex;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+    margin-top:15px;
+
+    margin-bottom:20px;
+}
+
+/* =====================================
+   KPI CARD
+===================================== */
+
+.kpi-card{
+
+    flex:1;
+
+    min-width:250px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:24px;
+
+    padding:25px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:.4s;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.15);
+
+    animation:cardEntry .8s ease forwards;
+
+    opacity:0;
+}
+
+/* Entry Animation */
+
+.kpi-card:nth-child(1){
+    animation-delay:.1s;
+}
+
+.kpi-card:nth-child(2){
+    animation-delay:.2s;
+}
+
+.kpi-card:nth-child(3){
+    animation-delay:.3s;
+}
+
+.kpi-card:nth-child(4){
+    animation-delay:.4s;
+}
+
+@keyframes cardEntry{
+
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* =====================================
+   SHIMMER EFFECT
+===================================== */
+
+.kpi-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:-100%;
+
+    width:100%;
+    height:100%;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.25),
+        transparent
+    );
+
+    transition:.8s;
+}
+
+.kpi-card:hover::before{
+
+    left:100%;
+}
+
+/* =====================================
+   FLOATING BLOB
+===================================== */
+
+.kpi-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:140px;
+
+    height:140px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.12);
+
+    top:-50px;
+
+    right:-40px;
+}
+
+/* =====================================
+   HOVER
+===================================== */
+
+.kpi-card:hover{
+
+    transform:
+        translateY(-8px)
+        scale(1.03);
+
+    box-shadow:
+        0 20px 40px rgba(0,0,0,.20);
+}
+
+/* =====================================
+   ICON
+===================================== */
+
+.kpi-icon{
+
+    width:70px;
+
+    height:70px;
+
+    border-radius:20px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:30px;
+
+    background:rgba(255,255,255,.15);
+
+    backdrop-filter:blur(10px);
+
+    animation:floatIcon 4s infinite ease-in-out;
+}
+
+@keyframes floatIcon{
+
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-8px);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+}
+
+/* =====================================
+   CONTENT
+===================================== */
+
+.kpi-content{
+
+    position:relative;
+
+    z-index:2;
+}
+
+.kpi-content h2{
+
+    margin:0;
+
+    font-size:38px;
+
+    font-weight:700;
+
+    color:white;
+
+    animation:numberPulse 3s infinite;
+}
+
+.kpi-content p{
+
+    margin-top:5px;
+
+    color:rgba(255,255,255,.95);
+
+    font-size:15px;
+
+    font-weight:500;
+}
+
+@keyframes numberPulse{
+
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.05);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+}
+
+/* =====================================
+   DOSES TODAY
+===================================== */
+
+.success{
+
+    background:linear-gradient(
+        135deg,
+        #1B5E20,
+        #66BB6A
+    );
+}
+
+/* =====================================
+   DUE NEXT 2 HOURS
+===================================== */
+
+.info{
+
+    background:linear-gradient(
+        135deg,
+        #0277BD,
+        #4FC3F7
+    );
+}
+
+/* =====================================
+   MISSED DOSES
+===================================== */
+
+.warning{
+
+    background:linear-gradient(
+        135deg,
+        #E65100,
+        #FFB74D
+    );
+
+    animation:
+        cardEntry .8s ease forwards,
+        warningGlow 2s infinite;
+}
+
+@keyframes warningGlow{
+
+    0%{
+        box-shadow:
+            0 0 0 rgba(255,183,77,.3);
+    }
+
+    50%{
+        box-shadow:
+            0 0 30px rgba(255,183,77,.45);
+    }
+
+    100%{
+        box-shadow:
+            0 0 0 rgba(255,183,77,.3);
+    }
+}
+
+/* =====================================
+   PATIENTS ASSIGNED
+===================================== */
+
+.primary{
+
+    background:linear-gradient(
+        135deg,
+        #6A1B9A,
+        #BA68C8
+    );
+}
+
+/* =====================================
+   MOBILE
+===================================== */
+
+@media(max-width:768px){
+
+    .kpi-card{
+
+        min-width:100%;
+    }
+
+    .kpi-content h2{
+
+        font-size:30px;
+    }
+
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>trackmed_kpi_tiles</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>TrackMed KPI Tiles</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    data.dosesToday = 15;
+    data.dueNext2Hours = 8;
+    data.missedDoses = 2;
+    data.patientsAssigned = 12;
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-09 16:26:33</sys_created_on>
+        <sys_id>f555de7ebd5107107f446e5ccea407ef</sys_id>
+        <sys_mod_count>9</sys_mod_count>
+        <sys_name>TrackMed KPI Tiles</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_widget_f555de7ebd5107107f446e5ccea407ef</sys_update_name>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-11 08:26:26</sys_updated_on>
+        <template><![CDATA[<div class="kpi-grid">
+
+    <div class="kpi-card success">
+        <div class="kpi-icon">
+            <i class="fa fa-check-circle"></i>
+        </div>
+        <div class="kpi-content">
+            <h2>{{data.dosesToday}}</h2>
+            <p>Doses Today</p>
+        </div>
+    </div>
+
+    <div class="kpi-card info">
+        <div class="kpi-icon">
+            <i class="fa fa-clock-o"></i>
+        </div>
+        <div class="kpi-content">
+            <h2>{{data.dueNext2Hours}}</h2>
+            <p>Due Next 2 Hours</p>
+        </div>
+    </div>
+
+    <div class="kpi-card warning">
+        <div class="kpi-icon">
+            <i class="fa fa-exclamation-triangle"></i>
+        </div>
+        <div class="kpi-content">
+            <h2>{{data.missedDoses}}</h2>
+            <p>Missed Doses</p>
+        </div>
+    </div>
+
+    <div class="kpi-card primary">
+        <div class="kpi-icon">
+            <i class="fa fa-users"></i>
+        </div>
+        <div class="kpi-content">
+            <h2>{{data.patientsAssigned}}</h2>
+            <p>Patients Assigned</p>
+        </div>
+    </div>
+
+</div>]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>f555de7ebd5107107f446e5ccea407ef</id>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-09 16:26:33</sys_created_on>
+        <sys_id>b155d2bebd5107107f446e5ccea4071b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-09 16:26:33</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

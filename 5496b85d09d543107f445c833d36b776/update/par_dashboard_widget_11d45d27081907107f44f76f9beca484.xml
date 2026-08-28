@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="par_dashboard_widget">
+    <par_dashboard_widget action="INSERT_OR_UPDATE">
+        <canvas display_value="">f945cbf2bd1907107f446e5ccea4076c</canvas>
+        <component display_value="Single score">d24d53f60350de7a652caf3188a46ed2</component>
+        <component_props>{"configVersion":"23.0.0-ci-SNAPSHOT","scoreSize":"auto","headingPosition":"top","sparklineStyle":"area","scoreIcon":"","iconStyle":"background","showScoreDate":false,"useRelativeScoreTime":false,"showScoreUpdateTime":false,"showZero":true,"rangesConfig":{},"colorConfig":{"type":"singleColor","values":[{"color":"1b62e7b70f0002104919700d7b767eda","metric":"ZEdGaWJHVnplWE5mZFhObGNqRTNPREV5TURZME1EUXdPVFU9MTc4MTIwNjQwNTc4NA==","rules":[{"operator":"&lt;","order":100,"color":"b09aa73f9f5c73001bb9baac757fcf32","value1":100}]}]},"newReporting":false,"enableAddZerosAtApi":true,"additionalGroupByConfig":[],"dataSources":[{"isDatabaseView":false,"allowRealTime":true,"label":"User","sourceType":"table","tableOrViewName":"sys_user","filterQuery":"x_snc_trackmed_user_type=care_taker","preferredVisualizations":["d24d53f60350de7a652caf3188a46ed2"],"id":"dGFibGVzeXNfdXNlcjE3ODEyMDY0MDQwOTU=","dataCategories":["trend","group","simple"]}],"showHeader":true,"showTotalAggregate":false,"showSubAggregate":false,"showFirstGroupAggregate":false,"showSecondGroupAggregate":false,"hideMatrixAggregate":false,"wrapTitle":false,"showLoadingIndicator":false,"showHeaderSeparator":false,"contextMenuActions":[],"headerTitle":"👨‍⚕️ Caregivers by Facility","headingLevel":2,"showBorder":true,"bareBorder":false,"telemetry":null,"showDataPassthrough":false,"showAdditionalGroupBySelector":false,"allowAdditionalGroupByPerMetric":false,"metrics":[{"dataSource":"dGFibGVzeXNfdXNlcjE3ODEyMDY0MDQwOTU=","id":"ZEdGaWJHVnplWE5mZFhObGNqRTNPREV5TURZME1EUXdPVFU9MTc4MTIwNjQwNTc4NA==","aggregateFunction":"COUNT","numberFormat":{"customFormat":false},"axisId":"primary"}],"groupBy":null,"filterPerMetric":[],"sortBy":"value","sortByOrder":"desc","trendBy":null,"showChange":false,"showChangePercentage":false,"showTarget":false,"showForecast":false,"showForecastRange":false,"showTrend":false,"showConfidenceBand":false,"showGapPercentage":false,"showSparkline":false,"showMetricLabel":false,"showThreshold":false,"showComment":false,"followFilters":true,"showFilterIcon":true,"enableRealTimeUpdate":false,"enableDrilldown":true,"enableClickAndStay":false,"showDataTable":false,"enableCustomEmptyState":false,"componentId":"lpn5bn9v","emptyStateIllustration":"no-data","emptyStateHeading":"No data available.","emptyStateHeadingLevel":3,"emptyStateContent":"There are no scores available for the selected criteria. Contact your admin for more info.","emptyStateAlignment":"vertical-centered","refreshFrequency":null,"hideDevSettings":false,"configPropModifiers":{},"filterConfigurations":"@state.parFilters","showMaximumRange":false,"allowChangeDateRange":false,"showDateRangeByDefault":false,"applyDateRange":false,"numberOfPeriods":3,"showAbsolutePeriod":false,"scoreType":null,"showChangeFrom":false,"useCurrentDateForEnd":false,"period":"M","useDataCache":false,"cacheExpirationTime":0,"showCacheTime":true,"dateFormat":"default","showRefresh":true,"showFilterAsSeparateSeries":false,"userInfo":"@context.session.user","sharedContext":{},"colors":{}}</component_props>
+        <h>13</h>
+        <name/>
+        <required_translations>[{"comment":"","code":"PAR_DASHBOARD.f1450bf2bd1907107f446e5ccea40779.11d45d27081907107f44f76f9beca484","message":"User"},{"comment":"","code":"PAR_DASHBOARD.f1450bf2bd1907107f446e5ccea40779.11d45d27081907107f44f76f9beca484","message":"👨‍⚕️ Caregivers by Facility"},{"comment":"","code":"PAR_DASHBOARD.f1450bf2bd1907107f446e5ccea40779.11d45d27081907107f44f76f9beca484","message":"No data available."},{"comment":"","code":"PAR_DASHBOARD.f1450bf2bd1907107f446e5ccea40779.11d45d27081907107f44f76f9beca484","message":"There are no scores available for the selected criteria. Contact your admin for more info."}]</required_translations>
+        <stored_component/>
+        <sys_class_name>par_dashboard_widget</sys_class_name>
+        <sys_created_by>meghanaa.penumetsa</sys_created_by>
+        <sys_created_on>2026-06-11 19:40:09</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>11d45d27081907107f44f76f9beca484</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>par_dashboard_widget_11d45d27081907107f44f76f9beca484</sys_update_name>
+        <sys_updated_by>meghanaa.penumetsa</sys_updated_by>
+        <sys_updated_on>2026-06-11 19:41:24</sys_updated_on>
+        <visualization/>
+        <w>10</w>
+        <widget_props/>
+        <x>34</x>
+        <y>0</y>
+    </par_dashboard_widget>
+</record_update>

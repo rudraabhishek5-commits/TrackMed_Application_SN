@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_dictionary action="INSERT_OR_UPDATE" element="x_snc_trackmed_trackmed_company" table="sys_user">
+        <active>true</active>
+        <array>false</array>
+        <attributes>edge_encryption_enabled=true,encode_utf8=false</attributes>
+        <audit>false</audit>
+        <calculation/>
+        <choice>0</choice>
+        <choice_field/>
+        <choice_table/>
+        <column_label>Trackmed Company</column_label>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>x_snc_trackmed_trackmed_company</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <internal_type display_value="Reference">reference</internal_type>
+        <mandatory>false</mandatory>
+        <max_length>32</max_length>
+        <name>sys_user</name>
+        <next_element/>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference display_value="" name="core_company">core_company</reference>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual>x_snc_trackmed_type=care_center^ORx_snc_trackmed_type=rehabilitation_center^ORx_snc_trackmed_type=hospital^ORx_snc_trackmed_type=alzheimer_care_cacilities^ORx_snc_trackmed_type=old_age_homes^ORx_snc_trackmed_type=parkinsons_are_facility</reference_qual>
+        <reference_qual_condition table="core_company">x_snc_trackmed_type=care_center^ORx_snc_trackmed_type=rehabilitation_center^ORx_snc_trackmed_type=hospital^ORx_snc_trackmed_type=alzheimer_care_cacilities^ORx_snc_trackmed_type=old_age_homes^ORx_snc_trackmed_type=parkinsons_are_facility<item display_value="Care Center" endquery="false" field="x_snc_trackmed_type" goto="false" newquery="false" operator="=" or="false" value="care_center"/>
+            <item display_value="Rehabilitation Center" endquery="false" field="x_snc_trackmed_type" goto="false" newquery="false" operator="=" or="true" value="rehabilitation_center"/>
+            <item display_value="Hospital" endquery="false" field="x_snc_trackmed_type" goto="false" newquery="false" operator="=" or="true" value="hospital"/>
+            <item display_value="Alzheimer Care Cacilities" endquery="false" field="x_snc_trackmed_type" goto="false" newquery="false" operator="=" or="true" value="alzheimer_care_cacilities"/>
+            <item display_value="Old Age Homes" endquery="false" field="x_snc_trackmed_type" goto="false" newquery="false" operator="=" or="true" value="old_age_homes"/>
+            <item display_value="Parkinsons Care Facility" endquery="false" field="x_snc_trackmed_type" goto="false" newquery="false" operator="=" or="true" value="parkinsons_are_facility"/>
+        </reference_qual_condition>
+        <reference_type/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_dictionary</sys_class_name>
+        <sys_created_by>meghanaa.penumetsa</sys_created_by>
+        <sys_created_on>2026-06-06 11:04:07</sys_created_on>
+        <sys_name>Trackmed Company</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sys_dictionary_sys_user_x_snc_trackmed_trackmed_company</sys_update_name>
+        <sys_updated_by>meghanaa.penumetsa</sys_updated_by>
+        <sys_updated_on>2026-06-06 11:04:08</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_dictionary>
+</record_update>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="enforce_dot_walk_cross_scope_access=true" db_object_id="6308f379811d43107f44e314ec616fb3" extends="task" label="Refill task" max_length="40" name="x_snc_trackmed_refill_task" type="collection">
+        <element attributes="edge_encryption_enabled=true" choice="3" label="Priority" max_length="40" name="priorit0" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="1 - High" sequence="0" value="high"/>
+                <element inactive_on_update="false" label="2 - Moderate" sequence="1" value="moderate"/>
+                <element inactive_on_update="false" label="3 - Low" sequence="2" value="low"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Refill request" max_length="32" name="refill_request" reference="x_snc_trackmed_refill_request" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" choice="3" label="Delivery method" max_length="40" name="delivery_method" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Delivery" sequence="1" value="Delivery"/>
+                <element inactive_on_update="false" label="Pick up" sequence="0" value="Pick up"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" choice="3" label="State" max_length="40" name="stat0" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Closed" sequence="4" value="Closed"/>
+                <element inactive_on_update="false" label="Dispatched" sequence="2" value="Dispatched"/>
+                <element inactive_on_update="false" label="Delivered" sequence="3" value="Delivered"/>
+                <element inactive_on_update="false" label="Pending" sequence="0" value="Pending"/>
+                <element inactive_on_update="false" label="In progress" sequence="1" value="In progress"/>
+            </choice>
+        </element>
+        <element label="Additional comments" max_length="40" name="additional_comments" type="string"/>
+    </element>
+</database>

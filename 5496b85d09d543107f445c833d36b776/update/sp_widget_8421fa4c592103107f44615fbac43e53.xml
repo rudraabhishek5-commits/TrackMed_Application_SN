@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller=function() {
+  /* widget controller */
+  var c = this;
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.trackmed-widget {
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
+.stat-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  border-left: 4px solid transparent;
+  transition: all .25s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.stat-card.stat-blue {
+  border-left-color: #1a73e8;
+}
+
+.stat-card.stat-green {
+  border-left-color: #22c55e;
+}
+
+.stat-card.stat-purple {
+  border-left-color: #8b5cf6;
+}
+
+.stat-card.stat-orange {
+  border-left-color: #f97316;
+}
+
+.stat-card.stat-teal {
+  border-left-color: #06b6d4;
+}
+
+.stat-icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.blue-icon {
+  background: #dbeafe;
+  color: #1a73e8;
+}
+
+.green-icon {
+  background: #dcfce7;
+  color: #22c55e;
+}
+
+.purple-icon {
+  background: #ede9fe;
+  color: #8b5cf6;
+}
+
+.orange-icon {
+  background: #ffedd5;
+  color: #f97316;
+}
+
+.teal-icon {
+  background: #cffafe;
+  color: #06b6d4;
+}
+
+.stat-info {
+  flex: 1;
+}
+
+.stat-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #64748b;
+  font-weight: 500;
+  letter-spacing: .5px;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 800;
+  color: #1a2332;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.stat-change {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.stat-change.positive {
+  color: #22c55e;
+}
+
+.stat-change.negative {
+  color: #ef4444;
+}
+
+.stat-sub {
+  font-size: 12px;
+  color: #22c55e;
+  font-weight: 600;
+}
+
+@media(max-width:1200px){
+
+  .stats-row{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+}
+
+@media(max-width:768px){
+
+  .stats-row{
+    grid-template-columns:repeat(1,1fr);
+  }
+
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>trackmed_carefacility_kpicard</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>Trackmed Carefacility Kpicard</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    data.stats = {};
+
+    /* ===================================================
+       RESIDENTS COUNT
+       =================================================== */
+
+    /*
+    var residents = new GlideAggregate(
+        'u_trackmed_patients'
+    );
+
+    residents.addAggregate('COUNT');
+    residents.query();
+
+    if(residents.next()){
+
+        data.stats.residents =
+            residents.getAggregate('COUNT');
+
+    }
+    */
+
+    /* ===================================================
+       TODAY SCHEDULES COUNT
+       =================================================== */
+
+    /*
+    var schCount = new GlideAggregate(
+        'u_trackmed_schedules'
+    );
+
+    schCount.addAggregate('COUNT');
+    schCount.query();
+
+    if(schCount.next()){
+
+        data.stats.schedules =
+            schCount.getAggregate('COUNT');
+
+    }
+    */
+
+    /* ===================================================
+       CAREGIVERS COUNT
+       =================================================== */
+
+    /*
+    var cgCount = new GlideAggregate(
+        'u_trackmed_caregivers'
+    );
+
+    cgCount.addQuery(
+        'u_status',
+        'active'
+    );
+
+    cgCount.addAggregate('COUNT');
+    cgCount.query();
+
+    if(cgCount.next()){
+
+        data.stats.caregivers =
+            cgCount.getAggregate('COUNT');
+
+    }
+    */
+
+    /* ===================================================
+       OPEN ALERTS COUNT
+       =================================================== */
+
+    /*
+    var alertCount = new GlideAggregate(
+        'u_trackmed_alerts'
+    );
+
+    alertCount.addQuery(
+        'u_resolved',
+        false
+    );
+
+    alertCount.addAggregate('COUNT');
+    alertCount.query();
+
+    if(alertCount.next()){
+
+        data.stats.openAlerts =
+            alertCount.getAggregate('COUNT');
+
+    }
+    */
+
+    /* ===================================================
+       REFILL REQUESTS COUNT
+       =================================================== */
+
+    /*
+    var refillCount = new GlideAggregate(
+        'u_trackmed_refill_requests'
+    );
+
+    refillCount.addQuery(
+        'u_status',
+        'pending'
+    );
+
+    refillCount.addAggregate('COUNT');
+    refillCount.query();
+
+    if(refillCount.next()){
+
+        data.stats.refillRequests =
+            refillCount.getAggregate('COUNT');
+
+    }
+    */
+
+    /* ===================================================
+       DUMMY DATA
+       =================================================== */
+
+    data.stats.residents = 128;
+    data.stats.residentsChange = 6.4;
+
+    data.stats.schedules = 256;
+    data.stats.schedulesChange = 7.8;
+
+    data.stats.caregivers = 24;
+
+    data.stats.openAlerts = 12;
+    data.stats.alertsChange = 2;
+
+    data.stats.refillRequests = 9;
+    data.stats.refillChange = 1;
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-13 15:40:21</sys_created_on>
+        <sys_id>8421fa4c592103107f44615fbac43e53</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Trackmed Carefacility Kpicard</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_widget_8421fa4c592103107f44615fbac43e53</sys_update_name>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-14 05:53:04</sys_updated_on>
+        <template><![CDATA[
+<div class="trackmed-widget">
+<div class="stats-row">
+
+  <!-- Residents -->
+  <div class="stat-card stat-blue">
+    <div class="stat-icon-wrap blue-icon">
+      <i class="fa fa-users"></i>
+    </div>
+
+    <div class="stat-info">
+      <div class="stat-label">Residents</div>
+
+      <div class="stat-value">
+        {{c.stats.residents}}
+      </div>
+
+      <div class="stat-change positive">
+        <i class="fa fa-arrow-up"></i>
+        {{c.stats.residentsChange}}%
+      </div>
+    </div>
+  </div>
+
+  <!-- Today's Schedules -->
+  <div class="stat-card stat-green">
+    <div class="stat-icon-wrap green-icon">
+      <i class="fa fa-calendar-check-o"></i>
+    </div>
+
+    <div class="stat-info">
+      <div class="stat-label">Today's Schedules</div>
+
+      <div class="stat-value">
+        {{c.stats.schedules}}
+      </div>
+
+      <div class="stat-change positive">
+        <i class="fa fa-arrow-up"></i>
+        {{c.stats.schedulesChange}}%
+      </div>
+    </div>
+  </div>
+
+  <!-- Caregivers -->
+  <div class="stat-card stat-purple">
+    <div class="stat-icon-wrap purple-icon">
+      <i class="fa fa-user-md"></i>
+    </div>
+
+    <div class="stat-info">
+      <div class="stat-label">Caregivers</div>
+
+      <div class="stat-value">
+        {{c.stats.caregivers}}
+      </div>
+
+      <div class="stat-sub">
+        Active
+      </div>
+    </div>
+  </div>
+
+  <!-- Open Alerts -->
+  <div class="stat-card stat-orange">
+    <div class="stat-icon-wrap orange-icon">
+      <i class="fa fa-exclamation-triangle"></i>
+    </div>
+
+    <div class="stat-info">
+      <div class="stat-label">Open Alerts</div>
+
+      <div class="stat-value">
+        {{c.stats.openAlerts}}
+      </div>
+
+      <div class="stat-change negative">
+        <i class="fa fa-arrow-down"></i>
+        {{c.stats.alertsChange}} from yesterday
+      </div>
+    </div>
+  </div>
+
+  <!-- Refill Requests -->
+  <div class="stat-card stat-teal">
+    <div class="stat-icon-wrap teal-icon">
+      <i class="fa fa-refresh"></i>
+    </div>
+
+    <div class="stat-info">
+      <div class="stat-label">Refill Requests</div>
+
+      <div class="stat-value">
+        {{c.stats.refillRequests}}
+      </div>
+
+      <div class="stat-change positive">
+        <i class="fa fa-arrow-up"></i>
+        {{c.stats.refillChange}} from yesterday
+      </div>
+    </div>
+  </div>
+
+</div><div class="trackmed-widget">
+]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>8421fa4c592103107f44615fbac43e53</id>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-13 15:40:22</sys_created_on>
+        <sys_id>4c21fa4c592103107f44615fbac43e59</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-13 15:40:22</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>
