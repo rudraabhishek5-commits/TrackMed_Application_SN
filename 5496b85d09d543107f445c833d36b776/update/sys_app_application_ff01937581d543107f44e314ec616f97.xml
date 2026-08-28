@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_application">
+    <sys_app_application action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category display_value="Custom Applications">e0355b31ef303000a61d5a3615c0fb78</category>
+        <description/>
+        <device_type>browser</device_type>
+        <hint/>
+        <name>Refill request</name>
+        <order>100</order>
+        <roles>x_snc_trackmed.refill_request_user</roles>
+        <sys_class_name>sys_app_application</sys_class_name>
+        <sys_created_by>rangewar.ashirwad</sys_created_by>
+        <sys_created_on>2026-06-06 18:13:32</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>ff01937581d543107f44e314ec616f97</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Refill request</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sys_app_application_ff01937581d543107f44e314ec616f97</sys_update_name>
+        <sys_updated_by>rangewar.ashirwad</sys_updated_by>
+        <sys_updated_on>2026-06-06 18:13:32</sys_updated_on>
+        <title>Refill request</title>
+        <view_name/>
+    </sys_app_application>
+</record_update>

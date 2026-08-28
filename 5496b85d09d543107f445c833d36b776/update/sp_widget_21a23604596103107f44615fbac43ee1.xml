@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller=function() {  /* widget controller */  var c = this;};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.content-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.card-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a2332;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-header h3 i {
+  color: #1a73e8;
+}
+
+.view-all-link {
+  font-size: 13px;
+  font-weight: 500;
+  color: #1a73e8;
+  text-decoration: none;
+}
+
+.view-all-link:hover {
+  text-decoration: underline;
+}
+
+.trackmed-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.trackmed-table thead tr {
+  background: #f8fafc;
+}
+
+.trackmed-table th {
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #64748b;
+  letter-spacing: .5px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.trackmed-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #374151;
+  font-size: 14px;
+}
+
+.trackmed-table tr:last-child td {
+  border-bottom: none;
+}
+
+.trackmed-table tr:hover td {
+  background: #f8fafc;
+}
+
+.patient-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(
+      135deg,
+      #1a73e8,
+      #06b6d4
+  );
+
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.med-name {
+  color: #475569;
+}
+
+.time-cell {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #64748b;
+}
+
+.status-pill {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-pending {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.status-completed {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.status-missed {
+  background: #fee2e2;
+  color: #dc2626;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>trackmed_carefacility_schedules</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>Trackmed carefacility Schedules</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    /* =====================================================
+       TODAY'S SCHEDULES
+       ===================================================== */
+
+    /*
+    var todayStart = new GlideDateTime();
+
+    todayStart.setDisplayValue(
+        gs.nowDate() + ' 00:00:00'
+    );
+
+    var todayEnd = new GlideDateTime();
+
+    todayEnd.setDisplayValue(
+        gs.nowDate() + ' 23:59:59'
+    );
+
+    data.todaySchedules = [];
+
+    var schGr = new GlideRecord(
+        'u_trackmed_schedules'
+    );
+
+    schGr.addQuery(
+        'u_schedule_date',
+        '>=',
+        todayStart
+    );
+
+    schGr.addQuery(
+        'u_schedule_date',
+        '<=',
+        todayEnd
+    );
+
+    schGr.orderBy('u_time');
+    schGr.setLimit(10);
+    schGr.query();
+
+    while(schGr.next()) {
+
+        var patient =
+            schGr.getValue(
+                'u_patient_name'
+            );
+
+        var parts =
+            patient.split(' ');
+
+        var initials =
+            (parts[0] ? parts[0][0] : '') +
+            (parts[1] ? parts[1][0] : '');
+
+        var status =
+            schGr.getValue(
+                'u_status'
+            );
+
+        data.todaySchedules.push({
+
+            patientName: patient,
+
+            initials:
+            initials.toUpperCase(),
+
+            medication:
+            schGr.getValue(
+                'u_medication'
+            ),
+
+            time:
+            schGr.getValue(
+                'u_time'
+            ),
+
+            status:
+            status,
+
+            statusClass:
+            'status-' +
+            status.toLowerCase()
+
+        });
+
+    }
+    */
+
+    /* =====================================================
+       DUMMY DATA
+       ===================================================== */
+
+    data.todaySchedules = [
+
+        {
+            patientName:'John Doe',
+            initials:'JD',
+            medication:'Atorvastatin 10mg',
+            time:'08:00 PM',
+            status:'Pending',
+            statusClass:'status-pending'
+        },
+
+        {
+            patientName:'Mary Johnson',
+            initials:'MJ',
+            medication:'Metformin 500mg',
+            time:'09:00 AM',
+            status:'Completed',
+            statusClass:'status-completed'
+        },
+
+        {
+            patientName:'Robert Brown',
+            initials:'RB',
+            medication:'Lisinopril 20mg',
+            time:'10:00 AM',
+            status:'Pending',
+            statusClass:'status-pending'
+        },
+
+        {
+            patientName:'Linda White',
+            initials:'LW',
+            medication:'Aspirin 81mg',
+            time:'11:00 AM',
+            status:'Completed',
+            statusClass:'status-completed'
+        }
+
+    ];
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-13 15:47:01</sys_created_on>
+        <sys_id>21a23604596103107f44615fbac43ee1</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Trackmed carefacility Schedules</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_widget_21a23604596103107f44615fbac43ee1</sys_update_name>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-13 15:47:37</sys_updated_on>
+        <template><![CDATA[<div class="content-card schedules-card">
+
+  <div class="card-header">
+
+    <h3>
+      <i class="fa fa-clock-o"></i>
+      Today's Schedules
+    </h3>
+
+    <a href="#"
+       class="view-all-link"
+       ng-click="c.navigateToSchedules()">
+
+      View All Schedules →
+    </a>
+
+  </div>
+
+  <div class="table-responsive">
+
+    <table class="trackmed-table">
+
+      <thead>
+
+        <tr>
+          <th>Patient</th>
+          <th>Medication</th>
+          <th>Time</th>
+          <th>Status</th>
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <tr ng-repeat="sch in c.todaySchedules">
+
+          <td>
+
+            <div class="patient-cell">
+
+              <div class="avatar-circle">
+                {{sch.initials}}
+              </div>
+
+              <span>
+                {{sch.patientName}}
+              </span>
+
+            </div>
+
+          </td>
+
+          <td class="med-name">
+            {{sch.medication}}
+          </td>
+
+          <td class="time-cell">
+            <i class="fa fa-clock-o"></i>
+            {{sch.time}}
+          </td>
+
+          <td>
+
+            <span class="status-pill"
+                  ng-class="sch.statusClass">
+
+                {{sch.status}}
+
+            </span>
+
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>21a23604596103107f44615fbac43ee1</id>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-13 15:47:01</sys_created_on>
+        <sys_id>a1a23a04596103107f44615fbac43ebb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-13 15:47:01</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

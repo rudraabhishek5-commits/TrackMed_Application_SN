@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function() {
+
+    var c = this;
+
+    c.timelineData = c.data.timelineData;
+
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>
+.timeline-container{
+
+    margin-top:20px;
+    padding:25px;
+
+    border-radius:24px;
+
+    background:linear-gradient(
+        -45deg,
+        #1B5E20,
+        #2E7D32,
+        #43A047,
+        #66BB6A
+    );
+
+    background-size:400% 400%;
+
+    animation:gradientMove 12s ease infinite;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+/* ==========================================
+   ANIMATED GRADIENT
+========================================== */
+
+@keyframes gradientMove{
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0% 50%;
+    }
+}
+
+/* ==========================================
+   FLOATING BLOBS
+========================================== */
+
+.timeline-container::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:250px;
+    height:250px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.08);
+
+    top:-100px;
+    right:-80px;
+
+    animation:blobFloat1 8s ease-in-out infinite;
+}
+
+.timeline-container::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+    height:180px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.06);
+
+    bottom:-60px;
+    left:-60px;
+
+    animation:blobFloat2 10s ease-in-out infinite;
+}
+
+@keyframes blobFloat1{
+
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-20px);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+}
+
+@keyframes blobFloat2{
+
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(20px);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+}
+
+/* ==========================================
+   GROUP
+========================================== */
+
+.timeline-group{
+    margin-bottom:35px;
+    position:relative;
+    z-index:2;
+}
+
+/* ==========================================
+   TIME
+========================================== */
+
+.timeline-time{
+
+    font-size:20px;
+    font-weight:700;
+
+    color:#fff;
+
+    margin-bottom:15px;
+    padding-left:10px;
+}
+
+.timeline-time i{
+
+    margin-right:8px;
+
+    animation:clockRotate 4s linear infinite;
+}
+
+@keyframes clockRotate{
+
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+/* ==========================================
+   CARD
+========================================== */
+
+.timeline-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:rgba(255,255,255,.12);
+
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+
+    border:1px solid rgba(255,255,255,.18);
+
+    border-radius:18px;
+
+    padding:18px;
+
+    margin-bottom:12px;
+
+    display:flex;
+
+    justify-content:space-between;
+    align-items:center;
+
+    color:#fff;
+
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+
+    animation:
+        slideUp .6s ease forwards,
+        cardFloat 6s ease-in-out infinite;
+
+    opacity:0;
+
+    transition:.3s;
+}
+
+/* Entry Animation */
+
+.timeline-card:nth-child(1){
+    animation-delay:.1s;
+}
+
+.timeline-card:nth-child(2){
+    animation-delay:.2s;
+}
+
+.timeline-card:nth-child(3){
+    animation-delay:.3s;
+}
+
+.timeline-card:nth-child(4){
+    animation-delay:.4s;
+}
+
+@keyframes slideUp{
+
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes cardFloat{
+
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-3px);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+}
+
+/* Hover */
+
+.timeline-card:hover{
+
+    transform:translateY(-5px) scale(1.02);
+
+    background:rgba(255,255,255,.18);
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.15),
+        0 0 20px rgba(255,255,255,.15);
+}
+
+/* ==========================================
+   SHIMMER
+========================================== */
+
+.timeline-card::before{
+
+    content:'';
+
+    position:absolute;
+
+    top:0;
+    left:-100%;
+
+    width:100%;
+    height:100%;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.15),
+        transparent
+    );
+
+    transition:.8s;
+}
+
+.timeline-card:hover::before{
+
+    left:100%;
+}
+
+/* ==========================================
+   TEXT
+========================================== */
+
+.patient-name{
+
+    font-size:16px;
+    font-weight:700;
+
+    color:#fff;
+}
+
+.medication-name{
+
+    margin-top:5px;
+
+    color:rgba(255,255,255,.85);
+}
+
+.ward-info{
+
+    font-weight:600;
+
+    color:#fff;
+}
+
+/* ==========================================
+   STATUS BADGES
+========================================== */
+
+.status-badge{
+
+    padding:8px 14px;
+
+    border-radius:30px;
+
+    font-size:12px;
+    font-weight:700;
+}
+
+.given{
+
+    background:#E8F5E9;
+    color:#2E7D32;
+}
+
+.due{
+
+    background:#FFF3E0;
+    color:#EF6C00;
+
+    animation:pulseDue 2s infinite;
+}
+
+.missed{
+
+    background:#FFEBEE;
+    color:#C62828;
+}
+
+.upcoming{
+
+    background:#E3F2FD;
+    color:#1565C0;
+}
+
+@keyframes pulseDue{
+
+    0%{
+        box-shadow:0 0 0 0 rgba(239,108,0,.6);
+    }
+
+    70%{
+        box-shadow:0 0 0 12px rgba(239,108,0,0);
+    }
+
+    100%{
+        box-shadow:0 0 0 0 rgba(239,108,0,0);
+    }
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media(max-width:768px){
+
+    .timeline-card{
+
+        flex-direction:column;
+        align-items:flex-start;
+
+        gap:12px;
+    }
+
+    .timeline-time{
+
+        font-size:18px;
+    }
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>automed_medication_timeline</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>AutoMed Medication Timeline</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    data.timelineData = [
+
+        {
+            time : "08:00 AM",
+            records : [
+
+                {
+                    patient : "Robert Chen",
+                    medication : "Metformin 500mg",
+                    ward : "Ward A",
+                    status : "Given"
+                },
+
+                {
+                    patient : "Anita Sharma",
+                    medication : "Vitamin D",
+                    ward : "Ward B",
+                    status : "Given"
+                }
+
+            ]
+        },
+
+        {
+            time : "10:00 AM",
+            records : [
+
+                {
+                    patient : "John Miller",
+                    medication : "Aspirin",
+                    ward : "Ward C",
+                    status : "Due Now"
+                }
+
+            ]
+        },
+
+        {
+            time : "12:00 PM",
+            records : [
+
+                {
+                    patient : "Sarah Lee",
+                    medication : "Paracetamol",
+                    ward : "Ward A",
+                    status : "Upcoming"
+                }
+
+            ]
+        },
+
+        {
+            time : "02:00 PM",
+            records : [
+
+                {
+                    patient : "David Kumar",
+                    medication : "Amoxicillin",
+                    ward : "Ward D",
+                    status : "Missed"
+                }
+
+            ]
+        }
+
+    ];
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-09 17:39:17</sys_created_on>
+        <sys_id>17f5aab2bd1507107f446e5ccea407a0</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>AutoMed Medication Timeline</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_widget_17f5aab2bd1507107f446e5ccea407a0</sys_update_name>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-11 03:57:18</sys_updated_on>
+        <template><![CDATA[<div class="timeline-container">
+
+    <div class="timeline-group"
+         ng-repeat="group in c.timelineData">
+
+        <div class="timeline-time">
+
+            <i class="fa fa-clock-o"></i>
+
+            {{group.time}}
+
+        </div>
+
+        <div class="timeline-card"
+             ng-repeat="record in group.records">
+
+            <div class="patient-info">
+
+                <div class="patient-name">
+                    {{record.patient}}
+                </div>
+
+                <div class="medication-name">
+                    {{record.medication}}
+                </div>
+
+            </div>
+
+            <div class="ward-info">
+                {{record.ward}}
+            </div>
+
+            <div>
+
+                <span
+                    class="status-badge"
+                    ng-class="{
+                        'given':record.status=='Given',
+                        'due':record.status=='Due Now',
+                        'missed':record.status=='Missed',
+                        'upcoming':record.status=='Upcoming'
+                    }">
+
+                    {{record.status}}
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>17f5aab2bd1507107f446e5ccea407a0</id>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-09 17:39:17</sys_created_on>
+        <sys_id>57f5aab2bd1507107f446e5ccea407ee</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-09 17:39:17</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

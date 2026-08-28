@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller=function() {  /* widget controller */  var c = this;};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.tm-alert-card {
+    background: #ffffff;
+    border-radius: 20px;
+    margin-top: 24px;
+    padding: 28px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.alert-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.alert-header h3 {
+    margin: 0;
+    font-size: 19px;
+    font-weight: 700;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.alert-header h3 i {
+    color: #ef4444;
+}
+
+.alert-count {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #ef4444;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 15px;
+    box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
+}
+
+/* Alert List */
+.alert-list {
+    flex: 1;
+    overflow-y: auto;
+    max-height: 420px; /* Adjust based on your layout */
+}
+
+.alert-item {
+    display: flex;
+    gap: 16px;
+    padding: 16px;
+    border-radius: 14px;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+    border: 1px solid #f1f5f9;
+    align-items: center;
+}
+
+.alert-item:hover {
+    background: #f8fafc;
+    transform: translateX(6px);
+    border-color: #e2e8f0;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+}
+
+.alert-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-shrink: 0;
+    font-size: 20px;
+}
+
+.alert-icon.high {
+    background: linear-gradient(135deg, #ef4444, #f87171);
+}
+
+.alert-icon.medium {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+}
+
+/* Alert Content */
+.alert-content {
+    flex: 1;
+}
+
+.alert-patient {
+    font-weight: 600;
+    color: #0f172a;
+    font-size: 15px;
+}
+
+.alert-message {
+    color: #64748b;
+    font-size: 13.5px;
+    margin-top: 3px;
+}
+
+.alert-time {
+    color: #94a3b8;
+    font-size: 12.5px;
+    margin-top: 6px;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 50px 20px;
+    color: #94a3b8;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.empty-state i {
+    font-size: 48px;
+    color: #22c55e;
+    margin-bottom: 12px;
+}
+
+/* Action Button */
+.alert-action .btn {
+    font-size: 12.5px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    white-space: nowrap;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>trackmed_cargiver_alerts</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>TrackMed Cargiver Alerts</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    data.alerts = [];
+    data.total = 0;
+
+    var gr = new GlideRecord('x_snc_trackmed_dose_log');
+
+    // Caregivers see only their alerts
+    // Admins see all alerts
+    if (!(gs.hasRole('admin') || gs.hasRole('x_snc_trackmed.admin'))) {
+        gr.addQuery('care_taker', gs.getUserID());
+    }
+
+    var qc = gr.addQuery('status', 'Scheduled');
+    qc.addOrCondition('status', 'Not Taken');
+
+    gr.orderBy('work_start');
+    gr.setLimit(10);
+
+    gr.query();
+
+    while (gr.next()) {
+
+        var status = gr.getDisplayValue('status');
+        var message = '';
+
+        if (status == 'Scheduled') {
+            message = 'Medication scheduled';
+        } else if (status == 'Not Taken') {
+            message = 'Dose not taken';
+        }
+
+        data.alerts.push({
+            patient: gr.getDisplayValue('patient'),
+            medication: gr.getDisplayValue('medication'),
+            caregiver: gr.getDisplayValue('care_taker'),
+            type: status,
+            time: gr.getDisplayValue('work_start'),
+            message: message,
+            confirmed: gr.caregiver_confirmed == true
+        });
+
+        data.total++;
+    }
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>vignesh.pitchai</sys_created_by>
+        <sys_created_on>2026-06-13 18:38:36</sys_created_on>
+        <sys_id>c7e99b4459a503107f44615fbac43e49</sys_id>
+        <sys_mod_count>8</sys_mod_count>
+        <sys_name>TrackMed Cargiver Alerts</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_widget_c7e99b4459a503107f44615fbac43e49</sys_update_name>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-17 06:46:31</sys_updated_on>
+        <template><![CDATA[<div class="tm-alert-card">
+    <div class="alert-header">
+        <h3>
+            <i class="fa fa-bell"></i>
+            Upcoming Alerts
+        </h3>
+        <span class="alert-count">{{c.data.total}}</span>
+    </div>
+    
+    <div class="empty-state" ng-if="c.data.total == 0">
+        <i class="fa fa-check-circle"></i>
+        <p>No Active Alerts</p>
+    </div>
+    
+    <div class="alert-list" ng-if="c.data.total > 0">
+        <div class="alert-item"
+             ng-repeat="a in c.data.alerts">
+            <div class="alert-icon"
+                 ng-class="{
+                    'high': a.type=='Not Taken',
+                    'medium': a.type=='Scheduled'
+                 }">
+                <i class="fa"
+                   ng-class="{
+                    'fa-exclamation-triangle': a.type=='Not Taken',
+                    'fa-clock-o': a.type=='Scheduled'
+                   }"></i>
+            </div>
+            <div class="alert-content">
+                <div class="alert-patient">{{a.patient}}</div>
+                <div class="alert-message">{{a.message}}</div>
+                <div class="alert-time">{{a.time}}</div>
+            </div>
+            <div class="alert-action">
+                <button class="btn btn-sm btn-primary">Mark Resolved</button>
+            </div>
+        </div>
+    </div>
+</div>]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>c7e99b4459a503107f44615fbac43e49</id>
+        <sys_created_by>vignesh.pitchai</sys_created_by>
+        <sys_created_on>2026-06-13 18:38:36</sys_created_on>
+        <sys_id>4fe99f4459a503107f44615fbac43e0a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>vignesh.pitchai</sys_updated_by>
+        <sys_updated_on>2026-06-13 18:38:36</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

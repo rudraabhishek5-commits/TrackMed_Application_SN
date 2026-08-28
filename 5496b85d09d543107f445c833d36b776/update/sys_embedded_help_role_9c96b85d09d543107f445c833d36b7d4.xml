@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_embedded_help_role">
+    <sys_embedded_help_role action="INSERT_OR_UPDATE">
+        <order>10</order>
+        <role display_value="x_snc_trackmed.admin" name="x_snc_trackmed.admin">9096b85d09d543107f445c833d36b7d0</role>
+        <sys_class_name>sys_embedded_help_role</sys_class_name>
+        <sys_created_by>meghanaa.penumetsa</sys_created_by>
+        <sys_created_on>2026-06-04 17:41:36</sys_created_on>
+        <sys_id>9c96b85d09d543107f445c833d36b7d4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>9096b85d09d543107f445c833d36b7d0</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sys_embedded_help_role_9c96b85d09d543107f445c833d36b7d4</sys_update_name>
+        <sys_updated_by>meghanaa.penumetsa</sys_updated_by>
+        <sys_updated_on>2026-06-04 17:41:36</sys_updated_on>
+    </sys_embedded_help_role>
+</record_update>

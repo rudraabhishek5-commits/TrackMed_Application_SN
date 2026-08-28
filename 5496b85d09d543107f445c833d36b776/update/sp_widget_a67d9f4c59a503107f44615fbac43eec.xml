@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function($scope, $timeout) {
+
+  var c = this;
+
+  c.$onInit = function() {
+
+    $timeout(function() {
+
+      // Scroll reveal animation
+      var els = document.querySelectorAll('.trackmed-landing .reveal');
+
+      if ('IntersectionObserver' in window) {
+
+        var io = new IntersectionObserver(function(entries) {
+
+          entries.forEach(function(entry) {
+
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in');
+              io.unobserve(entry.target);
+            }
+
+          });
+
+        }, {
+          threshold: 0.15
+        });
+
+        els.forEach(function(el) {
+          io.observe(el);
+        });
+
+      } else {
+
+        els.forEach(function(el) {
+          el.classList.add('in');
+        });
+
+      }
+
+      // Smooth scrolling for section links
+      document.querySelectorAll('.trackmed-landing a[href^="#"]').forEach(function(a) {
+
+        a.addEventListener('click', function(ev) {
+
+          var id = a.getAttribute('href');
+
+          if (id.length > 1) {
+
+            var target = document.querySelector(id);
+
+            if (target) {
+              ev.preventDefault();
+              target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+              });
+            }
+          }
+
+        });
+
+      });
+
+    }, 0);
+
+  };
+
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/* ECG container */
+.ecg-bg-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.ecg-track {
+  position: absolute;
+  width: 200%;
+  left: 0;
+}
+
+.ecg-track svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 3 lines clustered at vertical center */
+.ecg-track-1 {
+  top: 35%;
+  height: 80px;
+  animation: ecgScroll 14s linear infinite;
+}
+
+.ecg-track-2 {
+  top: 50%;
+  height: 60px;
+  animation: ecgScroll 18s linear infinite 2s;
+}
+
+.ecg-track-3 {
+  top: 62%;
+  height: 40px;
+  animation: ecgScroll 22s linear infinite 5s;
+}
+
+@keyframes ecgScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Keep all page content above ECG */
+.trackmed-landing .nav,
+.trackmed-landing header,
+.trackmed-landing section,
+.trackmed-landing footer {
+  position: relative;
+  z-index: 1;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>navata_landing_page</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>navata_landing_page</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+  data.brand = 'TrackMED';
+  data.year = new GlideDateTime().getYearLocalTime();
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>navata.sri</sys_created_by>
+        <sys_created_on>2026-06-13 18:54:08</sys_created_on>
+        <sys_id>a67d9f4c59a503107f44615fbac43eec</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>navata_landing_page</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_widget_a67d9f4c59a503107f44615fbac43eec</sys_update_name>
+        <sys_updated_by>navata.sri</sys_updated_by>
+        <sys_updated_on>2026-06-13 19:18:54</sys_updated_on>
+        <template><![CDATA[<div class="trackmed-landing">
+  <!-- Animated background -->
+  <div class="bg-layer">
+    <div class="bg-grid"></div>
+    <div class="bg-glow"></div>
+    <div class="bg-scan"></div>
+    <span class="star s1"></span>
+    <span class="star s2"></span>
+    <span class="star s3"></span>
+    <span class="star s4"></span>
+    <span class="star s5"></span>
+
+    <!-- ❤️ ECG Heart Rate Lines -->
+    <div class="ecg-bg-container">
+
+      <div class="ecg-track ecg-track-1">
+        <svg viewBox="0 0 1400 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,40 L60,40 L70,40 L80,15 L90,65 L100,5 L110,75 L120,40 L160,40
+                   L220,40 L230,40 L240,15 L250,65 L260,5 L270,75 L280,40 L320,40
+                   L380,40 L390,40 L400,15 L410,65 L420,5 L430,75 L440,40 L480,40
+                   L540,40 L550,40 L560,15 L570,65 L580,5 L590,75 L600,40 L640,40
+                   L700,40 L710,40 L720,15 L730,65 L740,5 L750,75 L760,40 L800,40
+                   L860,40 L870,40 L880,15 L890,65 L900,5 L910,75 L920,40 L960,40
+                   L1020,40 L1030,40 L1040,15 L1050,65 L1060,5 L1070,75 L1080,40
+                   L1120,40 L1180,40 L1190,40 L1200,15 L1210,65 L1220,5 L1230,75
+                   L1240,40 L1280,40 L1340,40 L1350,40 L1360,15 L1370,65 L1380,5
+                   L1390,75 L1400,40"
+                fill="none" stroke="rgba(79,195,247,0.65)" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <div class="ecg-track ecg-track-2">
+        <svg viewBox="0 0 1400 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,30 L80,30 L88,30 L95,12 L102,48 L109,5 L116,55 L123,30 L170,30
+                   L250,30 L258,12 L265,48 L272,5 L279,55 L286,30 L340,30
+                   L420,30 L428,12 L435,48 L442,5 L449,55 L456,30 L510,30
+                   L590,30 L598,12 L605,48 L612,5 L619,55 L626,30 L680,30
+                   L760,30 L768,12 L775,48 L782,5 L789,55 L796,30 L850,30
+                   L930,30 L938,12 L945,48 L952,5 L959,55 L966,30 L1020,30
+                   L1100,30 L1108,12 L1115,48 L1122,5 L1129,55 L1136,30 L1190,30
+                   L1270,30 L1278,12 L1285,48 L1292,5 L1299,55 L1306,30 L1400,30"
+                fill="none" stroke="rgba(79,195,247,0.38)" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <div class="ecg-track ecg-track-3">
+        <svg viewBox="0 0 1400 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,20 L100,20 L107,10 L114,30 L121,4 L128,36 L135,20 L200,20
+                   L300,20 L307,10 L314,30 L321,4 L328,36 L335,20 L400,20
+                   L500,20 L507,10 L514,30 L521,4 L528,36 L535,20 L600,20
+                   L700,20 L707,10 L714,30 L721,4 L728,36 L735,20 L800,20
+                   L900,20 L907,10 L914,30 L921,4 L928,36 L935,20 L1000,20
+                   L1100,20 L1107,10 L1114,30 L1121,4 L1128,36 L1135,20 L1200,20
+                   L1300,20 L1307,10 L1314,30 L1321,4 L1328,36 L1335,20 L1400,20"
+                fill="none" stroke="rgba(79,195,247,0.18)" stroke-width="1"
+                stroke-linecap="round"/>
+        </svg>
+      </div>
+
+    </div>
+    <!-- ❤️ ECG ends -->
+
+  </div>
+
+  <!-- Navbar -->
+  <header class="nav">
+    <div class="nav-inner">
+      <div class="logo">
+        <span class="logo-mark">+</span>
+        <span class="logo-text">TrackMED</span>
+      </div>
+      <nav class="nav-links">
+        <a href="javascript:void(0)" onclick="document.querySelector('#solution').scrollIntoView({behavior:'smooth'})">Solution</a>
+        <a href="javascript:void(0)" onclick="document.querySelector('#dashboard').scrollIntoView({behavior:'smooth'})">Dashboard</a>
+        <a href="javascript:void(0)" onclick="document.querySelector('#who').scrollIntoView({behavior:'smooth'})">Who it's for</a>
+        <a href="javascript:void(0)" onclick="document.querySelector('#how').scrollIntoView({behavior:'smooth'})">How it works</a>
+      </nav>
+      <a href="/trackmed?id=trackmed_login" class="btn btn-primary">Login →</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-grid">
+      <div class="hero-copy reveal">
+        <span class="eyebrow">✦ Built for modern care facilities</span>
+        <h1>
+          <span class="grad">Smarter Medication Management</span>
+          <span class="soft">for Modern Care Facilities</span>
+        </h1>
+        <p>
+          TrackMED helps care teams improve medication adherence, strengthen patient safety,
+          coordinate caregivers, and stay continuously compliant — all from a single,
+          calm, human-centered dashboard.
+        </p>
+        <div class="hero-cta">
+          <a href="/trackmed?id=trackmed_login" class="btn btn-primary">Login →</a>
+          <a href="javascript:void(0)" onclick="document.querySelector('#solution').scrollIntoView({behavior:'smooth'})" class="btn btn-ghost">Learn More</a>
+        </div>
+        <div class="trust">
+          <span>]]>🛡<![CDATA[ HIPAA-aligned</span>
+          <span>✓ 99.9% uptime</span>
+          <span>♥ Trusted by care teams</span>
+        </div>
+      </div>
+
+      <div class="hero-illu">
+        <div class="ring r1"></div>
+        <div class="ring r2"></div>
+        <div class="shield">
+          <div class="shield-cross">+</div>
+        </div>
+        <span class="pill p1"></span>
+        <span class="pill p2"></span>
+        <span class="pill p3"></span>
+        <span class="pill p4"></span>
+
+        <div class="float-card fc-top">
+          <div class="ic ic-green">✓</div>
+          <div>
+            <div class="ic-label">Adherence</div>
+            <div class="ic-value">98.2%</div>
+          </div>
+        </div>
+        <div class="float-card fc-bot">
+          <div class="ic ic-blue">]]>🔔<![CDATA[</div>
+          <div>
+            <div class="ic-label">Alerts today</div>
+            <div class="ic-value">3 resolved</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Challenges -->
+  <section id="solution" class="section">
+    <div class="section-head reveal">
+      <span class="eyebrow">The reality on the floor</span>
+      <h2>Care teams are stretched thin</h2>
+      <p>The day-to-day challenges that put residents — and your license — at risk.</p>
+    </div>
+    <div class="grid-5">
+      <div class="card reveal"><div class="card-ic">⏰</div><h3>Missed Doses</h3><p>Late or forgotten administrations put residents at risk.</p></div>
+      <div class="card reveal"><div class="card-ic">]]>📋<![CDATA[</div><h3>Manual Tracking</h3><p>Paper MARs and spreadsheets that lose context.</p></div>
+      <div class="card reveal"><div class="card-ic">]]>📦<![CDATA[</div><h3>Inventory Shortages</h3><p>Running out at the worst possible moment.</p></div>
+      <div class="card reveal"><div class="card-ic">]]>💬<![CDATA[</div><h3>Communication Gaps</h3><p>Shift handoffs that drop critical details.</p></div>
+      <div class="card reveal"><div class="card-ic">⚠️</div><h3>Compliance Risks</h3><p>Audit anxiety from incomplete documentation.</p></div>
+    </div>
+  </section>
+
+  <!-- Solutions -->
+  <section class="section">
+    <div class="section-head reveal">
+      <span class="eyebrow">The TrackMED solution</span>
+      <h2>One platform for the whole med cycle</h2>
+    </div>
+    <div class="grid-3">
+      <div class="card reveal"><div class="card-ic">]]>👥<![CDATA[</div><h3>Patient Management</h3><p>Complete medical profiles with allergies, conditions, and history.</p></div>
+      <div class="card reveal"><div class="card-ic">]]>💊<![CDATA[</div><h3>Medication Management</h3><p>Track every drug, dose, schedule, and interaction in one place.</p></div>
+      <div class="card reveal"><div class="card-ic">]]>📅<![CDATA[</div><h3>Smart Scheduling</h3><p>Automated reminders for nurses and caregivers.</p></div>
+      <div class="card reveal"><div class="card-ic">]]>📈<![CDATA[</div><h3>Real-Time Monitoring</h3><p>Live adherence dashboards across every wing.</p></div>
+      <div class="card reveal"><div class="card-ic">]]>🔔<![CDATA[</div><h3>Smart Alerts</h3><p>Missed dose? Inventory low? Everyone knows instantly.</p></div>
+      <div class="card reveal"><div class="card-ic">]]>📊<![CDATA[</div><h3>Reports & Analytics</h3><p>Audit-ready compliance reports in one click.</p></div>
+    </div>
+  </section>
+
+  <!-- Who -->
+  <section id="who" class="section">
+    <div class="section-head reveal">
+      <span class="eyebrow">Built for</span>
+      <h2>Trusted across care settings</h2>
+    </div>
+    <div class="grid-4">
+      <div class="card reveal"><div class="card-ic">]]>🏥<![CDATA[</div><h3>Rehabilitation Centers</h3></div>
+      <div class="card reveal"><div class="card-ic">]]>🧠<![CDATA[</div><h3>Alzheimer's Care</h3></div>
+      <div class="card reveal"><div class="card-ic">]]>🩺<![CDATA[</div><h3>Parkinson's Facilities</h3></div>
+      <div class="card reveal"><div class="card-ic">]]>🏠<![CDATA[</div><h3>Long-Term Care</h3></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="cta-inner reveal">
+      <h2>Ready to give your care team time back?</h2>
+      <p>Join the facilities choosing TrackMED for safer, calmer medication rounds.</p>
+      <a href="/trackmed?id=trackmed_login" class="btn btn-primary btn-lg">Login →</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="logo"><span class="logo-mark">+</span><span class="logo-text">TrackMED</span></div>
+      <p>© 2026 TrackMED. Built for modern care.</p>
+      <div class="footer-links">
+        <a href="/trackmed?id=trackmed_login">Privacy</a>
+        <a href="#">Support</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+</div>]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>a67d9f4c59a503107f44615fbac43eec</id>
+        <sys_created_by>navata.sri</sys_created_by>
+        <sys_created_on>2026-06-13 18:54:08</sys_created_on>
+        <sys_id>267ddf4c59a503107f44615fbac43e21</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>navata.sri</sys_updated_by>
+        <sys_updated_on>2026-06-13 18:54:08</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

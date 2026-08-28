@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="question_choice">
+    <question_choice action="INSERT_OR_UPDATE">
+        <inactive>true</inactive>
+        <order>300</order>
+        <published_ref/>
+        <question display_value="What is the Medication?">acaab476bd95c3107f446e5ccea4070d</question>
+        <sys_class_name>question_choice</sys_class_name>
+        <sys_created_by>navata.sri</sys_created_by>
+        <sys_created_on>2026-06-09 10:05:57</sys_created_on>
+        <sys_id>443e383abd95c3107f446e5ccea407c6</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>Missed</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>question_choice_443e383abd95c3107f446e5ccea407c6</sys_update_name>
+        <sys_updated_by>navata.sri</sys_updated_by>
+        <sys_updated_on>2026-06-09 10:21:24</sys_updated_on>
+        <text>Missed</text>
+        <value>Missed</value>
+    </question_choice>
+    <fx_price action="delete_multiple" query="id=443e383abd95c3107f446e5ccea407c6"/>
+</record_update>

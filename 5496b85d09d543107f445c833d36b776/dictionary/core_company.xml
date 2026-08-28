@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="all_tables.text_index_translations=true,global_search_config_handler=CompanySearchConfig,kagami_csindex_enabled=true,slushbucket_omit_embedded=true" create_roles="user_admin" db_object_id="d100fa338c1103100a22deb6dd2b4e22" label="Company" max_length="40" name="core_company" text_index="true" type="collection">
+        <element label="Email" max_length="40" name="x_snc_trackmed_email" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Type" max_length="40" name="x_snc_trackmed_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Parkinsons Care Facility" sequence="4" value="parkinsons_are_facility"/>
+                <element inactive_on_update="false" label="Rehabilitation Center" sequence="1" value="rehabilitation_center"/>
+                <element inactive_on_update="false" label="Old Age Homes" sequence="5" value="old_age_homes"/>
+                <element inactive_on_update="false" label="Alzheimer Care Cacilities" sequence="3" value="alzheimer_care_cacilities"/>
+                <element inactive_on_update="false" label="Care Center" sequence="0" value="care_center"/>
+                <element inactive_on_update="false" label="Hospital" sequence="2" value="hospital"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="D_Hospital" max_length="255" name="x_snc_trackmed_d_hospital" reference="core_company" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Active" max_length="255" name="x_snc_trackmed_active" type="boolean"/>
+        <element default="javascript:getNextObjNumberPadded();" dynamic_default_value="fdcb83a85f220100a9ad2572f2b4773c" label="Number" max_length="40" name="x_snc_trackmed_number" type="string" use_dynamic_default="true"/>
+        <index name="index">
+            <element name="x_snc_trackmed_d_hospital"/>
+        </index>
+    </element>
+</database>

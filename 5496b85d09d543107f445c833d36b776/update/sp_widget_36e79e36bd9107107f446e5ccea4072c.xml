@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller=function() {  /* widget controller */  var c = this;};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/* ===================================
+   HERO
+=================================== */
+
+.automed-hero{
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:24px;
+
+    padding:40px;
+
+    color:#fff;
+
+    background:linear-gradient(
+        -45deg,
+        #1B5E20,
+        #2E7D32,
+        #43A047,
+        #66BB6A
+    );
+
+    background-size:400% 400%;
+
+    animation:gradientMove 12s ease infinite;
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.18);
+}
+
+@keyframes gradientMove{
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0% 50%;
+    }
+}
+
+/* ===================================
+   CLOCK
+=================================== */
+
+.clock-bg{
+
+    position:absolute;
+
+    right:-80px;
+
+    top:-50px;
+
+    opacity:.12;
+}
+
+.clock-face{
+
+    width:320px;
+
+    height:320px;
+
+    border:10px solid #fff;
+
+    border-radius:50%;
+
+    position:relative;
+}
+
+.hour-hand{
+
+    position:absolute;
+
+    width:6px;
+
+    height:80px;
+
+    background:white;
+
+    left:50%;
+
+    top:50%;
+
+    border-radius:5px;
+
+    transform-origin:bottom center;
+
+    transform:
+        translateX(-50%)
+        translateY(-100%)
+        rotate(45deg);
+}
+
+.minute-hand{
+
+    position:absolute;
+
+    width:4px;
+
+    height:120px;
+
+    background:white;
+
+    left:50%;
+
+    top:50%;
+
+    transform-origin:bottom center;
+
+    animation:rotateClock 20s linear infinite;
+}
+
+@keyframes rotateClock{
+
+    from{
+
+        transform:
+        translateX(-50%)
+        translateY(-100%)
+        rotate(0deg);
+    }
+
+    to{
+
+        transform:
+        translateX(-50%)
+        translateY(-100%)
+        rotate(360deg);
+    }
+}
+
+/* ===================================
+   FLOATING PILLS
+=================================== */
+
+.pill{
+
+    position:absolute;
+
+    color:rgba(255,255,255,.18);
+
+    font-size:32px;
+}
+
+.pill1{
+
+    top:15%;
+
+    left:8%;
+
+    animation:floatPill 5s infinite;
+}
+
+.pill2{
+
+    bottom:20%;
+
+    right:20%;
+
+    animation:floatPill 7s infinite;
+}
+
+.pill3{
+
+    top:20%;
+
+    right:10%;
+
+    animation:floatPill 6s infinite;
+}
+
+@keyframes floatPill{
+
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-15px);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+}
+
+/* ===================================
+   HEALTHCARE TEAM
+=================================== */
+
+.health-icon{
+
+    position:absolute;
+
+    color:rgba(255,255,255,.10);
+}
+
+.doctor{
+
+    top:10%;
+
+    right:15%;
+
+    font-size:90px;
+
+    animation:floatHealth 7s infinite;
+}
+
+.caregiver{
+
+    top:50%;
+
+    right:28%;
+
+    font-size:80px;
+
+    animation:floatHealth 8s infinite;
+}
+
+.patient{
+
+    bottom:10%;
+
+    right:12%;
+
+    font-size:85px;
+
+    animation:floatHealth 6s infinite;
+}
+
+.hospital{
+
+    top:25%;
+
+    left:40%;
+
+    font-size:70px;
+
+    animation:floatHealth 9s infinite;
+}
+
+@keyframes floatHealth{
+
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-15px);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+}
+
+/* ===================================
+   CONTENT
+=================================== */
+
+.automed-hero-inner{
+
+    position:relative;
+
+    z-index:2;
+}
+
+.portal-badge{
+
+    display:inline-block;
+
+    padding:8px 16px;
+
+    border-radius:30px;
+
+    background:rgba(255,255,255,.18);
+
+    backdrop-filter:blur(10px);
+
+    margin-bottom:20px;
+}
+
+.portal-badge i{
+
+    margin-right:5px;
+}
+
+.automed-hero h1{
+
+    margin:0 0 15px;
+
+    font-size:42px;
+
+    font-weight:700;
+}
+
+.hero-subtitle{
+
+    font-size:20px;
+
+    margin-bottom:10px;
+}
+
+.hero-description{
+
+    font-size:16px;
+
+    opacity:.95;
+
+    margin-bottom:30px;
+}
+
+/* ===================================
+   STATS
+=================================== */
+
+.hero-stats{
+
+    display:flex;
+
+    gap:15px;
+}
+
+.stat-box{
+
+    background:rgba(255,255,255,.12);
+
+    backdrop-filter:blur(12px);
+
+    border:1px solid rgba(255,255,255,.15);
+
+    padding:15px 25px;
+
+    border-radius:15px;
+
+    transition:.3s;
+}
+
+.stat-box:hover{
+
+    transform:translateY(-5px);
+
+    background:rgba(255,255,255,.20);
+}
+
+.stat-number{
+
+    display:block;
+
+    font-size:28px;
+
+    font-weight:700;
+}
+
+.stat-label{
+
+    font-size:13px;
+}
+
+/* ===================================
+   MOBILE
+=================================== */
+
+@media(max-width:768px){
+
+    .automed-hero{
+
+        padding:25px;
+    }
+
+    .automed-hero h1{
+
+        font-size:28px;
+    }
+
+    .hero-stats{
+
+        flex-direction:column;
+    }
+
+    .clock-face{
+
+        width:180px;
+
+        height:180px;
+    }
+
+    .health-icon{
+
+        display:none;
+    }
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>automedwelcomepage</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>AutomedWelcomePage</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    data.user_name = gs.getUser().getFirstName();
+
+    var hour = parseInt(
+        new GlideDateTime()
+        .getLocalTime()
+        .getByFormat("HH")
+    );
+
+    if(hour < 12)
+        data.greeting = "Good Morning";
+    else if(hour < 17)
+        data.greeting = "Good Afternoon";
+    else
+        data.greeting = "Good Evening";
+
+    // Replace these with actual GlideRecord counts later
+    data.due_today = 5;
+    data.patient_count = 12;
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-09 16:37:48</sys_created_on>
+        <sys_id>36e79e36bd9107107f446e5ccea4072c</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>AutomedWelcomePage</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_widget_36e79e36bd9107107f446e5ccea4072c</sys_update_name>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-11 08:22:37</sys_updated_on>
+        <template><![CDATA[<div class="automed-hero">
+
+    <!-- Clock -->
+
+    <div class="clock-bg">
+
+        <div class="clock-face">
+
+            <div class="hour-hand"></div>
+
+            <div class="minute-hand"></div>
+
+        </div>
+
+    </div>
+
+    <!-- Floating Medical Icons -->
+
+    <div class="pill pill1">
+        <i class="fa fa-medkit"></i>
+    </div>
+
+    <div class="pill pill2">
+        <i class="fa fa-plus-circle"></i>
+    </div>
+
+    <div class="pill pill3">
+        <i class="fa fa-heartbeat"></i>
+    </div>
+
+    <!-- Healthcare Team -->
+
+    <div class="health-icon doctor">
+        <i class="fa fa-user-md"></i>
+    </div>
+
+    <div class="health-icon caregiver">
+        <i class="fa fa-user-plus"></i>
+    </div>
+
+    <div class="health-icon patient">
+        <i class="fa fa-wheelchair"></i>
+    </div>
+
+    <div class="health-icon hospital">
+        <i class="fa fa-hospital-o"></i>
+    </div>
+
+    <!-- Content -->
+
+    <div class="automed-hero-inner">
+
+        <span class="portal-badge">
+
+            <i class="fa fa-heartbeat"></i>
+
+            Home Care Portal
+
+        </span>
+
+        <h1>
+
+            {{data.greeting}}, {{data.user_name}} ]]>👋
+
+<![CDATA[        </h1>
+
+        <p class="hero-subtitle">
+
+            You have
+            <strong>{{data.due_today}}</strong>
+            medications due today.
+
+        </p>
+
+        <p class="hero-description">
+
+            Track medications, monitor patients,
+            manage caregivers and ensure timely care.
+
+        </p>
+
+        <div class="hero-stats">
+
+            <div class="stat-box">
+
+                <span class="stat-number">
+
+                    {{data.due_today}}
+
+                </span>
+
+                <span class="stat-label">
+
+                    Due Today
+
+                </span>
+
+            </div>
+
+            <div class="stat-box">
+
+                <span class="stat-number">
+
+                    {{data.patient_count}}
+
+                </span>
+
+                <span class="stat-label">
+
+                    Patients
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>36e79e36bd9107107f446e5ccea4072c</id>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-09 16:37:48</sys_created_on>
+        <sys_id>bee79276bd9107107f446e5ccea40744</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-09 16:37:48</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

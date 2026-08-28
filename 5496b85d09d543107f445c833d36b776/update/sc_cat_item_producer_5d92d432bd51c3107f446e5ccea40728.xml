@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sc_cat_item_producer">
+    <sc_cat_item_producer action="INSERT_OR_UPDATE">
+        <access_type>restricted</access_type>
+        <active>true</active>
+        <allow_edit>false</allow_edit>
+        <availability>on_desktop</availability>
+        <billable>false</billable>
+        <can_cancel>false</can_cancel>
+        <category display_value="Health, Environment, and Safety">d2f80b5bc611227a0079df82295ab196</category>
+        <cc_render_type/>
+        <checked_out/>
+        <cost>0</cost>
+        <custom_cart/>
+        <delivery_plan display_value="DEFAULT">523da512c611228900811a37c97c2014</delivery_plan>
+        <delivery_plan_script/>
+        <delivery_time>1970-01-03 00:00:00</delivery_time>
+        <description><![CDATA[<div style="background: #1E88E5; padding: 18px 22px; border-radius: 8px 8px 0 0; margin: -10px -10px 14px -10px;">
+<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px;"><span style="background: rgba(255,255,255,0.2); border-radius: 5px; padding: 4px 8px; color: #fff; font-size: 15px;">&#x1f48a;</span> <span style="color: #fff; font-size: 15px; font-weight: 600;">TrackMed</span> <span style="background: rgba(255,255,255,0.2); color: #fff; font-size: 11px; padding: 2px 9px; border-radius: 20px;">Refill Request</span></div>
+<div style="color: rgba(255,255,255,0.88); font-size: 12px;">Submit a refill request for a patient — pending doctor approval and pharmacy dispatch</div>
+<div style="display: flex; align-items: center; gap: 6px; margin-top: 10px; flex-wrap: wrap;"><span style="background: rgba(255,255,255,0.15); color: #fff; font-size: 11px; padding: 3px 9px; border-radius: 5px;">&#x1f4cb; Submit</span> <span style="color: rgba(255,255,255,0.6); font-size: 12px;">›</span> <span style="background: rgba(255,255,255,0.15); color: #fff; font-size: 11px; padding: 3px 9px; border-radius: 5px;">☑ Doctor approval</span> <span style="color: rgba(255,255,255,0.6); font-size: 12px;">›</span> <span style="background: rgba(255,255,255,0.15); color: #fff; font-size: 11px; padding: 3px 9px; border-radius: 5px;">&#x1f3ea; Pharmacy</span> <span style="color: rgba(255,255,255,0.6); font-size: 12px;">›</span> <span style="background: rgba(38,166,154,0.4); color: #fff; font-size: 11px; padding: 3px 9px; border-radius: 5px;">✓ Fulfilled</span></div>
+</div>
+<div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px; margin-bottom: 12px;">
+<div style="background: #e8f4fd; border-radius: 7px; padding: 9px 12px; border-left: 3px solid #1E88E5;">
+<div style="font-size: 11px; color: #1e88e5; font-weight: 600;">&#x1f48a; Medication</div>
+<div style="font-size: 10px; color: #555; margin-top: 2px;">Drug &amp; quantity</div>
+</div>
+<div style="background: #e8f8f6; border-radius: 7px; padding: 9px 12px; border-left: 3px solid #26A69A;">
+<div style="font-size: 11px; color: #26a69a; font-weight: 600;">&#x1f464; Patient</div>
+<div style="font-size: 10px; color: #555; margin-top: 2px;">Who needs refill</div>
+</div>
+<div style="background: #fff8e1; border-radius: 7px; padding: 9px 12px; border-left: 3px solid #f0a500;">
+<div style="font-size: 11px; color: #b37a00; font-weight: 600;">&#x1f3ea; Pharmacy</div>
+<div style="font-size: 10px; color: #555; margin-top: 2px;">Dispatch location</div>
+</div>
+<div style="background: #f3e5f5; border-radius: 7px; padding: 9px 12px; border-left: 3px solid #9c27b0;">
+<div style="font-size: 11px; color: #6a1b9a; font-weight: 600;">☑ Approval</div>
+<div style="font-size: 10px; color: #555; margin-top: 2px;">Doctor sign-off</div>
+</div>
+</div>
+<div style="background: #fff8e1; border-radius: 6px; padding: 8px 13px; border-left: 3px solid #f0a500; margin-bottom: 6px;"><span style="font-size: 12px; color: #7a5800;">ⓘ Fields marked with * are required. Request will be automatically routed for doctor approval on submission.</span></div>]]></description>
+        <display_price_property>non_zero</display_price_property>
+        <entitlement_script/>
+        <flow_designer_flow/>
+        <fulfillment_automation_level>unspecified</fulfillment_automation_level>
+        <group/>
+        <hide_sp>false</hide_sp>
+        <icon/>
+        <ignore_price>true</ignore_price>
+        <image/>
+        <location/>
+        <make_item_non_conversational>false</make_item_non_conversational>
+        <mandatory_attachment>false</mandatory_attachment>
+        <meta/>
+        <mobile_hide_price>false</mobile_hide_price>
+        <mobile_picture/>
+        <mobile_picture_type>use_desktop_picture</mobile_picture_type>
+        <model/>
+        <name>Request Medication Refill</name>
+        <no_attachment_v2>false</no_attachment_v2>
+        <no_cart>false</no_cart>
+        <no_cart_v2>false</no_cart_v2>
+        <no_delivery_time_v2>false</no_delivery_time_v2>
+        <no_order>false</no_order>
+        <no_order_now>false</no_order_now>
+        <no_proceed_checkout>false</no_proceed_checkout>
+        <no_quantity>false</no_quantity>
+        <no_quantity_v2>false</no_quantity_v2>
+        <no_save_as_draft>false</no_save_as_draft>
+        <no_search>false</no_search>
+        <no_wishlist_v2>false</no_wishlist_v2>
+        <omit_price>false</omit_price>
+        <order>0</order>
+        <ordered_item_link/>
+        <owner display_value="">5f3cc378315903107f4481c00791b5ad</owner>
+        <picture/>
+        <post_insert_script><![CDATA[/**
+* This script is executed after the record is generated. 
+* `current` Is the GlideRecord produced by Record Producer. Use `current.update()` to update the record
+* To access the variables, use `producer.var1` where var1 is the name of the variable
+* To access the Record Producer use `cat_item`
+*/]]></post_insert_script>
+        <preview>JavaScript: popupOpenStandard("com.glideapp.servicecatalog_cat_item_view.do?v=1&amp;sysparm_id=5d92d432bd51c3107f446e5ccea40728&amp;sysparm_preview=true", "summary");</preview>
+        <price>0</price>
+        <published_ref/>
+        <recurring_frequency/>
+        <redirect_url>generated_record</redirect_url>
+        <request_method/>
+        <roles/>
+        <save_options/>
+        <save_script><![CDATA[/**
+* This script is executed at every step save in Catalog Builder. 
+* This script is executed before `Script` is executed.
+* `current` Is the GlideRecord produced by Record Producer. 
+* To access the variables, use `producer.var1` where var1 is the name of the variable
+* To access the Record Producer use `cat_item`
+*/]]></save_script>
+        <sc_catalogs>e0d08b13c3330100c8b837659bba8fb4</sc_catalogs>
+        <sc_ic_item_staging/>
+        <sc_ic_version/>
+        <sc_template/>
+        <script><![CDATA[/** This script is executed before the Record is generated
+* `current`- GlideRecord produced by Record Producer
+* Don't use `current.update()` or `current.insert()` as the record is generated by Record Producer
+* Don't use `current.setValue('sys_class_name', 'xxx')` as this will trigger reparent flow and can cause data loss
+* Avoid `current.setAbortAction()` and generate a separate record
+* Use `producer.var1` to access variables
+*/
+producer.u_medication      = producer.medication;
+producer.u_patient         = producer.patient;
+producer.u_pharmacy        = producer.pharmacy;
+producer.u_requested_date  = producer.requested_date;
+producer.u_quantity_needed = producer.quantity_needed;
+producer.u_state           = producer.state;
+producer.u_requested_by    = producer.requested_by;
+producer.u_doctor_approval = producer.doctor_approval;
+producer.u_notes           = producer.notes;]]></script>
+        <secondary_owners/>
+        <short_description>Submit a refill request for a patient pending doctor approval</short_description>
+        <show_variable_help_on_load>false</show_variable_help_on_load>
+        <start_closed>false</start_closed>
+        <state/>
+        <sys_class_name>sc_cat_item_producer</sys_class_name>
+        <sys_created_by>navata.sri</sys_created_by>
+        <sys_created_on>2026-06-09 06:56:03</sys_created_on>
+        <sys_id>5d92d432bd51c3107f446e5ccea40728</sys_id>
+        <sys_mod_count>58</sys_mod_count>
+        <sys_name>Request Medication Refill</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sc_cat_item_producer_5d92d432bd51c3107f446e5ccea40728</sys_update_name>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2026-06-11 18:16:12</sys_updated_on>
+        <table_name>x_snc_trackmed_refill_request</table_name>
+        <taxonomy_topic/>
+        <template/>
+        <template_manager_roles/>
+        <type>item</type>
+        <use_sc_layout>true</use_sc_layout>
+        <vendor/>
+        <version>58</version>
+        <view/>
+        <visible_bundle>true</visible_bundle>
+        <visible_guide>true</visible_guide>
+        <visible_standalone>true</visible_standalone>
+        <workflow/>
+    </sc_cat_item_producer>
+    <sys_translated_text action="delete_multiple" query="documentkey=5d92d432bd51c3107f446e5ccea40728"/>
+    <fx_price action="delete_multiple" query="id=5d92d432bd51c3107f446e5ccea40728"/>
+    <fx_price action="INSERT_OR_UPDATE">
+        <amount>0</amount>
+        <currency display_value="USD">USD</currency>
+        <field>price</field>
+        <id>5d92d432bd51c3107f446e5ccea40728</id>
+        <parent/>
+        <reference_amount>0</reference_amount>
+        <reference_currency display_value="USD">USD</reference_currency>
+        <sys_created_by>navata.sri</sys_created_by>
+        <sys_created_on>2026-06-09 06:56:03</sys_created_on>
+        <sys_id>81c21c32bd51c3107f446e5ccea407a2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>navata.sri</sys_updated_by>
+        <sys_updated_on>2026-06-09 06:56:03</sys_updated_on>
+        <table>sc_cat_item_producer</table>
+        <type>calculated</type>
+    </fx_price>
+</record_update>

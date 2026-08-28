@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl">
+    <sys_security_acl action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <admin_overrides>true</admin_overrides>
+        <advanced>false</advanced>
+        <applies_to/>
+        <condition/>
+        <controlled_by_refs/>
+        <decision_type>allow</decision_type>
+        <description>Default access control on x_snc_trackmed_patient_record</description>
+        <local_or_existing>Existing</local_or_existing>
+        <name>x_snc_trackmed_patient_record</name>
+        <operation display_value="delete">delete</operation>
+        <script/>
+        <security_attribute/>
+        <sys_class_name>sys_security_acl</sys_class_name>
+        <sys_created_by>meghanaa.penumetsa</sys_created_by>
+        <sys_created_on>2026-06-07 10:26:06</sys_created_on>
+        <sys_id>16afaa8e81d1c3107f44e314ec616f5d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_snc_trackmed_patient_record</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sys_security_acl_16afaa8e81d1c3107f44e314ec616f5d</sys_update_name>
+        <sys_updated_by>meghanaa.penumetsa</sys_updated_by>
+        <sys_updated_on>2026-06-07 10:26:06</sys_updated_on>
+        <type display_value="record">record</type>
+    </sys_security_acl>
+</record_update>

@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller=function() {
+  /* widget controller */
+  var c = this;
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.trackmed-widget {
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.content-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.card-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a2332;
+}
+
+.card-header h3 i {
+  color: #1a73e8;
+}
+
+.view-all-link {
+  font-size: 13px;
+  color: #1a73e8;
+  text-decoration: none;
+}
+
+.view-all-link:hover {
+  text-decoration: underline;
+}
+
+/* Summary */
+
+.alert-summary-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.alert-summary-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f8fafc;
+  padding: 12px 14px;
+  border-radius: 10px;
+}
+
+.alert-icon-wrap {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.high-bg {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.medium-bg {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.low-bg {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.alert-summary-label {
+  flex: 1;
+  font-size: 14px;
+  color: #374151;
+}
+
+.alert-summary-count {
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.high-count {
+  color: #dc2626;
+}
+
+.medium-count {
+  color: #d97706;
+}
+
+.low-count {
+  color: #16a34a;
+}
+
+/* Recent Alerts */
+
+.recent-alerts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.recent-alert-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f8fafc;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.alert-priority-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dot-high {
+  background: #dc2626;
+}
+
+.dot-medium {
+  background: #d97706;
+}
+
+.dot-low {
+  background: #16a34a;
+}
+
+.alert-details {
+  flex: 1;
+}
+
+.alert-patient {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a2332;
+}
+
+.alert-desc {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.alert-time {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.alert-badge {
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.badge-high {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.badge-medium {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.badge-low {
+  background: #dcfce7;
+  color: #16a34a;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>trackmed_carefacility_alerts_summary</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>Trackmed Carefacility Alerts Summary</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    /* =====================================================
+       ALERT SUMMARY
+       ===================================================== */
+
+    /*
+    var high = 0;
+    var medium = 0;
+    var low = 0;
+
+    ['High','Medium','Low'].forEach(function(priority){
+
+        var ga = new GlideAggregate(
+            'u_trackmed_alerts'
+        );
+
+        ga.addQuery(
+            'u_priority',
+            priority
+        );
+
+        ga.addQuery(
+            'u_resolved',
+            false
+        );
+
+        ga.addAggregate('COUNT');
+        ga.query();
+
+        if(ga.next()){
+
+            if(priority == 'High')
+                high = ga.getAggregate('COUNT');
+
+            if(priority == 'Medium')
+                medium = ga.getAggregate('COUNT');
+
+            if(priority == 'Low')
+                low = ga.getAggregate('COUNT');
+
+        }
+
+    });
+
+    data.alertSummary = {
+        high: high,
+        medium: medium,
+        low: low
+    };
+    */
+
+    data.alertSummary = {
+        high: 4,
+        medium: 6,
+        low: 2
+    };
+
+    /* =====================================================
+       RECENT ALERTS
+       ===================================================== */
+
+    /*
+    data.recentAlerts = [];
+
+    var alertGR = new GlideRecord(
+        'u_trackmed_alerts'
+    );
+
+    alertGR.addQuery(
+        'u_resolved',
+        false
+    );
+
+    alertGR.orderByDesc(
+        'sys_created_on'
+    );
+
+    alertGR.setLimit(5);
+    alertGR.query();
+
+    while(alertGR.next()) {
+
+        var priority =
+        alertGR.getValue(
+            'u_priority'
+        );
+
+        data.recentAlerts.push({
+
+            patientName:
+            alertGR.getValue(
+                'u_patient_name'
+            ),
+
+            description:
+            alertGR.getValue(
+                'u_description'
+            ),
+
+            time:
+            alertGR.getDisplayValue(
+                'sys_created_on'
+            ),
+
+            priority:
+            priority,
+
+            dotClass:
+            'dot-' +
+            priority.toLowerCase(),
+
+            badgeClass:
+            'badge-' +
+            priority.toLowerCase()
+
+        });
+
+    }
+    */
+
+    data.recentAlerts = [
+
+        {
+            patientName:'John Doe',
+            description:'Missed dose at 09:00 PM',
+            time:'10:30 AM',
+            priority:'High',
+            dotClass:'dot-high',
+            badgeClass:'badge-high'
+        },
+
+        {
+            patientName:'Mary Johnson',
+            description:'Dose taken late',
+            time:'09:30 AM',
+            priority:'Medium',
+            dotClass:'dot-medium',
+            badgeClass:'badge-medium'
+        },
+
+        {
+            patientName:'Linda White',
+            description:'Dose taken on time',
+            time:'08:00 AM',
+            priority:'Low',
+            dotClass:'dot-low',
+            badgeClass:'badge-low'
+        }
+
+    ];
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-13 15:50:06</sys_created_on>
+        <sys_id>fe53fa44596103107f44615fbac43ee2</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Trackmed Carefacility Alerts Summary</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_widget_fe53fa44596103107f44615fbac43ee2</sys_update_name>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-14 06:28:21</sys_updated_on>
+        <template><![CDATA[<div class="trackmed-widget">
+
+<div class="content-card alerts-card">
+
+  <div class="card-header">
+
+    <h3>
+      <i class="fa fa-bell"></i>
+      Alerts Summary
+    </h3>
+
+    <a href="#"
+       class="view-all-link"
+       ng-click="c.navigateToAlerts()">
+
+       View All Alerts →
+    </a>
+
+  </div>
+
+  <!-- Alert Summary -->
+
+  <div class="alert-summary-items">
+
+    <div class="alert-summary-row">
+
+      <div class="alert-icon-wrap high-bg">
+        <i class="fa fa-exclamation-triangle"></i>
+      </div>
+
+      <div class="alert-summary-label">
+        High Priority
+      </div>
+
+      <div class="alert-summary-count high-count">
+        {{c.alertSummary.high}}
+      </div>
+
+    </div>
+
+    <div class="alert-summary-row">
+
+      <div class="alert-icon-wrap medium-bg">
+        <i class="fa fa-warning"></i>
+      </div>
+
+      <div class="alert-summary-label">
+        Medium Priority
+      </div>
+
+      <div class="alert-summary-count medium-count">
+        {{c.alertSummary.medium}}
+      </div>
+
+    </div>
+
+    <div class="alert-summary-row">
+
+      <div class="alert-icon-wrap low-bg">
+        <i class="fa fa-info-circle"></i>
+      </div>
+
+      <div class="alert-summary-label">
+        Low Priority
+      </div>
+
+      <div class="alert-summary-count low-count">
+        {{c.alertSummary.low}}
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Recent Alerts -->
+
+  <div class="recent-alerts-list">
+
+    <div class="recent-alert-item"
+         ng-repeat="alert in c.recentAlerts">
+
+      <div class="alert-priority-dot"
+           ng-class="alert.dotClass">
+      </div>
+
+      <div class="alert-details">
+
+        <div class="alert-patient">
+          {{alert.patientName}}
+        </div>
+
+        <div class="alert-desc">
+          {{alert.description}}
+        </div>
+
+      </div>
+
+      <div class="alert-time">
+        {{alert.time}}
+      </div>
+
+      <span class="alert-badge"
+            ng-class="alert.badgeClass">
+
+          {{alert.priority}}
+
+      </span>
+
+    </div>
+
+  </div>
+
+</div></div>]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>fe53fa44596103107f44615fbac43ee2</id>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-13 15:50:06</sys_created_on>
+        <sys_id>f253fa44596103107f44615fbac43ee6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-13 15:50:06</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

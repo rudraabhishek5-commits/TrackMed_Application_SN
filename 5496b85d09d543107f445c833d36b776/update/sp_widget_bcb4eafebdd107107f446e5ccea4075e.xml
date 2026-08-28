@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function() {
+
+    var c = this;
+
+    c.activeTab = "timeline";
+
+    c.selectTab = function(tab) {
+
+        c.activeTab = tab;
+
+    };
+
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/* ==========================================
+   TABS CONTAINER
+========================================== */
+
+.automed-tabs-container{
+
+    position:relative;
+
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+
+    margin-top:20px;
+    margin-bottom:25px;
+
+    padding:20px;
+
+    border-radius:24px;
+
+    overflow:hidden;
+
+    background:linear-gradient(
+        -45deg,
+        #1B5E20,
+        #2E7D32,
+        #43A047,
+        #66BB6A
+    );
+
+    background-size:400% 400%;
+
+    animation:gradientMove 12s ease infinite;
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.15);
+}
+
+/* ==========================================
+   BACKGROUND BLOBS
+========================================== */
+
+.automed-tabs-container::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:220px;
+    height:220px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.08);
+
+    top:-80px;
+    right:-50px;
+
+    animation:blobFloat1 8s infinite ease-in-out;
+}
+
+.automed-tabs-container::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+    height:180px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.06);
+
+    bottom:-60px;
+    left:-60px;
+
+    animation:blobFloat2 10s infinite ease-in-out;
+}
+
+/* ==========================================
+   ANIMATED GRADIENT
+========================================== */
+
+@keyframes gradientMove{
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0% 50%;
+    }
+}
+
+@keyframes blobFloat1{
+
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-20px);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+}
+
+@keyframes blobFloat2{
+
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(20px);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+}
+
+/* ==========================================
+   TAB BUTTONS
+========================================== */
+
+.tab-btn{
+
+    position:relative;
+
+    z-index:2;
+
+    border:none;
+
+    padding:14px 24px;
+
+    border-radius:14px;
+
+    background:rgba(255,255,255,.15);
+
+    backdrop-filter:blur(10px);
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+    border:1px solid rgba(255,255,255,.15);
+}
+
+.tab-btn i{
+
+    margin-right:8px;
+}
+
+/* Hover Animation */
+
+.tab-btn:hover{
+
+    transform:
+        translateY(-4px)
+        scale(1.03);
+
+    background:rgba(255,255,255,.22);
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.15);
+}
+
+/* ==========================================
+   ACTIVE TAB
+========================================== */
+
+.active-tab{
+
+    background:white !important;
+
+    color:#1B5E20 !important;
+
+    font-weight:700;
+
+    box-shadow:
+        0 0 25px rgba(255,255,255,.5);
+
+    animation:activeGlow 2s infinite alternate;
+}
+
+@keyframes activeGlow{
+
+    from{
+
+        box-shadow:
+            0 0 10px rgba(255,255,255,.3);
+    }
+
+    to{
+
+        box-shadow:
+            0 0 25px rgba(255,255,255,.7);
+    }
+}
+
+/* ==========================================
+   TAB CONTENT
+========================================== */
+
+.tab-content{
+
+    animation:fadeSlide .5s ease;
+}
+
+@keyframes fadeSlide{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+    }
+}
+
+/* ==========================================
+   CONTENT CARDS
+========================================== */
+
+.dummy-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:linear-gradient(
+        135deg,
+        #ffffff,
+        #f5f7f9
+    );
+
+    border-radius:18px;
+
+    padding:20px;
+
+    margin-bottom:15px;
+
+    box-shadow:
+        0 6px 18px rgba(0,0,0,.08);
+
+    transition:.35s;
+}
+
+/* Hover */
+
+.dummy-card:hover{
+
+    transform:
+        translateY(-5px);
+
+    box-shadow:
+        0 15px 30px rgba(0,0,0,.15);
+}
+
+/* Shimmer */
+
+.dummy-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:-100%;
+
+    width:100%;
+    height:100%;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.4),
+        transparent
+    );
+
+    transition:.8s;
+}
+
+.dummy-card:hover::before{
+
+    left:100%;
+}
+
+.dummy-card h4{
+
+    margin-top:0;
+
+    color:#1B5E20;
+
+    font-weight:700;
+}
+
+.dummy-card p{
+
+    margin-bottom:0;
+
+    color:#555;
+}
+
+/* ==========================================
+   ALERT CARD
+========================================== */
+
+.alert-card{
+
+    border-left:5px solid #C62828;
+
+    animation:alertPulse 2s infinite;
+}
+
+@keyframes alertPulse{
+
+    0%{
+        box-shadow:0 0 0 0 rgba(198,40,40,.4);
+    }
+
+    70%{
+        box-shadow:0 0 0 12px rgba(198,40,40,0);
+    }
+
+    100%{
+        box-shadow:0 0 0 0 rgba(198,40,40,0);
+    }
+}
+
+/* ==========================================
+   FLOATING MEDICAL ICONS
+========================================== */
+
+.medical-icon{
+
+    position:absolute;
+
+    color:rgba(255,255,255,.08);
+
+    z-index:1;
+}
+
+.icon1{
+
+    top:10%;
+    right:10%;
+
+    font-size:60px;
+
+    animation:floatIcon 6s infinite;
+}
+
+.icon2{
+
+    left:8%;
+    bottom:10%;
+
+    font-size:70px;
+
+    animation:floatIcon 8s infinite;
+}
+
+.icon3{
+
+    right:35%;
+    top:50%;
+
+    font-size:50px;
+
+    animation:floatIcon 7s infinite;
+}
+
+@keyframes floatIcon{
+
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-15px);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media(max-width:768px){
+
+    .automed-tabs-container{
+
+        flex-direction:column;
+    }
+
+    .tab-btn{
+
+        width:100%;
+    }
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>automed_schedule_tab</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>Automed Schedule Tab</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-09 17:33:39</sys_created_on>
+        <sys_id>bcb4eafebdd107107f446e5ccea4075e</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>Automed Schedule Tab</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_widget_bcb4eafebdd107107f446e5ccea4075e</sys_update_name>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-11 04:24:22</sys_updated_on>
+        <template><![CDATA[<div class="automed-tabs-container">
+
+    <button
+        class="tab-btn"
+        ng-class="{'active-tab': c.activeTab == 'timeline'}"
+        ng-click="c.selectTab('timeline')">
+        <i class="fa fa-clock-o"></i>
+        Timeline
+    </button>
+
+    <button
+        class="tab-btn"
+        ng-class="{'active-tab': c.activeTab == 'patient'}"
+        ng-click="c.selectTab('patient')">
+        <i class="fa fa-user"></i>
+        By Patient
+    </button>
+
+    <button
+        class="tab-btn"
+        ng-class="{'active-tab': c.activeTab == 'medication'}"
+        ng-click="c.selectTab('medication')">
+        <i class="fa fa-medkit"></i>
+        By Medication
+    </button>
+
+    <button
+        class="tab-btn"
+        ng-class="{'active-tab': c.activeTab == 'alerts'}"
+        ng-click="c.selectTab('alerts')">
+        <i class="fa fa-exclamation-triangle"></i>
+        Missed / Alerts
+    </button>
+
+</div>
+
+<!-- Timeline Tab -->
+
+<div class="tab-content" ng-show="c.activeTab=='timeline'">
+
+    <div class="dummy-card">
+        <h4>08:00 AM</h4>
+        <p>Robert Chen - Metformin - Given</p>
+    </div>
+
+    <div class="dummy-card">
+        <h4>10:00 AM</h4>
+        <p>Anita Sharma - Aspirin - Due Now</p>
+    </div>
+
+</div>
+
+<!-- Patient Tab -->
+
+<div class="tab-content" ng-show="c.activeTab=='patient'">
+
+    <div class="dummy-card">
+        <h4>Robert Chen</h4>
+        <p>Metformin</p>
+        <p>Dolo 650</p>
+    </div>
+
+    <div class="dummy-card">
+        <h4>Anita Sharma</h4>
+        <p>Aspirin</p>
+        <p>Vitamin D</p>
+    </div>
+
+</div>
+
+<!-- Medication Tab -->
+
+<div class="tab-content" ng-show="c.activeTab=='medication'">
+
+    <div class="dummy-card">
+        <h4>Metformin</h4>
+        <p>Assigned Patients : 12</p>
+    </div>
+
+    <div class="dummy-card">
+        <h4>Aspirin</h4>
+        <p>Assigned Patients : 8</p>
+    </div>
+
+</div>
+
+<!-- Alerts Tab -->
+
+<div class="tab-content" ng-show="c.activeTab=='alerts'">
+
+    <div class="dummy-card alert-card">
+        <h4>Missed Dose Alert</h4>
+        <p>David Kumar missed Amoxicillin at 02:00 PM</p>
+    </div>
+
+    <div class="dummy-card alert-card">
+        <h4>Missed Dose Alert</h4>
+        <p>Sarah Lee missed Vitamin D at 08:00 AM</p>
+    </div>
+
+</div>]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>bcb4eafebdd107107f446e5ccea4075e</id>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-09 17:33:39</sys_created_on>
+        <sys_id>f4b4eafebdd107107f446e5ccea40762</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-09 17:33:39</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

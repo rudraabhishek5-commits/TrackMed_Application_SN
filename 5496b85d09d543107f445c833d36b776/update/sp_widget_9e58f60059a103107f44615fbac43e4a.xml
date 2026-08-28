@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function() {
+
+    var c = this;
+
+    c.searchText = "";
+    c.filterStatus = "";
+    c.filterCaregiver = "";
+
+    c.patientFilter = function(patient){
+
+        var searchMatch =
+        !c.searchText ||
+
+        patient.name.toLowerCase().indexOf(c.searchText.toLowerCase()) > -1 ||
+
+        patient.medication.toLowerCase().indexOf(c.searchText.toLowerCase()) > -1 ||
+
+        patient.caregiver.toLowerCase().indexOf(c.searchText.toLowerCase()) > -1;
+
+        var statusMatch =
+        !c.filterStatus ||
+        patient.status == c.filterStatus;
+
+        var caregiverMatch =
+        !c.filterCaregiver ||
+        patient.caregiver == c.filterCaregiver;
+
+        return searchMatch &&
+               statusMatch &&
+               caregiverMatch;
+    };
+
+    c.viewPatient = function(patient){
+
+        alert(
+            patient.name +
+            "\nMedication: " +
+            patient.medication
+        );
+
+    };
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.patient-list-widget{
+    background:#fff;
+    border-radius:16px;
+    padding:24px;
+    box-shadow:0 2px 12px rgba(0,0,0,.08);
+}
+
+.widget-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.widget-header h3{
+    margin:0;
+    font-size:18px;
+    font-weight:700;
+    color:#1a2332;
+}
+
+.header-right{
+    display:flex;
+    gap:12px;
+    align-items:center;
+}
+
+.search-box-wrapper{
+    position:relative;
+}
+
+.search-box-wrapper i{
+    position:absolute;
+    left:12px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#94a3b8;
+}
+
+.search-box-wrapper input{
+    width:280px;
+    padding:10px 12px 10px 38px;
+    border:1px solid #dbe2ea;
+    border-radius:8px;
+}
+
+.search-box-wrapper input:focus{
+    outline:none;
+    border-color:#1a73e8;
+}
+
+.header-right select{
+    padding:10px 12px;
+    border:1px solid #dbe2ea;
+    border-radius:8px;
+    min-width:150px;
+    background:#fff;
+}
+
+.patient-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.patient-table th{
+    background:#f8fafc;
+    color:#64748b;
+    font-size:12px;
+    text-transform:uppercase;
+    padding:12px;
+    text-align:left;
+}
+
+.patient-table td{
+    padding:14px 12px;
+    border-bottom:1px solid #eef2f7;
+    font-size:14px;
+}
+
+.patient-table tr:hover{
+    background:#f8fafc;
+}
+
+.patient-name{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.avatar{
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    background:#1a73e8;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:12px;
+    font-weight:700;
+}
+
+.blood-badge{
+    background:#fee2e2;
+    color:#dc2626;
+    padding:4px 10px;
+    border-radius:12px;
+    font-size:12px;
+    font-weight:600;
+}
+
+.status-badge{
+    padding:4px 10px;
+    border-radius:12px;
+    font-size:12px;
+    font-weight:600;
+}
+
+.status-active{
+    background:#dcfce7;
+    color:#16a34a;
+}
+
+.status-inactive{
+    background:#f1f5f9;
+    color:#64748b;
+}
+
+.status-critical{
+    background:#fee2e2;
+    color:#dc2626;
+}
+
+.action-btn{
+    background:#1a73e8;
+    color:#fff;
+    border:none;
+    padding:7px 14px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.action-btn:hover{
+    background:#1558b0;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>trackmed_carefacility_management</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>Trackmed carefacility Management</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    data.caregivers = [
+        "Michael Lee",
+        "Sarah Adams",
+        "James Carter"
+    ];
+
+    data.patients = [
+
+        {
+            patientId:"PT001",
+            initials:"JD",
+            name:"John Doe",
+            age:72,
+            bloodType:"A+",
+            medication:"Atorvastatin 10mg",
+            caregiver:"Michael Lee",
+            status:"Active",
+            statusClass:"status-active",
+            nextDose:"08:00 PM"
+        },
+
+        {
+            patientId:"PT002",
+            initials:"MJ",
+            name:"Mary Johnson",
+            age:68,
+            bloodType:"B+",
+            medication:"Metformin 500mg",
+            caregiver:"Sarah Adams",
+            status:"Active",
+            statusClass:"status-active",
+            nextDose:"09:00 AM"
+        },
+
+        {
+            patientId:"PT003",
+            initials:"RB",
+            name:"Robert Brown",
+            age:75,
+            bloodType:"O-",
+            medication:"Lisinopril 20mg",
+            caregiver:"Michael Lee",
+            status:"Critical",
+            statusClass:"status-critical",
+            nextDose:"10:00 AM"
+        },
+
+        {
+            patientId:"PT004",
+            initials:"LW",
+            name:"Linda White",
+            age:64,
+            bloodType:"AB+",
+            medication:"Aspirin 81mg",
+            caregiver:"James Carter",
+            status:"Inactive",
+            statusClass:"status-inactive",
+            nextDose:"11:00 AM"
+        },
+
+        {
+            patientId:"PT005",
+            initials:"PG",
+            name:"Patricia Garcia",
+            age:70,
+            bloodType:"A-",
+            medication:"Albuterol Inhaler",
+            caregiver:"Sarah Adams",
+            status:"Active",
+            statusClass:"status-active",
+            nextDose:"02:00 PM"
+        }
+
+    ];
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-13 16:11:54</sys_created_on>
+        <sys_id>9e58f60059a103107f44615fbac43e4a</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>Trackmed carefacility Management</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_widget_9e58f60059a103107f44615fbac43e4a</sys_update_name>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-13 16:21:17</sys_updated_on>
+        <template><![CDATA[<div class="patient-list-widget">
+
+  <div class="widget-header">
+
+    <div class="header-left">
+      <h3>
+        <i class="fa fa-users"></i>
+        Patient List
+      </h3>
+    </div>
+
+    <div class="header-right">
+
+      <div class="search-box-wrapper">
+        <i class="fa fa-search"></i>
+
+        <input type="text"
+               placeholder="Search patient, medication or caregiver..."
+               ng-model="c.searchText">
+      </div>
+
+      <select ng-model="c.filterStatus">
+        <option value="">All Status</option>
+        <option value="Active">Active</option>
+        <option value="Inactive">Inactive</option>
+        <option value="Critical">Critical</option>
+      </select>
+
+      <select ng-model="c.filterCaregiver">
+        <option value="">All Caregivers</option>
+
+        <option ng-repeat="cg in c.caregivers">
+          {{cg}}
+        </option>
+
+      </select>
+
+    </div>
+
+  </div>
+
+  <div class="table-responsive">
+
+    <table class="patient-table">
+
+      <thead>
+
+        <tr>
+          <th>Patient ID</th>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Blood Type</th>
+          <th>Medication</th>
+          <th>Caregiver</th>
+          <th>Status</th>
+          <th>Next Dose</th>
+          <th>Action</th>
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <tr ng-repeat="patient in c.patients | filter:c.patientFilter">
+
+          <td>{{patient.patientId}}</td>
+
+          <td>
+
+            <div class="patient-name">
+
+              <div class="avatar">
+                {{patient.initials}}
+              </div>
+
+              {{patient.name}}
+
+            </div>
+
+          </td>
+
+          <td>{{patient.age}}</td>
+
+          <td>
+
+            <span class="blood-badge">
+              {{patient.bloodType}}
+            </span>
+
+          </td>
+
+          <td>{{patient.medication}}</td>
+
+          <td>{{patient.caregiver}}</td>
+
+          <td>
+
+            <span class="status-badge"
+                  ng-class="patient.statusClass">
+
+              {{patient.status}}
+
+            </span>
+
+          </td>
+
+          <td>{{patient.nextDose}}</td>
+
+          <td>
+
+            <button class="action-btn"
+                    ng-click="c.viewPatient(patient)">
+              View
+            </button>
+
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>9e58f60059a103107f44615fbac43e4a</id>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-13 16:11:54</sys_created_on>
+        <sys_id>5258f60059a103107f44615fbac43e4e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-13 16:11:54</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

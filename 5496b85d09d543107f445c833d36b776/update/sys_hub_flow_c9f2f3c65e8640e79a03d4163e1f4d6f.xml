@@ -1,0 +1,1474 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_hub_flow">
+    <sys_hub_flow action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>false</active>
+        <allow_high_security_roles>false</allow_high_security_roles>
+        <annotation/>
+        <attributes>timeFromCreateToActivate=49000</attributes>
+        <authored_on_release_version/>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description/>
+        <display_name_after_preview/>
+        <flow_priority>MEDIUM</flow_priority>
+        <generation_source>fluent</generation_source>
+        <internal_name>trackmed_dose_execution__escalation_engine</internal_name>
+        <label_cache>[{"name":"Created_1.current.patient.patient_name","label":"Trigger - Record Created➛x_snc_trackmed_dose_log Record➛Patient➛Patient Name","type":"string","base_type":"string","usedInstances":{"775e49d8-359e-4fb6-8ae3-f178b7d10b10":["ah_subject"],"18cd9e8b-c966-44a1-8987-29ecf14d4f0a":["log_message"],"b385354f-3f15-489d-aa3f-fce33d10e278":["ah_subject"],"a723271a-4119-4127-9627-20caa1f0dc52":["ah_subject"]},"attributes":{}},{"name":"Created_1.current","label":"Trigger - Record Created➛x_snc_trackmed_dose_log Record","type":"reference","base_type":"reference","usedInstances":{"775e49d8-359e-4fb6-8ae3-f178b7d10b10":["record"],"1ee59c6b-7a6b-48fe-960f-9b63ba44d1a3":["record"],"c53329a6-bf8f-487d-8f15-c4af7b802593":["record"],"b385354f-3f15-489d-aa3f-fce33d10e278":["record"],"b0224147-1841-4eb1-bf77-ac11579195ff":["record"],"a723271a-4119-4127-9627-20caa1f0dc52":["record"]},"attributes":{}},{"name":"Created_1.current.care_taker.email","label":"Trigger - Record Created➛x_snc_trackmed_dose_log Record➛Care Taker➛Email","type":"string","base_type":"string","usedInstances":{"775e49d8-359e-4fb6-8ae3-f178b7d10b10":["ah_to"],"b385354f-3f15-489d-aa3f-fce33d10e278":["ah_to"],"a723271a-4119-4127-9627-20caa1f0dc52":["ah_to"]},"attributes":{}},{"name":"1ee59c6b-7a6b-48fe-960f-9b63ba44d1a3.state","label":"1ee59c6b-7a6b-48fe-960f-9b63ba44d1a3➛state","type":"string","base_type":"string","usedInstances":{"53a2e6f0-7267-41c2-9311-99a48078a7d4":["condition"],"efa07219-4245-4008-858c-aba451a6fafd":["condition"]},"attributes":{}},{"name":"Created_1.current.sys_id","label":"Trigger - Record Created➛x_snc_trackmed_dose_log Record➛Sys Id","type":"string","base_type":"string","usedInstances":{"63c637bb-60b0-4be9-95e1-25f80a0945ce":["conditions"]},"attributes":{}},{"name":"63c637bb-60b0-4be9-95e1-25f80a0945ce.Record.status","label":"63c637bb-60b0-4be9-95e1-25f80a0945ce➛Record➛status","type":"string","base_type":"string","usedInstances":{"0a14171d-695d-4cc1-b5d4-c327467df4bf":["condition"],"011450b4-4277-4559-b217-834b0524b9b0":["condition"]},"attributes":{}},{"name":"Created_1.current.medication","label":"Trigger - Record Created➛x_snc_trackmed_dose_log Record➛Medication","type":"string","base_type":"string","usedInstances":{"fc21895b-e1c7-4473-947b-dd5847dc4306":["conditions"]},"attributes":{}},{"name":"fc21895b-e1c7-4473-947b-dd5847dc4306.Record","label":"fc21895b-e1c7-4473-947b-dd5847dc4306➛Record","type":"reference","base_type":"reference","usedInstances":{"a3e158e0-f687-4aab-b33f-e4c7e5825b91":["record"]},"attributes":{}},{"name":"fc21895b-e1c7-4473-947b-dd5847dc4306.Record.stock_quantity","label":"fc21895b-e1c7-4473-947b-dd5847dc4306➛Record➛stock_quantity","type":"integer","base_type":"integer","usedInstances":{"a3e158e0-f687-4aab-b33f-e4c7e5825b91":["values"]},"attributes":{}},{"name":"63c637bb-60b0-4be9-95e1-25f80a0945ce.Record.work_end","label":"63c637bb-60b0-4be9-95e1-25f80a0945ce➛Record➛work_end","type":"glide_date_time","base_type":"glide_date_time","usedInstances":{"c53329a6-bf8f-487d-8f15-c4af7b802593":["values"]},"attributes":{}},{"name":"Created_1.current.care_taker","label":"Trigger - Record Created➛x_snc_trackmed_dose_log Record➛Care Taker","type":"reference","base_type":"reference","usedInstances":{"1b154b58-58cf-481f-bf18-4e4225194469":["field_values"],"cb8afd1d-efc1-4a26-a1d7-0f0da838de82":["field_values"]},"attributes":{}}]</label_cache>
+        <master_snapshot>7651680047430f104134ef6c716d433b</master_snapshot>
+        <master_snapshot_digest/>
+        <name>TrackMed Dose Execution &amp; Escalation Engine</name>
+        <natlang/>
+        <outputs/>
+        <pre_compiled>false</pre_compiled>
+        <remote_trigger_id>5351a80047430f104134ef6c716d4359</remote_trigger_id>
+        <run_as>system</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <show_draft_actions>false</show_draft_actions>
+        <show_triggered_flows>false</show_triggered_flows>
+        <status>published</status>
+        <substatus/>
+        <sys_class_name>sys_hub_flow</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:45:33</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>c9f2f3c65e8640e79a03d4163e1f4d6f</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>TrackMed Dose Execution &amp; Escalation Engine</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sys_hub_flow_c9f2f3c65e8640e79a03d4163e1f4d6f</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-28 19:32:12</sys_updated_on>
+        <type>flow</type>
+        <updation_source/>
+        <version>2</version>
+        <version_record>69d4200847430f104134ef6c716d43d7</version_record>
+    </sys_hub_flow>
+    <sys_translated_text action="delete_multiple" query="documentkey=c9f2f3c65e8640e79a03d4163e1f4d6f"/>
+    <sys_variable_value action="delete_multiple" query="document_key=c9f2f3c65e8640e79a03d4163e1f4d6f"/>
+    <sys_flow_record_trigger action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <condition table="x_snc_trackmed_dose_log">status=Scheduled<item display_value="Scheduled" endquery="false" field="status" goto="false" newquery="false" operator="=" or="false" value="Scheduled"/>
+        </condition>
+        <name/>
+        <on_delete>false</on_delete>
+        <on_insert>true</on_insert>
+        <on_update>false</on_update>
+        <published_version/>
+        <run_flow_in>background</run_flow_in>
+        <run_on_extended>false</run_on_extended>
+        <run_when_setting>both</run_when_setting>
+        <run_when_user_list/>
+        <run_when_user_setting>any</run_when_user_setting>
+        <sys_class_name>sys_flow_record_trigger</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:25</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>5351a80047430f104134ef6c716d4359</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:25</sys_updated_on>
+        <table>x_snc_trackmed_dose_log</table>
+        <trigger_definition/>
+    </sys_flow_record_trigger>
+    <sys_trigger_runner_mapping action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <data>{"run_flow_in":"background","run_when_user_list":[],"run_when_setting":"both","run_when_user_setting":"any","run_on_extended":"false"}</data>
+        <identifier>c9f2f3c65e8640e79a03d4163e1f4d6f</identifier>
+        <identifier_type>flow</identifier_type>
+        <runner>FDTriggerRunner</runner>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:25</sys_created_on>
+        <sys_id>5f51a80047430f104134ef6c716d4359</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:25</sys_updated_on>
+        <trigger display_value="">5351a80047430f104134ef6c716d4359</trigger>
+    </sys_trigger_runner_mapping>
+    <sys_trigger_runner_mapping action="delete_multiple" query="identifier=c9f2f3c65e8640e79a03d4163e1f4d6f^sys_idNOT IN5f51a80047430f104134ef6c716d4359"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=c9f2f3c65e8640e79a03d4163e1f4d6f"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=c9f2f3c65e8640e79a03d4163e1f4d6f"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=c9f2f3c65e8640e79a03d4163e1f4d6f^sys_idNOT IN4651e40047430f104134ef6c716d43f9,4e51280047430f104134ef6c716d4321"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,timeFromCreateToActivate=36000,uiType=document_id</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent>table_name</dependent>
+        <dependent_on_field>table_name</dependent_on_field>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>current</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">document_id</internal_type>
+        <label>Record</label>
+        <mandatory>true</mandatory>
+        <max_length>200</max_length>
+        <model display_value="TrackMed Dose Execution &amp; Escalation Engine">c9f2f3c65e8640e79a03d4163e1f4d6f</model>
+        <model_id>c9f2f3c65e8640e79a03d4163e1f4d6f</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_c9f2f3c65e8640e79a03d4163e1f4d6f</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:21</sys_created_on>
+        <sys_id>4651e40047430f104134ef6c716d43f9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:21</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>true</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=4651e40047430f104134ef6c716d43f9"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,test_input_hidden=true,uiType=table_name</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>table_name</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">table_name</internal_type>
+        <label>Table Name</label>
+        <mandatory>false</mandatory>
+        <max_length>200</max_length>
+        <model display_value="TrackMed Dose Execution &amp; Escalation Engine">c9f2f3c65e8640e79a03d4163e1f4d6f</model>
+        <model_id>c9f2f3c65e8640e79a03d4163e1f4d6f</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_c9f2f3c65e8640e79a03d4163e1f4d6f</name>
+        <next_element/>
+        <order>101</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:21</sys_created_on>
+        <sys_id>4e51280047430f104134ef6c716d4321</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:21</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=4e51280047430f104134ef6c716d4321"/>
+    <sys_hub_flow_output action="delete_multiple" query="model=c9f2f3c65e8640e79a03d4163e1f4d6f"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=c9f2f3c65e8640e79a03d4163e1f4d6f"/>
+    <sys_hub_trigger_instance_v2 action="delete_multiple" query="flow=c9f2f3c65e8640e79a03d4163e1f4d6f^sys_idNOT INad01b14704dd4d6d8561cecc16c070ed"/>
+    <sys_hub_trigger_instance_v2 action="INSERT_OR_UPDATE">
+        <comment/>
+        <display_text/>
+        <flow display_value="TrackMed Dose Execution &amp; Escalation Engine">c9f2f3c65e8640e79a03d4163e1f4d6f</flow>
+        <generation_source/>
+        <name>Created</name>
+        <published_version/>
+        <remote_sys_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:40:08</sys_created_on>
+        <sys_id>ad01b14704dd4d6d8561cecc16c070ed</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:22</sys_updated_on>
+        <trigger_definition display_value="Created">798916a0c31322002841b63b12d3ae7c</trigger_definition>
+        <trigger_inputs>H4sIAAAAAAAA/+1XTW/bMAz9K4JPG5ABGXbrbV8FAnQr0HTboSsMxaITYYqUSXQSr8h/H+WPRHXsNm3jbRh6SkTJ4iP5nkRd3URo5XQKdqQdcp3AOHcjEZ1E0SBSfAKK/l7yiQIaS41gNVeX+QLIjN4caz73cwIWoAVoLD9NZkYmcCYdja+uB9Gca8HR2Dw6QZvBIEqtmV/CfKE40l4pV46Mxgqw0cnr4XAQFftWTmjDJVeZH69jp5MYLU9+zEHEwjiIlZl6BNLRbvnXexcmM6mEBV0iW3BLntD7vdmLuAECWwKvMBNiWKNPgdiGEwRdWSxwca5VHixZO/kLiu8zQhiksVqRjmdmdQEpEOIETqUu3FWTyiRcbUccqZaTDMFRLJvNNiWnElRVUpdYucC3CcplnfbN4BAOXGSanWv2sYqRFRly+6QoC38PIW4oKviZ+YCKyNO6aJ4btDg9C7wazZLMUvTIKJ+szjLDGkE6mvMplG5oXwUJBkVIv7hw9Ek6J/U0iL0DSjG/j0XlIaCaGE+BcN1GlEPlYTMdGx1vqbcTSo2/IYvafIAIOkve6RsbHPhXtRFxsfQ8FzXlehDLtxloNgYqtfG/iL7kR5bLxOCsSdHUWPaO7GzkPfECfCGcz0a/Cm0Vtv4UpIkccucwBOrrzGq0HcB6w3UIJtrasuODerLWV8Sq2G3ZtLxNhIbWK+uBUu8gbLfzZ7UHqlNmRXw5tsC5zvf07T1JTZLOWWLI2Rp7U8qEmqepNZkWXSh2K9gLASnPFL7s70o2Fu6Gc3vF3xSqR0SnX6jRMJlNpYZzB+p1R7lWt8/qLFP13mghsTy6m9qsp9yDHjAPZEMSAKi5QGgxc9+z4fCNGCczEJmCFlp0LTuAIWHYLUCwJQO9MaR68T2WICuu0cVoYi5EHCDePhfmRoD6ENSvYgUJYZGhizZBdalj3T7oemr6it6hp46v7UKgdsVfBpR029vRazTEJm1tl2TKquTQG2GSM5wBYVJ0ENHOBao+W0xf0Ca0D4bRBLN/BNxxWjqPpKWvK8vdOBVK40O6ugYj73H+fHO0pa9Q5p6ap0oKiFU5d/wrpOBBAK21cpX3mjP7hHkMW6pw73KILSn4D7ly/RszReH6JBUAAA==</trigger_inputs>
+        <trigger_outputs/>
+        <trigger_type>record_create</trigger_type>
+        <updation_source/>
+    </sys_hub_trigger_instance_v2>
+    <sys_hub_action_instance_v2 action="delete_multiple" query="flow=c9f2f3c65e8640e79a03d4163e1f4d6f^sys_idNOT IN18cd9e8bc96644a1898729ecf14d4f0a,1b154b5858cf481fbf184e4225194469,1ee59c6b7a6b48fe960f9b63ba44d1a3,63c637bb60b04be995e125f80a0945ce,775e49d8359e4fb68ae3f178b7d10b10,a3e158e0f6874aabb33fe4c7e5825b91,a723271a41194127962720caa1f0dc52,b022414718414eb1bf77ac11579195ff,b385354f3f15489daa3ffce33d10e278,c53329a6bf8f487d8f15c4af7b802593,cb8afd1defc14a26a1d70f0da838de82,fc21895be1c74473947bdd5847dc4306"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Log">5bc1bcc6531003003bf1d9109ec587d4</action_type>
+        <action_type_parent display_value="">5bc1bcc6531003003bf1d9109ec587d4</action_type_parent>
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <comment/>
+        <compiled_snapshot>5bc1bcc6531003003bf1d9109ec587d4</compiled_snapshot>
+        <display_text/>
+        <flow display_value="TrackMed Dose Execution &amp; Escalation Engine">c9f2f3c65e8640e79a03d4163e1f4d6f</flow>
+        <generation_source/>
+        <order>9</order>
+        <parent_ui_id>0a14171d-695d-4cc1-b5d4-c327467df4bf</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:40:09</sys_created_on>
+        <sys_id>18cd9e8bc96644a1898729ecf14d4f0a</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2026-08-26 20:43:44</sys_updated_on>
+        <ui_id>18cd9e8b-c966-44a1-8987-29ecf14d4f0a</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VU72vbMBD9V4w+JyZO6nXNt5KsMOgPWCD7UIqRpXMikCVPkpNmJv/7TraSmDZsC3SfBoFwzyfdvad399wQRUsgUyL1KpOwAUkGZENl7TGhCo0hF7aSdLcM6NcOrajBkw4MmTaErYXkBhSZPr8MiOCYluYsyRn7lE6S0WiCv7xI+E0yugGWfr7m13iFpDnWm5L7UPdMK25XeYittWAQ4vtwbHYAteG+jdGAwKsDxQHrF1RaGJCSKk6dNrsjYoDyJyVPwFooh7cRn/xqxU+sdzXyeQUgIwbdt2OYBTk6uJhTRxfO1MzVJqR2zVrUojlSHA6jR60gGg57+vZa3w9OuUHgN68QMpN+5ndqlFCrXvIWkVPyuJ/8xRhteqkQ4pA72ePLcShoLd3scgbJXzMYX8JgcgGDK8+gE/+pckKjG0niPUNzeXgaLetSPXY+I0e+yzeG79D5Wd/XFi0AlbeZ900wUbFY6+23g0fuhGo7Ch+lZlQeI+qcEXntvL4NAQklXpSVtKpQiKwyeiPaw9hsGa8kBnEh9RaLWrFSMWWeWoyupvEd4vMWXlIjPM0HvAYP7wfE7uxMUmtPZNHC2Y/ad9JRDxyyVqj2CDOicrdYYAOhXS9/byxLsJauoPcGc20horwUSlhcBsAjWzP0ji1qKXdRoU1UUSewTtQ0Mxw+BzxLYlYbVMrF4dvhP/O19vv3S+dflfnTFhtPfrfFIO1tsYejNmcFC5vM4uO3fu9vssUBPAzTh22ycZp+zCo7txzej9tF0/b/DdPLL+b7RN1wBwAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=18cd9e8bc96644a1898729ecf14d4f0a"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Create Task">2b3a6335531003003bf1d9109ec58759</action_type>
+        <action_type_parent display_value="">2b3a6335531003003bf1d9109ec58759</action_type_parent>
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <comment/>
+        <compiled_snapshot>2b3a6335531003003bf1d9109ec58759</compiled_snapshot>
+        <display_text/>
+        <flow display_value="TrackMed Dose Execution &amp; Escalation Engine">c9f2f3c65e8640e79a03d4163e1f4d6f</flow>
+        <generation_source/>
+        <order>12</order>
+        <parent_ui_id>011450b4-4277-4559-b217-834b0524b9b0</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:40:09</sys_created_on>
+        <sys_id>1b154b5858cf481fbf184e4225194469</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2026-08-26 20:43:44</sys_updated_on>
+        <ui_id>1b154b58-58cf-481f-bf18-4e4225194469</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VWTVPbMBD9Kx6dM65DGkJzY6A5tTAFhh4o8aylNdEgS0aSE9xM/nvXlhPMRymHXmhncsg+7cfb1csqV2umoUA2ZR7cbeohU8gGbAmq2oJkCulKBfXlY7QES6EeLZuuGV9IJSxqNr26HjApyA0nI9gfjcbj0TBJRvTJ8qH4NEw+IR8fTMacUijIUJHrRVf3JS6+LgNGZto6BOxLPzY6CQfGioZPMmB471ELJCI5KIcDVoAW4I2t2dTbigCLIE61qnceC6k9JWSN772TP6nsQdL45UidcQxnOzPtxhLg/Bg8nFNm7ivbufKFkRxdmInAHCrlj/pYcDgtvTQ6hISuQ7RRVaFPwkjYLsH2FgipHJHAsumzYd61kZ8vzOpsy3ImdTuS7lAZDmpngfdWZpVv+KxZBpRvS6C7ZFRYUPK0gLKU+iYtrVnKNiHxK+IbRUacK7MiIk7e6Bh400xMo4Z4RvhxC1+ClU3ir5SGgjcD5mp3pMC5h/5osOld1bAL3XZ9pWE0TQi3svSHVGCJXQubwU7AK5C+J93kuW7biDcIN89fE+5k0hPu91D0MYVOsZkxCkE/lStp78OsY9LJde91uXbIW/T68X/S6/vRZi5RibSVputp1C2M9Q25Npio/ahIbeKwEtJPo2PjMBLIldQooqyOOFj0cIt2/jwkcnyBolLkKZq4FbioAHtLNn07MT66oEgdR2e4lLiKLN5V0qKI59QnDQFF6k3ItV4fkdQ8IcOYV5ZuxcdN6bStvdnMSyuNlb4O7nvzz9+e/9b+pdb+tC/2Xn3o9rPevpg1Qogut0J4WR7bFw8LmqjHcPB0jXSHIdfDKhn+tVWyP06S97RNwqP+7pdJ77/Pb9bK9S8YLGoJtQkAAA==</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=1b154b5858cf481fbf184e4225194469"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Wait For Condition">89ce8a4187120010663ca1bb36cb0be3</action_type>
+        <action_type_parent display_value="">89ce8a4187120010663ca1bb36cb0be3</action_type_parent>
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <comment/>
+        <compiled_snapshot>89ce8a4187120010663ca1bb36cb0be3</compiled_snapshot>
+        <display_text/>
+        <flow display_value="TrackMed Dose Execution &amp; Escalation Engine">c9f2f3c65e8640e79a03d4163e1f4d6f</flow>
+        <generation_source/>
+        <order>2</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:45:33</sys_created_on>
+        <sys_id>1ee59c6b7a6b48fe960f9b63ba44d1a3</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2026-08-26 20:43:44</sys_updated_on>
+        <ui_id>1ee59c6b-7a6b-48fe-960f-9b63ba44d1a3</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+2XXW/bNhSG/0qga9MjJUqWclfYDhogSwDH6y66TqD4EROlJVei0mRG/vtIiYkl23Ga5QMrNsA3OvzQy/fw8Tn6vPZysuTesaflkhe1TlldEi2L3Bt410TVdgglIwggMr8j6B9DaH5mlMlqpcjtJzfJP/pY1GVlBlakNFtqXnrHa48upGIlz73jz18GnmRmJmWUxwSjeIR8CBGMooASlGVBRDOYicRsoUjGlZk62Yh5XKa+XdmRKyUZ346f7W5UlMxKCwcev9E8Z9xoEkRVfOAtSc6ILsrbh0jJCbvI1SawkLk2+3l28k0l/zJvxtDOE9yckvJ27OExdS61YTEhmlzqsqa6Lt1Uuigk5VXrD+OC1EqPu7F2wsWqkd8s0SRT96sLVS/z89Yb72GD+6SYSF0ZEXxlD2qVu2OIy0XxfXav8kTmjSduUBWUqIcnonUps1pbPWuvlvNH7G5H9hjOFV+ad6dLslrJ/CpdlcW1bN5n5C+HzUZDoYrvRmclr/IhoXbl0KSCDE9MfNKEP5FS2oP/arYxi20qGJ+Q28reitIc10r4LZffan7aXDPKERmFGUhiTgD2EwRIgn2QRHzEsYijgCTe3cCrbquxIlW1MdFkL/1WWwtaS515aeu/XUJLudIfjMxr7ny6G2xIsirT5mHD0E1a5TTVJaFfl5ylrDBpUcXVLkePT3yKKxwe4oqTDlfz5gYN9ip2OO3Ezrprj87bAQeT/0yYbL72shT/J1nqed3nqOe2rNL26jnRza5vSFiPJx/FSYyzAAQZDgFOhAAxjDHAnEAa+myEEX0bntxfvlDkqluVdtlxfwNPgQIPFyDcAWWaN/47CbtlyGlyzGRFoTjZrj1zo+qXE5cqBwz+v/q8iJiN01u4dL1+FywoJbG5/wQkAeUARxkFsaACBDwLRRBmcTaCb4JFyam5TB0g1uuxuTDaFA00pHVpvNV3d7uQ/EglSQ5Wki4gs3sV26ocEqygdZMEybawmLiRo9PJhgt0mIu2bvwIFoH/E2HRHuvlVPTN3mrIenYLqUz607bwVKZxb0yaTccXs0n6+4f5+ON0ls6ml/PZ6Xg+nbwXTFgIFKAoAgjBAGCURbZ7CwHkIcGhj6Mw8v8BTJ36+iRWtMiZtMqrDlqVJrqu/qghDNicfOX5nxezbuy80Efaxndxe87SF3IpOlyOu8fYdzTH507sbN8Gjs7gtejEEP5MZeu1+OyZ3cezZ/e7sMZZHGUhjAEXcQxwMIpBgnwfRBFhCGHKBHxr1u67qIouOKubL5LnF6sYHezmulBcbt7zuAIHxuZy9rmYdeIOi+jVmrl4hwu6zLvi9jHSOdW/gJXnt3jikpOSLk4kVzaf7jPoEYS6aekT1E3M+3R+vo8CxilAzFCE/cgHcYBHYJTEGcTm6mUBf8XO78vfba/VuqwTAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=1ee59c6b7a6b48fe960f9b63ba44d1a3"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Look Up Record">9d09f99587003300663ca1bb36cb0ba3</action_type>
+        <action_type_parent display_value="">9d09f99587003300663ca1bb36cb0ba3</action_type_parent>
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <comment/>
+        <compiled_snapshot>9d09f99587003300663ca1bb36cb0ba3</compiled_snapshot>
+        <display_text/>
+        <flow display_value="TrackMed Dose Execution &amp; Escalation Engine">c9f2f3c65e8640e79a03d4163e1f4d6f</flow>
+        <generation_source/>
+        <order>4</order>
+        <parent_ui_id>53a2e6f0-7267-41c2-9311-99a48078a7d4</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:40:08</sys_created_on>
+        <sys_id>63c637bb60b04be995e125f80a0945ce</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2026-08-26 20:43:44</sys_updated_on>
+        <ui_id>63c637bb-60b0-4be9-95e1-25f80a0945ce</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VYUW/iOBD+K1GeKZcQINC3ExXSSntbadvry+7KcmIHrDV21nbaUsR/v3HiBA5SKFeQtronlPHYM/PNN+Mx31a+wAvqX/taKoPMMqd+x3/EvGhkWKcgIkznHC8f3Ar2jPReQJ5jBfsNVf71yk/njBNFhX/97UfHZwQUByQYZ+PxYBQHQRQFwXAYpThMkmiYJkGShHAExwnloHoH1rz7yoMWp8qfa7AhWVp/f3ZbJ7VQKmJdiTo+fTZUEAo+ZJhr2vEXWBBspFo2EkUxuRV8I5gzYeA03yo/a/YC9qKe1csoRJXSaq35RA6USpzdYIPvjCpSUyinWjmrAY9VE2YDXQvKzv1g3dnov1h9vKtP6PaGcA14E5rhgpvJf7MZnmqzZ21WAd7mhknIuh/ZvOCE1+FLXizElyqXfuPhQwu9qpWbV1hWaACb5jahNkMuXdndXD59rbMxZaL0yy1ymWLefGFjFEsKY3FZ+RlBGaOcICY4E9YSpM3Sh3K6AAtogfOciRnKlXxk5akQy6I74/DRzbh8sliwmeji1EbeBWLh7hTkN6X4AStmUfgLjoHNHWtwDludPaRTxXKDnhiZUbOxXmsRaZ4w/9m27hiH6kSV4fnrjq+XesKx1huwgaboV2ExqKB36KEyUeWW0os/IYJH6oCyHHCll0pBmA1Ob9NgqREj3wuoZbJaTaCADCUo7KaFghyYbrW+Xu83jBN2HmspZHCopeDxVkuZbAfRFljdVHZln9sOqCvlbM2lHwTBedpLW/nvl+dJ1blfdpaG76i6yxTX6dyvIDhaAJXahvvPSIsUGYXTnwugLpEADpezfaq/rniU2eODzO5vMfveebfjrONz+YnKtX/zudzmfakW6tvmbHwefSQ2v/cSudhdwTgwBFUp1LJQJZSPKOWFLhcUFro66yKNn2VoAcCxHMwrmgJJNMKKokwWgiBneFMWFtWMKW2c8n49fKWQY+FJII9n5tQrtb1G+1hRhAeLItlu958yr3bdna89cN0rXfca108L9JS5s3/Gq+Hcc+cUM17iDyzKtxJIlZLqldnzSOoOcOCNg+kbnQrP6tT7J9c20rdOsEd8/RAt6RJNphz9K5D3G8ZbmsLBZyUmW03h1ibdS5Y7r8rGuKvv6kHQcmVO7cLOldn7f16Zv+UA2HntOXexyRCVAx6RsC2D/gV7Ud2v6uYT7LO6eqodp3ZKcdLv4WEchWEQhAGJg1Ech6Nhkg1x3M+2qH0jhX1R9WLjWUegzXi1I8dddbxPpOQUix3S3wOAf0ydx470g9/ucvsQc2LB7neRrkStWF+qRgr2t2C/CvrJUmxEg94oJOnVKA7jq35GhldjggdXeJwM4ojQtJ+d80+FH/8A1NNx+mYUAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=63c637bb60b04be995e125f80a0945ce"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Send Email">c1806bf4a70323008299b39f087901cb</action_type>
+        <action_type_parent display_value="">c1806bf4a70323008299b39f087901cb</action_type_parent>
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <comment/>
+        <compiled_snapshot>c1806bf4a70323008299b39f087901cb</compiled_snapshot>
+        <display_text/>
+        <flow display_value="TrackMed Dose Execution &amp; Escalation Engine">c9f2f3c65e8640e79a03d4163e1f4d6f</flow>
+        <generation_source/>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:45:33</sys_created_on>
+        <sys_id>775e49d8359e4fb68ae3f178b7d10b10</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2026-08-26 20:43:44</sys_updated_on>
+        <ui_id>775e49d8-359e-4fb6-8ae3-f178b7d10b10</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+2Y227jNhCGX4XQtaHK5zh3WxtBA2x2i3WwvVgsBIqkLDaUqJJUHNfIu++Iom36ACdOmsLb5irhiIeZ0fdzRv62DAqcs+AyMDgRLLaDVnCPRVUbH2JdkNgoTO5yRmMqNYuFnMEMynUp8OLrkxNLrGBPw1RwuQxIxgVVrAguv31vBZzCyvboIhokaQ8Po26nG0UXndEo6Y7S6GI4itq0B1sInDABU29rF2F8yGOzKA/aPvpr0afmgVS09qfdCtiDYQVl4EiKhWatIMcFxUaqxdqiGKafCwEGoyoYZ7ww9YYZQwarGTNIMQI7IuPcy/GD5n+DNxdRvTplEDCpnQu8YewS2JjTCTZ4CvsTUyk3lWSSE6abVFGW4kqYsW9rJnwuDZdFs6TxoFktRZUXn5pMBesNVu8LLBW8IsrKOvw6IBdtOs3k/MvKyyte2Ey5h0ISLNYjbIziSWVqf5YBEyyHjeIclyUvZnGp5D23i8GXPJwJGISpkHM4VPNZEWJSOx5CtnF4BfaJNX/FitdR3MA2sBgg0bEmiper2OzhwWMr0As9FljrTYyQ3PivqvawidjFFjfpqZfYjT7AwffMhfHYWitgjoHSHKu7mOWYC08G7X3gaxaeQXc0GCTJIOkPuxu6RySlwyQd4CHpenRfF0RUlKE/Vm5sSN/3zOGeSCkYLnZZB99+ubJ5WrPeOZF1Z3CwN5AhIxG8FrFAGK1dqo0GtGA9g/+wQVwjDXkP0a1E3EXlrWihhaxQXmkD0ww82ZJR6Cuod74KcgA46+QgHT+FxN5CSjiLdZX8yYjxVHTDKCfYgqRYbsNGqVRouRwDdwbKRjsklVI1OiXM8/7aG/3xcV+G/8ieT4m4T4+VKEY8EU/XUR/KhFOthpdazHZEO10ZnWAHxwXb1KI9vXq1Jzpf7fzPpZFIuvB08Ttc4RpuSAr8cg0Y2vtUk4zRSjCK8g3jcNfC3anQCmV0Y29gmF53XAhrdIvvWIEkZM/bkNlbdUc6/9axT6kLH1VX2vHU9WuTuL1MOl1lJhc7qvrt9ubjRlPDlxXBtagG/X538K6qV/d05Zx2qJJl6WKz5fItxNa0FJ7WDtSFQ2XlGdj2jmJL6NZ3i+1vvqyc2XXO4UslqWy6Od2heOKeoOvJBuboVR3dB60l4ZAJ7XVvc24y6McONGLdzjb20NZxy9hh/K83j89ABk2tPEEF6ZRhRbIrzkT9qosqTyy32+ogcIGqeIdJ1/mdSz3yvoefU5mMPK6VkGDFYgOXvQotMofE8+x1T/Zdx38awL7E5FZdsHGc0m1137utM6gLlAmecwvE29UEwIOQF1359CiPLPJ4HI+3eLQHnsJj75WdyjuQPxWQyQuJbB//Mh34vfMOksnJTPbfmfyPM/n9BwMptVUPGAAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=775e49d8359e4fb68ae3f178b7d10b10"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Update Record">f9d01dd2c31332002841b63b12d3aea1</action_type>
+        <action_type_parent display_value="">f9d01dd2c31332002841b63b12d3aea1</action_type_parent>
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <comment/>
+        <compiled_snapshot>f9d01dd2c31332002841b63b12d3aea1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="TrackMed Dose Execution &amp; Escalation Engine">c9f2f3c65e8640e79a03d4163e1f4d6f</flow>
+        <generation_source/>
+        <order>7</order>
+        <parent_ui_id>0a14171d-695d-4cc1-b5d4-c327467df4bf</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:40:09</sys_created_on>
+        <sys_id>a3e158e0f6874aabb33fe4c7e5825b91</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2026-08-26 20:43:44</sys_updated_on>
+        <ui_id>a3e158e0-f687-4aab-b33f-e4c7e5825b91</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1V70/bMBD9V5A/t1HSpD+/TXRIkzbQYOILY5FjX6iF42S2A3RV/3fOcZpmgGBITBrSKvWD7+6d3728Sy42RNECyIJYmklIm8OA3FBZu+BdahRLrabsugCe4l8wakWpUsNWwGtENDiEcGEqSdfnr0dWVOOtFjRZbAhbCck1KLK4uBwQwbFVNuZhNI8mLI7ieBSGo1kSZZM4i0Y8psDm2ELSDCSWfmtbPjWTXVdPxj73sQfHPlFq7viMwwGBOwuKAzLJqTQwIAVVnNpSr8nC6hoDGig/UXLdVayEstiRuNo7I37hvbPQ1eWAozHwue6Yttr5cL6klp5hZ2Zr3ZayVSkYGC8Kh5zW0h72Y77gpHIKe4hX16NLWRfq2GtCuga7R4WR2iAJqNycjnk7Rn62Km9PdyyPhGo0aZOyZFR2J2qtFlltHZ8NAQkFNkoLWlVCXaWVLm9EA0YuRXAl8RDksrzFS424UgFljniAstLgCOPLJnxOtXBTfME2CN4OiFmbQ0mN2c+CIqY/a8fET9bOkHoZHIRpUdkPeMENtHS3g871Ghg+6p7jN5ucjaLZfJwNIWLTYZJM4+E8mWZDzsezZMpZEoeT4LTBbbePjf8Hhk7gOUND1DP06Y7fQ76tm3nJ6kZqwR/YedlmDj4t936O3szPyXvysx/r3du59+p60diNn03P2MaW7Nr1VlbY9fc6DGP+KrMHv3fYbn98/PrY/n/rmpd2Khw9u1PQ26kjAZKb/U51Uu2+EFDgRBZSL92Dr0SbPDhvk91mvdlqRZOw+f1fsH9vwS7vARbx9DwxCQAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=a3e158e0f6874aabb33fe4c7e5825b91"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Send Email">c1806bf4a70323008299b39f087901cb</action_type>
+        <action_type_parent display_value="">c1806bf4a70323008299b39f087901cb</action_type_parent>
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <comment/>
+        <compiled_snapshot>c1806bf4a70323008299b39f087901cb</compiled_snapshot>
+        <display_text/>
+        <flow display_value="TrackMed Dose Execution &amp; Escalation Engine">c9f2f3c65e8640e79a03d4163e1f4d6f</flow>
+        <generation_source/>
+        <order>15</order>
+        <parent_ui_id>efa07219-4245-4008-858c-aba451a6fafd</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:45:33</sys_created_on>
+        <sys_id>a723271a41194127962720caa1f0dc52</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2026-08-26 20:43:44</sys_updated_on>
+        <ui_id>a723271a-4119-4127-9627-20caa1f0dc52</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+2Y227bOBCGX4XQtaHK5zh3WbvBBmhaoA66F0UhUCRlc0OJKknFcY28+w4p2pYPcOJkU7htrhKOyNHM6Ps1I39dBDnOWHAeGJwIFrtFI7jDorTG+1jnJDYKk9uM0ZhKzWIhJ7CDcl0IPP/y6MYCK/BpmArOFwGZckEVy4Pzr98aAadwsjk4i3pJ2sH9qN1qR9FZazBI2oM0OusPoibtgAuBEyZg640NEdb7IjbzYq/tQ/0s+lhdkIraeJqNgN0bllMGgaRYaNYIMpxTbKSaryyKYfopF2AwqoT1lOfGOpwyZLCaMIMUI+ARGR9ehu81/wHRnEX2dMogYWKDC2rL2BewMqcjbPAY/BNTKr+VTCUnTFeloizFpTDDuq3a8KkwXObVkSqC6rQUZZZ/rCoVrBwsnxdYSnhElBU2fZuQzzYdT+Xs8zLKS567SvmLQhIsVitsjOJJaWw8i4AJloGjOMNFwfNJXCh5x91hiCULJwIWYSrkDG6q+SQPMbGBh1BtHF6CfeTMX7DiNotrcAOHARIda6J4sczN3Tx4aAR6rocCa73OEYobfy9thFXGPre4Ko894hxdwI3vmE/jobFSwAwDpRlWtzHLMBc1GTR3gbcsPIHuqNdLkl7S7bfXdA9ISvtJ2sN90q7RfZUTUVKG/lmGsSZ9NzKPeyKlYDjfZh1ie3fp6rRivXUk697gYa8gQ0YieCxijjBahWSNBrTgIoP/sEFcIw11D9GNRNxnVTvRQHNZoqzUBrYZuLIho7CuoM7pKsgD4K2jvXT8EhJ7DSnhaazL5F9GTE1F7zWkhm1E5+iaa80osn0CpVKhxWII7BloHc2QlEpZfArYW/vr3uoPD7tS/N/8PibmLj3UqhipiXm8yn5fRbx6NTzcfLIl3vHS6IXbOyzcqift6LbWg6LT1dAfLpFE0nlNHxdIkymjpQCAYYjixDFdsTzDGuUSXpY04znXwChsmnED72f39lXse8mtzfCMpRbjEF1l1gvAj6BGEJl1ttwX7sroZ9/+MbXhg2pLWzW1/VUVcqeyXmdTk4ktlf19c/1hrbH+85rjSmS9brfde1PZi2e9YkZbVMmi8Lm5Nvoa4qtGjZr29vSJfa3mCdh2DmJL6Mb3jJt7Pi+D2Q7O40slKV25Od2ieOSvoKvRGuboRZPehdaSWNXq2lRnlQ5z2p4Brd3axB7GPe4Y24//1fryCcig6p1HqCAdM6zI9JIzYR91XmaJ43ZTHQRGchVvMeknwlPpT7Xv5Kd0KiMPayUkWLHY4FumQofMPvE8+dyjc9jhnwxwXWJyoy+4PI6Zvtpv09cJ9AXKBM+4A+L1egLgQcizXvn0II8sqvE4HG7w6G54DI+dF04qb0D+UkAmzySyefhLtVefnbeQTI5msvvG5G/O5Lf/AA3QiLInGAAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=a723271a41194127962720caa1f0dc52"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Update Record">f9d01dd2c31332002841b63b12d3aea1</action_type>
+        <action_type_parent display_value="">f9d01dd2c31332002841b63b12d3aea1</action_type_parent>
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <comment/>
+        <compiled_snapshot>f9d01dd2c31332002841b63b12d3aea1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="TrackMed Dose Execution &amp; Escalation Engine">c9f2f3c65e8640e79a03d4163e1f4d6f</flow>
+        <generation_source/>
+        <order>14</order>
+        <parent_ui_id>efa07219-4245-4008-858c-aba451a6fafd</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:45:33</sys_created_on>
+        <sys_id>b022414718414eb1bf77ac11579195ff</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2026-08-26 20:43:44</sys_updated_on>
+        <ui_id>b0224147-1841-4eb1-bf77-ac11579195ff</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+2UXW/aMBSG/wryNYoSQlHL3QRDmrRRrZ246drIsU/AqmNntkNhiP++4ySEiFawi16s0nLn8+X3PX6Uhx1RNAcyJo6mEpLq0CdrKksf3CRWscQZyp5z4AnXFhKpl1jBhS0k3S4uFhbU4EwHhox3hK2E5AYUGT889ong2Jle8TC6iUYsjuJ4EIaD62GUjuI0GvCYArvBEZKmILH0h5eI57cUu23xZuxrt7c3rxPacK/nKuwT2DhQHFBJRqWFPsmp4tRpsyVjZ0oMGKD8VsltW7ESyuFE4ms3VvzGe69DX5cBWmNQ59pj0qyqDmdT6ug9TmauNE0pW2nBwNZL4ZDRUrpJN1YX3BZOaFW3VD6bbi3LXM3rnZB2wOFlMFLiY3AovE+vvLGR3a/0y91B5UyoaidNUmpGZXuizhmRls7r2RGQkOOgJKdFIdQyKYxei6oZteTBUuIhyKR+wUutWKqAMi88wLXSYIbxaRVeUCO8i284Bpv3fWK3diKptUcvuMTkV+mV1M4aD0m9Bt/CjCjcJ7xgDY3cfb9l2gDDp+7wvNtN8DkdEhoFrDTo3O33r2n+C2yHcA5biDrY3h1UnKpqmOWaldVCBT+Bdtpkel+mR2qjd6N2+JGorW19eGg7P6iL+FbU2g6+1lFX2p9lGMZ8rl3P0WdQT5+/vyb4TOUlssPBWbKhQ/ZMgOT2SHYr+PA3hhxFOUhqAyd/5CbZWzTJlu93AzwahdX3H/N/D/PHP92Qrs97CAAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=b022414718414eb1bf77ac11579195ff"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Send Email">c1806bf4a70323008299b39f087901cb</action_type>
+        <action_type_parent display_value="">c1806bf4a70323008299b39f087901cb</action_type_parent>
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <comment/>
+        <compiled_snapshot>c1806bf4a70323008299b39f087901cb</compiled_snapshot>
+        <display_text/>
+        <flow display_value="TrackMed Dose Execution &amp; Escalation Engine">c9f2f3c65e8640e79a03d4163e1f4d6f</flow>
+        <generation_source/>
+        <order>11</order>
+        <parent_ui_id>011450b4-4277-4559-b217-834b0524b9b0</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:45:33</sys_created_on>
+        <sys_id>b385354f3f15489daa3ffce33d10e278</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2026-08-26 20:43:44</sys_updated_on>
+        <ui_id>b385354f-3f15-489d-aa3f-fce33d10e278</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+2Y227jNhCGX4XQtaHK5zh3qb1BA+xmi02wvVgsBIocWWwoUSWpOK6Rd+9Qkm35ACdOmoW3zVXM4UEzo+/njPJt4WU0Be/cszSSEJaDlndPZeGMD6HJWGg1ZXcp8JArA6FUU1zBhcklnX99cmFONZ5pQXvnC48lQnINmXf+7XvLExx3tkdnwSCKe3QYdDvdIDjrjEZRdxQHZ8NR0OY9PELSCCQuvXUu4nifx3ae77V9bO4l19WE0tz502558GAh44COxFQaaHkpzTi1Ss9XFg2Uf84kGqwucJyIzLoDEyCW6ilYooHhicTW7qX0wYi/0ZuzwO2OAQNmzjmvMQzrBFbmeEItvcHzmS10vZQlSjAwVao4xLSQdty0VQs+51aorNpSeVDtVrJIs+sqU97qgOX7QkuBr4hD7sJ3AdXRxjeJmn1ZenkpsjJT9aRUjMrViFqrRVRY58/CAwkpHhSmNM9FNg1zre5FuRl9Sf2pxIEfSzXDhxoxzXzKnOM+Zpv6l2iflOavVAsXxSc8BjcjJCY0TIt8GVv5cO+x5Zm5GUtqzDpGTG74V+E8rCKuYwur9Lgt5UEX+OB7qMN4bK0UMKNIaUr1XQgpFbIhg/Yu8I6FZ9AdDAZRNIj6w+6a7hGL+TCKB3TIug26rzImCw7kj6Uba9J3Patxj5SSQLNt1tG3Xy7LPK1Y7xzJem2oYa8gI1YRfC1yTihZueSMFrVQeoa/qCXCEIN598mtIqKOqrGjReaqIGlhLC6zOLMhI7+poN7pKqgGoLZO9tLxU0jsLaREk9AU0Z/AbENFHwyGRp1H52SCBYJwYFJkwEmsNFksxkifxeLR9lmhtQMox9WNv+W9/vi4K8Z/8eSnBN3nh8oVsIagb1YZ2JeVWsEGX3A23RLwzdJYi3dwWLxVXdrRbqMOBaero/+5TCLF5w2NXBDDEuCFRHaxkRKspJq4fook1JAIICPuEsV5HF4rS27pHWQ++R0LAS7ScC9gRhAOvFbvwN3XWuUYicXfVZy7+vlBT31KW/SgtuJOQ1u/VmnbyWOtqsSmcktTv91++rhW1PBl5XAlqUG/3x28a+rV3V0+4x2OqOR1bGXhfAupVc1FQ2l7qsK+0vIMbHsHsWV84wum7HS+LJ3Zdq7GlytWlOkWfIviST1DriZrmINX9XYXxijmlGoafdxM2AQ7sz0tWbeziT02eKJkbD/+V+vpE5BBVSmPUEF8A1Sz5FKAdK86K9Ko5HZTHQxvQR1uMVn3gKdSjRpfxs+pS1Yd1orPqIbQXfbaL5HZJ55n73uy6zr8TwLalJjaqAtlHMf0Wt33XusE6gIHKVJRAvF2NQHxYOxFVz4/yCMEDR7H4w0eywcew2PvlZ3KO5A/FZDRC4lsH/4uHTR75y0ko6OZ7L8z+R9n8vs/ioI4HRkYAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=b385354f3f15489daa3ffce33d10e278"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Update Record">f9d01dd2c31332002841b63b12d3aea1</action_type>
+        <action_type_parent display_value="">f9d01dd2c31332002841b63b12d3aea1</action_type_parent>
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <comment/>
+        <compiled_snapshot>f9d01dd2c31332002841b63b12d3aea1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="TrackMed Dose Execution &amp; Escalation Engine">c9f2f3c65e8640e79a03d4163e1f4d6f</flow>
+        <generation_source/>
+        <order>8</order>
+        <parent_ui_id>0a14171d-695d-4cc1-b5d4-c327467df4bf</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:45:33</sys_created_on>
+        <sys_id>c53329a6bf8f487d8f15c4af7b802593</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2026-08-26 20:43:44</sys_updated_on>
+        <ui_id>c53329a6-bf8f-487d-8f15-c4af7b802593</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1Uy27bMBD8FYNnW6AsW7V9K+IGKNAmaFL4kqYCRa5sIpSokpQfFfzvXT0sC0mQ9JBDA1Q37oszw1ndlSRjKZAFcSxWENWHIdkyVVTBfWQzHjnD+EMKIhLaQqT0GiuEtLlih9WrhTkzONOBIYuS8I1UwkBGFnf3QyIFdsZTQf25H/LAD4IxpePZxI/DIPbHImDA5zhCsRgUln6vIOL5OcTukD8b+9LvHVw1CW1EhWdKhwT2DjIBiCRhysKQpCwTzGlzIAtnCgwYYOI6U4euYiMzhxNJVbu38jfeO6NVXQJIjUOT645RK1UTTpbMsVuczF1h2lK+0ZKDbUQRkLBCuYt+rCm4zp3UWdNS82y7tSrS7KrRhHQDTi+DkQIfQ0Be8ayQtzSS243e3ZxQXsqs1qRNKs2Z6k7MOSPjwlV4SgIKUhwUpSzPZbaOcqO3sm5GLKm3VnjwEqV3eKmV68xjvALuoazMu8T4sg6vmJEVi684BpuPQ2IP9kIxa89cUMToV1EhaZi1HKJGhqqFG5m7j3jBFlq4x2HnaQMcn7rn57K8wOd06FDf44VB5u54fOrmv7DtBF6yLfg9296cUDxG1XpWaF7UgkrxyLTLNjP4vDy71n8z107ek2sbWu/etL0f1Kv2rV1re/bdafMQ4bQfBaWBKMsw4GHwIY5HIY3paBLDfDSfgj8aT5MZZXQ+mXLwGvt5p97j8eenb08t/5ajX9sdOn5xd6C3O5cSlLDn3ekkOf3vIUUWDqJGokf//DY5WLXJboPebIX8kNbf/0X69xbp/g9UrrD33QgAAA==</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=c53329a6bf8f487d8f15c4af7b802593"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Create Task">2b3a6335531003003bf1d9109ec58759</action_type>
+        <action_type_parent display_value="">2b3a6335531003003bf1d9109ec58759</action_type_parent>
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <comment/>
+        <compiled_snapshot>2b3a6335531003003bf1d9109ec58759</compiled_snapshot>
+        <display_text/>
+        <flow display_value="TrackMed Dose Execution &amp; Escalation Engine">c9f2f3c65e8640e79a03d4163e1f4d6f</flow>
+        <generation_source/>
+        <order>16</order>
+        <parent_ui_id>efa07219-4245-4008-858c-aba451a6fafd</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:40:09</sys_created_on>
+        <sys_id>cb8afd1defc14a26a1d70f0da838de82</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2026-08-26 20:43:44</sys_updated_on>
+        <ui_id>cb8afd1d-efc1-4a26-a1d7-0f0da838de82</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VWTU/bQBD9K9aeg+uQhpTcEDRSpQJqqeiBEmuzO45XrHfN7jghjfLfO/Y6wXyUcugFIfmyb77ezD6PfbVmhhfAxgy5v0mRzzSwHltwXW1BOkrlS81Xlw/RkjsKRXBsvGYiV1o6MGx8dd1jSpIbjAb8YDAYDgf9JBnQM8v68rCfHIIYfhoNBaXQfAaaXH+0dZ/jgqsyYHRMG4eAfe3GRmfBYJ2s+SQ9BncIRgIRybj20GMFN5KjdSs2RlcR4IDLc6NXO49cGaSErPa98+o3lf2U1H4ZUGcCgm13TNuxBDg74cgvKLPAyrWuIrdKgA8zkZDxSuNxFwsO5yUqa0JI6DpEW10V5iyMhO0SbG+BkMoTCSjrPmvmbRvZRW6X37csJ8o0I2mN2gqudyeO6NSswprPms045dsSaC8ZNBSUPC14WSozT0tnF6pJSPyKeK7pEGfaLomIV3MTc1E3E9OoeTwh/KSBL7lTdeJTSkPBmx7zK3+suff3/dFg09uqZhe6bftKw2jqEOFUiUdUYAFtC5veTsBLrrAj3eSpbpuIVwg3y14S7mjUEe7PUPQhhVaxM2s1cPNYrqS9D5OWSSvX/Zfl2iKv0evH96TXt6PNTIGWaSNN39Goz63DmlwTTNR+VaQ2eVRJhePoVHkPMipAKsFraySth2gvQlWArTCCOwFAmpk+zRB5kYOsNMU3QUvuI2Mx4rJQRnnSPlmWCklCEeYQ7e/ltnKEGGmXcfTFLMCjmoeyDm4rRQHxlGZCAwOZog2F1utjkiUS0o9F5egGMRbc1WvkBtxmMy2dsk7hKrj3p5+/PX0v3+sY/rWH9l/8gB7MOntoUgssutwK7HnZbb+kUND0EYLh8XpqjSHX/Yrq/7cVdTBMkre0pcLPwptfUp1/qr+sq+s/U9i8qA0KAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=cb8afd1defc14a26a1d70f0da838de82"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Look Up Record">9d09f99587003300663ca1bb36cb0ba3</action_type>
+        <action_type_parent display_value="">9d09f99587003300663ca1bb36cb0ba3</action_type_parent>
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <comment/>
+        <compiled_snapshot>9d09f99587003300663ca1bb36cb0ba3</compiled_snapshot>
+        <display_text/>
+        <flow display_value="TrackMed Dose Execution &amp; Escalation Engine">c9f2f3c65e8640e79a03d4163e1f4d6f</flow>
+        <generation_source/>
+        <order>6</order>
+        <parent_ui_id>0a14171d-695d-4cc1-b5d4-c327467df4bf</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:40:08</sys_created_on>
+        <sys_id>fc21895be1c74473947bdd5847dc4306</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2026-08-26 20:43:44</sys_updated_on>
+        <ui_id>fc21895b-e1c7-4473-947b-dd5847dc4306</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VY32/iOBD+V6I8Uy7hV6BvJyqklfa20rbXl92V5dhOsdbYWdtpS1H/9xsnTuAghXIFaat7QhnPeGa++WZs820VSrxg4WVolLbILnMWdsIHLIpGhg0BEeUmF3h551dwYFXwDPIca7C3TIeXq5DMuaCayfDy249OyCkoDmk0ySaT4TiJon4/ikajPsFxmvZHJI3SNIYtBE6ZANUb8BbcVhG0BFX+XIIPxUn9/dmbTmuh0tSF0u+E7MkySRnEkGFhWCdcYEmxVXrZSDTD9FqKtWDOpYXdQqf8ZPgz+Ov3nF7GICvCqrXmE3lQKnF2hS2+sbogttBetQrWAB6rJs0GuhaUffjRS2et/+z08bY+ZZsG8QvgTVmGC2Gn/81nfKzPnvNZJXidW66g6mHf1QWnok5fiWIhv1S1DJsI71roVa1cvcKywgDYLHcFdRXy5cpu5urxa12NGZdlXH5RKIJF84Wt1TwtrMNlFWYUZZwJirgUXDpPUDZHHybYAjygBc5zLu9RrtUDL3eFXBbdewEf3UyoR4cFv5ddTFzmXSAW7s5AflWK77DmDoW/YBsw7jiHczD1/pAhmucWPXJ6z+zae61FlX3E4mfbumccqgtVphe+dEKzNFOBjVmDDTRFvwqHQQW9Rw+VhSpNyij+hAwemAfKccC3HlGScpec2aTB0iBOvxfQy3S1mkIDWUZR3CWFhhrY7oJRTrCzennZHRpHWh8aLXS4b7TgycZomW4m05ZgPVy2ZZ/bNqg75mRDZhBF0WnGTNsY2G3To7p0t/0cHd/RfedpsuN7oILgYCNUauseeEJGEmQ1Jj+BsGhNWmjrOaOFYKg22eL/EZYHuT/Zy/3BBvdv/ZZb6XjGl5+oXPs340uz4Eu1UJ9LJ2P8+CPx/b3HzdlOFS6AIRVnkFGFLqF8QEQUplzQWJpqr7McETxDCwCO5+BeMwIkMQhrhjJVSIq843XjOFQzro31yrsN8pVBjWWggDyBnbOg1A4a7UNNEe9tinTzQPiUBXXofn8TQOhBGXrQhH5cosfcUAcnPDxOfUOdYS5K/IFF+UYBmdZKv3JLPVC6PRx44xX2jUHFJw3q/XfcNtK33nUPxPohRtI5hkz5SKhA3h0YbxkKex+gmG4MhWtX9CBdbr0/G+e+v6unQ8uROXMLW0dm7/95ZP6WV8TOaw+/s90dUXnjowrMMphfYIvqeVUPn2iX1dWj7jC1CcPpoIdHST+OoyiOaBKNkyQej9JshJNBtkHtKyXdu6uX2MAFAmMmqAM5HKrnfaqUYFhukf4WAPxj5iP2pB/+dofbh7gnFvx2G+lK1Ir1uXqk4H9L/qtgnxzFxizqjWNKLsZJnFwMMjq6mFA8vMCTdJj0KSOD7JR/P/z4BypIQpiQFAAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=fc21895be1c74473947bdd5847dc4306"/>
+    <sys_hub_sub_flow_instance_v2 action="delete_multiple" query="flow=c9f2f3c65e8640e79a03d4163e1f4d6f"/>
+    <sys_hub_flow_logic_instance_v2 action="delete_multiple" query="flow=c9f2f3c65e8640e79a03d4163e1f4d6f^sys_idNOT IN011450b442774559b217834b0524b9b0,0a14171d695d4cc1b5d4c327467df4bf,53a2e6f0726741c2931199a48078a7d4,efa0721942454008858caba451a6fafd"/>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <block display_value="">9a51280047430f104134ef6c716d43a3</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="TrackMed Dose Execution &amp; Escalation Engine">c9f2f3c65e8640e79a03d4163e1f4d6f</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="Else If">666e5545c3e232002841b63b12d3ae99</logic_definition>
+        <order>10</order>
+        <outputs_assigned/>
+        <parent_ui_id>53a2e6f0-7267-41c2-9311-99a48078a7d4</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:40:09</sys_created_on>
+        <sys_id>011450b442774559b217834b0524b9b0</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:22</sys_updated_on>
+        <ui_id>011450b4-4277-4559-b217-834b0524b9b0</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1VXU/bMBT9K8jPbeR8tbRvqAgJiYEEiJcNRdeO01q4cWY7LVnU/77rJG3R1mls7HFv8bHv9Tkn9yQt0bWramcf9YW1clmS+efnEZGlx/C5JSWsBZkTrstcOqlLMiIbULXH2nYS80k8ZWw8oYyOEyZm41kqwnGUFucU6CxJuQjuBdcmD6wDV9vd7ktNaZzfanfm4EX4frm0lYLm6R+35SupciMGSRUYVOKEIfP2hy2Z460FhSKc8ZDH0SSOKI3Ok5BNYhZGeQwCQmyogAmFRxdvvDhhj2sqD1lnZLkc1jdD6cMeROqeSkRHRLw6UeYCSRSgrBiRNZQ5OG0aMnemRsAIyO9K1RxOrGTpsBvxZ1+t/CZ8J0r9yUKgLi763cMyGzzu4eISHCCVmrvaDEf5SksubO9ILgqolVu8xfoDd1WnsitxwNS+Wqt6Xd72ZpBDg/0rRaS2SEJUXqnnPggpHlZ6e79neSXLzpVhU2kO6rACh96x2nk+LRFKrLFRtoaqQkezyuiN7IqRyzpYKlwEhdJbvNTPdQDcEw/QWAiuEL/s4Ccw0qv4hG2wGGfBZpYbWe21dZeT3YjYxi4UWHvUiOZmX2vPsFc8aMt6e3xJ1+gCL96IQcZu1BLP6kYvJb8ucXhR9kNjr/0I0jBMUsqSJJpOkzSdsSicnscJo2mUsBmj5H2jGp0Yy6wDjtH9OXXkwxGJTkXkrJ/8XzP6k7SEv0nLgLwrLmn6Py0fTounycBKnnV/DGznP1h/GZfB9CspVH5yhE7l6dnPdM/q8Da4tFj26LHr/Y/MbzQ4cj51R2irzYuXfcR23wENBZUREgcAAA==</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <block display_value="">5a51280047430f104134ef6c716d439c</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="TrackMed Dose Execution &amp; Escalation Engine">c9f2f3c65e8640e79a03d4163e1f4d6f</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>5</order>
+        <outputs_assigned/>
+        <parent_ui_id>53a2e6f0-7267-41c2-9311-99a48078a7d4</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:40:09</sys_created_on>
+        <sys_id>0a14171d695d4cc1b5d4c327467df4bf</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:22</sys_updated_on>
+        <ui_id>0a14171d-695d-4cc1-b5d4-c327467df4bf</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1VXU/bMBT9K5Of28j5LO0bKkJCYkMCxMuGohvbaS3cOLMdIIv633edpC2CTrCPxz21Pva9PufknqQjunF14+ytPrVWriqy+Ho/IbLyGP7vSAUbQRaE6YpLJ3VFJuQRVOOxrstilsWzophmtKDTpBDz6TwV4TRKyxMKdJ6kTATXgmnDA+vANXa7/dZQGvNbeBC+F5e2VtDe/cOWbC0VN2KUUoNBBU4YsuhebUmON84hLdOQpiyOsjiiNDpJwiKLizDiMYgkw4YKCqHw6PKFB0dscW3tIeuMrFbj+nIsvdmBSNtTieiEiGcnKi6QRAnKignZQMXBadOShTMNAkYAv6pUuz+xlpXDbsSffbbyh/CdKPUnS4G6mBh298t89HeAyzNwgFQa5hozHmVrLZmwgyNclNAot3yJDQeu6l5lX+KgULtqrZpN9WUwg+wb7B4nIo1FEqL2Sj33UUh5s9ZP1zuW57LqXRk3lWag9itw6F3ROM+nI0KJDTbKN1DX6GheG/0o+2LksglWChdBqfQTXurnOQDmiQdoLATniJ/18B0Y6VV8xjZYjLNgc8uMrHfa+svJdkJsa5cKrD1oRHPz741nOCgeteWDPb6kb3SKFz+KUcZ20hHP6lKvJLuocHBR9k1rL/wIUgiTcBbybJ7yhLGw8D9xNEuyGS+ToiTjqJYUynDOwuOjCvGRscx74BDZt4kj70fkA/e+icinYfJ/zeh30hK+k5YR+VBc0vR/Wv46LZ5mAVayvP9SYDv/wvrDuIymn0uh+NEROpanez/TA6v902DSYtmtxy52HzC/0eLI+dQdoCdtHrzsA7b9CcxG0LoKBwAA</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <block display_value="">d651280047430f104134ef6c716d4398</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="TrackMed Dose Execution &amp; Escalation Engine">c9f2f3c65e8640e79a03d4163e1f4d6f</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>3</order>
+        <outputs_assigned/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:40:09</sys_created_on>
+        <sys_id>53a2e6f0726741c2931199a48078a7d4</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:22</sys_updated_on>
+        <ui_id>53a2e6f0-7267-41c2-9311-99a48078a7d4</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1VXU/bMBT9K5OfS+V8tukbAiFVYkMaiJcNRTe201pz48x2ClnU/77rJG0RdIKN171U9fH9OOfmnqQjunF14+ydPrdWriqy+PYwIbLyGP7vSAUbQRaE6YpLJ3VFJmQLqvFY1wVCJBlLi7MZ4E88L8VZltLyLCvSqIA45gFEU+vAid3ue0NpxCnmc2lrBe39B8uwtVTciJFyDQaZOmHIontxJTl2ySApk4AmLArTKKQ0nMeBLx+EPAIRp1hQQSEUhl4803pCvmtrD1lnZLUaz9dj6u0e1IZ7KiGdEPHkRMUFkihBWTEhG6g4OG1asnCmQcAI4DeVag8Ra1k5rEZ87JOVv4SvRKmPLAXqYmK4PRzzcaYDXF6CA6TSMNeYMZSttWTCDhPhooRGuYvn2BBwU/cq+xQHhdpna9Vsqi/DMMihwP4RItJYJCFqr9RzH4WUt2v9+HXP8kpW/VTGS6UZqMMJHM6uaJzn0xGhxAYL5Ruoa5xoXhu9lX0yctlMVwoP01LpR2zq93YKzBOf4mBheoX4ZQ/fg5FexWcsg8m4Cza3zMh6r61vTnYTYlt7ocDao0Ycbv6z8QwHxaO2fBiPT+kLnWPjrRhl7CYd8ayu9UqyZYU7i7JvW7v0K5hEEIq0pLMwncUBC7MoCLIM4jmdzWHGYzKuakmhDDIWnF5ViE6sZd4DR2u+dhl52yLv6PvKIp+Gzf8zo79xS/CGW0bkXXZJkv9u+bBbPM0CrGR5/0XAcv6F9Y92GYd+JYXiJ1folJ8e/E4PrA5Pg0mLaXceW+4/VP6ixZXzrjtCj9r88LKP2O439cdwF/IGAAA=</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <block display_value="">2251280047430f104134ef6c716d43a8</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="TrackMed Dose Execution &amp; Escalation Engine">c9f2f3c65e8640e79a03d4163e1f4d6f</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="Else If">666e5545c3e232002841b63b12d3ae99</logic_definition>
+        <order>13</order>
+        <outputs_assigned/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:40:09</sys_created_on>
+        <sys_id>efa0721942454008858caba451a6fafd</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:22</sys_updated_on>
+        <ui_id>efa07219-4245-4008-858c-aba451a6fafd</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1V0W7aMBT9lcnPgJIQKPBWUVWq1K3SqPqyVdGN7YA1Y2e20zaL+PfdmwSoOqZ143UvCB/7Xp9zc07SMFuFsgr+3l56r9aGLb48DpgyhOH/hhnYSrZg3BqhgrKGDdgT6IqwpomlnMz5NB9eAP6ks0IO59OoGM7z6TiHNBUxjEc+QJC73dcqisYixnqhfKmhfjizDd8oLZzsKZfgkGmQji2aN1tK4C1FBEU85zEfJ9NxEkXJLI2pfZyIMUighhpyqfHo8pXWE/JDXRLkg1Nm3a9v+9LVHrROEJUkGjD5EqQREkkUoL0csC0YAcG6mi2CqxBwEsSd0fXhxEaZgN0YnX3x6oekTlFEJwuJurjsdg/LrJ9pBxdXEACpVDxUrj/KN1Zx6buJCFlApcPyNdYduCtblW1JgFzvq62utuZTNwx2aLB/hIhUHknIkpQS915IsdrY5897ltfKtFPpN7XloA8rCDi7vArEp2FSyy02yrZQljjRrHT2SbXFyGU7WmtcjAptn/FS8u0IOBEf4WBhdI34VQs/gFOk4iO2wWL0gs88d6rca2svZ7sB87VfavD+qBGHm32viGGnuNeWdeOhkrbRJV78JHsZu0HDiNWtXSt+Y9CzKHtV+xuyIM4sukjieZqkkzSKZrPJjAP6exLDtIBCsPdZNTlhy6wFjtH8NWXs7IgkpyLyoXP+7xn9TVriP6SlR94Vl8nkf1rOTgvRzMErnrVfBGxHL6x/jEs/9GsltThpoVN5eiRPd6wOT4Mrj2X3hN3sP1S0UaPlKHVH6Nm6byT7iO1+Ah726OPyBgAA</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=c9f2f3c65e8640e79a03d4163e1f4d6f"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=c9f2f3c65e8640e79a03d4163e1f4d6f"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>current</element>
+        <help/>
+        <hint/>
+        <label>Record</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_c9f2f3c65e8640e79a03d4163e1f4d6f</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:21</sys_created_on>
+        <sys_id>4e51280047430f104134ef6c716d4310</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:21</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>table_name</element>
+        <help/>
+        <hint/>
+        <label>Table Name</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_c9f2f3c65e8640e79a03d4163e1f4d6f</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:21</sys_created_on>
+        <sys_id>5a51280047430f104134ef6c716d4328</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:21</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_c9f2f3c65e8640e79a03d4163e1f4d6f"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_c9f2f3c65e8640e79a03d4163e1f4d6f"/>
+    <sys_hub_flow_snapshot action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <allow_high_security_roles>false</allow_high_security_roles>
+        <annotation/>
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <authored_on_release_version>-1</authored_on_release_version>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description/>
+        <flow_priority>MEDIUM</flow_priority>
+        <internal_name>trackmed_dose_execution__escalation_engine</internal_name>
+        <label_cache>[{"name":"Created_1.current.patient.patient_name","label":"Trigger - Record Created➛x_snc_trackmed_dose_log Record➛Patient➛Patient Name","type":"string","base_type":"string","usedInstances":{"775e49d8-359e-4fb6-8ae3-f178b7d10b10":["ah_subject"],"18cd9e8b-c966-44a1-8987-29ecf14d4f0a":["log_message"],"b385354f-3f15-489d-aa3f-fce33d10e278":["ah_subject"],"a723271a-4119-4127-9627-20caa1f0dc52":["ah_subject"]},"attributes":{}},{"name":"Created_1.current","label":"Trigger - Record Created➛x_snc_trackmed_dose_log Record","type":"reference","base_type":"reference","usedInstances":{"775e49d8-359e-4fb6-8ae3-f178b7d10b10":["record"],"1ee59c6b-7a6b-48fe-960f-9b63ba44d1a3":["record"],"c53329a6-bf8f-487d-8f15-c4af7b802593":["record"],"b385354f-3f15-489d-aa3f-fce33d10e278":["record"],"b0224147-1841-4eb1-bf77-ac11579195ff":["record"],"a723271a-4119-4127-9627-20caa1f0dc52":["record"]},"attributes":{}},{"name":"Created_1.current.care_taker.email","label":"Trigger - Record Created➛x_snc_trackmed_dose_log Record➛Care Taker➛Email","type":"string","base_type":"string","usedInstances":{"775e49d8-359e-4fb6-8ae3-f178b7d10b10":["ah_to"],"b385354f-3f15-489d-aa3f-fce33d10e278":["ah_to"],"a723271a-4119-4127-9627-20caa1f0dc52":["ah_to"]},"attributes":{}},{"name":"1ee59c6b-7a6b-48fe-960f-9b63ba44d1a3.state","label":"1ee59c6b-7a6b-48fe-960f-9b63ba44d1a3➛state","type":"string","base_type":"string","usedInstances":{"53a2e6f0-7267-41c2-9311-99a48078a7d4":["condition"],"efa07219-4245-4008-858c-aba451a6fafd":["condition"]},"attributes":{}},{"name":"Created_1.current.sys_id","label":"Trigger - Record Created➛x_snc_trackmed_dose_log Record➛Sys Id","type":"string","base_type":"string","usedInstances":{"63c637bb-60b0-4be9-95e1-25f80a0945ce":["conditions"]},"attributes":{}},{"name":"63c637bb-60b0-4be9-95e1-25f80a0945ce.Record.status","label":"63c637bb-60b0-4be9-95e1-25f80a0945ce➛Record➛status","type":"string","base_type":"string","usedInstances":{"0a14171d-695d-4cc1-b5d4-c327467df4bf":["condition"],"011450b4-4277-4559-b217-834b0524b9b0":["condition"]},"attributes":{}},{"name":"Created_1.current.medication","label":"Trigger - Record Created➛x_snc_trackmed_dose_log Record➛Medication","type":"string","base_type":"string","usedInstances":{"fc21895b-e1c7-4473-947b-dd5847dc4306":["conditions"]},"attributes":{}},{"name":"fc21895b-e1c7-4473-947b-dd5847dc4306.Record","label":"fc21895b-e1c7-4473-947b-dd5847dc4306➛Record","type":"reference","base_type":"reference","usedInstances":{"a3e158e0-f687-4aab-b33f-e4c7e5825b91":["record"]},"attributes":{}},{"name":"fc21895b-e1c7-4473-947b-dd5847dc4306.Record.stock_quantity","label":"fc21895b-e1c7-4473-947b-dd5847dc4306➛Record➛stock_quantity","type":"integer","base_type":"integer","usedInstances":{"a3e158e0-f687-4aab-b33f-e4c7e5825b91":["values"]},"attributes":{}},{"name":"63c637bb-60b0-4be9-95e1-25f80a0945ce.Record.work_end","label":"63c637bb-60b0-4be9-95e1-25f80a0945ce➛Record➛work_end","type":"glide_date_time","base_type":"glide_date_time","usedInstances":{"c53329a6-bf8f-487d-8f15-c4af7b802593":["values"]},"attributes":{}},{"name":"Created_1.current.care_taker","label":"Trigger - Record Created➛x_snc_trackmed_dose_log Record➛Care Taker","type":"reference","base_type":"reference","usedInstances":{"1b154b58-58cf-481f-bf18-4e4225194469":["field_values"],"cb8afd1d-efc1-4a26-a1d7-0f0da838de82":["field_values"]},"attributes":{}}]</label_cache>
+        <master>true</master>
+        <name>TrackMed Dose Execution &amp; Escalation Engine</name>
+        <natlang/>
+        <outputs/>
+        <parent_flow display_value="TrackMed Dose Execution &amp; Escalation Engine">c9f2f3c65e8640e79a03d4163e1f4d6f</parent_flow>
+        <remote_trigger_id/>
+        <run_as>system</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <status>published</status>
+        <sys_class_name>sys_hub_flow_snapshot</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:23</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>7651680047430f104134ef6c716d433b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:23</sys_updated_on>
+        <type>flow</type>
+        <version>2</version>
+    </sys_hub_flow_snapshot>
+    <sys_translated_text action="delete_multiple" query="documentkey=7651680047430f104134ef6c716d433b"/>
+    <sys_variable_value action="delete_multiple" query="document_key=7651680047430f104134ef6c716d433b"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=7651680047430f104134ef6c716d433b"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=7651680047430f104134ef6c716d433b^sys_idNOT INb651680047430f104134ef6c716d433c"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>7651680047430f104134ef6c716d433b</id>
+        <name>TrackMed Dose Execution &amp; Escalation Engine</name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:23</sys_created_on>
+        <sys_id>b651680047430f104134ef6c716d433c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:23</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=b651680047430f104134ef6c716d433c"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=7651680047430f104134ef6c716d433b^sys_idNOT INf651680047430f104134ef6c716d435c,fa51680047430f104134ef6c716d433d"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,test_input_hidden=true,uiType=table_name</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>table_name</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">table_name</internal_type>
+        <label>Table Name</label>
+        <mandatory>false</mandatory>
+        <max_length>200</max_length>
+        <model display_value="TrackMed Dose Execution &amp; Escalation Engine">7651680047430f104134ef6c716d433b</model>
+        <model_id>7651680047430f104134ef6c716d433b</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_7651680047430f104134ef6c716d433b</name>
+        <next_element/>
+        <order>101</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:24</sys_created_on>
+        <sys_id>f651680047430f104134ef6c716d435c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:24</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=f651680047430f104134ef6c716d435c"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,timeFromCreateToActivate=36000,uiType=document_id</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent>table_name</dependent>
+        <dependent_on_field>table_name</dependent_on_field>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>current</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">document_id</internal_type>
+        <label>Record</label>
+        <mandatory>true</mandatory>
+        <max_length>200</max_length>
+        <model display_value="TrackMed Dose Execution &amp; Escalation Engine">7651680047430f104134ef6c716d433b</model>
+        <model_id>7651680047430f104134ef6c716d433b</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_7651680047430f104134ef6c716d433b</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:23</sys_created_on>
+        <sys_id>fa51680047430f104134ef6c716d433d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:23</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>true</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=fa51680047430f104134ef6c716d433d"/>
+    <sys_hub_flow_output action="delete_multiple" query="model=7651680047430f104134ef6c716d433b"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=7651680047430f104134ef6c716d433b"/>
+    <sys_hub_trigger_instance_v2 action="delete_multiple" query="flow=7651680047430f104134ef6c716d433b^sys_idNOT INcf51680047430f104134ef6c716d43b5"/>
+    <sys_hub_trigger_instance_v2 action="INSERT_OR_UPDATE">
+        <comment/>
+        <display_text/>
+        <flow display_value="TrackMed Dose Execution &amp; Escalation Engine">7651680047430f104134ef6c716d433b</flow>
+        <generation_source/>
+        <name>Created</name>
+        <published_version/>
+        <remote_sys_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:24</sys_created_on>
+        <sys_id>cf51680047430f104134ef6c716d43b5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:24</sys_updated_on>
+        <trigger_definition display_value="Created">798916a0c31322002841b63b12d3ae7c</trigger_definition>
+        <trigger_inputs>H4sIAAAAAAAA/+1XTW/bMAz9K4JPG5ABGXbrbV8FAnQr0HTboSsMxaITYYqUSXQSr8h/H+WPRHXsNm3jbRh6SkTJ4iP5nkRd3URo5XQKdqQdcp3AOHcjEZ1E0SBSfAKK/l7yiQIaS41gNVeX+QLIjN4caz73cwIWoAVoLD9NZkYmcCYdja+uB9Gca8HR2Dw6QZvBIEqtmV/CfKE40l4pV46Mxgqw0cnr4XAQFftWTmjDJVeZH69jp5MYLU9+zEHEwjiIlZl6BNLRbvnXexcmM6mEBV0iW3BLntD7vdmLuAECWwKvMBNiWKNPgdiGEwRdWSxwca5VHixZO/kLiu8zQhiksVqRjmdmdQEpEOIETqUu3FWTyiRcbUccqZaTDMFRLJvNNiWnElRVUpdYucC3CcplnfbN4BAOXGSanWv2sYqRFRly+6QoC38PIW4oKviZ+YCKyNO6aJ4btDg9C7wazZLMUvTIKJ+szjLDGkE6mvMplG5oXwUJBkVIv7hw9Ek6J/U0iL0DSjG/j0XlIaCaGE+BcN1GlEPlYTMdGx1vqbcTSo2/IYvafIAIOkve6RsbHPhXtRFxsfQ8FzXlehDLtxloNgYqtfG/iL7kR5bLxOCsSdHUWPaO7GzkPfECfCGcz0a/Cm0Vtv4UpIkccucwBOrrzGq0HcB6w3UIJtrasuODerLWV8Sq2G3ZtLxNhIbWK+uBUu8gbLfzZ7UHqlNmRXw5tsC5zvf07T1JTZLOWWLI2Rp7U8qEmqepNZkWXSh2K9gLASnPFL7s70o2Fu6Gc3vF3xSqR0SnX6jRMJlNpYZzB+p1R7lWt8/qLFP13mghsTy6m9qsp9yDHjAPZEMSAKi5QGgxc9+z4fCNGCczEJmCFlp0LTuAIWHYLUCwJQO9MaR68T2WICuu0cVoYi5EHCDePhfmRoD6ENSvYgUJYZGhizZBdalj3T7oemr6it6hp46v7UKgdsVfBpR029vRazTEJm1tl2TKquTQG2GSM5wBYVJ0ENHOBao+W0xf0Ca0D4bRBLN/BNxxWjqPpKWvK8vdOBVK40O6ugYj73H+fHO0pa9Q5p6ap0oKiFU5d/wrpOBBAK21cpX3mjP7hHkMW6pw73KILSn4D7ly/RszReH6JBUAAA==</trigger_inputs>
+        <trigger_outputs/>
+        <trigger_type>record_create</trigger_type>
+        <updation_source/>
+    </sys_hub_trigger_instance_v2>
+    <sys_hub_action_instance_v2 action="delete_multiple" query="flow=7651680047430f104134ef6c716d433b^sys_idNOT IN0b51680047430f104134ef6c716d43b0,0b51680047430f104134ef6c716d43b2,0f51680047430f104134ef6c716d43b3,3251680047430f104134ef6c716d439e,3a51680047430f104134ef6c716d439c,4b51680047430f104134ef6c716d439f,4b51680047430f104134ef6c716d43a1,8351680047430f104134ef6c716d43b3,8f51680047430f104134ef6c716d43af,8f51680047430f104134ef6c716d43b1,c351680047430f104134ef6c716d43a0,c351680047430f104134ef6c716d43a2"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Send Email">c1806bf4a70323008299b39f087901cb</action_type>
+        <action_type_parent display_value="Send Email">98c181d20b100300d97d8bf637673ab5</action_type_parent>
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <comment/>
+        <compiled_snapshot>c1806bf4a70323008299b39f087901cb</compiled_snapshot>
+        <display_text/>
+        <flow display_value="TrackMed Dose Execution &amp; Escalation Engine">7651680047430f104134ef6c716d433b</flow>
+        <generation_source/>
+        <order>11</order>
+        <parent_ui_id>011450b4-4277-4559-b217-834b0524b9b0</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:24</sys_created_on>
+        <sys_id>0b51680047430f104134ef6c716d43b0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:24</sys_updated_on>
+        <ui_id>b385354f-3f15-489d-aa3f-fce33d10e278</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+2Y227jNhCGX4XQtaHK5zh3qb1BA+xmi02wvVgsBIocWWwoUSWpOK6Rd+9Qkm35ACdOmoW3zVXM4UEzo+/njPJt4WU0Be/cszSSEJaDlndPZeGMD6HJWGg1ZXcp8JArA6FUU1zBhcklnX99cmFONZ5pQXvnC48lQnINmXf+7XvLExx3tkdnwSCKe3QYdDvdIDjrjEZRdxQHZ8NR0OY9PELSCCQuvXUu4nifx3ae77V9bO4l19WE0tz502558GAh44COxFQaaHkpzTi1Ss9XFg2Uf84kGqwucJyIzLoDEyCW6ilYooHhicTW7qX0wYi/0ZuzwO2OAQNmzjmvMQzrBFbmeEItvcHzmS10vZQlSjAwVao4xLSQdty0VQs+51aorNpSeVDtVrJIs+sqU97qgOX7QkuBr4hD7sJ3AdXRxjeJmn1ZenkpsjJT9aRUjMrViFqrRVRY58/CAwkpHhSmNM9FNg1zre5FuRl9Sf2pxIEfSzXDhxoxzXzKnOM+Zpv6l2iflOavVAsXxSc8BjcjJCY0TIt8GVv5cO+x5Zm5GUtqzDpGTG74V+E8rCKuYwur9Lgt5UEX+OB7qMN4bK0UMKNIaUr1XQgpFbIhg/Yu8I6FZ9AdDAZRNIj6w+6a7hGL+TCKB3TIug26rzImCw7kj6Uba9J3Patxj5SSQLNt1tG3Xy7LPK1Y7xzJem2oYa8gI1YRfC1yTihZueSMFrVQeoa/qCXCEIN598mtIqKOqrGjReaqIGlhLC6zOLMhI7+poN7pKqgGoLZO9tLxU0jsLaREk9AU0Z/AbENFHwyGRp1H52SCBYJwYFJkwEmsNFksxkifxeLR9lmhtQMox9WNv+W9/vi4K8Z/8eSnBN3nh8oVsIagb1YZ2JeVWsEGX3A23RLwzdJYi3dwWLxVXdrRbqMOBaero/+5TCLF5w2NXBDDEuCFRHaxkRKspJq4fook1JAIICPuEsV5HF4rS27pHWQ++R0LAS7ScC9gRhAOvFbvwN3XWuUYicXfVZy7+vlBT31KW/SgtuJOQ1u/VmnbyWOtqsSmcktTv91++rhW1PBl5XAlqUG/3x28a+rV3V0+4x2OqOR1bGXhfAupVc1FQ2l7qsK+0vIMbHsHsWV84wum7HS+LJ3Zdq7GlytWlOkWfIviST1DriZrmINX9XYXxijmlGoafdxM2AQ7sz0tWbeziT02eKJkbD/+V+vpE5BBVSmPUEF8A1Sz5FKAdK86K9Ko5HZTHQxvQR1uMVn3gKdSjRpfxs+pS1Yd1orPqIbQXfbaL5HZJ55n73uy6zr8TwLalJjaqAtlHMf0Wt33XusE6gIHKVJRAvF2NQHxYOxFVz4/yCMEDR7H4w0eywcew2PvlZ3KO5A/FZDRC4lsH/4uHTR75y0ko6OZ7L8z+R9n8vs/ioI4HRkYAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=0b51680047430f104134ef6c716d43b0"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Update Record">f9d01dd2c31332002841b63b12d3aea1</action_type>
+        <action_type_parent display_value="Update Record">baf174c8c3c232002841b63b12d3aee4</action_type_parent>
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <comment/>
+        <compiled_snapshot>f9d01dd2c31332002841b63b12d3aea1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="TrackMed Dose Execution &amp; Escalation Engine">7651680047430f104134ef6c716d433b</flow>
+        <generation_source/>
+        <order>14</order>
+        <parent_ui_id>efa07219-4245-4008-858c-aba451a6fafd</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:24</sys_created_on>
+        <sys_id>0b51680047430f104134ef6c716d43b2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:24</sys_updated_on>
+        <ui_id>b0224147-1841-4eb1-bf77-ac11579195ff</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+2UXW/aMBSG/wryNYoSQlHL3QRDmrRRrZ246drIsU/AqmNntkNhiP++4ySEiFawi16s0nLn8+X3PX6Uhx1RNAcyJo6mEpLq0CdrKksf3CRWscQZyp5z4AnXFhKpl1jBhS0k3S4uFhbU4EwHhox3hK2E5AYUGT889ong2Jle8TC6iUYsjuJ4EIaD62GUjuI0GvCYArvBEZKmILH0h5eI57cUu23xZuxrt7c3rxPacK/nKuwT2DhQHFBJRqWFPsmp4tRpsyVjZ0oMGKD8VsltW7ESyuFE4ms3VvzGe69DX5cBWmNQ59pj0qyqDmdT6ug9TmauNE0pW2nBwNZL4ZDRUrpJN1YX3BZOaFW3VD6bbi3LXM3rnZB2wOFlMFLiY3AovE+vvLGR3a/0y91B5UyoaidNUmpGZXuizhmRls7r2RGQkOOgJKdFIdQyKYxei6oZteTBUuIhyKR+wUutWKqAMi88wLXSYIbxaRVeUCO8i284Bpv3fWK3diKptUcvuMTkV+mV1M4aD0m9Bt/CjCjcJ7xgDY3cfb9l2gDDp+7wvNtN8DkdEhoFrDTo3O33r2n+C2yHcA5biDrY3h1UnKpqmOWaldVCBT+Bdtpkel+mR2qjd6N2+JGorW19eGg7P6iL+FbU2g6+1lFX2p9lGMZ8rl3P0WdQT5+/vyb4TOUlssPBWbKhQ/ZMgOT2SHYr+PA3hhxFOUhqAyd/5CbZWzTJlu93AzwahdX3H/N/D/PHP92Qrs97CAAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=0b51680047430f104134ef6c716d43b2"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Create Task">2b3a6335531003003bf1d9109ec58759</action_type>
+        <action_type_parent display_value="Create Task">3f9b1ff1531003003bf1d9109ec58775</action_type_parent>
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <comment/>
+        <compiled_snapshot>2b3a6335531003003bf1d9109ec58759</compiled_snapshot>
+        <display_text/>
+        <flow display_value="TrackMed Dose Execution &amp; Escalation Engine">7651680047430f104134ef6c716d433b</flow>
+        <generation_source/>
+        <order>16</order>
+        <parent_ui_id>efa07219-4245-4008-858c-aba451a6fafd</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:24</sys_created_on>
+        <sys_id>0f51680047430f104134ef6c716d43b3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:24</sys_updated_on>
+        <ui_id>cb8afd1d-efc1-4a26-a1d7-0f0da838de82</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VWTU/bQBD9K9aeg+uQhpTcEDRSpQJqqeiBEmuzO45XrHfN7jghjfLfO/Y6wXyUcugFIfmyb77ezD6PfbVmhhfAxgy5v0mRzzSwHltwXW1BOkrlS81Xlw/RkjsKRXBsvGYiV1o6MGx8dd1jSpIbjAb8YDAYDgf9JBnQM8v68rCfHIIYfhoNBaXQfAaaXH+0dZ/jgqsyYHRMG4eAfe3GRmfBYJ2s+SQ9BncIRgIRybj20GMFN5KjdSs2RlcR4IDLc6NXO49cGaSErPa98+o3lf2U1H4ZUGcCgm13TNuxBDg74cgvKLPAyrWuIrdKgA8zkZDxSuNxFwsO5yUqa0JI6DpEW10V5iyMhO0SbG+BkMoTCSjrPmvmbRvZRW6X37csJ8o0I2mN2gqudyeO6NSswprPms045dsSaC8ZNBSUPC14WSozT0tnF6pJSPyKeK7pEGfaLomIV3MTc1E3E9OoeTwh/KSBL7lTdeJTSkPBmx7zK3+suff3/dFg09uqZhe6bftKw2jqEOFUiUdUYAFtC5veTsBLrrAj3eSpbpuIVwg3y14S7mjUEe7PUPQhhVaxM2s1cPNYrqS9D5OWSSvX/Zfl2iKv0evH96TXt6PNTIGWaSNN39Goz63DmlwTTNR+VaQ2eVRJhePoVHkPMipAKsFraySth2gvQlWArTCCOwFAmpk+zRB5kYOsNMU3QUvuI2Mx4rJQRnnSPlmWCklCEeYQ7e/ltnKEGGmXcfTFLMCjmoeyDm4rRQHxlGZCAwOZog2F1utjkiUS0o9F5egGMRbc1WvkBtxmMy2dsk7hKrj3p5+/PX0v3+sY/rWH9l/8gB7MOntoUgssutwK7HnZbb+kUND0EYLh8XpqjSHX/Yrq/7cVdTBMkre0pcLPwptfUp1/qr+sq+s/U9i8qA0KAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=0f51680047430f104134ef6c716d43b3"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Wait For Condition">89ce8a4187120010663ca1bb36cb0be3</action_type>
+        <action_type_parent display_value="Wait For Condition">8bb9a8160b10030085c083eb37673aec</action_type_parent>
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <comment/>
+        <compiled_snapshot>89ce8a4187120010663ca1bb36cb0be3</compiled_snapshot>
+        <display_text/>
+        <flow display_value="TrackMed Dose Execution &amp; Escalation Engine">7651680047430f104134ef6c716d433b</flow>
+        <generation_source/>
+        <order>2</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:24</sys_created_on>
+        <sys_id>3251680047430f104134ef6c716d439e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:24</sys_updated_on>
+        <ui_id>1ee59c6b-7a6b-48fe-960f-9b63ba44d1a3</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+2XXW/bNhSG/0qga9MjJUqWclfYDhogSwDH6y66TqD4EROlJVei0mRG/vtIiYkl23Ga5QMrNsA3OvzQy/fw8Tn6vPZysuTesaflkhe1TlldEi2L3Bt410TVdgglIwggMr8j6B9DaH5mlMlqpcjtJzfJP/pY1GVlBlakNFtqXnrHa48upGIlz73jz18GnmRmJmWUxwSjeIR8CBGMooASlGVBRDOYicRsoUjGlZk62Yh5XKa+XdmRKyUZ346f7W5UlMxKCwcev9E8Z9xoEkRVfOAtSc6ILsrbh0jJCbvI1SawkLk2+3l28k0l/zJvxtDOE9yckvJ27OExdS61YTEhmlzqsqa6Lt1Uuigk5VXrD+OC1EqPu7F2wsWqkd8s0SRT96sLVS/z89Yb72GD+6SYSF0ZEXxlD2qVu2OIy0XxfXav8kTmjSduUBWUqIcnonUps1pbPWuvlvNH7G5H9hjOFV+ad6dLslrJ/CpdlcW1bN5n5C+HzUZDoYrvRmclr/IhoXbl0KSCDE9MfNKEP5FS2oP/arYxi20qGJ+Q28reitIc10r4LZffan7aXDPKERmFGUhiTgD2EwRIgn2QRHzEsYijgCTe3cCrbquxIlW1MdFkL/1WWwtaS515aeu/XUJLudIfjMxr7ny6G2xIsirT5mHD0E1a5TTVJaFfl5ylrDBpUcXVLkePT3yKKxwe4oqTDlfz5gYN9ip2OO3Ezrprj87bAQeT/0yYbL72shT/J1nqed3nqOe2rNL26jnRza5vSFiPJx/FSYyzAAQZDgFOhAAxjDHAnEAa+myEEX0bntxfvlDkqluVdtlxfwNPgQIPFyDcAWWaN/47CbtlyGlyzGRFoTjZrj1zo+qXE5cqBwz+v/q8iJiN01u4dL1+FywoJbG5/wQkAeUARxkFsaACBDwLRRBmcTaCb4JFyam5TB0g1uuxuTDaFA00pHVpvNV3d7uQ/EglSQ5Wki4gs3sV26ocEqygdZMEybawmLiRo9PJhgt0mIu2bvwIFoH/E2HRHuvlVPTN3mrIenYLqUz607bwVKZxb0yaTccXs0n6+4f5+ON0ls6ml/PZ6Xg+nbwXTFgIFKAoAgjBAGCURbZ7CwHkIcGhj6Mw8v8BTJ36+iRWtMiZtMqrDlqVJrqu/qghDNicfOX5nxezbuy80Efaxndxe87SF3IpOlyOu8fYdzTH507sbN8Gjs7gtejEEP5MZeu1+OyZ3cezZ/e7sMZZHGUhjAEXcQxwMIpBgnwfRBFhCGHKBHxr1u67qIouOKubL5LnF6sYHezmulBcbt7zuAIHxuZy9rmYdeIOi+jVmrl4hwu6zLvi9jHSOdW/gJXnt3jikpOSLk4kVzaf7jPoEYS6aekT1E3M+3R+vo8CxilAzFCE/cgHcYBHYJTEGcTm6mUBf8XO78vfba/VuqwTAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=3251680047430f104134ef6c716d439e"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Send Email">c1806bf4a70323008299b39f087901cb</action_type>
+        <action_type_parent display_value="Send Email">98c181d20b100300d97d8bf637673ab5</action_type_parent>
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <comment/>
+        <compiled_snapshot>c1806bf4a70323008299b39f087901cb</compiled_snapshot>
+        <display_text/>
+        <flow display_value="TrackMed Dose Execution &amp; Escalation Engine">7651680047430f104134ef6c716d433b</flow>
+        <generation_source/>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:24</sys_created_on>
+        <sys_id>3a51680047430f104134ef6c716d439c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:24</sys_updated_on>
+        <ui_id>775e49d8-359e-4fb6-8ae3-f178b7d10b10</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+2Y227jNhCGX4XQtaHK5zh3WxtBA2x2i3WwvVgsBIqkLDaUqJJUHNfIu++Iom36ACdOmsLb5irhiIeZ0fdzRv62DAqcs+AyMDgRLLaDVnCPRVUbH2JdkNgoTO5yRmMqNYuFnMEMynUp8OLrkxNLrGBPw1RwuQxIxgVVrAguv31vBZzCyvboIhokaQ8Po26nG0UXndEo6Y7S6GI4itq0B1sInDABU29rF2F8yGOzKA/aPvpr0afmgVS09qfdCtiDYQVl4EiKhWatIMcFxUaqxdqiGKafCwEGoyoYZ7ww9YYZQwarGTNIMQI7IuPcy/GD5n+DNxdRvTplEDCpnQu8YewS2JjTCTZ4CvsTUyk3lWSSE6abVFGW4kqYsW9rJnwuDZdFs6TxoFktRZUXn5pMBesNVu8LLBW8IsrKOvw6IBdtOs3k/MvKyyte2Ey5h0ISLNYjbIziSWVqf5YBEyyHjeIclyUvZnGp5D23i8GXPJwJGISpkHM4VPNZEWJSOx5CtnF4BfaJNX/FitdR3MA2sBgg0bEmiper2OzhwWMr0As9FljrTYyQ3PivqvawidjFFjfpqZfYjT7AwffMhfHYWitgjoHSHKu7mOWYC08G7X3gaxaeQXc0GCTJIOkPuxu6RySlwyQd4CHpenRfF0RUlKE/Vm5sSN/3zOGeSCkYLnZZB99+ubJ5WrPeOZF1Z3CwN5AhIxG8FrFAGK1dqo0GtGA9g/+wQVwjDXkP0a1E3EXlrWihhaxQXmkD0ww82ZJR6Cuod74KcgA46+QgHT+FxN5CSjiLdZX8yYjxVHTDKCfYgqRYbsNGqVRouRwDdwbKRjsklVI1OiXM8/7aG/3xcV+G/8ieT4m4T4+VKEY8EU/XUR/KhFOthpdazHZEO10ZnWAHxwXb1KI9vXq1Jzpf7fzPpZFIuvB08Ttc4RpuSAr8cg0Y2vtUk4zRSjCK8g3jcNfC3anQCmV0Y29gmF53XAhrdIvvWIEkZM/bkNlbdUc6/9axT6kLH1VX2vHU9WuTuL1MOl1lJhc7qvrt9ubjRlPDlxXBtagG/X538K6qV/d05Zx2qJJl6WKz5fItxNa0FJ7WDtSFQ2XlGdj2jmJL6NZ3i+1vvqyc2XXO4UslqWy6Od2heOKeoOvJBuboVR3dB60l4ZAJ7XVvc24y6McONGLdzjb20NZxy9hh/K83j89ABk2tPEEF6ZRhRbIrzkT9qosqTyy32+ogcIGqeIdJ1/mdSz3yvoefU5mMPK6VkGDFYgOXvQotMofE8+x1T/Zdx38awL7E5FZdsHGc0m1137utM6gLlAmecwvE29UEwIOQF1359CiPLPJ4HI+3eLQHnsJj75WdyjuQPxWQyQuJbB//Mh34vfMOksnJTPbfmfyPM/n9BwMptVUPGAAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=3a51680047430f104134ef6c716d439c"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Look Up Record">9d09f99587003300663ca1bb36cb0ba3</action_type>
+        <action_type_parent display_value="Look Up Record">b93f42810b30030085c083eb37673a63</action_type_parent>
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <comment/>
+        <compiled_snapshot>9d09f99587003300663ca1bb36cb0ba3</compiled_snapshot>
+        <display_text/>
+        <flow display_value="TrackMed Dose Execution &amp; Escalation Engine">7651680047430f104134ef6c716d433b</flow>
+        <generation_source/>
+        <order>4</order>
+        <parent_ui_id>53a2e6f0-7267-41c2-9311-99a48078a7d4</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:24</sys_created_on>
+        <sys_id>4b51680047430f104134ef6c716d439f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:24</sys_updated_on>
+        <ui_id>63c637bb-60b0-4be9-95e1-25f80a0945ce</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VYUW/iOBD+K1GeKZcQINC3ExXSSntbadvry+7KcmIHrDV21nbaUsR/v3HiBA5SKFeQtronlPHYM/PNN+Mx31a+wAvqX/taKoPMMqd+x3/EvGhkWKcgIkznHC8f3Ar2jPReQJ5jBfsNVf71yk/njBNFhX/97UfHZwQUByQYZ+PxYBQHQRQFwXAYpThMkmiYJkGShHAExwnloHoH1rz7yoMWp8qfa7AhWVp/f3ZbJ7VQKmJdiTo+fTZUEAo+ZJhr2vEXWBBspFo2EkUxuRV8I5gzYeA03yo/a/YC9qKe1csoRJXSaq35RA6USpzdYIPvjCpSUyinWjmrAY9VE2YDXQvKzv1g3dnov1h9vKtP6PaGcA14E5rhgpvJf7MZnmqzZ21WAd7mhknIuh/ZvOCE1+FLXizElyqXfuPhQwu9qpWbV1hWaACb5jahNkMuXdndXD59rbMxZaL0yy1ymWLefGFjFEsKY3FZ+RlBGaOcICY4E9YSpM3Sh3K6AAtogfOciRnKlXxk5akQy6I74/DRzbh8sliwmeji1EbeBWLh7hTkN6X4AStmUfgLjoHNHWtwDludPaRTxXKDnhiZUbOxXmsRaZ4w/9m27hiH6kSV4fnrjq+XesKx1huwgaboV2ExqKB36KEyUeWW0os/IYJH6oCyHHCll0pBmA1Ob9NgqREj3wuoZbJaTaCADCUo7KaFghyYbrW+Xu83jBN2HmspZHCopeDxVkuZbAfRFljdVHZln9sOqCvlbM2lHwTBedpLW/nvl+dJ1blfdpaG76i6yxTX6dyvIDhaAJXahvvPSIsUGYXTnwugLpEADpezfaq/rniU2eODzO5vMfveebfjrONz+YnKtX/zudzmfakW6tvmbHwefSQ2v/cSudhdwTgwBFUp1LJQJZSPKOWFLhcUFro66yKNn2VoAcCxHMwrmgJJNMKKokwWgiBneFMWFtWMKW2c8n49fKWQY+FJII9n5tQrtb1G+1hRhAeLItlu958yr3bdna89cN0rXfca108L9JS5s3/Gq+Hcc+cUM17iDyzKtxJIlZLqldnzSOoOcOCNg+kbnQrP6tT7J9c20rdOsEd8/RAt6RJNphz9K5D3G8ZbmsLBZyUmW03h1ibdS5Y7r8rGuKvv6kHQcmVO7cLOldn7f16Zv+UA2HntOXexyRCVAx6RsC2D/gV7Ud2v6uYT7LO6eqodp3ZKcdLv4WEchWEQhAGJg1Ech6Nhkg1x3M+2qH0jhX1R9WLjWUegzXi1I8dddbxPpOQUix3S3wOAf0ydx470g9/ucvsQc2LB7neRrkStWF+qRgr2t2C/CvrJUmxEg94oJOnVKA7jq35GhldjggdXeJwM4ojQtJ+d80+FH/8A1NNx+mYUAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=4b51680047430f104134ef6c716d439f"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Update Record">f9d01dd2c31332002841b63b12d3aea1</action_type>
+        <action_type_parent display_value="Update Record">baf174c8c3c232002841b63b12d3aee4</action_type_parent>
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <comment/>
+        <compiled_snapshot>f9d01dd2c31332002841b63b12d3aea1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="TrackMed Dose Execution &amp; Escalation Engine">7651680047430f104134ef6c716d433b</flow>
+        <generation_source/>
+        <order>7</order>
+        <parent_ui_id>0a14171d-695d-4cc1-b5d4-c327467df4bf</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:24</sys_created_on>
+        <sys_id>4b51680047430f104134ef6c716d43a1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:24</sys_updated_on>
+        <ui_id>a3e158e0-f687-4aab-b33f-e4c7e5825b91</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1V70/bMBD9V5A/t1HSpD+/TXRIkzbQYOILY5FjX6iF42S2A3RV/3fOcZpmgGBITBrSKvWD7+6d3728Sy42RNECyIJYmklIm8OA3FBZu+BdahRLrabsugCe4l8wakWpUsNWwGtENDiEcGEqSdfnr0dWVOOtFjRZbAhbCck1KLK4uBwQwbFVNuZhNI8mLI7ieBSGo1kSZZM4i0Y8psDm2ELSDCSWfmtbPjWTXVdPxj73sQfHPlFq7viMwwGBOwuKAzLJqTQwIAVVnNpSr8nC6hoDGig/UXLdVayEstiRuNo7I37hvbPQ1eWAozHwue6Yttr5cL6klp5hZ2Zr3ZayVSkYGC8Kh5zW0h72Y77gpHIKe4hX16NLWRfq2GtCuga7R4WR2iAJqNycjnk7Rn62Km9PdyyPhGo0aZOyZFR2J2qtFlltHZ8NAQkFNkoLWlVCXaWVLm9EA0YuRXAl8RDksrzFS424UgFljniAstLgCOPLJnxOtXBTfME2CN4OiFmbQ0mN2c+CIqY/a8fET9bOkHoZHIRpUdkPeMENtHS3g871Ghg+6p7jN5ucjaLZfJwNIWLTYZJM4+E8mWZDzsezZMpZEoeT4LTBbbePjf8Hhk7gOUND1DP06Y7fQ76tm3nJ6kZqwR/YedlmDj4t936O3szPyXvysx/r3du59+p60diNn03P2MaW7Nr1VlbY9fc6DGP+KrMHv3fYbn98/PrY/n/rmpd2Khw9u1PQ26kjAZKb/U51Uu2+EFDgRBZSL92Dr0SbPDhvk91mvdlqRZOw+f1fsH9vwS7vARbx9DwxCQAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=4b51680047430f104134ef6c716d43a1"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Send Email">c1806bf4a70323008299b39f087901cb</action_type>
+        <action_type_parent display_value="Send Email">98c181d20b100300d97d8bf637673ab5</action_type_parent>
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <comment/>
+        <compiled_snapshot>c1806bf4a70323008299b39f087901cb</compiled_snapshot>
+        <display_text/>
+        <flow display_value="TrackMed Dose Execution &amp; Escalation Engine">7651680047430f104134ef6c716d433b</flow>
+        <generation_source/>
+        <order>15</order>
+        <parent_ui_id>efa07219-4245-4008-858c-aba451a6fafd</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:24</sys_created_on>
+        <sys_id>8351680047430f104134ef6c716d43b3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:24</sys_updated_on>
+        <ui_id>a723271a-4119-4127-9627-20caa1f0dc52</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+2Y227bOBCGX4XQtaHK5zh3WbvBBmhaoA66F0UhUCRlc0OJKknFcY28+w4p2pYPcOJkU7htrhKOyNHM6Ps1I39dBDnOWHAeGJwIFrtFI7jDorTG+1jnJDYKk9uM0ZhKzWIhJ7CDcl0IPP/y6MYCK/BpmArOFwGZckEVy4Pzr98aAadwsjk4i3pJ2sH9qN1qR9FZazBI2oM0OusPoibtgAuBEyZg640NEdb7IjbzYq/tQ/0s+lhdkIraeJqNgN0bllMGgaRYaNYIMpxTbKSaryyKYfopF2AwqoT1lOfGOpwyZLCaMIMUI+ARGR9ehu81/wHRnEX2dMogYWKDC2rL2BewMqcjbPAY/BNTKr+VTCUnTFeloizFpTDDuq3a8KkwXObVkSqC6rQUZZZ/rCoVrBwsnxdYSnhElBU2fZuQzzYdT+Xs8zLKS567SvmLQhIsVitsjOJJaWw8i4AJloGjOMNFwfNJXCh5x91hiCULJwIWYSrkDG6q+SQPMbGBh1BtHF6CfeTMX7DiNotrcAOHARIda6J4sczN3Tx4aAR6rocCa73OEYobfy9thFXGPre4Ko894hxdwI3vmE/jobFSwAwDpRlWtzHLMBc1GTR3gbcsPIHuqNdLkl7S7bfXdA9ISvtJ2sN90q7RfZUTUVKG/lmGsSZ9NzKPeyKlYDjfZh1ie3fp6rRivXUk697gYa8gQ0YieCxijjBahWSNBrTgIoP/sEFcIw11D9GNRNxnVTvRQHNZoqzUBrYZuLIho7CuoM7pKsgD4K2jvXT8EhJ7DSnhaazL5F9GTE1F7zWkhm1E5+iaa80osn0CpVKhxWII7BloHc2QlEpZfArYW/vr3uoPD7tS/N/8PibmLj3UqhipiXm8yn5fRbx6NTzcfLIl3vHS6IXbOyzcqift6LbWg6LT1dAfLpFE0nlNHxdIkymjpQCAYYjixDFdsTzDGuUSXpY04znXwChsmnED72f39lXse8mtzfCMpRbjEF1l1gvAj6BGEJl1ttwX7sroZ9/+MbXhg2pLWzW1/VUVcqeyXmdTk4ktlf19c/1hrbH+85rjSmS9brfde1PZi2e9YkZbVMmi8Lm5Nvoa4qtGjZr29vSJfa3mCdh2DmJL6Mb3jJt7Pi+D2Q7O40slKV25Od2ieOSvoKvRGuboRZPehdaSWNXq2lRnlQ5z2p4Brd3axB7GPe4Y24//1fryCcig6p1HqCAdM6zI9JIzYR91XmaJ43ZTHQRGchVvMeknwlPpT7Xv5Kd0KiMPayUkWLHY4FumQofMPvE8+dyjc9jhnwxwXWJyoy+4PI6Zvtpv09cJ9AXKBM+4A+L1egLgQcizXvn0II8sqvE4HG7w6G54DI+dF04qb0D+UkAmzySyefhLtVefnbeQTI5msvvG5G/O5Lf/AA3QiLInGAAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=8351680047430f104134ef6c716d43b3"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Log">5bc1bcc6531003003bf1d9109ec587d4</action_type>
+        <action_type_parent display_value="Log">0e0ae8c2531003003bf1d9109ec587c8</action_type_parent>
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <comment/>
+        <compiled_snapshot>5bc1bcc6531003003bf1d9109ec587d4</compiled_snapshot>
+        <display_text/>
+        <flow display_value="TrackMed Dose Execution &amp; Escalation Engine">7651680047430f104134ef6c716d433b</flow>
+        <generation_source/>
+        <order>9</order>
+        <parent_ui_id>0a14171d-695d-4cc1-b5d4-c327467df4bf</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:24</sys_created_on>
+        <sys_id>8f51680047430f104134ef6c716d43af</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:24</sys_updated_on>
+        <ui_id>18cd9e8b-c966-44a1-8987-29ecf14d4f0a</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VU72vbMBD9V4w+JyZO6nXNt5KsMOgPWCD7UIqRpXMikCVPkpNmJv/7TraSmDZsC3SfBoFwzyfdvad399wQRUsgUyL1KpOwAUkGZENl7TGhCo0hF7aSdLcM6NcOrajBkw4MmTaErYXkBhSZPr8MiOCYluYsyRn7lE6S0WiCv7xI+E0yugGWfr7m13iFpDnWm5L7UPdMK25XeYittWAQ4vtwbHYAteG+jdGAwKsDxQHrF1RaGJCSKk6dNrsjYoDyJyVPwFooh7cRn/xqxU+sdzXyeQUgIwbdt2OYBTk6uJhTRxfO1MzVJqR2zVrUojlSHA6jR60gGg57+vZa3w9OuUHgN68QMpN+5ndqlFCrXvIWkVPyuJ/8xRhteqkQ4pA72ePLcShoLd3scgbJXzMYX8JgcgGDK8+gE/+pckKjG0niPUNzeXgaLetSPXY+I0e+yzeG79D5Wd/XFi0AlbeZ900wUbFY6+23g0fuhGo7Ch+lZlQeI+qcEXntvL4NAQklXpSVtKpQiKwyeiPaw9hsGa8kBnEh9RaLWrFSMWWeWoyupvEd4vMWXlIjPM0HvAYP7wfE7uxMUmtPZNHC2Y/ad9JRDxyyVqj2CDOicrdYYAOhXS9/byxLsJauoPcGc20horwUSlhcBsAjWzP0ji1qKXdRoU1UUSewTtQ0Mxw+BzxLYlYbVMrF4dvhP/O19vv3S+dflfnTFhtPfrfFIO1tsYejNmcFC5vM4uO3fu9vssUBPAzTh22ycZp+zCo7txzej9tF0/b/DdPLL+b7RN1wBwAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=8f51680047430f104134ef6c716d43af"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Create Task">2b3a6335531003003bf1d9109ec58759</action_type>
+        <action_type_parent display_value="Create Task">3f9b1ff1531003003bf1d9109ec58775</action_type_parent>
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <comment/>
+        <compiled_snapshot>2b3a6335531003003bf1d9109ec58759</compiled_snapshot>
+        <display_text/>
+        <flow display_value="TrackMed Dose Execution &amp; Escalation Engine">7651680047430f104134ef6c716d433b</flow>
+        <generation_source/>
+        <order>12</order>
+        <parent_ui_id>011450b4-4277-4559-b217-834b0524b9b0</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:24</sys_created_on>
+        <sys_id>8f51680047430f104134ef6c716d43b1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:24</sys_updated_on>
+        <ui_id>1b154b58-58cf-481f-bf18-4e4225194469</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VWTVPbMBD9Kx6dM65DGkJzY6A5tTAFhh4o8aylNdEgS0aSE9xM/nvXlhPMRymHXmhncsg+7cfb1csqV2umoUA2ZR7cbeohU8gGbAmq2oJkCulKBfXlY7QES6EeLZuuGV9IJSxqNr26HjApyA0nI9gfjcbj0TBJRvTJ8qH4NEw+IR8fTMacUijIUJHrRVf3JS6+LgNGZto6BOxLPzY6CQfGioZPMmB471ELJCI5KIcDVoAW4I2t2dTbigCLIE61qnceC6k9JWSN772TP6nsQdL45UidcQxnOzPtxhLg/Bg8nFNm7ivbufKFkRxdmInAHCrlj/pYcDgtvTQ6hISuQ7RRVaFPwkjYLsH2FgipHJHAsumzYd61kZ8vzOpsy3ImdTuS7lAZDmpngfdWZpVv+KxZBpRvS6C7ZFRYUPK0gLKU+iYtrVnKNiHxK+IbRUacK7MiIk7e6Bh400xMo4Z4RvhxC1+ClU3ir5SGgjcD5mp3pMC5h/5osOld1bAL3XZ9pWE0TQi3svSHVGCJXQubwU7AK5C+J93kuW7biDcIN89fE+5k0hPu91D0MYVOsZkxCkE/lStp78OsY9LJde91uXbIW/T68X/S6/vRZi5RibSVputp1C2M9Q25Npio/ahIbeKwEtJPo2PjMBLIldQooqyOOFj0cIt2/jwkcnyBolLkKZq4FbioAHtLNn07MT66oEgdR2e4lLiKLN5V0qKI59QnDQFF6k3ItV4fkdQ8IcOYV5ZuxcdN6bStvdnMSyuNlb4O7nvzz9+e/9b+pdb+tC/2Xn3o9rPevpg1Qogut0J4WR7bFw8LmqjHcPB0jXSHIdfDKhn+tVWyP06S97RNwqP+7pdJ77/Pb9bK9S8YLGoJtQkAAA==</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=8f51680047430f104134ef6c716d43b1"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Look Up Record">9d09f99587003300663ca1bb36cb0ba3</action_type>
+        <action_type_parent display_value="Look Up Record">b93f42810b30030085c083eb37673a63</action_type_parent>
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <comment/>
+        <compiled_snapshot>9d09f99587003300663ca1bb36cb0ba3</compiled_snapshot>
+        <display_text/>
+        <flow display_value="TrackMed Dose Execution &amp; Escalation Engine">7651680047430f104134ef6c716d433b</flow>
+        <generation_source/>
+        <order>6</order>
+        <parent_ui_id>0a14171d-695d-4cc1-b5d4-c327467df4bf</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:24</sys_created_on>
+        <sys_id>c351680047430f104134ef6c716d43a0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:24</sys_updated_on>
+        <ui_id>fc21895b-e1c7-4473-947b-dd5847dc4306</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VY32/iOBD+V6I8Uy7hV6BvJyqklfa20rbXl92V5dhOsdbYWdtpS1H/9xsnTuAghXIFaat7QhnPeGa++WZs820VSrxg4WVolLbILnMWdsIHLIpGhg0BEeUmF3h551dwYFXwDPIca7C3TIeXq5DMuaCayfDy249OyCkoDmk0ySaT4TiJon4/ikajPsFxmvZHJI3SNIYtBE6ZANUb8BbcVhG0BFX+XIIPxUn9/dmbTmuh0tSF0u+E7MkySRnEkGFhWCdcYEmxVXrZSDTD9FqKtWDOpYXdQqf8ZPgz+Ov3nF7GICvCqrXmE3lQKnF2hS2+sbogttBetQrWAB6rJs0GuhaUffjRS2et/+z08bY+ZZsG8QvgTVmGC2Gn/81nfKzPnvNZJXidW66g6mHf1QWnok5fiWIhv1S1DJsI71roVa1cvcKywgDYLHcFdRXy5cpu5urxa12NGZdlXH5RKIJF84Wt1TwtrMNlFWYUZZwJirgUXDpPUDZHHybYAjygBc5zLu9RrtUDL3eFXBbdewEf3UyoR4cFv5ddTFzmXSAW7s5AflWK77DmDoW/YBsw7jiHczD1/pAhmucWPXJ6z+zae61FlX3E4mfbumccqgtVphe+dEKzNFOBjVmDDTRFvwqHQQW9Rw+VhSpNyij+hAwemAfKccC3HlGScpec2aTB0iBOvxfQy3S1mkIDWUZR3CWFhhrY7oJRTrCzennZHRpHWh8aLXS4b7TgycZomW4m05ZgPVy2ZZ/bNqg75mRDZhBF0WnGTNsY2G3To7p0t/0cHd/RfedpsuN7oILgYCNUauseeEJGEmQ1Jj+BsGhNWmjrOaOFYKg22eL/EZYHuT/Zy/3BBvdv/ZZb6XjGl5+oXPs340uz4Eu1UJ9LJ2P8+CPx/b3HzdlOFS6AIRVnkFGFLqF8QEQUplzQWJpqr7McETxDCwCO5+BeMwIkMQhrhjJVSIq843XjOFQzro31yrsN8pVBjWWggDyBnbOg1A4a7UNNEe9tinTzQPiUBXXofn8TQOhBGXrQhH5cosfcUAcnPDxOfUOdYS5K/IFF+UYBmdZKv3JLPVC6PRx44xX2jUHFJw3q/XfcNtK33nUPxPohRtI5hkz5SKhA3h0YbxkKex+gmG4MhWtX9CBdbr0/G+e+v6unQ8uROXMLW0dm7/95ZP6WV8TOaw+/s90dUXnjowrMMphfYIvqeVUPn2iX1dWj7jC1CcPpoIdHST+OoyiOaBKNkyQej9JshJNBtkHtKyXdu6uX2MAFAmMmqAM5HKrnfaqUYFhukf4WAPxj5iP2pB/+dofbh7gnFvx2G+lK1Ir1uXqk4H9L/qtgnxzFxizqjWNKLsZJnFwMMjq6mFA8vMCTdJj0KSOD7JR/P/z4BypIQpiQFAAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=c351680047430f104134ef6c716d43a0"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Update Record">f9d01dd2c31332002841b63b12d3aea1</action_type>
+        <action_type_parent display_value="Update Record">baf174c8c3c232002841b63b12d3aee4</action_type_parent>
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <comment/>
+        <compiled_snapshot>f9d01dd2c31332002841b63b12d3aea1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="TrackMed Dose Execution &amp; Escalation Engine">7651680047430f104134ef6c716d433b</flow>
+        <generation_source/>
+        <order>8</order>
+        <parent_ui_id>0a14171d-695d-4cc1-b5d4-c327467df4bf</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:24</sys_created_on>
+        <sys_id>c351680047430f104134ef6c716d43a2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:24</sys_updated_on>
+        <ui_id>c53329a6-bf8f-487d-8f15-c4af7b802593</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1Uy27bMBD8FYNnW6AsW7V9K+IGKNAmaFL4kqYCRa5sIpSokpQfFfzvXT0sC0mQ9JBDA1Q37oszw1ndlSRjKZAFcSxWENWHIdkyVVTBfWQzHjnD+EMKIhLaQqT0GiuEtLlih9WrhTkzONOBIYuS8I1UwkBGFnf3QyIFdsZTQf25H/LAD4IxpePZxI/DIPbHImDA5zhCsRgUln6vIOL5OcTukD8b+9LvHVw1CW1EhWdKhwT2DjIBiCRhysKQpCwTzGlzIAtnCgwYYOI6U4euYiMzhxNJVbu38jfeO6NVXQJIjUOT645RK1UTTpbMsVuczF1h2lK+0ZKDbUQRkLBCuYt+rCm4zp3UWdNS82y7tSrS7KrRhHQDTi+DkQIfQ0Be8ayQtzSS243e3ZxQXsqs1qRNKs2Z6k7MOSPjwlV4SgIKUhwUpSzPZbaOcqO3sm5GLKm3VnjwEqV3eKmV68xjvALuoazMu8T4sg6vmJEVi684BpuPQ2IP9kIxa89cUMToV1EhaZi1HKJGhqqFG5m7j3jBFlq4x2HnaQMcn7rn57K8wOd06FDf44VB5u54fOrmv7DtBF6yLfg9296cUDxG1XpWaF7UgkrxyLTLNjP4vDy71n8z107ek2sbWu/etL0f1Kv2rV1re/bdafMQ4bQfBaWBKMsw4GHwIY5HIY3paBLDfDSfgj8aT5MZZXQ+mXLwGvt5p97j8eenb08t/5ajX9sdOn5xd6C3O5cSlLDn3ekkOf3vIUUWDqJGokf//DY5WLXJboPebIX8kNbf/0X69xbp/g9UrrD33QgAAA==</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=c351680047430f104134ef6c716d43a2"/>
+    <sys_hub_sub_flow_instance_v2 action="delete_multiple" query="flow=7651680047430f104134ef6c716d433b"/>
+    <sys_hub_flow_logic_instance_v2 action="delete_multiple" query="flow=7651680047430f104134ef6c716d433b^sys_idNOT IN3251680047430f104134ef6c716d4397,3a51680047430f104134ef6c716d4398,7651680047430f104134ef6c716d436f,fa51680047430f104134ef6c716d439a"/>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <block display_value="">5a51280047430f104134ef6c716d439c</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="TrackMed Dose Execution &amp; Escalation Engine">7651680047430f104134ef6c716d433b</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>5</order>
+        <outputs_assigned/>
+        <parent_ui_id>53a2e6f0-7267-41c2-9311-99a48078a7d4</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:24</sys_created_on>
+        <sys_id>3251680047430f104134ef6c716d4397</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:24</sys_updated_on>
+        <ui_id>0a14171d-695d-4cc1-b5d4-c327467df4bf</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1VXU/bMBT9K5Of28j5LO0bKkJCYkMCxMuGohvbaS3cOLMdIIv633edpC2CTrCPxz21Pva9PufknqQjunF14+ytPrVWriqy+Ho/IbLyGP7vSAUbQRaE6YpLJ3VFJuQRVOOxrstilsWzophmtKDTpBDz6TwV4TRKyxMKdJ6kTATXgmnDA+vANXa7/dZQGvNbeBC+F5e2VtDe/cOWbC0VN2KUUoNBBU4YsuhebUmON84hLdOQpiyOsjiiNDpJwiKLizDiMYgkw4YKCqHw6PKFB0dscW3tIeuMrFbj+nIsvdmBSNtTieiEiGcnKi6QRAnKignZQMXBadOShTMNAkYAv6pUuz+xlpXDbsSffbbyh/CdKPUnS4G6mBh298t89HeAyzNwgFQa5hozHmVrLZmwgyNclNAot3yJDQeu6l5lX+KgULtqrZpN9WUwg+wb7B4nIo1FEqL2Sj33UUh5s9ZP1zuW57LqXRk3lWag9itw6F3ROM+nI0KJDTbKN1DX6GheG/0o+2LksglWChdBqfQTXurnOQDmiQdoLATniJ/18B0Y6VV8xjZYjLNgc8uMrHfa+svJdkJsa5cKrD1oRHPz741nOCgeteWDPb6kb3SKFz+KUcZ20hHP6lKvJLuocHBR9k1rL/wIUgiTcBbybJ7yhLGw8D9xNEuyGS+ToiTjqJYUynDOwuOjCvGRscx74BDZt4kj70fkA/e+icinYfJ/zeh30hK+k5YR+VBc0vR/Wv46LZ5mAVayvP9SYDv/wvrDuIymn0uh+NEROpanez/TA6v902DSYtmtxy52HzC/0eLI+dQdoCdtHrzsA7b9CcxG0LoKBwAA</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <block display_value="">9a51280047430f104134ef6c716d43a3</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="TrackMed Dose Execution &amp; Escalation Engine">7651680047430f104134ef6c716d433b</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="Else If">666e5545c3e232002841b63b12d3ae99</logic_definition>
+        <order>10</order>
+        <outputs_assigned/>
+        <parent_ui_id>53a2e6f0-7267-41c2-9311-99a48078a7d4</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:24</sys_created_on>
+        <sys_id>3a51680047430f104134ef6c716d4398</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:24</sys_updated_on>
+        <ui_id>011450b4-4277-4559-b217-834b0524b9b0</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1VXU/bMBT9K8jPbeR8tbRvqAgJiYEEiJcNRdeO01q4cWY7LVnU/77rJG3R1mls7HFv8bHv9Tkn9yQt0bWramcf9YW1clmS+efnEZGlx/C5JSWsBZkTrstcOqlLMiIbULXH2nYS80k8ZWw8oYyOEyZm41kqwnGUFucU6CxJuQjuBdcmD6wDV9vd7ktNaZzfanfm4EX4frm0lYLm6R+35SupciMGSRUYVOKEIfP2hy2Z460FhSKc8ZDH0SSOKI3Ok5BNYhZGeQwCQmyogAmFRxdvvDhhj2sqD1lnZLkc1jdD6cMeROqeSkRHRLw6UeYCSRSgrBiRNZQ5OG0aMnemRsAIyO9K1RxOrGTpsBvxZ1+t/CZ8J0r9yUKgLi763cMyGzzu4eISHCCVmrvaDEf5SksubO9ILgqolVu8xfoDd1WnsitxwNS+Wqt6Xd72ZpBDg/0rRaS2SEJUXqnnPggpHlZ6e79neSXLzpVhU2kO6rACh96x2nk+LRFKrLFRtoaqQkezyuiN7IqRyzpYKlwEhdJbvNTPdQDcEw/QWAiuEL/s4Ccw0qv4hG2wGGfBZpYbWe21dZeT3YjYxi4UWHvUiOZmX2vPsFc8aMt6e3xJ1+gCL96IQcZu1BLP6kYvJb8ucXhR9kNjr/0I0jBMUsqSJJpOkzSdsSicnscJo2mUsBmj5H2jGp0Yy6wDjtH9OXXkwxGJTkXkrJ/8XzP6k7SEv0nLgLwrLmn6Py0fTounycBKnnV/DGznP1h/GZfB9CspVH5yhE7l6dnPdM/q8Da4tFj26LHr/Y/MbzQ4cj51R2irzYuXfcR23wENBZUREgcAAA==</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <block display_value="">d651280047430f104134ef6c716d4398</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="TrackMed Dose Execution &amp; Escalation Engine">7651680047430f104134ef6c716d433b</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>3</order>
+        <outputs_assigned/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:24</sys_created_on>
+        <sys_id>7651680047430f104134ef6c716d436f</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:24</sys_updated_on>
+        <ui_id>53a2e6f0-7267-41c2-9311-99a48078a7d4</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1VXU/bMBT9K5OfS+V8tukbAiFVYkMaiJcNRTe201pz48x2ClnU/77rJG0RdIKN171U9fH9OOfmnqQjunF14+ydPrdWriqy+PYwIbLyGP7vSAUbQRaE6YpLJ3VFJmQLqvFY1wVCJBlLi7MZ4E88L8VZltLyLCvSqIA45gFEU+vAid3ue0NpxCnmc2lrBe39B8uwtVTciJFyDQaZOmHIontxJTl2ySApk4AmLArTKKQ0nMeBLx+EPAIRp1hQQSEUhl4803pCvmtrD1lnZLUaz9dj6u0e1IZ7KiGdEPHkRMUFkihBWTEhG6g4OG1asnCmQcAI4DeVag8Ra1k5rEZ87JOVv4SvRKmPLAXqYmK4PRzzcaYDXF6CA6TSMNeYMZSttWTCDhPhooRGuYvn2BBwU/cq+xQHhdpna9Vsqi/DMMihwP4RItJYJCFqr9RzH4WUt2v9+HXP8kpW/VTGS6UZqMMJHM6uaJzn0xGhxAYL5Ruoa5xoXhu9lX0yctlMVwoP01LpR2zq93YKzBOf4mBheoX4ZQ/fg5FexWcsg8m4Cza3zMh6r61vTnYTYlt7ocDao0Ycbv6z8QwHxaO2fBiPT+kLnWPjrRhl7CYd8ayu9UqyZYU7i7JvW7v0K5hEEIq0pLMwncUBC7MoCLIM4jmdzWHGYzKuakmhDDIWnF5ViE6sZd4DR2u+dhl52yLv6PvKIp+Gzf8zo79xS/CGW0bkXXZJkv9u+bBbPM0CrGR5/0XAcv6F9Y92GYd+JYXiJ1folJ8e/E4PrA5Pg0mLaXceW+4/VP6ixZXzrjtCj9r88LKP2O439cdwF/IGAAA=</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes>timeFromCreateToActivate=36000</attributes>
+        <block display_value="">2251280047430f104134ef6c716d43a8</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="TrackMed Dose Execution &amp; Escalation Engine">7651680047430f104134ef6c716d433b</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="Else If">666e5545c3e232002841b63b12d3ae99</logic_definition>
+        <order>13</order>
+        <outputs_assigned/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:24</sys_created_on>
+        <sys_id>fa51680047430f104134ef6c716d439a</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:24</sys_updated_on>
+        <ui_id>efa07219-4245-4008-858c-aba451a6fafd</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1V0W7aMBT9lcnPgJIQKPBWUVWq1K3SqPqyVdGN7YA1Y2e20zaL+PfdmwSoOqZ143UvCB/7Xp9zc07SMFuFsgr+3l56r9aGLb48DpgyhOH/hhnYSrZg3BqhgrKGDdgT6IqwpomlnMz5NB9eAP6ks0IO59OoGM7z6TiHNBUxjEc+QJC73dcqisYixnqhfKmhfjizDd8oLZzsKZfgkGmQji2aN1tK4C1FBEU85zEfJ9NxEkXJLI2pfZyIMUighhpyqfHo8pXWE/JDXRLkg1Nm3a9v+9LVHrROEJUkGjD5EqQREkkUoL0csC0YAcG6mi2CqxBwEsSd0fXhxEaZgN0YnX3x6oekTlFEJwuJurjsdg/LrJ9pBxdXEACpVDxUrj/KN1Zx6buJCFlApcPyNdYduCtblW1JgFzvq62utuZTNwx2aLB/hIhUHknIkpQS915IsdrY5897ltfKtFPpN7XloA8rCDi7vArEp2FSyy02yrZQljjRrHT2SbXFyGU7WmtcjAptn/FS8u0IOBEf4WBhdI34VQs/gFOk4iO2wWL0gs88d6rca2svZ7sB87VfavD+qBGHm32viGGnuNeWdeOhkrbRJV78JHsZu0HDiNWtXSt+Y9CzKHtV+xuyIM4sukjieZqkkzSKZrPJjAP6exLDtIBCsPdZNTlhy6wFjtH8NWXs7IgkpyLyoXP+7xn9TVriP6SlR94Vl8nkf1rOTgvRzMErnrVfBGxHL6x/jEs/9GsltThpoVN5eiRPd6wOT4Mrj2X3hN3sP1S0UaPlKHVH6Nm6byT7iO1+Ah726OPyBgAA</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=7651680047430f104134ef6c716d433b"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=7651680047430f104134ef6c716d433b"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>table_name</element>
+        <help/>
+        <hint/>
+        <label>Table Name</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_7651680047430f104134ef6c716d433b</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:24</sys_created_on>
+        <sys_id>f251680047430f104134ef6c716d4363</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:24</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>current</element>
+        <help/>
+        <hint/>
+        <label>Record</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_7651680047430f104134ef6c716d433b</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:24</sys_created_on>
+        <sys_id>f651680047430f104134ef6c716d434b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:24</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_7651680047430f104134ef6c716d433b"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_7651680047430f104134ef6c716d433b"/>
+    <sys_hub_flow action="UPDATE">
+        <sys_id>c9f2f3c65e8640e79a03d4163e1f4d6f</sys_id>
+        <latest_snapshot>7651680047430f104134ef6c716d433b</latest_snapshot>
+        <compiler_build>glide-australia-02-11-2026__patch3-05-25-2026_06-12-2026_1106.zip</compiler_build>
+        <version_record/>
+    </sys_hub_flow>
+    <sys_flow_trigger_plan action="delete_multiple" query="plan_id=c9f2f3c65e8640e79a03d4163e1f4d6f^sys_idNOT IN5751a80047430f104134ef6c716d435a"/>
+    <sys_flow_trigger_plan action="INSERT_OR_UPDATE">
+        <binding_strategy>com.snc.process_flow.engine.binding.OncePerRecord</binding_strategy>
+        <plan>{"@class":"com.snc.process_flow.engine.serialization.plan_data.ChunkingPlanData","chunk_data":{"table":"sys_flow_trigger_plan","id":"5751a80047430f104134ef6c716d435a","name":"plan","plan_signature":null},"plan_data":"CHUNKING_PLAN"}</plan>
+        <plan_id>c9f2f3c65e8640e79a03d4163e1f4d6f</plan_id>
+        <snapshot>6d3cf0c847070f104134ef6c716d43a1</snapshot>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 18:46:25</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>5751a80047430f104134ef6c716d435a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 18:46:25</sys_updated_on>
+        <trigger display_value="">5351a80047430f104134ef6c716d4359</trigger>
+    </sys_flow_trigger_plan>
+    <sys_flow_subflow_plan action="delete_multiple" query="plan_id=c9f2f3c65e8640e79a03d4163e1f4d6f"/>
+</record_update>

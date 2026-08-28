@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="enforce_dot_walk_cross_scope_access=true" db_object_id="725c660a81d1c3107f44e314ec616f08" label="Patient Record" max_length="40" name="x_snc_trackmed_patient_record" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Care facility" max_length="32" name="care_facility" reference="core_company" type="reference"/>
+        <element label="DOB" max_length="255" name="dob" type="glide_date"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Caretaker" max_length="32" name="caregiver" reference="sys_user" type="reference"/>
+        <element label="Diagnosis " max_length="40" name="diagnosis" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="3" label="Gender" max_length="40" name="gender" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Female" sequence="1" value="female"/>
+                <element inactive_on_update="false" label="Male" sequence="0" value="male"/>
+            </choice>
+        </element>
+        <element display="true" label="Patient name" max_length="40" name="patient_name" type="string"/>
+        <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Patient id" max_length="40" name="number" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Primary doctor" max_length="32" name="primary_doctor" reference="sys_user" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Guardian" max_length="32" name="guardian" reference="sys_user" type="reference"/>
+        <index name="index">
+            <element name="care_facility"/>
+        </index>
+        <index name="index2">
+            <element name="caregiver"/>
+        </index>
+        <index name="index3">
+            <element name="guardian"/>
+        </index>
+        <index name="index4">
+            <element name="primary_doctor"/>
+        </index>
+    </element>
+</database>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="dose_log_id" label="Dose log id" language="en" table="x_snc_trackmed_dose_log">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>dose_log_id</element>
+            <help/>
+            <hint/>
+            <label>Dose log id</label>
+            <language>en</language>
+            <name>x_snc_trackmed_dose_log</name>
+            <plural/>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>rangewar.ashirwad</sys_created_by>
+            <sys_created_on>2026-06-07 18:37:10</sys_created_on>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_name>Dose log id</sys_name>
+            <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+            <sys_update_name>sys_documentation_x_snc_trackmed_dose_log_dose_log_id_en</sys_update_name>
+            <sys_updated_by>rangewar.ashirwad</sys_updated_by>
+            <sys_updated_on>2026-06-07 18:37:10</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

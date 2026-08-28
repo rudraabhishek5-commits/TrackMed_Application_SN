@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sysauto_script">
+    <sysauto_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <advanced>true</advanced>
+        <business_calendar/>
+        <condition/>
+        <conditional>false</conditional>
+        <entered_run_end/>
+        <entered_run_start/>
+        <entered_time>1970-01-01 00:10:00</entered_time>
+        <max_drift/>
+        <name>TrackMed Daily Dose Log Generator</name>
+        <offset/>
+        <offset_type>0</offset_type>
+        <repeat_every/>
+        <run_as/>
+        <run_as_tz/>
+        <run_dayofmonth>1</run_dayofmonth>
+        <run_dayofweek>1</run_dayofweek>
+        <run_daysofweek/>
+        <run_end/>
+        <run_month>1</run_month>
+        <run_period/>
+        <run_start>2026-08-26 20:35:31</run_start>
+        <run_time>1970-01-01 00:10:00</run_time>
+        <run_type>daily</run_type>
+        <run_weekinmonth>1</run_weekinmonth>
+        <script><![CDATA[(function() {
+    var now = new GlideDateTime();
+    gs.info('TrackMed: Starting daily dose log generation at ' + now.getDisplayValue());
+
+    // Query all active medication schedules
+    var schedGr = new GlideRecord('x_snc_trackmed_medication_schedule_table');
+    schedGr.addQuery('state', 'active');
+    schedGr.query();
+
+    var totalCreated = 0;
+
+    while (schedGr.next()) {
+        var frequency = schedGr.getValue('frequency');
+        var patient = schedGr.getValue('patient');
+        var caretaker = schedGr.getValue('caretaker');
+        var schedSysId = schedGr.getUniqueValue();
+        var medName = schedGr.getValue('medication_name');
+
+        // Create Morning dose (all frequencies)
+        _createDoseLog(patient, caretaker, schedSysId, 'Medication dose - Morning (' + medName + ')');
+        totalCreated++;
+
+        // Create Afternoon dose (twice_Daily or thrice_Daily)
+        if (frequency == 'twice_Daily' || frequency == 'thrice_Daily') {
+            _createDoseLog(patient, caretaker, schedSysId, 'Medication dose - Afternoon (' + medName + ')');
+            totalCreated++;
+        }
+
+        // Create Evening dose (thrice_Daily only)
+        if (frequency == 'thrice_Daily') {
+            _createDoseLog(patient, caretaker, schedSysId, 'Medication dose - Evening (' + medName + ')');
+            totalCreated++;
+        }
+    }
+
+    gs.info('TrackMed: Daily dose log generation complete. Created ' + totalCreated + ' dose logs.');
+
+    function _createDoseLog(patient, caretaker, medication, description) {
+        var doseGr = new GlideRecord('x_snc_trackmed_dose_log');
+        doseGr.initialize();
+        doseGr.setValue('patient', patient);
+        doseGr.setValue('care_taker', caretaker);
+        doseGr.setValue('medication', medication);
+        doseGr.setValue('status', 'Scheduled');
+        doseGr.setValue('short_description', description);
+        doseGr.insert();
+    }
+})();]]></script>
+        <sys_class_name>sysauto_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-08-26 19:45:35</sys_created_on>
+        <sys_id>72dcc1fc149f419c8313a7b917a22564</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>TrackMed Daily Dose Log Generator</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sysauto_script_72dcc1fc149f419c8313a7b917a22564</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-08-26 20:43:41</sys_updated_on>
+        <time_zone/>
+        <upgrade_safe>false</upgrade_safe>
+    </sysauto_script>
+</record_update>

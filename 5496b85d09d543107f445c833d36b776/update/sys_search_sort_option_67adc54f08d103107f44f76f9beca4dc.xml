@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_search_sort_option">
+    <sys_search_sort_option action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <ais_field_name>sort_by_date</ais_field_name>
+        <ascending>false</ascending>
+        <gui_label>Most recent</gui_label>
+        <search_context_config display_value="TrackMed Buddy">daad854f08d103107f44f76f9beca436</search_context_config>
+        <sys_class_name>sys_search_sort_option</sys_class_name>
+        <sys_created_by>rangewar.ashirwad</sys_created_by>
+        <sys_created_on>2026-06-10 05:51:56</sys_created_on>
+        <sys_id>67adc54f08d103107f44f76f9beca4dc</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Most recent</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sys_search_sort_option_67adc54f08d103107f44f76f9beca4dc</sys_update_name>
+        <sys_updated_by>rangewar.ashirwad</sys_updated_by>
+        <sys_updated_on>2026-06-10 05:51:56</sys_updated_on>
+    </sys_search_sort_option>
+</record_update>

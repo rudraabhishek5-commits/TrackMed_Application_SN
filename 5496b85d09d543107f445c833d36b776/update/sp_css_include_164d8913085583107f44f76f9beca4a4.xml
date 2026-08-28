@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_css_include">
+    <sp_css_include action="INSERT_OR_UPDATE">
+        <lazy_load>false</lazy_load>
+        <name>TrackMed Styles</name>
+        <rtl_css_file_url/>
+        <source>local</source>
+        <sp_css display_value="TrackMed Styles">0a2d4913085583107f44f76f9beca4df</sp_css>
+        <sys_class_name>sp_css_include</sys_class_name>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-11 00:28:41</sys_created_on>
+        <sys_id>164d8913085583107f44f76f9beca4a4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>TrackMed Styles</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_css_include_164d8913085583107f44f76f9beca4a4</sys_update_name>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-11 00:28:41</sys_updated_on>
+        <url/>
+    </sp_css_include>
+</record_update>

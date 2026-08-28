@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sc_cat_item_catalog">
+    <sc_cat_item_catalog action="INSERT_OR_UPDATE">
+        <sc_cat_item display_value="Create New Patient Record">2a65989f085d43107f44f76f9beca4a8</sc_cat_item>
+        <sc_catalog display_value="Service Catalog">e0d08b13c3330100c8b837659bba8fb4</sc_catalog>
+        <sys_class_name>sc_cat_item_catalog</sys_class_name>
+        <sys_created_by>navata.sri</sys_created_by>
+        <sys_created_on>2026-06-10 20:40:24</sys_created_on>
+        <sys_id>9a099c57089d43107f44f76f9beca48b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Service Catalog.Create New Patient Record</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sc_cat_item_catalog_9a099c57089d43107f44f76f9beca48b</sys_update_name>
+        <sys_updated_by>navata.sri</sys_updated_by>
+        <sys_updated_on>2026-06-10 20:40:24</sys_updated_on>
+    </sc_cat_item_catalog>
+</record_update>

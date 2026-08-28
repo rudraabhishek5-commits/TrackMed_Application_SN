@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function($rootScope) {
+var c = this;
+c.date = new Date();
+c.broadcast = function() { $rootScope.$broadcast('tm.dateChanged', c.date); };
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.tm-hero { display:flex; justify-content:space-between; align-items:center;
+padding:6px 2px 14px;
+h2 { margin:0; font-size:21px; color:#0A1633; font-weight:700; }
+p { margin:2px 0 0; font-size:13px; }
+.tm-hero-date { width:160px; } }
+body.tm-dark .tm-hero h2 { color:#fff; }</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>trackmed_hero</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>TrackMed Hero</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+// Scoped apps: gs.getUser().getRecord() is NOT available - query sys_user instead
+var me = new GlideRecord('sys_user');
+me.get(gs.getUserID());
+data.name = me.getDisplayValue('name');
+data.title = me.getValue('title') || 'TrackMed User';
+})();
+
+]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-11 05:46:43</sys_created_on>
+        <sys_id>701692d7089d83107f44f76f9beca406</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>TrackMed Hero</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_widget_701692d7089d83107f44f76f9beca406</sys_update_name>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-11 06:12:54</sys_updated_on>
+        <template><![CDATA[<div class="tm-hero">
+<div>
+<h2>Welcome back, {{data.name}}</h2>
+<p class="text-muted">{{data.title}}</p>
+</div>
+<input type="date" class="form-control tm-hero-date" ng-model="c.date"
+ng-change="c.broadcast()"/>
+</div>]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>701692d7089d83107f44f76f9beca406</id>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-11 05:46:43</sys_created_on>
+        <sys_id>f81692d7089d83107f44f76f9beca409</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-11 05:46:43</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_cs_context_profile_search">
+    <sys_cs_context_profile_search action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <context_profile display_value="TrackMed Buddy">f5ad454f08d103107f44f76f9beca441</context_profile>
+        <search_context_config display_value="TrackMed Buddy">daad854f08d103107f44f76f9beca436</search_context_config>
+        <search_result_config display_value="[NAVA] Virtual Agent Search">b224e17e530020103296ddeeff7b123f</search_result_config>
+        <sys_class_name>sys_cs_context_profile_search</sys_class_name>
+        <sys_created_by>rangewar.ashirwad</sys_created_by>
+        <sys_created_on>2026-06-10 05:51:56</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_id>23adc54f08d103107f44f76f9beca4e0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sys_cs_context_profile_search_23adc54f08d103107f44f76f9beca4e0</sys_update_name>
+        <sys_updated_by>rangewar.ashirwad</sys_updated_by>
+        <sys_updated_on>2026-06-10 05:51:56</sys_updated_on>
+    </sys_cs_context_profile_search>
+</record_update>

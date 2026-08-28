@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[ api.controller = function() {};
+]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.tm-patient-strip { display:flex; align-items:center; gap:16px;
+.tm-avatar-lg { width:56px; height:56px; border-radius:50%; object-fit:cover; }
+.tm-strip-body { flex:1; h3 { margin:0 0 4px; font-size:18px; } p { margin:0; font-size:13px; } } }</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>trackmed_patient_card</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>Trackmed Patient Card</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+data.found = false;
+var id = $sp.getParameter('sys_id') || $sp.getParameter('patient');
+if (!id) return;
+var gr = new GlideRecord('x_trackmed_patient');
+if (!gr.get(id)) return; // ACLs apply: get() fails if not readable
+data.found = true;
+data.sys_id = gr.getUniqueValue();
+data.name = gr.getValue('first_name') + ' ' + gr.getValue('last_name');
+data.dob = gr.getDisplayValue('date_of_birth');
+data.gender = gr.getDisplayValue('gender');
+data.phone = gr.getValue('phone');
+data.status = gr.getValue('status');
+data.photo = gr.user ? '/profile_image.do?sys_id=' + gr.getValue('user') : '';
+data.canEdit = gr.canWrite();
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-11 16:34:14</sys_created_on>
+        <sys_id>394a68a3089107107f44f76f9beca4f3</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Trackmed Patient Card</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_widget_394a68a3089107107f44f76f9beca4f3</sys_update_name>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-11 16:35:10</sys_updated_on>
+        <template><![CDATA[<div class="tm-card tm-patient-strip" ng-if="data.found">
+<img ng-src="{{data.photo}}" class="tm-avatar-lg" onerror="this.src='/images/avatar_default.png'"/>
+<div class="tm-strip-body">
+<h3>{{data.name}} <span class="tm-pill {{data.status}}">{{data.status}}</span></h3>
+<p class="text-muted">DOB: {{data.dob}} &nbsp;|&nbsp; {{data.gender}}
+&nbsp;|&nbsp; {{data.phone}}</p>
+</div>
+<a class="btn btn-default" ng-href="?id=trackmed_patient&sys_id={{data.sys_id}}&edit=true"
+ng-if="data.canEdit">Edit</a>
+</div>
+<div class="tm-card" ng-if="!data.found">Patient not found or access denied.</div>]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>394a68a3089107107f44f76f9beca4f3</id>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-11 16:34:14</sys_created_on>
+        <sys_id>fd4a68a3089107107f44f76f9beca4f6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-11 16:34:14</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

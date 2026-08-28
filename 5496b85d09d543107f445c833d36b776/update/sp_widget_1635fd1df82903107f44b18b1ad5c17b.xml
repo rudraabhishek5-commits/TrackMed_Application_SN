@@ -1,0 +1,939 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function initializeWidget() {
+  var approveBtn = document.getElementById('approveBtn');
+  var rejectBtn = document.getElementById('rejectBtn');
+  var modifyBtn = document.getElementById('modifyBtn');
+  var consultBtn = document.getElementById('consultBtn');
+  var overlay = document.getElementById('successOverlay');
+  var iconContainer = document.getElementById('iconContainer');
+  var resultText = document.getElementById('resultText');
+  var resultMessage = document.getElementById('resultMessage');
+  
+  if (!approveBtn || !overlay) return;
+  
+  // Function to create SVG icons
+  function createApproveIcon() {
+    return `
+      <svg class="result-icon-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <circle class="approve-circle-bg" cx="60" cy="60" r="54" fill="none" />
+        <path class="approve-tick" d="M40,60 L54,74 L82,46" />
+      </svg>
+    `;
+  }
+  
+  function createRejectIcon() {
+    return `
+      <svg class="result-icon-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <circle class="reject-circle-bg" cx="60" cy="60" r="54" fill="none" />
+        <path class="reject-cross" d="M40,40 L80,80 M80,40 L40,80" />
+      </svg>
+    `;
+  }
+  
+  function createModifyIcon() {
+    return `
+      <svg class="result-icon-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <circle class="modify-circle-bg" cx="60" cy="60" r="54" fill="none" />
+        <path class="modify-pencil" d="M30,75 L45,90 L85,50 L70,35 L30,75 Z M70,35 L85,50" />
+        <circle cx="70" cy="50" r="4" fill="#f59e0b" />
+      </svg>
+    `;
+  }
+  
+  function createConsultIcon() {
+    return `
+      <svg class="result-icon-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <circle class="consult-circle-bg" cx="60" cy="60" r="54" fill="none" />
+        <circle cx="60" cy="45" r="8" fill="#3b82f6" />
+        <path class="consult-info" d="M60,58 L60,85 M60,68 L72,68 M60,68 L48,68" stroke="#3b82f6" stroke-width="5" fill="none" stroke-linecap="round" />
+      </svg>
+    `;
+  }
+  
+  function showResult(type, title, message, iconHTML) {
+    if (overlay.classList.contains('active')) {
+      // Remove active class to reset animations
+      overlay.classList.remove('active');
+      // Small delay to allow reset
+      setTimeout(function() {
+        showResultInternal(type, title, message, iconHTML);
+      }, 100);
+      return;
+    }
+    showResultInternal(type, title, message, iconHTML);
+  }
+  
+  function showResultInternal(type, title, message, iconHTML) {
+    // Set icon
+    iconContainer.innerHTML = iconHTML;
+    
+    // Set text with color class
+    resultText.textContent = title;
+    resultText.className = 'result-text ' + type;
+    
+    // Set message
+    resultMessage.textContent = message;
+    
+    // Show overlay
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    // Auto-close after 3 seconds
+    if (window._timeoutId) {
+      clearTimeout(window._timeoutId);
+    }
+    window._timeoutId = setTimeout(function() {
+      if (overlay.classList.contains('active')) {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }, 3200);
+  }
+  
+  // Button click handlers
+  function handleApprove() {
+    var patient = document.getElementById('patientName') ? document.getElementById('patientName').value : 'Patient';
+    showResult('approved', 'Approved', 'Refill request for ' + patient + ' has been approved', createApproveIcon());
+    console.log('✅ Approved: Refill request approved');
+  }
+  
+  function handleReject() {
+    var patient = document.getElementById('patientName') ? document.getElementById('patientName').value : 'Patient';
+    showResult('rejected', 'Rejected', 'Refill request for ' + patient + ' has been rejected', createRejectIcon());
+    console.log('❌ Rejected: Refill request rejected');
+  }
+  
+  function handleModify() {
+    var patient = document.getElementById('patientName') ? document.getElementById('patientName').value : 'Patient';
+    showResult('modified', 'Modify', 'Refill request for ' + patient + ' has been modified', createModifyIcon());
+    console.log('✎ Modified: Refill request modified');
+  }
+  
+  function handleConsult() {
+    var patient = document.getElementById('patientName') ? document.getElementById('patientName').value : 'Patient';
+    showResult('consulted', 'Consult', 'Consultation requested for ' + patient + "'s refill", createConsultIcon());
+    console.log(']]>💬<![CDATA[ Consult: Consultation requested');
+  }
+  
+  // Attach event listeners
+  function attachListener(btn, handler) {
+    var newBtn = btn.cloneNode(true);
+    btn.parentNode.replaceChild(newBtn, btn);
+    newBtn.addEventListener('click', handler);
+    return newBtn;
+  }
+  
+  var newApprove = attachListener(approveBtn, handleApprove);
+  var newReject = attachListener(rejectBtn, handleReject);
+  var newModify = attachListener(modifyBtn, handleModify);
+  var newConsult = attachListener(consultBtn, handleConsult);
+  
+  // Close overlay on background click
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+      if (window._timeoutId) {
+        clearTimeout(window._timeoutId);
+        window._timeoutId = null;
+      }
+    }
+  });
+  
+  // Close with Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && overlay.classList.contains('active')) {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+      if (window._timeoutId) {
+        clearTimeout(window._timeoutId);
+        window._timeoutId = null;
+      }
+    }
+  });
+}
+
+// Initialize
+if (window.frameElement && window.frameElement.getAttribute('data-sn-widget')) {
+  initializeWidget();
+} else {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeWidget);
+  } else {
+    initializeWidget();
+  }
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/* Main Container with Sidebar */&#13;
+.trackmed-container {&#13;
+  display: flex;&#13;
+  min-height: 100vh;&#13;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;&#13;
+  background: #f5f7fa;&#13;
+}&#13;
+&#13;
+/* Sidebar Styles */&#13;
+.sidebar {&#13;
+  width: 300px;&#13;
+  background: #0b2b3b;&#13;
+  color: white;&#13;
+  position: fixed;&#13;
+  height: 100vh;&#13;
+  overflow-y: auto;&#13;
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);&#13;
+}&#13;
+&#13;
+.sidebar-header {&#13;
+  padding: 1.8rem 1.5rem;&#13;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);&#13;
+  margin-bottom: 1rem;&#13;
+}&#13;
+&#13;
+.sidebar-header h2 {&#13;
+  font-size: 2rem;&#13;
+  font-weight: 700;&#13;
+  margin: 0;&#13;
+  color: white;&#13;
+}&#13;
+&#13;
+.sidebar-header h2 span {&#13;
+  color: #2ecc71;&#13;
+  font-weight: 400;&#13;
+}&#13;
+&#13;
+.sidebar-nav {&#13;
+  display: flex;&#13;
+  flex-direction: column;&#13;
+}&#13;
+&#13;
+.nav-item {&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  gap: 0.75rem;&#13;
+  padding: 0.9rem 1.5rem;&#13;
+  color: rgba(255, 255, 255, 0.8);&#13;
+  text-decoration: none;&#13;
+  transition: all 0.2s ease;&#13;
+  font-size: 1rem;&#13;
+}&#13;
+&#13;
+.nav-item:hover {&#13;
+  background: rgba(255, 255, 255, 0.1);&#13;
+  color: white;&#13;
+}&#13;
+&#13;
+.nav-item.active {&#13;
+  background: #1e4a5f;&#13;
+  color: white;&#13;
+  border-left: 3px solid #2ecc71;&#13;
+}&#13;
+&#13;
+.nav-icon {&#13;
+  font-size: 1.2rem;&#13;
+  width: 24px;&#13;
+}&#13;
+&#13;
+/* Main Content Area */&#13;
+.main-content {&#13;
+  flex: 1;&#13;
+  margin-left: 300px;&#13;
+  padding: 2rem;&#13;
+  display: flex;&#13;
+  justify-content: center;&#13;
+  align-items: flex-start;&#13;
+}&#13;
+&#13;
+/* Widget Styles */&#13;
+.trackmed-widget {&#13;
+  max-width: 1000px;&#13;
+  width: 100%;&#13;
+  background: #ffffff;&#13;
+  border-radius: 2rem;&#13;
+  box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.25);&#13;
+  overflow: hidden;&#13;
+}&#13;
+&#13;
+.brand-header {&#13;
+  background: #0b2b3b;&#13;
+  padding: 1.5rem 2.5rem;&#13;
+  color: white;&#13;
+}&#13;
+&#13;
+.brand-header h1 {&#13;
+  font-size: 1.8rem;&#13;
+  font-weight: 600;&#13;
+  margin: 0;&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  gap: 0.5rem;&#13;
+}&#13;
+&#13;
+.brand-header h1 span {&#13;
+  font-weight: 400;&#13;
+  font-size: 0.9rem;&#13;
+  background: #2c5a6e;&#13;
+  padding: 0.2rem 0.7rem;&#13;
+  border-radius: 40px;&#13;
+}&#13;
+&#13;
+.refill-badge {&#13;
+  background: rgba(255, 255, 255, 0.15);&#13;
+  display: inline-block;&#13;
+  font-size: 0.85rem;&#13;
+  font-weight: 500;&#13;
+  padding: 0.3rem 1rem;&#13;
+  border-radius: 30px;&#13;
+  margin-top: 0.7rem;&#13;
+}&#13;
+&#13;
+.request-content {&#13;
+  padding: 2rem 2.5rem;&#13;
+}&#13;
+&#13;
+.info-row {&#13;
+  display: flex;&#13;
+  justify-content: space-between;&#13;
+  align-items: center;&#13;
+  border-bottom: 1px solid #edf2f7;&#13;
+  padding: 1.2rem 0;&#13;
+}&#13;
+&#13;
+.info-label {&#13;
+  font-weight: 600;&#13;
+  color: #1e2a3e;&#13;
+  font-size: 1rem;&#13;
+  width: 30%;&#13;
+}&#13;
+&#13;
+.info-value {&#13;
+  width: 70%;&#13;
+  color: #0f2b3d;&#13;
+  font-weight: 500;&#13;
+}&#13;
+&#13;
+.blue-highlight {&#13;
+  background: #e8f0fe;&#13;
+  border-radius: 0.75rem;&#13;
+  transition: all 0.2s ease;&#13;
+}&#13;
+&#13;
+.blue-highlight:focus-within {&#13;
+  background: #d9e6f7;&#13;
+  box-shadow: 0 0 0 2px rgba(15, 107, 79, 0.2);&#13;
+}&#13;
+&#13;
+.blue-field {&#13;
+  width: 100%;&#13;
+  padding: 0.9rem 1rem;&#13;
+  border: 2px solid #4a90e2;&#13;
+  border-radius: 0.75rem;&#13;
+  font-size: 1rem;&#13;
+  font-family: inherit;&#13;
+  background: white;&#13;
+  transition: all 0.2s ease;&#13;
+}&#13;
+&#13;
+.blue-field:focus {&#13;
+  outline: none;&#13;
+  border-color: #0f6b4f;&#13;
+  box-shadow: 0 0 0 3px rgba(15, 107, 79, 0.1);&#13;
+}&#13;
+&#13;
+.blue-field:hover {&#13;
+  border-color: #2c6eb0;&#13;
+}&#13;
+&#13;
+.status-select {&#13;
+  cursor: pointer;&#13;
+  background: white;&#13;
+}&#13;
+&#13;
+.editable-textarea {&#13;
+  width: 100%;&#13;
+  padding: 0.9rem 1rem;&#13;
+  border: 2px solid #4a90e2;&#13;
+  border-radius: 0.75rem;&#13;
+  font-size: 1rem;&#13;
+  font-family: inherit;&#13;
+  resize: vertical;&#13;
+  min-height: 120px;&#13;
+  background: white;&#13;
+  transition: all 0.2s ease;&#13;
+}&#13;
+&#13;
+.editable-textarea:focus {&#13;
+  outline: none;&#13;
+  border-color: #0f6b4f;&#13;
+  box-shadow: 0 0 0 3px rgba(15, 107, 79, 0.1);&#13;
+}&#13;
+&#13;
+.notes-section {&#13;
+  margin-top: 1.5rem;&#13;
+  background: #f8fafc;&#13;
+  padding: 1.2rem 1.5rem;&#13;
+  border-radius: 1rem;&#13;
+  border-left: 4px solid #2b7a62;&#13;
+}&#13;
+&#13;
+.notes-label {&#13;
+  font-size: 0.85rem;&#13;
+  text-transform: uppercase;&#13;
+  font-weight: 600;&#13;
+  color: #2b6a54;&#13;
+  margin-bottom: 0.7rem;&#13;
+}&#13;
+&#13;
+/* Action Buttons - 4 Button Layout */&#13;
+.action-buttons {&#13;
+  display: grid;&#13;
+  grid-template-columns: repeat(4, 1fr);&#13;
+  gap: 1rem;&#13;
+  padding: 1.5rem 2.5rem 2.5rem 2.5rem;&#13;
+}&#13;
+&#13;
+.action-btn {&#13;
+  padding: 1rem 0.5rem;&#13;
+  border: none;&#13;
+  border-radius: 1rem;&#13;
+  font-size: 1rem;&#13;
+  font-weight: 600;&#13;
+  cursor: pointer;&#13;
+  transition: all 0.3s ease;&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  justify-content: center;&#13;
+  gap: 0.5rem;&#13;
+  font-family: inherit;&#13;
+}&#13;
+&#13;
+.btn-icon {&#13;
+  font-size: 1.2rem;&#13;
+  font-weight: 700;&#13;
+}&#13;
+&#13;
+/* Approve Button */&#13;
+.approve-btn {&#13;
+  background: #0f6b4f;&#13;
+  color: white;&#13;
+  box-shadow: 0 4px 12px rgba(15, 107, 79, 0.3);&#13;
+}&#13;
+&#13;
+.approve-btn:hover {&#13;
+  background: #0a5a42;&#13;
+  transform: translateY(-2px);&#13;
+  box-shadow: 0 6px 16px rgba(15, 107, 79, 0.4);&#13;
+}&#13;
+&#13;
+/* Reject Button */&#13;
+.reject-btn {&#13;
+  background: #dc2626;&#13;
+  color: white;&#13;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);&#13;
+}&#13;
+&#13;
+.reject-btn:hover {&#13;
+  background: #b91c1c;&#13;
+  transform: translateY(-2px);&#13;
+  box-shadow: 0 6px 16px rgba(220, 38, 38, 0.4);&#13;
+}&#13;
+&#13;
+/* Modify Button */&#13;
+.modify-btn {&#13;
+  background: #f59e0b;&#13;
+  color: white;&#13;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);&#13;
+}&#13;
+&#13;
+.modify-btn:hover {&#13;
+  background: #d97706;&#13;
+  transform: translateY(-2px);&#13;
+  box-shadow: 0 6px 16px rgba(245, 158, 11, 0.4);&#13;
+}&#13;
+&#13;
+/* Consult Button */&#13;
+.consult-btn {&#13;
+  background: #3b82f6;&#13;
+  color: white;&#13;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);&#13;
+}&#13;
+&#13;
+.consult-btn:hover {&#13;
+  background: #2563eb;&#13;
+  transform: translateY(-2px);&#13;
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);&#13;
+}&#13;
+&#13;
+/* Animation Overlay */&#13;
+.animation-overlay {&#13;
+  position: fixed;&#13;
+  top: 0;&#13;
+  left: 0;&#13;
+  width: 100%;&#13;
+  height: 100%;&#13;
+  background: rgba(0, 0, 0, 0.75);&#13;
+  backdrop-filter: blur(8px);&#13;
+  display: flex;&#13;
+  justify-content: center;&#13;
+  align-items: center;&#13;
+  z-index: 2000;&#13;
+  visibility: hidden;&#13;
+  opacity: 0;&#13;
+  transition: visibility 0s, opacity 0.3s ease;&#13;
+}&#13;
+&#13;
+.animation-overlay.active {&#13;
+  visibility: visible;&#13;
+  opacity: 1;&#13;
+}&#13;
+&#13;
+.success-card {&#13;
+  background: white;&#13;
+  border-radius: 3rem;&#13;
+  padding: 3rem 3.5rem;&#13;
+  text-align: center;&#13;
+  max-width: 400px;&#13;
+  width: 90%;&#13;
+  box-shadow: 0 35px 60px rgba(0, 0, 0, 0.3);&#13;
+  animation: floatIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;&#13;
+}&#13;
+&#13;
+@keyframes floatIn {&#13;
+  0% {&#13;
+    opacity: 0;&#13;
+    transform: scale(0.8) translateY(30px);&#13;
+  }&#13;
+  100% {&#13;
+    opacity: 1;&#13;
+    transform: scale(1) translateY(0);&#13;
+  }&#13;
+}&#13;
+&#13;
+/* Icon Container for Animations */&#13;
+.icon-container {&#13;
+  width: 130px;&#13;
+  height: 130px;&#13;
+  margin: 0 auto 1.5rem auto;&#13;
+  position: relative;&#13;
+}&#13;
+&#13;
+/* SVG Icons */&#13;
+.result-icon-svg {&#13;
+  width: 100%;&#13;
+  height: 100%;&#13;
+}&#13;
+&#13;
+/* Approve - Green Tick */&#13;
+.approve-circle-bg {&#13;
+  stroke: #0f6b4f;&#13;
+  stroke-width: 4;&#13;
+  fill: none;&#13;
+  stroke-dasharray: 340;&#13;
+  stroke-dashoffset: 340;&#13;
+  animation: drawCircle 0.6s ease-out forwards;&#13;
+}&#13;
+&#13;
+.approve-tick {&#13;
+  stroke: #0f6b4f;&#13;
+  stroke-width: 6;&#13;
+  fill: none;&#13;
+  stroke-linecap: round;&#13;
+  stroke-linejoin: round;&#13;
+  stroke-dasharray: 80;&#13;
+  stroke-dashoffset: 80;&#13;
+  animation: drawTick 0.5s ease-out 0.4s forwards;&#13;
+}&#13;
+&#13;
+/* Reject - Red Cross */&#13;
+.reject-circle-bg {&#13;
+  stroke: #dc2626;&#13;
+  stroke-width: 4;&#13;
+  fill: none;&#13;
+  stroke-dasharray: 340;&#13;
+  stroke-dashoffset: 340;&#13;
+  animation: drawCircle 0.6s ease-out forwards;&#13;
+}&#13;
+&#13;
+.reject-cross {&#13;
+  stroke: #dc2626;&#13;
+  stroke-width: 6;&#13;
+  fill: none;&#13;
+  stroke-linecap: round;&#13;
+  stroke-linejoin: round;&#13;
+  stroke-dasharray: 100;&#13;
+  stroke-dashoffset: 100;&#13;
+  animation: drawCross 0.5s ease-out 0.4s forwards;&#13;
+}&#13;
+&#13;
+/* Modify - Pencil/Yellow */&#13;
+.modify-circle-bg {&#13;
+  stroke: #f59e0b;&#13;
+  stroke-width: 4;&#13;
+  fill: none;&#13;
+  stroke-dasharray: 340;&#13;
+  stroke-dashoffset: 340;&#13;
+  animation: drawCircle 0.6s ease-out forwards;&#13;
+}&#13;
+&#13;
+.modify-pencil {&#13;
+  stroke: #f59e0b;&#13;
+  stroke-width: 5;&#13;
+  fill: none;&#13;
+  stroke-linecap: round;&#13;
+  stroke-linejoin: round;&#13;
+  stroke-dasharray: 120;&#13;
+  stroke-dashoffset: 120;&#13;
+  animation: drawPencil 0.5s ease-out 0.4s forwards;&#13;
+}&#13;
+&#13;
+/* Consult - Blue/Info */&#13;
+.consult-circle-bg {&#13;
+  stroke: #3b82f6;&#13;
+  stroke-width: 4;&#13;
+  fill: none;&#13;
+  stroke-dasharray: 340;&#13;
+  stroke-dashoffset: 340;&#13;
+  animation: drawCircle 0.6s ease-out forwards;&#13;
+}&#13;
+&#13;
+.consult-info {&#13;
+  stroke: #3b82f6;&#13;
+  stroke-width: 5;&#13;
+  fill: none;&#13;
+  stroke-linecap: round;&#13;
+  stroke-linejoin: round;&#13;
+  stroke-dasharray: 80;&#13;
+  stroke-dashoffset: 80;&#13;
+  animation: drawInfo 0.5s ease-out 0.4s forwards;&#13;
+}&#13;
+&#13;
+/* Animation Keyframes */&#13;
+@keyframes drawCircle {&#13;
+  to {&#13;
+    stroke-dashoffset: 0;&#13;
+  }&#13;
+}&#13;
+&#13;
+@keyframes drawTick {&#13;
+  to {&#13;
+    stroke-dashoffset: 0;&#13;
+  }&#13;
+}&#13;
+&#13;
+@keyframes drawCross {&#13;
+  to {&#13;
+    stroke-dashoffset: 0;&#13;
+  }&#13;
+}&#13;
+&#13;
+@keyframes drawPencil {&#13;
+  to {&#13;
+    stroke-dashoffset: 0;&#13;
+  }&#13;
+}&#13;
+&#13;
+@keyframes drawInfo {&#13;
+  to {&#13;
+    stroke-dashoffset: 0;&#13;
+  }&#13;
+}&#13;
+&#13;
+/* Result Text */&#13;
+.result-text {&#13;
+  font-size: 2.2rem;&#13;
+  font-weight: 700;&#13;
+  margin: 0.5rem 0;&#13;
+}&#13;
+&#13;
+.result-text.approved {&#13;
+  color: #0f6b4f;&#13;
+}&#13;
+&#13;
+.result-text.rejected {&#13;
+  color: #dc2626;&#13;
+}&#13;
+&#13;
+.result-text.modified {&#13;
+  color: #f59e0b;&#13;
+}&#13;
+&#13;
+.result-text.consulted {&#13;
+  color: #3b82f6;&#13;
+}&#13;
+&#13;
+.extra-message {&#13;
+  margin-top: 0.8rem;&#13;
+  font-size: 0.95rem;&#13;
+  color: #5a6e7c;&#13;
+}&#13;
+&#13;
+/* Responsive */&#13;
+@media (max-width: 768px) {&#13;
+  .sidebar {&#13;
+    width: 80px;&#13;
+  }&#13;
+  &#13;
+  .sidebar-header h2 {&#13;
+    font-size: 1.2rem;&#13;
+    text-align: center;&#13;
+  }&#13;
+  &#13;
+  .sidebar-header h2 span {&#13;
+    display: none;&#13;
+  }&#13;
+  &#13;
+  .nav-item span:last-child {&#13;
+    display: none;&#13;
+  }&#13;
+  &#13;
+  .nav-icon {&#13;
+    font-size: 1.5rem;&#13;
+  }&#13;
+  &#13;
+  .main-content {&#13;
+    margin-left: 80px;&#13;
+  }&#13;
+  &#13;
+  .action-buttons {&#13;
+    grid-template-columns: repeat(2, 1fr);&#13;
+    gap: 0.8rem;&#13;
+  }&#13;
+  &#13;
+  .info-row {&#13;
+    flex-direction: column;&#13;
+    align-items: flex-start;&#13;
+    gap: 0.5rem;&#13;
+  }&#13;
+  &#13;
+  .info-label, .info-value {&#13;
+    width: 100%;&#13;
+  }&#13;
+}&#13;
+&#13;
+@media (max-width: 480px) {&#13;
+  .sidebar {&#13;
+    display: none;&#13;
+  }&#13;
+  &#13;
+  .main-content {&#13;
+    margin-left: 0;&#13;
+  }&#13;
+  &#13;
+  .action-buttons {&#13;
+    grid-template-columns: 1fr;&#13;
+  }&#13;
+  &#13;
+  .success-card {&#13;
+    padding: 2rem;&#13;
+  }&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Doctor Approval</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    data.refill = {
+
+        patient: "Mary Johnson",
+
+        medication: "Metformin 500mg",
+
+        requested_on: "May 10, 2024 12:45 PM",
+
+        quantity: "60 Tablets",
+
+        requested_by: "Mary Johnson",
+
+        status: "Pending",
+
+        notes: "Please approve refill."
+
+    };
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>rangewar.ashirwad</sys_created_by>
+        <sys_created_on>2026-06-17 08:44:52</sys_created_on>
+        <sys_id>1635fd1df82903107f44b18b1ad5c17b</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Doctor Approval</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_widget_1635fd1df82903107f44b18b1ad5c17b</sys_update_name>
+        <sys_updated_by>rangewar.ashirwad</sys_updated_by>
+        <sys_updated_on>2026-06-17 17:07:50</sys_updated_on>
+        <template><![CDATA[<div class="trackmed-container">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <h2>Track<span>MED</span></h2>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="javascript:void(0)" class="nav-item active">
+        <span class="nav-icon">]]>📊<![CDATA[</span>
+        <span>Dashboard</span>
+      </a>
+      <a href="javascript:void(0)" class="nav-item">
+        <span class="nav-icon">]]>👥<![CDATA[</span>
+        <span>Patients</span>
+      </a>
+      <a href="javascript:void(0)" class="nav-item">
+        <span class="nav-icon">]]>💊<![CDATA[</span>
+        <span>Medication Schedules</span>
+      </a>
+      <a href="javascript:void(0)" class="nav-item">
+        <span class="nav-icon">]]>🔄<![CDATA[</span>
+        <span>Refill Requests</span>
+      </a>
+      <a href="javascript:void(0)" class="nav-item">
+        <span class="nav-icon">⚠️</span>
+        <span>CFF Alerts</span>
+      </a>
+      <a href="javascript:void(0)" class="nav-item">
+        <span class="nav-icon">]]>📈<![CDATA[</span>
+        <span>CO Dashboard</span>
+      </a>
+      <a href="javascript:void(0)" class="nav-item">
+        <span class="nav-icon">]]>📅<![CDATA[</span>
+        <span>Assigned Schedules</span>
+      </a>
+      <a href="javascript:void(0)" class="nav-item">
+        <span class="nav-icon">]]>📋<![CDATA[</span>
+        <span>CFA Dashboard</span>
+      </a>
+      <a href="javascript:void(0)" class="nav-item">
+        <span class="nav-icon">]]>🏥<![CDATA[</span>
+        <span>CFC Dashboard</span>
+      </a>
+      <a href="javascript:void(0)" class="nav-item">
+        <span class="nav-icon">]]>👨<![CDATA[‍⚕️</span>
+        <span>CFP Dashboard</span>
+      </a>
+    </nav>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="trackmed-widget">
+      <div class="brand-header">
+        <h1>Trackmed <span>Carefacility Refill</span></h1>
+        <div class="refill-badge">Refill Request · eRx</div>
+      </div>
+
+      <form id="refillForm" class="request-content">
+        <div class="info-row">
+          <div class="info-label">Patient</div>
+          <div class="info-value">
+            <div class="blue-highlight">
+              <input type="text" id="patientName" class="editable-input blue-field" value="Mary Johnson" placeholder="Enter patient name">
+            </div>
+          </div>
+        </div>
+        
+        <div class="info-row">
+          <div class="info-label">Medication</div>
+          <div class="info-value">
+            <div class="blue-highlight">
+              <input type="text" id="medication" class="editable-input blue-field" value="Metformin 500mg" placeholder="Enter medication">
+            </div>
+          </div>
+        </div>
+        
+        <div class="info-row">
+          <div class="info-label">Requested On</div>
+          <div class="info-value">
+            <div class="blue-highlight">
+              <input type="datetime-local" id="requestedDate" class="editable-input blue-field" value="2024-05-10T12:45">
+            </div>
+          </div>
+        </div>
+        
+        <div class="info-row">
+          <div class="info-label">Quantity</div>
+          <div class="info-value">
+            <div class="blue-highlight">
+              <input type="text" id="quantity" class="editable-input blue-field" value="60 Tablets" placeholder="e.g., 30 Tablets">
+            </div>
+          </div>
+        </div>
+        
+        <div class="info-row">
+          <div class="info-label">Requested By</div>
+          <div class="info-value">
+            <div class="blue-highlight">
+              <input type="text" id="requestedBy" class="editable-input blue-field" value="Mary Johnson" placeholder="Enter name">
+            </div>
+          </div>
+        </div>
+        
+        <div class="info-row">
+          <div class="info-label">Status</div>
+          <div class="info-value">
+            <div class="blue-highlight">
+              <select id="status" class="editable-input blue-field status-select">
+                <option value="Pending" selected>Pending</option>
+                <option value="Approved">Approved</option>
+                <option value="Rejected">Rejected</option>
+                <option value="In Review">In Review</option>
+                <option value="Completed">Completed</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        
+        <div class="notes-section">
+          <div class="notes-label">Additional Notes</div>
+          <div class="notes-text">
+            <div class="blue-highlight">
+              <textarea id="notes" class="editable-textarea blue-field" rows="3" placeholder="Add any additional notes...">Please approve refill.</textarea>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button type="button" class="action-btn approve-btn" id="approveBtn">
+          <span class="btn-icon">✓</span> Approve
+        </button>
+        <button type="button" class="action-btn reject-btn" id="rejectBtn">
+          <span class="btn-icon">✗</span> Reject
+        </button>
+        <button type="button" class="action-btn modify-btn" id="modifyBtn">
+          <span class="btn-icon">✎</span> Modify
+        </button>
+        <button type="button" class="action-btn consult-btn" id="consultBtn">
+          <span class="btn-icon">]]>💬<![CDATA[</span> Consult
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Overlay for animations -->
+<div id="successOverlay" class="animation-overlay">
+  <div class="success-card" id="successCard">
+    <div class="icon-container" id="iconContainer">
+      <!-- Icons will be dynamically inserted by JavaScript -->
+    </div>
+    <div class="result-text" id="resultText">Approved</div>
+    <div class="extra-message" id="resultMessage">Request has been approved</div>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

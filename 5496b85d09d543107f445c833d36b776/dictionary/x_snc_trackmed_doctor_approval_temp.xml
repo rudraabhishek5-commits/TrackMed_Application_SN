@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="enforce_dot_walk_cross_scope_access=true" db_object_id="209a4125741543107f445266d691c7aa" label="Doctor Approval" max_length="40" name="x_snc_trackmed_doctor_approval_temp" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Approved By" max_length="40" name="approved_by" reference="sys_user" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Decision" mandatory="true" max_length="40" name="decision" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Modify" sequence="2" value="Modify"/>
+                <element inactive_on_update="false" label="Consult" sequence="3" value="Consult"/>
+                <element inactive_on_update="false" label="Approve" sequence="0" value="Approve"/>
+                <element inactive_on_update="false" label="Reject" sequence="1" value="Reject"/>
+            </choice>
+        </element>
+        <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Approval id" max_length="40" name="number" type="string"/>
+        <element label="Comments" max_length="300" name="comments" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Refill request" max_length="32" name="refill_request" reference="x_snc_trackmed_refill_request" type="reference"/>
+        <element label="Decision Date" mandatory="true" max_length="40" name="decision_date" type="glide_date_time"/>
+        <element label="Approval ID" max_length="100" name="approval_id" type="string"/>
+        <index name="index">
+            <element name="approved_by"/>
+        </index>
+        <index name="index2">
+            <element name="refill_request"/>
+        </index>
+    </element>
+</database>

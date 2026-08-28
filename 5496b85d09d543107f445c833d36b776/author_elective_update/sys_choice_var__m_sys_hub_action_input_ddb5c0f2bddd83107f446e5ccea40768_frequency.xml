@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="frequency" table="var__m_sys_hub_action_input_ddb5c0f2bddd83107f446e5ccea40768" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>frequency</element>
+            <name>var__m_sys_hub_action_input_ddb5c0f2bddd83107f446e5ccea40768</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-08-26 00:45:49</sys_created_on>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>frequency</sys_name>
+            <sys_package display_value="Global" source="global">global</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+            <sys_update_name>sys_choice_var__m_sys_hub_action_input_ddb5c0f2bddd83107f446e5ccea40768_frequency</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-08-26 00:45:49</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>frequency</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Once Daily</label>
+            <language>en</language>
+            <name>var__m_sys_hub_action_input_ddb5c0f2bddd83107f446e5ccea40768</name>
+            <sequence>0</sequence>
+            <synonyms/>
+            <sys_created_by>abhishek.pathak</sys_created_by>
+            <sys_created_on>2026-06-09 06:29:00</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>abhishek.pathak</sys_updated_by>
+            <sys_updated_on>2026-06-09 06:29:48</sys_updated_on>
+            <value>once_Daily</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>frequency</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Twice Day</label>
+            <language>en</language>
+            <name>var__m_sys_hub_action_input_ddb5c0f2bddd83107f446e5ccea40768</name>
+            <sequence>1</sequence>
+            <synonyms/>
+            <sys_created_by>abhishek.pathak</sys_created_by>
+            <sys_created_on>2026-06-09 06:29:00</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>abhishek.pathak</sys_updated_by>
+            <sys_updated_on>2026-06-09 06:29:48</sys_updated_on>
+            <value>twice_Daily</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>frequency</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Thrice Daily</label>
+            <language>en</language>
+            <name>var__m_sys_hub_action_input_ddb5c0f2bddd83107f446e5ccea40768</name>
+            <sequence>2</sequence>
+            <synonyms/>
+            <sys_created_by>abhishek.pathak</sys_created_by>
+            <sys_created_on>2026-06-09 06:29:00</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>abhishek.pathak</sys_updated_by>
+            <sys_updated_on>2026-06-09 06:29:48</sys_updated_on>
+            <value>thrice_Daily</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>frequency</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>As Needed</label>
+            <language>en</language>
+            <name>var__m_sys_hub_action_input_ddb5c0f2bddd83107f446e5ccea40768</name>
+            <sequence>3</sequence>
+            <synonyms/>
+            <sys_created_by>abhishek.pathak</sys_created_by>
+            <sys_created_on>2026-06-09 06:29:00</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>abhishek.pathak</sys_updated_by>
+            <sys_updated_on>2026-06-09 06:29:48</sys_updated_on>
+            <value>as_Needed</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

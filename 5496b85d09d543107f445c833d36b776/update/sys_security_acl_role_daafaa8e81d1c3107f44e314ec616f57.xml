@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl_role">
+    <sys_security_acl_role action="INSERT_OR_UPDATE">
+        <sys_class_name>sys_security_acl_role</sys_class_name>
+        <sys_created_by>meghanaa.penumetsa</sys_created_by>
+        <sys_created_on>2026-06-07 10:26:06</sys_created_on>
+        <sys_id>daafaa8e81d1c3107f44e314ec616f57</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_snc_trackmed_patient_record.x_snc_trackmed.patient_record_user</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_security_acl display_value="x_snc_trackmed_patient_record">5aafaa8e81d1c3107f44e314ec616f52</sys_security_acl>
+        <sys_update_name>sys_security_acl_role_daafaa8e81d1c3107f44e314ec616f57</sys_update_name>
+        <sys_updated_by>meghanaa.penumetsa</sys_updated_by>
+        <sys_updated_on>2026-06-07 10:26:06</sys_updated_on>
+        <sys_user_role display_value="x_snc_trackmed.patient_record_user" name="x_snc_trackmed.patient_record_user">42af6a8e81d1c3107f44e314ec616f89</sys_user_role>
+    </sys_security_acl_role>
+</record_update>

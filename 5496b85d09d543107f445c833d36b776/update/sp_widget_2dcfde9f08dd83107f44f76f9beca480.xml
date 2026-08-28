@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function() {
+    var c = this;
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.tm-card{
+    background:#fff;
+    border-radius:18px;
+    padding:20px;
+    border:1px solid #e5e7eb;
+    box-shadow:0 4px 16px rgba(0,0,0,.08);
+}
+
+.tm-card-head{
+    margin-bottom:25px;
+}
+
+.tm-card-title{
+    margin:0;
+    font-size:18px;
+    font-weight:600;
+    color:#111827;
+}
+
+.tm-chart-container{
+    display:flex;
+    align-items:flex-end;
+}
+
+.tm-y-axis{
+    width:60px;
+    height:350px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    font-size:12px;
+    color:#64748b;
+    margin-right:10px;
+}
+
+.tm-chart{
+    flex:1;
+    height:350px;
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-around;
+    position:relative;
+    border-left:1px solid #e5e7eb;
+    border-bottom:1px solid #e5e7eb;
+}
+
+.tm-grid{
+    position:absolute;
+    left:0;
+    right:0;
+    height:1px;
+    background:#f1f5f9;
+}
+
+.grid1{
+    bottom:87px;
+}
+
+.grid2{
+    bottom:175px;
+}
+
+.grid3{
+    bottom:262px;
+}
+
+.grid4{
+    bottom:349px;
+}
+
+.tm-bar-wrapper{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.tm-bar{
+    width:50px;
+    background:linear-gradient(
+        180deg,
+        #60A5FA,
+        #2563EB
+    );
+    border-radius:10px 10px 0 0;
+    transition:.3s;
+    cursor:pointer;
+}
+
+.tm-bar:hover{
+    transform:translateY(-5px);
+    box-shadow:0 8px 20px rgba(37,99,235,.25);
+}
+
+.tm-label{
+    margin-top:10px;
+    font-size:12px;
+    color:#64748B;
+    font-weight:600;
+}
+
+.tm-tooltip{
+    position:absolute;
+    bottom:100%;
+    margin-bottom:10px;
+    background:#111827;
+    color:#fff;
+    font-size:12px;
+    padding:6px 10px;
+    border-radius:8px;
+    opacity:0;
+    visibility:hidden;
+    transition:.2s;
+    white-space:nowrap;
+}
+
+.tm-tooltip:after{
+    content:'';
+    position:absolute;
+    top:100%;
+    left:50%;
+    transform:translateX(-50%);
+    border:6px solid transparent;
+    border-top-color:#111827;
+}
+
+.tm-bar-wrapper:hover .tm-tooltip{
+    opacity:1;
+    visibility:visible;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>trackmed_schedules_chart</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>TrackMed Schedules Chart</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    data.chartHeight = 350;
+
+    var days = {
+        Mon: 0,
+        Tue: 0,
+        Wed: 0,
+        Thu: 0,
+        Fri: 0,
+        Sat: 0,
+        Sun: 0
+    };
+
+    var gr = new GlideRecord('x_snc_trackmed_medication_schedule_table');
+    gr.query();
+
+    while (gr.next()) {
+
+        var scheduleDate = gr.getValue('start_date');
+
+        if (!scheduleDate)
+            continue;
+
+        var gdt = new GlideDateTime(scheduleDate);
+        var dayNumber = parseInt(gdt.getDayOfWeekLocalTime(), 10);
+
+        switch(dayNumber) {
+
+            case 1:
+                days.Mon++;
+                break;
+
+            case 2:
+                days.Tue++;
+                break;
+
+            case 3:
+                days.Wed++;
+                break;
+
+            case 4:
+                days.Thu++;
+                break;
+
+            case 5:
+                days.Fri++;
+                break;
+
+            case 6:
+                days.Sat++;
+                break;
+
+            case 7:
+                days.Sun++;
+                break;
+        }
+    }
+
+    data.schedule = [
+        {day:"Mon", value:days.Mon},
+        {day:"Tue", value:days.Tue},
+        {day:"Wed", value:days.Wed},
+        {day:"Thu", value:days.Thu},
+        {day:"Fri", value:days.Fri},
+        {day:"Sat", value:days.Sat},
+        {day:"Sun", value:days.Sun}
+    ];
+
+    var highest = Math.max(
+        days.Mon,
+        days.Tue,
+        days.Wed,
+        days.Thu,
+        days.Fri,
+        days.Sat,
+        days.Sun
+    );
+
+    if (highest <= 10)
+        data.maxValue = 10;
+    else if (highest <= 50)
+        data.maxValue = 50;
+    else if (highest <= 100)
+        data.maxValue = 100;
+    else if (highest <= 200)
+        data.maxValue = 200;
+    else if (highest <= 500)
+        data.maxValue = 500;
+    else
+        data.maxValue = Math.ceil(highest / 100) * 100;
+
+    data.step4 = Math.round(data.maxValue * 0.75);
+    data.step3 = Math.round(data.maxValue * 0.50);
+    data.step2 = Math.round(data.maxValue * 0.25);
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-11 06:29:06</sys_created_on>
+        <sys_id>2dcfde9f08dd83107f44f76f9beca480</sys_id>
+        <sys_mod_count>15</sys_mod_count>
+        <sys_name>TrackMed Schedules Chart</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_widget_2dcfde9f08dd83107f44f76f9beca480</sys_update_name>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-12 10:02:42</sys_updated_on>
+        <template><![CDATA[<div class="tm-card">
+
+    <div class="tm-card-head">
+        <h4 class="tm-card-title">Medication Schedules Overview</h4>
+    </div>
+
+    <div class="tm-chart-container">
+
+        <div class="tm-y-axis">
+            <span>{{c.data.maxValue}}</span>
+            <span>{{c.data.step4}}</span>
+            <span>{{c.data.step3}}</span>
+            <span>{{c.data.step2}}</span>
+            <span>0</span>
+        </div>
+
+        <div class="tm-chart">
+
+            <div class="tm-grid grid1"></div>
+            <div class="tm-grid grid2"></div>
+            <div class="tm-grid grid3"></div>
+            <div class="tm-grid grid4"></div>
+
+            <div class="tm-bar-wrapper"
+                 ng-repeat="item in c.data.schedule">
+
+                <div class="tm-tooltip">
+                    {{item.value}} Schedules
+                </div>
+
+                <div class="tm-bar"
+                     ng-style="{
+                     'height': ((item.value / c.data.maxValue) * c.data.chartHeight) + 'px'
+                     }">
+                </div>
+
+                <div class="tm-label">
+                    {{item.day}}
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>2dcfde9f08dd83107f44f76f9beca480</id>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-11 06:29:06</sys_created_on>
+        <sys_id>a1cfde9f08dd83107f44f76f9beca484</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-11 06:29:06</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

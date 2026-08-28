@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function($rootScope, $scope, $window) {
+
+    var c = this;
+
+    c.isCollapsed = false;
+
+    // Auto redirect to first menu page
+    if (!c.data.current && c.data.homePage) {
+        $window.location.href = c.data.homePage;
+        return;
+    }
+
+    var unbind = $rootScope.$on('tm:sidebarToggle', function(evt, args) {
+
+        if (args && typeof args.collapsed === 'boolean') {
+            c.isCollapsed = args.collapsed;
+        } else {
+            c.isCollapsed = !c.isCollapsed;
+        }
+
+    });
+
+    $scope.$on('$destroy', function() {
+        unbind();
+    });
+
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.tm-sidebar{
+    background:#0A1633;
+    border-radius:16px;
+    min-height:calc(150vh - 20px);
+    padding: 2px 10px 10px;
+    display:flex;
+    flex-direction:column;
+    position:sticky;
+    top:8px;
+    width:220px;
+    transition:.35s ease;   /* same speed as the header */
+    overflow:hidden;
+}
+
+/* COLLAPSED */
+.tm-sidebar.collapsed{
+    width:65px;
+}
+
+/* BRAND */
+/*.tm-brand{
+    color:#fff;
+    font-weight:700;
+    font-size:18px;
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:20px;
+    white-space:nowrap;
+    padding:20px 12px;
+    justify-content:center;
+ }*/
+.tm-brand{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    padding:0;          /* kill the inner padding */
+    margin:0 0 0;    /* only a small breathing space below */
+    box-sizing:border-box;
+    line-height:0;      /* removes baseline gap under the img */
+}
+
+.tm-logo{
+    width:150px;
+    height:auto;
+    display:block;
+}
+
+.tm-brand-ico{
+    color:#4D8DFF;
+    font-size:22px;
+    min-width:28px;
+}
+
+/* NAVIGATION */
+.tm-sidebar nav{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.tm-nav-item{
+    color:#9FB0D6;
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:12px;
+    border-radius:10px;
+    transition:.3s;
+    white-space:nowrap;
+}
+
+.tm-nav-ico{
+    min-width:20px;
+    text-align:center;
+    font-size:15px;
+}
+
+.tm-nav-item:hover{
+    background:#102046;
+    color:#fff;
+}
+
+.tm-nav-item.active{
+    background:#1B5EDB;
+    color:#fff;
+}
+
+/* MEDICAL CARD */
+.tm-medical-banner{
+    position:relative;
+    margin-top:15px;
+    margin-bottom:15px;
+    padding:18px;
+    border-radius:18px;
+    text-align:center;
+    background:linear-gradient(
+        135deg,
+        #1B5EDB,
+        #4D8DFF
+    );
+    overflow:hidden;
+    animation:floatCard 4s ease-in-out infinite;
+}
+
+.doctor-img{
+    width:110px;
+    display:block;
+    margin:auto;
+    position:relative;
+    z-index:2;
+    animation:bounceDoctor 3s ease-in-out infinite;
+}
+
+.medical-text{
+    position:relative;
+    z-index:2;
+}
+
+.medical-text h4{
+    color:white;
+    margin:10px 0 4px;
+    font-size:15px;
+    font-weight:700;
+}
+
+.medical-text p{
+    color:#E7EEFF;
+    font-size:12px;
+    margin:0;
+}
+
+/* HEARTS */
+.floating-heart{
+    position:absolute;
+    color:white;
+    opacity:.5;
+    z-index:1;
+}
+
+.heart1{
+    top:15px;
+    left:20px;
+    font-size:18px;
+    animation:heartMove1 4s infinite;
+}
+
+.heart2{
+    top:35px;
+    right:20px;
+    font-size:22px;
+    animation:heartMove2 5s infinite;
+}
+
+.floating-pill{
+    position:absolute;
+    bottom:25px;
+    right:15px;
+    font-size:20px;
+    animation:pillFloat 3s infinite;
+}
+
+/* ==========================================
+   COLLAPSED STATE
+========================================== */
+.tm-sidebar.collapsed .tm-nav-item{
+    justify-content:center;
+    padding:12px 0;
+		width:40px;
+    content:url('/trackmed_icon.png');
+}
+
+.tm-sidebar.collapsed .tm-brand{
+    justify-content:center;
+}
+
+/* hide all text labels when collapsed — icons only */
+.tm-sidebar.collapsed .tm-nav-label,
+.tm-sidebar.collapsed .tm-brand-text{
+    display:none;
+}
+
+.tm-sidebar.collapsed .medical-text{
+    display:none;
+}
+
+.tm-sidebar.collapsed .doctor-img{
+    width:40px;
+}
+
+.tm-sidebar.collapsed .tm-medical-banner{
+    padding:10px 4px;
+}
+
+.tm-sidebar.collapsed .floating-heart,
+.tm-sidebar.collapsed .floating-pill{
+    display:none;
+}
+
+/* ANIMATIONS */
+@keyframes bounceDoctor{
+    0%{ transform:translateY(0); }
+    50%{ transform:translateY(-8px); }
+    100%{ transform:translateY(0); }
+}
+
+@keyframes floatCard{
+    0%{ transform:translateY(0); }
+    50%{ transform:translateY(-4px); }
+    100%{ transform:translateY(0); }
+}
+
+@keyframes heartMove1{
+    0%{ transform:translateY(0); }
+    50%{ transform:translateY(-12px); }
+    100%{ transform:translateY(0); }
+}
+
+@keyframes heartMove2{
+    0%{ transform:translateY(0); }
+    50%{ transform:translateY(-15px); }
+    100%{ transform:translateY(0); }
+}
+
+@keyframes pillFloat{
+    0%{ transform:translateY(0) rotate(0deg); }
+    50%{ transform:translateY(-8px) rotate(10deg); }
+    100%{ transform:translateY(0) rotate(0deg); }
+}
+
+/* MOBILE */
+@media(max-width:991px){
+    .tm-sidebar{
+        width:100%;
+        min-height:auto;
+        position:relative;
+    }
+    .tm-medical-banner{
+        display:none;
+    }
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>trackmed_sidebar</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>TrackMed Sidebar</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+data.items = [];
+// 1. find the TrackMed portal and its menu
+var portal = new GlideRecord('sp_portal');
+portal.addQuery('url_suffix', 'trackmed');
+portal.setLimit(1); portal.query();
+if (!portal.next()) return;
+// 2. read menu items, honoring roles
+var mi = new GlideRecord('sp_rectangle_menu_item');
+mi.addQuery('sp_rectangle_menu', portal.getValue('sp_rectangle_menu'));
+mi.addActiveQuery();
+mi.orderBy('order');
+mi.query();
+while (mi.next()) {
+var roles = mi.getValue('roles');
+if (roles) {
+var ok = false, list = roles.split(',');
+for (var i = 0; i < list.length; i++)
+if (gs.hasRole(list[i].trim())) { ok = true; break; }
+if (!ok) continue;
+}
+data.items.push({
+label: mi.getValue('label'),
+page: mi.sp_page ? mi.sp_page.id.toString() : '',
+href: mi.sp_page ? '?id=' + mi.sp_page.id : mi.getValue('href')
+});
+}
+data.current = $sp.getParameter('id');
+// Scoped apps: gs.getUser().getRecord() is NOT available - query sys_user instead
+var me = new GlideRecord('sys_user');
+me.get(gs.getUserID());
+data.user = me.getDisplayValue('name');
+data.role = me.getValue('title') || '';
+data.avatar = '/profile_image.do?sys_id=' + gs.getUserID();
+// dark-mode preference -> client adds body class on init
+var p = new GlideRecord('sys_user_preference');
+p.addQuery('user', gs.getUserID());
+p.addQuery('name', 'x_trackmed.theme');
+p.setLimit(1); p.query();
+data.dark = p.next() && p.getValue('value') == 'dark';
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-11 05:51:09</sys_created_on>
+        <sys_id>f9179a5b089d83107f44f76f9beca4fa</sys_id>
+        <sys_mod_count>78</sys_mod_count>
+        <sys_name>TrackMed Sidebar</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_widget_f9179a5b089d83107f44f76f9beca4fa</sys_update_name>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-15 05:53:18</sys_updated_on>
+        <template><![CDATA[<aside class="tm-sidebar" ng-class="{'collapsed': c.isCollapsed}">
+
+    <!-- BRAND -->
+    <a class="tm-brand" href="?id=trackmed_dashboard">
+        <!-- <span class="tm-brand-ico">❤</span>
+        <span class="tm-brand-text">TrackMED</span> -->
+      <img src="/trackmed_logo.png"
+         alt="TrackMED Logo"
+         class="tm-logo">
+    </a>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <a ng-repeat="i in data.items"
+           ng-href="{{i.href}}"
+           class="tm-nav-item"
+           ng-class="{active: i.page == data.current}"
+           title="{{i.label}}">
+            <i class="{{i.icon}} tm-nav-ico"></i>
+            <span class="tm-nav-label">{{i.label}}</span>
+        </a>
+    </nav>
+
+    <!-- MEDICAL ANIMATION CARD -->
+    <div class="tm-medical-banner">
+        <div class="floating-heart heart1">❤</div>
+        <div class="floating-heart heart2">❤</div>
+        <div class="floating-pill">]]>💊<![CDATA[</div>
+        <img
+            src="https://cdn-icons-png.flaticon.com/512/2785/2785544.png"
+            class="doctor-img"
+            alt="Doctor">
+        <div class="medical-text">
+            <h4>TrackMED Care</h4>
+            <p>Managing Patients & Doctors Efficiently</p>
+        </div>
+    </div>
+
+</aside>]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>f9179a5b089d83107f44f76f9beca4fa</id>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-11 05:51:09</sys_created_on>
+        <sys_id>71179a5b089d83107f44f76f9beca4fe</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-11 05:51:09</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

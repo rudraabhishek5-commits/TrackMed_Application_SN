@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function() {
+  var c = this;
+  c.searchQ     = '';
+  c.filterShift  = '';
+  c.filterStatus = '';
+  c.filtered     = angular.copy(c.caregivers || []);
+
+  c.filter = function() {
+    var q = (c.searchQ || '').toLowerCase();
+    c.filtered = (c.caregivers || []).filter(function(cg) {
+      var mQ  = !q || cg.name.toLowerCase().indexOf(q) > -1 ||
+                     (cg.specialty||'').toLowerCase().indexOf(q) > -1;
+      var mSh = !c.filterShift  || cg.shift  === c.filterShift;
+      var mSt = !c.filterStatus || cg.status === c.filterStatus;
+      return mQ && mSh && mSt;
+    });
+  };
+
+  c.reset = function() {
+    c.searchQ = ''; c.filterShift = ''; c.filterStatus = '';
+    c.filter();
+  };
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/* ============================================
+   Widget 3A — Caregivers List
+   ============================================ */
+
+.cg-list-widget {
+  font-family: 'Inter','Segoe UI',sans-serif;
+  background: #f0f4f8;
+  min-height: 100vh;
+  padding: 0;
+}
+
+/* HEADER */
+.cg-page-header {
+  background: linear-gradient(135deg,#064e3b 0%,#059669 60%,#10b981 100%);
+  padding: 28px 32px;
+  display: flex; justify-content: space-between; align-items: flex-end;
+  border-radius: 0 0 20px 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 20px rgba(5,150,105,0.3);
+}
+
+.breadcrumb { font-size:13px; color:rgba(255,255,255,0.7); margin-bottom:6px; }
+.breadcrumb a { color:rgba(255,255,255,0.85); text-decoration:none; }
+.breadcrumb a:hover { text-decoration:underline; }
+.sep { margin:0 6px; }
+
+.page-title { font-size:24px; font-weight:800; color:#fff; margin:0 0 4px; display:flex; align-items:center; gap:10px; }
+.page-subtitle { font-size:14px; color:rgba(255,255,255,0.75); margin:0; }
+
+.cg-header-right { display:flex; gap:10px; align-items:center; }
+
+.btn-header-outline {
+  padding:9px 16px; background:transparent;
+  border:1.5px solid rgba(255,255,255,0.5); border-radius:8px;
+  color:rgba(255,255,255,0.9); font-size:13px; font-weight:500;
+  text-decoration:none; display:flex; align-items:center; gap:6px; transition:all 0.2s;
+}
+.btn-header-outline:hover { background:rgba(255,255,255,0.2); border-color:#fff; color:#fff; }
+
+.btn-header-primary {
+  padding:10px 18px; background:rgba(255,255,255,0.2);
+  border:2px solid rgba(255,255,255,0.5); border-radius:10px;
+  color:#fff; font-size:14px; font-weight:600;
+  text-decoration:none; display:flex; align-items:center; gap:8px;
+  backdrop-filter:blur(4px); transition:background 0.2s;
+}
+.btn-header-primary:hover { background:rgba(255,255,255,0.35); }
+
+/* STATS */
+.cg-stats-row {
+  display:grid; grid-template-columns:repeat(4,1fr);
+  gap:16px; padding:0 28px; margin-bottom:22px;
+}
+
+.cg-stat-card {
+  background:#fff; border-radius:14px; padding:18px 20px;
+  display:flex; align-items:center; gap:14px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.07);
+  border-left:4px solid transparent; transition:transform 0.2s;
+}
+.cg-stat-card:hover { transform:translateY(-3px); }
+.border-teal   { border-left-color:#059669; }
+.border-green  { border-left-color:#22c55e; }
+.border-blue   { border-left-color:#1a73e8; }
+.border-orange { border-left-color:#f97316; }
+
+.cg-stat-icon {
+  width:44px; height:44px; border-radius:10px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:18px; flex-shrink:0;
+}
+.teal-icon   { background:#ccfbf1; color:#059669; }
+.green-icon  { background:#dcfce7; color:#22c55e; }
+.blue-icon   { background:#dbeafe; color:#1a73e8; }
+.orange-icon { background:#ffedd5; color:#f97316; }
+
+.cg-stat-value { font-size:26px; font-weight:800; color:#1a2332; }
+.cg-stat-label { font-size:12px; color:#64748b; font-weight:500; }
+
+/* FILTER BAR */
+.cg-filter-bar {
+  display:flex; gap:12px; padding:0 28px; margin-bottom:22px; align-items:center;
+}
+.search-wrap { flex:1; position:relative; }
+.s-icon { position:absolute; left:14px; top:50%; transform:translateY(-50%); color:#94a3b8; font-size:15px; }
+.search-input {
+  width:100%; padding:11px 14px 11px 40px;
+  border:1.5px solid #e2e8f0; border-radius:10px;
+  font-size:14px; background:#fff; color:#1a2332; box-sizing:border-box;
+}
+.search-input:focus { outline:none; border-color:#059669; box-shadow:0 0 0 3px rgba(5,150,105,0.1); }
+.cg-select {
+  padding:11px 14px; border:1.5px solid #e2e8f0; border-radius:10px;
+  font-size:14px; background:#fff; color:#374151; cursor:pointer;
+}
+
+/* CARDS GRID */
+.cg-cards-grid {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:20px; padding:0 28px 28px;
+}
+
+.cg-card {
+  background:#fff; border-radius:16px;
+  box-shadow:0 2px 12px rgba(0,0,0,0.07);
+  overflow:hidden; border:1.5px solid transparent; transition:all 0.2s;
+}
+.cg-card:hover { transform:translateY(-4px); box-shadow:0 10px 28px rgba(5,150,105,0.15); border-color:#059669; }
+
+/* Card top */
+.cg-card-top {
+  display:flex; align-items:center; gap:14px; padding:18px;
+  background:linear-gradient(135deg,#f0fdf4,#ecfdf5);
+  border-bottom:1px solid #e2e8f0;
+}
+
+.cg-avatar-wrap { position:relative; flex-shrink:0; }
+
+.cg-avatar {
+  width:52px; height:52px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:18px; font-weight:700; color:#fff;
+}
+.av-teal   { background:linear-gradient(135deg,#059669,#10b981); }
+.av-blue   { background:linear-gradient(135deg,#1a73e8,#06b6d4); }
+.av-purple { background:linear-gradient(135deg,#7c3aed,#a78bfa); }
+.av-orange { background:linear-gradient(135deg,#f97316,#ea580c); }
+.av-pink   { background:linear-gradient(135deg,#ec4899,#be185d); }
+
+.cg-online-dot {
+  position:absolute; bottom:2px; right:2px;
+  width:13px; height:13px; border-radius:50%; border:2px solid #fff;
+}
+.dot-active  { background:#22c55e; }
+.dot-off     { background:#94a3b8; }
+.dot-leave   { background:#f97316; }
+
+.cg-identity { flex:1; }
+.cg-name { font-size:15px; font-weight:700; color:#1a2332; }
+.cg-id-text { font-size:11px; color:#94a3b8; margin:2px 0; }
+.cg-specialty-text { font-size:12px; color:#059669; font-weight:500; display:flex; align-items:center; gap:4px; }
+
+.cg-card-btns { display:flex; gap:6px; }
+
+.cg-icon-btn {
+  width:32px; height:32px; border-radius:8px;
+  background:#f1f5f9; border:none;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; color:#64748b; font-size:13px; text-decoration:none; transition:all 0.2s;
+}
+.cg-icon-btn:hover { background:#059669; color:#fff; }
+
+/* Info grid */
+.cg-card-info-grid {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:8px; padding:12px 18px; border-bottom:1px solid #f1f5f9;
+}
+.cg-info-item { display:flex; align-items:center; gap:6px; font-size:12px; color:#475569; }
+.cg-ico { color:#059669; width:14px; }
+
+/* Patient section */
+.cg-patient-section { padding:12px 18px; border-bottom:1px solid #f1f5f9; }
+.cg-pt-header-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+.cg-pt-label { font-size:12px; font-weight:600; color:#374151; display:flex; align-items:center; gap:5px; }
+
+.cg-workload-tag { padding:3px 10px; border-radius:10px; font-size:11px; font-weight:700; }
+.wl-normal { background:#dcfce7; color:#16a34a; }
+.wl-high   { background:#fef3c7; color:#d97706; }
+.wl-max    { background:#fee2e2; color:#dc2626; }
+
+.cg-pt-chips { display:flex; flex-direction:column; gap:6px; }
+
+.cg-pt-chip {
+  display:flex; align-items:center; gap:8px; padding:7px 10px;
+  background:#f8fafc; border-radius:8px;
+}
+.chip-av {
+  width:28px; height:28px; border-radius:50%;
+  background:linear-gradient(135deg,#1a73e8,#06b6d4);
+  color:#fff; font-size:11px; font-weight:700;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.chip-body { flex:1; }
+.chip-name { font-size:12px; font-weight:600; color:#1a2332; }
+.chip-med  { font-size:11px; color:#64748b; }
+.chip-alert { color:#f97316; font-size:12px; }
+
+.more-chip {
+  padding:5px 10px; background:#e0f2fe; border-radius:8px;
+  font-size:12px; color:#0369a1; font-weight:600; text-align:center; cursor:pointer;
+}
+.no-pt-msg { font-size:12px; color:#94a3b8; display:flex; align-items:center; gap:6px; padding:4px 0; }
+
+/* Card footer */
+.cg-card-footer {
+  padding:12px 18px; display:flex; justify-content:space-between; align-items:center; background:#f8fafc;
+}
+.btn-assign-sm {
+  padding:6px 14px; background:#059669; color:#fff;
+  border:none; border-radius:8px; cursor:pointer; font-size:12px; font-weight:600;
+  text-decoration:none; display:flex; align-items:center; gap:5px; transition:background 0.2s;
+}
+.btn-assign-sm:hover { background:#047857; }
+
+.cg-status-tag { padding:4px 12px; border-radius:12px; font-size:11px; font-weight:700; }
+.cgstatus-active   { background:#dcfce7; color:#16a34a; }
+.cgstatus-off-duty { background:#f1f5f9; color:#64748b; }
+.cgstatus-on-leave { background:#fef3c7; color:#d97706; }
+
+/* EMPTY */
+.cg-empty { text-align:center; padding:60px 20px; color:#94a3b8; }
+.cg-empty p { font-size:15px; margin:12px 0; }
+.btn-clear { padding:8px 20px; background:#059669; color:#fff; border:none; border-radius:8px; cursor:pointer; font-size:14px; }</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>trackmed_carefacilty_caregiver</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>Trackmed CareFacilty Caregiver</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  var avatarClasses = ['av-teal','av-blue','av-purple','av-orange','av-pink'];
+  var dotMap = { 'Active':'dot-active','Off Duty':'dot-off','On Leave':'dot-leave' };
+
+  /* ---- Stats ---- */
+  data.cgStats = { total:0, active:0, totalAssigned:0, unassigned:0 };
+
+  var ag1 = new GlideAggregate('u_trackmed_caregivers'); ag1.addAggregate('COUNT'); ag1.query();
+  if (ag1.next()) data.cgStats.total = parseInt(ag1.getAggregate('COUNT'));
+
+  var ag2 = new GlideAggregate('u_trackmed_caregivers');
+  ag2.addQuery('u_status','Active'); ag2.addAggregate('COUNT'); ag2.query();
+  if (ag2.next()) data.cgStats.active = parseInt(ag2.getAggregate('COUNT'));
+
+  var ag3 = new GlideAggregate('u_trackmed_patients');
+  ag3.addNotNullQuery('u_caregiver'); ag3.addAggregate('COUNT'); ag3.query();
+  if (ag3.next()) data.cgStats.totalAssigned = parseInt(ag3.getAggregate('COUNT'));
+
+  var ag4 = new GlideAggregate('u_trackmed_patients');
+  ag4.addNullQuery('u_caregiver'); ag4.addAggregate('COUNT'); ag4.query();
+  if (ag4.next()) data.cgStats.unassigned = parseInt(ag4.getAggregate('COUNT'));
+
+  /* ---- Load Caregivers ---- */
+  data.caregivers = [];
+  var idx = 0;
+  var cgGr = new GlideRecord('u_trackmed_caregivers');
+  cgGr.orderBy('u_full_name'); cgGr.query();
+
+  while (cgGr.next()) {
+    var name   = cgGr.getValue('u_full_name') || '';
+    var parts  = name.split(' ');
+    var status = cgGr.getValue('u_status') || 'Active';
+    var patients = [];
+    var ptGr = new GlideRecord('u_trackmed_patients');
+    ptGr.addQuery('u_caregiver', cgGr.getUniqueValue()); ptGr.query();
+    while (ptGr.next()) {
+      var pfn = ptGr.getValue('u_first_name')||'';
+      var pln = ptGr.getValue('u_last_name') ||'';
+      var aAg = new GlideAggregate('u_trackmed_alerts');
+      aAg.addQuery('u_patient', ptGr.getUniqueValue());
+      aAg.addQuery('u_resolved', false); aAg.addAggregate('COUNT'); aAg.query();
+      patients.push({
+        sysId:    ptGr.getUniqueValue(),
+        name:     (pfn+' '+pln).trim(),
+        initials: ((pfn[0]||'')+(pln[0]||'')).toUpperCase(),
+        medication: ptGr.getValue('u_medication')||'',
+        hasAlert: aAg.next() && parseInt(aAg.getAggregate('COUNT')) > 0
+      });
+    }
+    var wl = patients.length <= 3 ? 'Normal' : patients.length <= 5 ? 'High' : 'Max';
+    data.caregivers.push({
+      sysId:       cgGr.getUniqueValue(),
+      name:        name,
+      caregiverId: 'CG-' + String(idx+1).padStart(3,'0'),
+      initials:    ((parts[0]||'')[0]+(parts[1]||'')[0]).toUpperCase(),
+      specialty:   cgGr.getValue('u_specialty')||'General Care',
+      shift:       cgGr.getValue('u_shift')||'Morning',
+      phone:       cgGr.getValue('u_phone')||'',
+      email:       cgGr.getValue('u_email')||'',
+      joinDate:    cgGr.getDisplayValue('u_hire_date')||'N/A',
+      status:      status,
+      dotClass:    dotMap[status]||'dot-off',
+      avatarClass: avatarClasses[idx % avatarClasses.length],
+      patients:    patients,
+      workload:    wl,
+      workloadClass: 'wl-' + wl.toLowerCase()
+    });
+    idx++;
+  }
+
+  /* ---- Demo data fallback ---- */
+  if (data.caregivers.length === 0) {
+    data.cgStats = { total:3, active:2, totalAssigned:5, unassigned:1 };
+    data.caregivers = [
+      { sysId:'cg1', name:'Michael Lee',   caregiverId:'CG-001', initials:'ML',
+        specialty:'Medication Management', shift:'Morning', phone:'(555) 123-4567',
+        email:'m.lee@facility.com', joinDate:'Jan 2022', status:'Active',
+        dotClass:'dot-active', avatarClass:'av-teal', workload:'Normal', workloadClass:'wl-normal',
+        patients:[
+          {sysId:'p1',name:'John Doe',    initials:'JD',medication:'Atorvastatin 10mg',hasAlert:true},
+          {sysId:'p3',name:'Robert Brown',initials:'RB',medication:'Lisinopril 20mg',  hasAlert:false}
+        ]},
+      { sysId:'cg2', name:'Sarah Adams',   caregiverId:'CG-002', initials:'SA',
+        specialty:'Geriatric Care', shift:'Afternoon', phone:'(555) 234-5678',
+        email:'s.adams@facility.com', joinDate:'Mar 2021', status:'Active',
+        dotClass:'dot-active', avatarClass:'av-blue', workload:'Normal', workloadClass:'wl-normal',
+        patients:[
+          {sysId:'p2',name:'Mary Johnson',   initials:'MJ',medication:'Metformin 500mg',  hasAlert:false},
+          {sysId:'p5',name:'Patricia Garcia',initials:'PG',medication:'Albuterol Inhaler',hasAlert:false}
+        ]},
+      { sysId:'cg3', name:'James Carter',  caregiverId:'CG-003', initials:'JC',
+        specialty:'Dementia Care', shift:'Night', phone:'(555) 345-6789',
+        email:'j.carter@facility.com', joinDate:'Jul 2023', status:'Off Duty',
+        dotClass:'dot-off', avatarClass:'av-purple', workload:'High', workloadClass:'wl-high',
+        patients:[
+          {sysId:'p4',name:'Linda White',   initials:'LW',medication:'Aspirin 81mg',  hasAlert:false},
+          {sysId:'p6',name:'Charles Wilson',initials:'CW',medication:'Donepezil 5mg', hasAlert:false}
+        ]}
+    ];
+  }
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-13 19:38:59</sys_created_on>
+        <sys_id>27b7af80592903107f44615fbac43e3e</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Trackmed CareFacilty Caregiver</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_widget_27b7af80592903107f44615fbac43e3e</sys_update_name>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-14 08:11:39</sys_updated_on>
+        <template><![CDATA[<div class="cg-list-widget">
+
+  <!-- PAGE HEADER -->
+  <div class="cg-page-header">
+    <div class="cg-header-left">
+      <div class="breadcrumb">
+        <a href="/trackmed_dashboard"><i class="fa fa-home"></i> Dashboard</a>
+        <span class="sep"> / </span>
+        <span>Caregivers</span>
+      </div>
+      <h2 class="page-title"><i class="fa fa-user-md"></i> Caregiver Management</h2>
+      <p class="page-subtitle">View all caregivers, their assignments and workloads</p>
+    </div>
+    <div class="cg-header-right">
+      <a class="btn-header-outline" href="/trackmed_caregiver_assign">
+        <i class="fa fa-link"></i> Assign Patient
+      </a>
+      <a class="btn-header-primary" href="/trackmed_caregiver_form">
+        <i class="fa fa-user-plus"></i> Add Caregiver
+      </a>
+    </div>
+  </div>
+
+  <!-- STATS ROW -->
+  <div class="cg-stats-row">
+    <div class="cg-stat-card border-teal">
+      <div class="cg-stat-icon teal-icon"><i class="fa fa-user-md"></i></div>
+      <div class="cg-stat-body">
+        <div class="cg-stat-value">{{c.cgStats.total}}</div>
+        <div class="cg-stat-label">Total Caregivers</div>
+      </div>
+    </div>
+    <div class="cg-stat-card border-green">
+      <div class="cg-stat-icon green-icon"><i class="fa fa-check-circle"></i></div>
+      <div class="cg-stat-body">
+        <div class="cg-stat-value">{{c.cgStats.active}}</div>
+        <div class="cg-stat-label">Active On Duty</div>
+      </div>
+    </div>
+    <div class="cg-stat-card border-blue">
+      <div class="cg-stat-icon blue-icon"><i class="fa fa-users"></i></div>
+      <div class="cg-stat-body">
+        <div class="cg-stat-value">{{c.cgStats.totalAssigned}}</div>
+        <div class="cg-stat-label">Patients Assigned</div>
+      </div>
+    </div>
+    <div class="cg-stat-card border-orange">
+      <div class="cg-stat-icon orange-icon"><i class="fa fa-exclamation-circle"></i></div>
+      <div class="cg-stat-body">
+        <div class="cg-stat-value">{{c.cgStats.unassigned}}</div>
+        <div class="cg-stat-label">Unassigned Patients</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEARCH & FILTER -->
+  <div class="cg-filter-bar">
+    <div class="search-wrap">
+      <i class="fa fa-search s-icon"></i>
+      <input type="text" class="search-input"
+        placeholder="Search by name, specialty or shift..."
+        ng-model="c.searchQ"
+        ng-change="c.filter()" />
+    </div>
+    <select class="cg-select" ng-model="c.filterShift" ng-change="c.filter()">
+      <option value="">All Shifts</option>
+      <option>Morning</option>
+      <option>Afternoon</option>
+      <option>Night</option>
+    </select>
+    <select class="cg-select" ng-model="c.filterStatus" ng-change="c.filter()">
+      <option value="">All Status</option>
+      <option>Active</option>
+      <option>Off Duty</option>
+      <option>On Leave</option>
+    </select>
+  </div>
+
+  <!-- CAREGIVER CARDS -->
+  <div class="cg-cards-grid">
+    <div class="cg-card" ng-repeat="cg in c.filtered">
+
+      <!-- CARD TOP -->
+      <div class="cg-card-top">
+        <div class="cg-avatar-wrap">
+          <div class="cg-avatar" ng-class="cg.avatarClass">{{cg.initials}}</div>
+          <div class="cg-online-dot" ng-class="cg.dotClass" title="{{cg.status}}"></div>
+        </div>
+        <div class="cg-identity">
+          <div class="cg-name">{{cg.name}}</div>
+          <div class="cg-id-text">{{cg.caregiverId}}</div>
+          <div class="cg-specialty-text">
+            <i class="fa fa-stethoscope"></i> {{cg.specialty}}
+          </div>
+        </div>
+        <div class="cg-card-btns">
+          <a class="cg-icon-btn" href="/trackmed_caregiver_form?action=edit&id={{cg.sysId}}" title="Edit">
+            <i class="fa fa-pencil"></i>
+          </a>
+          <a class="cg-icon-btn" href="/trackmed_caregiver_form?action=view&id={{cg.sysId}}" title="View">
+            <i class="fa fa-eye"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- CARD INFO -->
+      <div class="cg-card-info-grid">
+        <div class="cg-info-item">
+          <i class="fa fa-phone cg-ico"></i><span>{{cg.phone}}</span>
+        </div>
+        <div class="cg-info-item">
+          <i class="fa fa-envelope cg-ico"></i><span>{{cg.email}}</span>
+        </div>
+        <div class="cg-info-item">
+          <i class="fa fa-clock-o cg-ico"></i><span>{{cg.shift}} Shift</span>
+        </div>
+        <div class="cg-info-item">
+          <i class="fa fa-calendar cg-ico"></i><span>Since {{cg.joinDate}}</span>
+        </div>
+      </div>
+
+      <!-- PATIENTS SECTION -->
+      <div class="cg-patient-section">
+        <div class="cg-pt-header-row">
+          <span class="cg-pt-label">
+            <i class="fa fa-users"></i> Patients ({{cg.patients.length}})
+          </span>
+          <span class="cg-workload-tag" ng-class="cg.workloadClass">{{cg.workload}}</span>
+        </div>
+        <div class="cg-pt-chips">
+          <div class="cg-pt-chip" ng-repeat="pt in cg.patients | limitTo:3">
+            <div class="chip-av">{{pt.initials}}</div>
+            <div class="chip-body">
+              <div class="chip-name">{{pt.name}}</div>
+              <div class="chip-med">{{pt.medication}}</div>
+            </div>
+            <i class="fa fa-exclamation-triangle chip-alert" ng-if="pt.hasAlert"></i>
+          </div>
+          <div class="more-chip" ng-if="cg.patients.length > 3">
+            +{{cg.patients.length - 3}} more
+          </div>
+          <div class="no-pt-msg" ng-if="cg.patients.length === 0">
+            <i class="fa fa-user-times"></i> No patients assigned
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD FOOTER -->
+      <div class="cg-card-footer">
+        <a class="btn-assign-sm" href="/trackmed_caregiver_assign?cgId={{cg.sysId}}">
+          <i class="fa fa-link"></i> Assign Patient
+        </a>
+        <span class="cg-status-tag"
+          ng-class="'cgstatus-' + cg.status.replace(' ','-').toLowerCase()">
+          {{cg.status}}
+        </span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- EMPTY -->
+  <div class="cg-empty" ng-if="c.filtered.length === 0">
+    <i class="fa fa-search fa-3x"></i>
+    <p>No caregivers found matching your search.</p>
+    <button class="btn-clear" ng-click="c.reset()">Clear Filters</button>
+  </div>
+
+</div>]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>27b7af80592903107f44615fbac43e3e</id>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-13 19:38:59</sys_created_on>
+        <sys_id>ffb7af80592903107f44615fbac43e41</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-13 19:38:59</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

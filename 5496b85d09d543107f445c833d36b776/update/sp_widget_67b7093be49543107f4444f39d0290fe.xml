@@ -1,0 +1,1458 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function($scope, $uibModal, spUtil) {
+
+    var c = this;
+
+    c.search = "";
+
+    /* =====================================
+       PAGINATION
+    ===================================== */
+
+    c.page = 1;
+    c.pageSize = 10;
+    c.pageSizes = [5,10,25,50];
+    c.filtered = [];
+
+    c.totalItems = function() {
+
+        return c.search ?
+            (c.filtered || []).length :
+            (c.data.medications || []).length;
+    };
+
+    c.totalPages = function() {
+
+        return Math.max(
+            1,
+            Math.ceil(
+                c.totalItems() / c.pageSize
+            )
+        );
+    };
+
+    c.endIndex = function() {
+
+        return Math.min(
+            c.page * c.pageSize,
+            c.totalItems()
+        );
+    };
+
+    c.goToPage = function(n) {
+
+        if(n < 1 || n > c.totalPages())
+            return;
+
+        c.page = n;
+    };
+
+    c.pageNumbers = function() {
+
+        var total = c.totalPages();
+
+        var start =
+            Math.max(1, c.page - 2);
+
+        var end =
+            Math.min(total, start + 4);
+
+        start =
+            Math.max(1, end - 4);
+
+        var pages = [];
+
+        for(var i=start;i<=end;i++)
+            pages.push(i);
+
+        return pages;
+    };
+
+    $scope.$watch(function() {
+
+        return c.totalItems();
+
+    }, function() {
+
+        if(c.page > c.totalPages())
+            c.page = c.totalPages();
+
+    });
+
+    /* =====================================
+       MODAL
+    ===================================== */
+
+    function openModal() {
+
+        return $uibModal.open({
+
+            templateUrl: 'medicationModal',
+
+            scope: $scope,
+
+            size: 'lg'
+
+        });
+    }
+
+    /* =====================================
+       DATE HELPERS
+    ===================================== */
+
+    function toDateObject(str) {
+
+        if(!str)
+            return null;
+
+        var p = str.split('-');
+
+        return new Date(
+            p[0],
+            p[1]-1,
+            p[2]
+        );
+    }
+
+    function toDateString(d) {
+
+        if(!d)
+            return '';
+
+        if(typeof d === 'string')
+            return d;
+
+        var m =
+            ('0'+(d.getMonth()+1))
+            .slice(-2);
+
+        var day =
+            ('0'+d.getDate())
+            .slice(-2);
+
+        return d.getFullYear() +
+               '-' + m +
+               '-' + day;
+    }
+
+    /* =====================================
+       BUILD PAYLOAD
+    ===================================== */
+
+    function buildPayload(m) {
+
+        return {
+
+            sys_id:
+                m.sys_id || '',
+
+            medication_name:
+                m.medication_name || '',
+
+            patient:
+                m.patient || '',
+
+            prescribed_by:
+                m.prescribed_by || '',
+
+            caretaker:
+                m.caretaker || '',
+
+            dosage:
+                m.dosage || '',
+
+            frequency:
+                m.frequency || '',
+
+            route_of_administration:
+                m.route_of_administration || '',
+
+            reminder_time:
+                m.reminder_time || '',
+
+            start_date:
+                toDateString(
+                    m.start_date
+                ),
+
+            end_date:
+                toDateString(
+                    m.end_date
+                ),
+
+            state:
+                m.state || '',
+
+            stock_quantity:
+                m.stock_quantity || '',
+
+            low_stock_threshold:
+                m.low_stock_threshold || ''
+        };
+    }
+
+    /* =====================================
+       CREATE
+    ===================================== */
+
+    c.openMedicationModal = function() {
+
+        $scope.modalTitle =
+            "Create Medication";
+
+        $scope.medication = {};
+
+        var modal = openModal();
+
+        $scope.saveMedication =
+        function() {
+
+            if(
+                !$scope.medication
+                .medication_name
+            ) {
+
+                spUtil.addErrorMessage(
+                    'Medication Name is required'
+                );
+
+                return;
+            }
+
+            c.server.get({
+
+                action: 'create',
+
+                medication:
+                    buildPayload(
+                        $scope.medication
+                    )
+
+            }).then(function(r) {
+
+                c.data.medications =
+                    r.data.medications;
+
+                modal.close();
+
+                spUtil.addInfoMessage(
+                    'Medication created successfully'
+                );
+
+            });
+
+        };
+
+    };
+
+    /* =====================================
+       EDIT
+    ===================================== */
+
+    c.editMedication =
+    function(medication) {
+
+        $scope.modalTitle =
+            "Edit Medication";
+
+        $scope.medication =
+            angular.copy(
+                medication
+            );
+
+        $scope.medication.start_date =
+            toDateObject(
+                medication.start_date
+            );
+
+        $scope.medication.end_date =
+            toDateObject(
+                medication.end_date
+            );
+
+        var modal = openModal();
+
+        $scope.saveMedication =
+        function() {
+
+            c.server.get({
+
+                action:'update',
+
+                medication:
+                    buildPayload(
+                        $scope.medication
+                    )
+
+            }).then(function(r){
+
+                c.data.medications =
+                    r.data.medications;
+
+                modal.close();
+
+                spUtil.addInfoMessage(
+                    'Medication updated successfully'
+                );
+
+            });
+
+        };
+
+    };
+
+    /* =====================================
+       DELETE
+    ===================================== */
+
+    c.deleteMedication =
+    function(medication) {
+
+        if(
+            !confirm(
+                'Delete "' +
+                medication.medication_name +
+                '" ?'
+            )
+        ) {
+            return;
+        }
+
+        c.server.get({
+
+            action:'delete',
+
+            sys_id:
+                medication.sys_id
+
+        }).then(function(r){
+
+            c.data.medications =
+                r.data.medications;
+
+            spUtil.addInfoMessage(
+                'Medication deleted successfully'
+            );
+
+        });
+
+    };
+
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/* ==========================================
+   PAGE
+========================================== */
+
+.tm-page{
+    padding:20px;
+    background:#f1f5f9;
+    min-height:100vh;
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.tm-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:24px 30px;
+
+    margin-bottom:20px;
+
+    background:linear-gradient(
+        135deg,
+        #0ea5e9,
+        #2563eb
+    );
+
+    border-radius:20px;
+
+    color:#fff;
+
+    box-shadow:
+    0 15px 35px rgba(37,99,235,.25);
+}
+
+.tm-header h2{
+    margin:0;
+    font-size:28px;
+    font-weight:700;
+}
+
+.tm-header p{
+    margin:6px 0 0;
+    opacity:.9;
+    font-size:14px;
+}
+
+/* ==========================================
+   CREATE BUTTON
+========================================== */
+
+.tm-create-btn{
+    background:#fff !important;
+    color:#2563eb !important;
+    border:none !important;
+
+    padding:12px 18px;
+
+    border-radius:12px;
+
+    font-weight:700;
+
+    transition:.3s;
+}
+
+.tm-create-btn:hover{
+    transform:translateY(-2px);
+}
+
+/* ==========================================
+   SEARCH
+========================================== */
+
+.tm-search-section{
+    margin-bottom:20px;
+}
+
+.tm-search-wrapper{
+    position:relative;
+}
+
+.tm-search-wrapper i{
+    position:absolute;
+    left:16px;
+    top:18px;
+    color:#94a3b8;
+}
+
+.tm-search{
+    width:100%;
+    height:54px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:#fff;
+
+    padding-left:45px;
+
+    box-shadow:
+    0 4px 20px rgba(0,0,0,.05);
+}
+
+.tm-search:focus{
+    outline:none;
+
+    box-shadow:
+    0 0 0 4px rgba(37,99,235,.15);
+}
+
+/* ==========================================
+   TABLE WRAPPER
+========================================== */
+
+.tm-table-wrapper{
+    background:#fff;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    border:1px solid #e2e8f0;
+
+    box-shadow:
+    0 10px 30px rgba(15,23,42,.08);
+}
+
+/* ==========================================
+   TABLE
+========================================== */
+
+.tm-table{
+    margin:0;
+}
+
+.tm-table thead{
+    background:
+    linear-gradient(
+        135deg,
+        #2563eb,
+        #4f46e5
+    );
+}
+
+.tm-table thead th{
+    color:#fff !important;
+
+    border:none !important;
+
+    padding:14px 16px;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+}
+
+.tm-table tbody td{
+    padding:14px 16px;
+
+    border-top:none !important;
+
+    border-bottom:1px solid #eef2f7;
+
+    vertical-align:middle;
+}
+
+.tm-table tbody tr:nth-child(even){
+    background:#f8fafc;
+}
+
+.tm-table tbody tr:hover{
+    background:#eff6ff;
+}
+
+/* ==========================================
+   BADGES
+========================================== */
+
+.tm-id-badge{
+    background:#dbeafe;
+
+    color:#1d4ed8;
+
+    padding:5px 10px;
+
+    border-radius:999px;
+
+    font-size:11px;
+
+    font-weight:700;
+}
+
+.tm-frequency{
+    background:#dcfce7;
+
+    color:#166534;
+
+    padding:5px 10px;
+
+    border-radius:999px;
+
+    font-size:11px;
+
+    font-weight:700;
+}
+
+.tm-state{
+    background:#ede9fe;
+
+    color:#6d28d9;
+
+    padding:5px 10px;
+
+    border-radius:999px;
+
+    font-size:11px;
+
+    font-weight:700;
+}
+
+/* ==========================================
+   BUTTONS
+========================================== */
+
+.tm-edit-btn{
+    background:#0ea5e9 !important;
+    color:#fff !important;
+
+    border:none !important;
+
+    border-radius:8px;
+
+    margin-right:5px;
+}
+
+.tm-delete-btn{
+    background:#ef4444 !important;
+    color:#fff !important;
+
+    border:none !important;
+
+    border-radius:8px;
+}
+
+/* ==========================================
+   PAGINATION
+========================================== */
+
+.tm-pagination{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:15px 20px;
+
+    border-top:1px solid #e2e8f0;
+
+    background:#f8fafc;
+}
+
+.tm-pagination .pagination{
+    margin:0;
+}
+
+.tm-pagination .pagination li a{
+    border:none;
+
+    border-radius:8px;
+
+    margin:0 2px;
+
+    color:#475569;
+}
+
+.tm-pagination .pagination li.active a{
+    background:#2563eb;
+    color:#fff;
+}
+
+/* ==========================================
+   MODAL
+========================================== */
+
+.modal-header{
+    background:
+    linear-gradient(
+        135deg,
+        #2563eb,
+        #4f46e5
+    );
+
+    color:#fff;
+}
+
+.modal-title{
+    font-weight:700;
+}
+
+.modal-body label{
+    font-weight:600;
+    color:#334155;
+    margin-bottom:6px;
+}
+
+.modal-body .form-control{
+    border-radius:10px;
+    border:1px solid #cbd5e1;
+}
+
+.modal-footer{
+    background:#f8fafc;
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media(max-width:768px){
+
+    .tm-header{
+        flex-direction:column;
+        text-align:center;
+        gap:15px;
+    }
+
+    .tm-create-btn{
+        width:100%;
+    }
+
+    .tm-pagination{
+        flex-direction:column;
+        gap:15px;
+    }
+
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>trackmed_medication_schedule_list</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>TrackMed medication schedule_List</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    var TABLE = 'x_snc_trackmed_medication_schedule_table';
+
+    /* =====================================
+       USER TYPE FIELD
+    ===================================== */
+
+    var USER_TYPE_FIELD =
+        'x_snc_trackmed_user_type';
+
+    var USER_TYPES = {
+
+        doctor: 'doctor',
+
+        caretaker: 'care_taker'
+
+    };
+
+    /* =====================================
+       CREATE / UPDATE / DELETE
+    ===================================== */
+
+    if (input) {
+
+        /* CREATE */
+
+        if (input.action == 'create' &&
+            input.medication) {
+
+            var grCreate =
+                new GlideRecord(TABLE);
+
+            grCreate.initialize();
+
+            setFields(
+                grCreate,
+                input.medication
+            );
+
+            grCreate.insert();
+        }
+
+        /* UPDATE */
+
+        if (input.action == 'update' &&
+            input.medication &&
+            input.medication.sys_id) {
+
+            var grUpdate =
+                new GlideRecord(TABLE);
+
+            if (
+                grUpdate.get(
+                    input.medication.sys_id
+                )
+            ) {
+
+                setFields(
+                    grUpdate,
+                    input.medication
+                );
+
+                grUpdate.update();
+            }
+        }
+
+        /* DELETE */
+
+        if (input.action == 'delete' &&
+            input.sys_id) {
+
+            var grDelete =
+                new GlideRecord(TABLE);
+
+            if (
+                grDelete.get(
+                    input.sys_id
+                )
+            ) {
+
+                grDelete.deleteRecord();
+            }
+        }
+    }
+
+    /* =====================================
+       PATIENTS DROPDOWN
+    ===================================== */
+
+    data.patients = [];
+
+    var p =
+        new GlideRecord(
+            'x_snc_trackmed_patient_record'
+        );
+
+    p.orderBy('patient_name');
+    p.query();
+
+    while (p.next()) {
+
+        data.patients.push({
+
+            sys_id:
+                p.getUniqueValue(),
+
+            name:
+                p.getValue(
+                    'patient_name'
+                )
+
+        });
+    }
+
+    /* =====================================
+       DOCTORS DROPDOWN
+    ===================================== */
+
+    data.doctors =
+        getUsersByType(
+            USER_TYPES.doctor
+        );
+
+    /* =====================================
+       CARETAKERS DROPDOWN
+    ===================================== */
+
+    data.caretakers =
+        getUsersByType(
+            USER_TYPES.caretaker
+        );
+
+    /* =====================================
+       MEDICATION LIST
+    ===================================== */
+
+    data.medications = [];
+
+    var gr =
+        new GlideRecord(TABLE);
+
+    gr.orderByDesc(
+        'sys_created_on'
+    );
+
+    gr.query();
+
+    while (gr.next()) {
+
+        data.medications.push({
+
+            sys_id:
+                gr.getUniqueValue(),
+
+            number:
+                gr.getValue(
+                    'number'
+                ),
+
+            medication_name:
+                gr.getValue(
+                    'medication_name'
+                ),
+
+            patient:
+                gr.getValue(
+                    'patient'
+                ),
+
+            patient_display:
+                gr.getDisplayValue(
+                    'patient'
+                ),
+
+            prescribed_by:
+                gr.getValue(
+                    'prescribed_by'
+                ),
+
+            prescribed_by_display:
+                gr.getDisplayValue(
+                    'prescribed_by'
+                ),
+
+            caretaker:
+                gr.getValue(
+                    'caretaker'
+                ),
+
+            caretaker_display:
+                gr.getDisplayValue(
+                    'caretaker'
+                ),
+
+            dosage:
+                gr.getValue(
+                    'dosage'
+                ),
+
+            frequency:
+                gr.getDisplayValue(
+                    'frequency'
+                ),
+
+            route_of_administration:
+                gr.getValue(
+                    'route_of_administration'
+                ),
+
+            reminder_time:
+                gr.getDisplayValue(
+                    'reminder_time'
+                ),
+
+            start_date:
+                gr.getValue(
+                    'start_date'
+                ),
+
+            end_date:
+                gr.getValue(
+                    'end_date'
+                ),
+
+            state:
+                gr.getDisplayValue(
+                    'state'
+                ),
+
+            stock_quantity:
+                gr.getValue(
+                    'stock_quantity'
+                ),
+
+            low_stock_threshold:
+                gr.getValue(
+                    'low_stock_threshold'
+                )
+        });
+    }
+
+    /* =====================================
+       GET USERS BY TYPE
+    ===================================== */
+
+    function getUsersByType(
+        typeValue
+    ) {
+
+        var list = [];
+
+        var u =
+            new GlideRecord(
+                'sys_user'
+            );
+
+        u.addActiveQuery();
+
+        u.addQuery(
+            USER_TYPE_FIELD,
+            typeValue
+        );
+
+        u.orderBy('name');
+
+        u.query();
+
+        while (u.next()) {
+
+            list.push({
+
+                sys_id:
+                    u.getUniqueValue(),
+
+                name:
+                    u.getValue(
+                        'name'
+                    )
+
+            });
+        }
+
+        return list;
+    }
+
+    /* =====================================
+       SAVE FIELDS
+    ===================================== */
+
+    function setFields(
+        gr,
+        m
+    ) {
+
+        gr.medication_name =
+            m.medication_name;
+
+        gr.patient =
+            m.patient;
+
+        gr.prescribed_by =
+            m.prescribed_by;
+
+        gr.caretaker =
+            m.caretaker;
+
+        gr.dosage =
+            m.dosage;
+
+        gr.route_of_administration =
+            m.route_of_administration;
+
+        gr.reminder_time =
+            m.reminder_time;
+
+        gr.start_date =
+            m.start_date;
+
+        gr.end_date =
+            m.end_date;
+
+        gr.stock_quantity =
+            m.stock_quantity;
+
+        gr.low_stock_threshold =
+            m.low_stock_threshold;
+
+        gr.setValue(
+            'frequency',
+            m.frequency
+        );
+
+        gr.setValue(
+            'state',
+            m.state
+        );
+    }
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>vignesh.pitchai</sys_created_by>
+        <sys_created_on>2026-06-12 13:21:27</sys_created_on>
+        <sys_id>67b7093be49543107f4444f39d0290fe</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>TrackMed medication schedule_List</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_widget_67b7093be49543107f4444f39d0290fe</sys_update_name>
+        <sys_updated_by>vignesh.pitchai</sys_updated_by>
+        <sys_updated_on>2026-06-12 13:32:22</sys_updated_on>
+        <template><![CDATA[<div class="tm-page">
+
+    <!-- HEADER -->
+    <div class="tm-header">
+
+        <div>
+            <h2>
+                <i class="fa fa-medkit"></i>
+                Medication Schedule
+            </h2>
+            <p>
+                Manage medication schedules and reminders
+            </p>
+        </div>
+
+        <button class="btn tm-create-btn"
+                ng-click="c.openMedicationModal()">
+
+            <i class="fa fa-plus"></i>
+            Create Medication
+
+        </button>
+
+    </div>
+
+    <!-- SEARCH -->
+
+    <div class="tm-search-section">
+
+        <div class="tm-search-wrapper">
+
+            <i class="fa fa-search"></i>
+
+            <input type="text"
+                   class="tm-search"
+                   placeholder="Search medication..."
+                   ng-model="c.search"
+                   ng-change="c.page=1">
+
+        </div>
+
+    </div>
+
+    <!-- TABLE -->
+
+    <div class="tm-table-wrapper">
+
+        <table class="table tm-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+                    <th>Medication</th>
+                    <th>Patient</th>
+                    <th>Dosage</th>
+                    <th>Frequency</th>
+                    <th>Reminder</th>
+                    <th>State</th>
+                    <th>Actions</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr ng-repeat="m in c.filtered=(data.medications | filter:c.search)
+                                | limitTo:c.pageSize:(c.page-1)*c.pageSize">
+
+                    <td>
+                        <span class="tm-id-badge">
+                            {{m.number}}
+                        </span>
+                    </td>
+
+                    <td>
+                        <b>{{m.medication_name}}</b>
+                    </td>
+
+                    <td>
+                        {{m.patient_display}}
+                    </td>
+
+                    <td>
+                        {{m.dosage}}
+                    </td>
+
+                    <td>
+
+                        <span class="tm-frequency">
+                            {{m.frequency}}
+                        </span>
+
+                    </td>
+
+                    <td>
+                        {{m.reminder_time}}
+                    </td>
+
+                    <td>
+
+                        <span class="tm-state">
+                            {{m.state}}
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <button class="btn btn-xs tm-edit-btn"
+                                ng-click="c.editMedication(m)">
+
+                            <i class="fa fa-pencil"></i>
+
+                        </button>
+
+                        <button class="btn btn-xs tm-delete-btn"
+                                ng-click="c.deleteMedication(m)">
+
+                            <i class="fa fa-trash"></i>
+
+                        </button>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+        <!-- PAGINATION -->
+
+        <div class="tm-pagination">
+
+            <div>
+
+                Showing
+                {{(c.page-1)*c.pageSize+1}}
+                -
+                {{c.endIndex()}}
+                of
+                {{c.totalItems()}}
+
+            </div>
+
+            <ul class="pagination pagination-sm">
+
+                <li ng-class="{disabled:c.page==1}">
+                    <a ng-click="c.goToPage(c.page-1)">
+                        <
+                    </a>
+                </li>
+
+                <li ng-repeat="n in c.pageNumbers()"
+                    ng-class="{active:n==c.page}">
+
+                    <a ng-click="c.goToPage(n)">
+                        {{n}}
+                    </a>
+
+                </li>
+
+                <li ng-class="{disabled:c.page==c.totalPages()}">
+                    <a ng-click="c.goToPage(c.page+1)">
+                        >
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script type="text/ng-template" id="medicationModal">
+
+<div class="modal-header">
+
+    <h3>
+        {{modalTitle}}
+    </h3>
+
+</div>
+
+<div class="modal-body">
+
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <label>Medication Name</label>
+
+            <input class="form-control"
+                   ng-model="medication.medication_name">
+
+        </div>
+
+        <div class="col-md-6">
+
+            <label>Dosage</label>
+
+            <input class="form-control"
+                   ng-model="medication.dosage">
+
+        </div>
+
+    </div>
+
+    <br>
+
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <label>Patient</label>
+
+            <select class="form-control"
+                    ng-model="medication.patient"
+                    ng-options="p.sys_id as p.name for p in data.patients">
+
+                <option value="">
+                    Select Patient
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <label>Doctor</label>
+
+            <select class="form-control"
+                    ng-model="medication.prescribed_by"
+                    ng-options="d.sys_id as d.name for d in data.doctors">
+
+                <option value="">
+                    Select Doctor
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+    <br>
+
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <label>Caretaker</label>
+
+            <select class="form-control"
+                    ng-model="medication.caretaker"
+                    ng-options="c.sys_id as c.name for c in data.caretakers">
+
+                <option value="">
+                    Select Caretaker
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <label>Frequency</label>
+
+            <select class="form-control"
+                    ng-model="medication.frequency">
+
+                <option value="once_Daily">Once Daily</option>
+                <option value="twice_Daily">Twice Daily</option>
+                <option value="thrice_Daily">Thrice Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="as_Needed">As Needed</option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+    <br>
+
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <label>Reminder Time</label>
+
+            <input type="time"
+                   class="form-control"
+                   ng-model="medication.reminder_time">
+
+        </div>
+
+        <div class="col-md-6">
+
+            <label>State</label>
+
+            <select class="form-control"
+                    ng-model="medication.state">
+
+                <option value="draft">Draft</option>
+                <option value="completed">Completed</option>
+                <option value="paused">Paused</option>
+                <option value="cancelled">Cancelled</option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+    <br>
+
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <label>Start Date</label>
+
+            <input type="date"
+                   class="form-control"
+                   ng-model="medication.start_date">
+
+        </div>
+
+        <div class="col-md-6">
+
+            <label>End Date</label>
+
+            <input type="date"
+                   class="form-control"
+                   ng-model="medication.end_date">
+
+        </div>
+
+    </div>
+
+    <br>
+
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <label>Stock Quantity</label>
+
+            <input type="number"
+                   class="form-control"
+                   ng-model="medication.stock_quantity">
+
+        </div>
+
+        <div class="col-md-6">
+
+            <label>Low Stock Threshold</label>
+
+            <input type="number"
+                   class="form-control"
+                   ng-model="medication.low_stock_threshold">
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="modal-footer">
+
+    <button class="btn btn-default"
+            ng-click="$dismiss()">
+
+        Cancel
+
+    </button>
+
+    <button class="btn btn-primary"
+            ng-click="saveMedication()">
+
+        Save
+
+    </button>
+
+</div>
+
+</script>]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>67b7093be49543107f4444f39d0290fe</id>
+        <sys_created_by>vignesh.pitchai</sys_created_by>
+        <sys_created_on>2026-06-12 13:21:27</sys_created_on>
+        <sys_id>a3b78d3be49543107f4444f39d029036</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>vignesh.pitchai</sys_updated_by>
+        <sys_updated_on>2026-06-12 13:21:27</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

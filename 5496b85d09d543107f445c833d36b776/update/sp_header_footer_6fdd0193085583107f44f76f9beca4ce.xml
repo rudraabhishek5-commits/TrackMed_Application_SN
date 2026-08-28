@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_header_footer">
+    <sp_header_footer action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function($rootScope) {
+  var c = this;
+  c.isCollapsed = false;
+
+  c.toggleSidebar = function() {
+    c.isCollapsed = !c.isCollapsed;
+    // Broadcast to ALL widgets on the page
+    $rootScope.$broadcast('tm:sidebarToggle', { collapsed: c.isCollapsed });
+  };
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/* =========================
+   TRACKMED HEADER
+========================= */
+.tm-header {
+  position: fixed;
+  top: 9px;
+  left: 230px;
+  right: 0;
+  height: 72px;
+  background: linear-gradient(135deg, #0A1633 0%, #0F4C81 50%, #1B5EDB 100%);
+  border-bottom: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  z-index: 9999;
+  transition: left 0.35s ease;
+  box-shadow: 0 4px 24px rgba(27, 94, 219, 0.35);
+  
+}
+
+.tm-header.collapsed {
+  left: 72px;
+}
+
+/* =========================
+   SPACER
+========================= */
+.tm-header-spacer {
+  display: block;
+  height: 88px;
+  width: 100%;
+}
+
+/* =========================
+   LEFT SIDE
+========================= */
+.tm-header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.tm-menu-btn {
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s;
+  backdrop-filter: blur(4px);
+}
+
+.tm-menu-btn:hover {
+  background: rgba(255,255,255,0.28);
+}
+
+.tm-welcome-text {
+  font-size: 12px;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.2;
+}
+
+.tm-user-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.tm-role {
+  font-size: 12px;
+  color: #7eb8ff;
+  margin-top: 2px;
+}
+
+/* =========================
+   RIGHT SIDE
+========================= */
+.tm-header-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.tm-date-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 12px;
+  padding: 8px 14px;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(4px);
+}
+
+.tm-date-label {
+  font-size: 11px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1;
+}
+
+.tm-date-value {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.tm-date-card i {
+  color: #7eb8ff;
+  font-size: 16px;
+}
+
+.tm-alert-btn {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 12px;
+  background: rgba(255,255,255,0.12);
+  color: #ffffff;
+  font-size: 18px;
+  text-decoration: none;
+  backdrop-filter: blur(4px);
+  transition: background 0.2s;
+}
+
+.tm-alert-btn:hover {
+  background: rgba(255,255,255,0.22);
+}
+
+.tm-alert-count {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: #ff4d4d;
+  color: #fff;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  font-size: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  box-shadow: 0 0 6px rgba(255,77,77,0.6);
+}
+
+.tm-profile-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 12px;
+  padding: 8px 14px;
+  background: rgba(255,255,255,0.12);
+  text-decoration: none;
+  color: #ffffff;
+  backdrop-filter: blur(4px);
+  transition: background 0.2s;
+}
+
+.tm-profile-card:hover {
+  background: rgba(255,255,255,0.22);
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.tm-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255,255,255,0.4);
+}
+
+.tm-profile-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.tm-profile-role {
+  font-size: 11px;
+  color: rgba(255,255,255,0.6);
+}
+
+.tm-profile-card i.fa-chevron-down {
+  color: rgba(255,255,255,0.6);
+  font-size: 11px;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>TrackMed Header</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+  data.userName  = gs.getUserDisplayName();
+  data.userTitle = "Medical Staff";
+  data.avatar    = "/images/avatar_default.png";
+  data.alertCount = 3;
+
+  var gd = new GlideDate();
+  data.today = gd.getDisplayValue();
+
+  data.showHeader = true;
+
+  var pageId = $sp.getParameter('id');
+
+  if (pageId == 'trackmed_login') {
+      data.showHeader = false;
+  }
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <static>false</static>
+        <sys_class_name>sp_header_footer</sys_class_name>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-11 00:34:16</sys_created_on>
+        <sys_id>6fdd0193085583107f44f76f9beca4ce</sys_id>
+        <sys_mod_count>53</sys_mod_count>
+        <sys_name>TrackMed Header</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_header_footer_6fdd0193085583107f44f76f9beca4ce</sys_update_name>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-14 18:24:12</sys_updated_on>
+        <template/>
+    </sp_header_footer>
+</record_update>

@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function($scope, spUtil) {
+
+    var c = this;
+
+    c.sendSOS = function() {
+
+        if(confirm("Are you sure you want to send an Emergency SOS Alert?")) {
+
+            spUtil.addInfoMessage(
+                "Emergency SOS Alert sent successfully."
+            );
+
+            c.server.get({
+                action: "sos"
+            }).then(function(response){
+
+            });
+
+        }
+
+    };
+
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.tm-sos-widget{
+    background:#fff;
+    border-radius:14px;
+    padding:16px;
+    border:1px solid #e5e7eb;
+    box-shadow:0 6px 18px rgba(0,0,0,0.08);
+    max-width:320px;
+    margin:auto;
+    text-align:center;
+    transition:all .3s ease;
+}
+
+.tm-sos-widget:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 24px rgba(0,0,0,0.12);
+}
+
+/* Header */
+
+.tm-sos-header{
+    margin-bottom:12px;
+}
+
+.tm-sos-header i{
+    display:block;
+    font-size:28px;
+    color:#dc2626;
+    margin-bottom:6px;
+}
+
+.tm-sos-header h3{
+    margin:0;
+    font-size:18px;
+    font-weight:700;
+    color:#1e293b;
+}
+
+/* Status Badge */
+
+.tm-status{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:#fef2f2;
+    color:#dc2626;
+    padding:8px 14px;
+    border-radius:50px;
+    font-size:12px;
+    font-weight:600;
+    margin-bottom:12px;
+}
+
+.pulse{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:#dc2626;
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+    0%{
+        transform:scale(1);
+        opacity:1;
+    }
+
+    100%{
+        transform:scale(2);
+        opacity:0;
+    }
+}
+
+/* Date Time */
+
+.tm-time{
+    font-size:12px;
+    color:#64748b;
+    margin-bottom:15px;
+}
+
+/* SOS Button */
+
+.tm-sos-btn{
+    width:100%;
+    border:none;
+    background:linear-gradient(135deg,#ef4444,#dc2626);
+    color:#fff;
+    padding:12px;
+    border-radius:10px;
+    font-size:14px;
+    font-weight:700;
+    cursor:pointer;
+    transition:all .3s ease;
+}
+
+.tm-sos-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 18px rgba(220,38,38,.35);
+}
+
+/* Contact Section */
+
+.tm-contact-info{
+    margin-top:15px;
+}
+
+/* Contact Cards */
+
+.contact-card{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:10px;
+    margin-bottom:8px;
+    border-radius:10px;
+    background:#f8fafc;
+    text-align:left;
+    border:1px solid #e2e8f0;
+}
+
+.contact-card:last-child{
+    margin-bottom:0;
+}
+
+.contact-card i{
+    width:35px;
+    height:35px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#fee2e2;
+    color:#dc2626;
+    border-radius:50%;
+    font-size:14px;
+    flex-shrink:0;
+}
+
+.contact-card label{
+    display:block;
+    font-size:11px;
+    color:#64748b;
+    margin-bottom:2px;
+    font-weight:500;
+}
+
+.contact-card strong{
+    display:block;
+    font-size:13px;
+    color:#1e293b;
+    font-weight:600;
+}
+
+/* Mobile */
+
+@media (max-width:768px){
+
+    .tm-sos-widget{
+        max-width:100%;
+        padding:14px;
+    }
+
+    .tm-sos-header h3{
+        font-size:16px;
+    }
+
+    .tm-sos-btn{
+        font-size:13px;
+        padding:10px;
+    }
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>trackmed_sos</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>Trackmed Sos</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    data.currentTime = new GlideDateTime().getDisplayValue();
+
+    data.emergencyNumber = "+1 (800) 911-HELP";
+
+    data.dutyDoctor = "Dr. Sarah Wilson";
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-16 06:03:10</sys_created_on>
+        <sys_id>eac90041f12503107f44df9cea21aa41</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Trackmed Sos</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_widget_eac90041f12503107f44df9cea21aa41</sys_update_name>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-16 10:11:40</sys_updated_on>
+        <template><![CDATA[<div class="tm-sos-widget">
+
+    <div class="tm-sos-header">
+        <i class="fa fa-ambulance"></i>
+        <h3>Emergency SOS</h3>
+    </div>
+
+    <div class="tm-sos-body">
+
+        <div class="tm-status">
+            <span class="pulse"></span>
+            Emergency Assistance Available
+        </div>
+
+        <div class="tm-time">
+            {{data.currentTime}}
+        </div>
+
+        <button class="tm-sos-btn"
+                ng-click="c.sendSOS()">
+            <i class="fa fa-exclamation-triangle"></i>
+            SEND SOS ALERT
+        </button>
+
+        <div class="tm-contact-info">
+
+            <div class="contact-card">
+                <i class="fa fa-phone"></i>
+                <div>
+                    <label>Emergency Hotline</label>
+                    <strong>{{data.emergencyNumber}}</strong>
+                </div>
+            </div>
+
+            <div class="contact-card">
+                <i class="fa fa-user-md"></i>
+                <div>
+                    <label>Duty Doctor</label>
+                    <strong>{{data.dutyDoctor}}</strong>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>eac90041f12503107f44df9cea21aa41</id>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-16 06:03:11</sys_created_on>
+        <sys_id>6ac90041f12503107f44df9cea21aa46</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-16 06:03:11</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

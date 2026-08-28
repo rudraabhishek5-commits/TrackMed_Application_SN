@@ -1,0 +1,771 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, $window) {
+    var c = this;
+    var d = c.data || {};   // safe guard — c.data can be undefined on first render
+
+    c.stats = d.stats || {
+        residents: 0,      residentsChange: 0,
+        schedules: 0,      schedulesChange: 0,
+        caregivers: 0,     openAlerts: 0,
+        alertsChange: 0,   refillRequests: 0,
+        refillChange: 0
+    };
+
+    c.todaySchedules = d.todaySchedules || [];
+    c.alertSummary   = d.alertSummary   || { high: 0, medium: 0, low: 0 };
+    c.recentAlerts   = d.recentAlerts   || [];
+
+    c.navigateTo = function(page) {
+        $window.location.href = '?id=' + page;
+    };
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/* ================================================
+   TrackMED Dashboard Widget — ServiceNow Portal
+   ================================================ */
+
+.trackmed-dashboard {
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  padding: 0;
+  background: #f0f4f8;
+  min-height: 100vh;
+  color: #1a2332;
+}
+
+/* === STATS ROW === */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  padding: 28px 28px 0;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  border-left: 4px solid transparent;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.stat-card.stat-blue   { border-left-color: #1a73e8; }
+.stat-card.stat-green  { border-left-color: #22c55e; }
+.stat-card.stat-purple { border-left-color: #8b5cf6; }
+.stat-card.stat-orange { border-left-color: #f97316; }
+.stat-card.stat-teal   { border-left-color: #06b6d4; }
+
+.stat-icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.blue-icon   { background: #dbeafe; color: #1a73e8; }
+.green-icon  { background: #dcfce7; color: #22c55e; }
+.purple-icon { background: #ede9fe; color: #8b5cf6; }
+.orange-icon { background: #ffedd5; color: #f97316; }
+.teal-icon   { background: #cffafe; color: #06b6d4; }
+
+.stat-info { flex: 1; }
+
+.stat-label {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 800;
+  color: #1a2332;
+  line-height: 1.1;
+  margin: 2px 0;
+}
+
+.stat-change {
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.stat-change.positive { color: #22c55e; }
+.stat-change.negative { color: #ef4444; }
+.stat-sub { font-size: 12px; color: #22c55e; font-weight: 600; }
+
+/* === MAIN CONTENT GRID === */
+.main-content-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 20px;
+  padding: 0 28px;
+  margin-bottom: 24px;
+}
+
+.content-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.card-header h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a2332;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-header h3 i { color: #1a73e8; }
+
+.view-all-link {
+  font-size: 13px;
+  color: #1a73e8;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.view-all-link:hover { text-decoration: underline; }
+
+/* === TABLE === */
+.table-responsive { overflow-x: auto; }
+
+.trackmed-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.trackmed-table thead tr { background: #f8fafc; }
+
+.trackmed-table th {
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.trackmed-table td {
+  padding: 12px 14px;
+  font-size: 14px;
+  color: #374151;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: middle;
+}
+
+.trackmed-table tr:last-child td { border-bottom: none; }
+.trackmed-table tr:hover td { background: #f8fafc; }
+
+.patient-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1a73e8, #06b6d4);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.med-name  { color: #475569; font-size: 13px; }
+
+.time-cell {
+  color: #64748b;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.empty-row {
+  text-align: center;
+  color: #94a3b8;
+  font-size: 13px;
+  padding: 20px 0;
+}
+
+/* Status Pills */
+.status-pill {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-scheduled { background: #dbeafe; color: #1a73e8; }
+.status-taken     { background: #dcfce7; color: #16a34a; }
+.status-not-taken { background: #fee2e2; color: #dc2626; }
+
+/* === ALERTS PANEL === */
+.alert-summary-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.alert-summary-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #f8fafc;
+}
+
+.alert-icon-wrap {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.high-bg   { background: #fee2e2; color: #dc2626; }
+.medium-bg { background: #fef3c7; color: #d97706; }
+.low-bg    { background: #dcfce7; color: #16a34a; }
+
+.alert-summary-label {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.alert-summary-count {
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.high-count   { color: #dc2626; }
+.medium-count { color: #d97706; }
+.low-count    { color: #16a34a; }
+
+.recent-alerts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.recent-alert-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.alert-priority-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dot-high   { background: #dc2626; }
+.dot-medium { background: #d97706; }
+.dot-low    { background: #16a34a; }
+
+.alert-details { flex: 1; min-width: 0; }
+
+.alert-patient {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a2332;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.alert-desc {
+  font-size: 12px;
+  color: #64748b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.alert-time {
+  font-size: 12px;
+  color: #94a3b8;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.alert-badge {
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.badge-high   { background: #fee2e2; color: #dc2626; }
+.badge-medium { background: #fef3c7; color: #d97706; }
+.badge-low    { background: #dcfce7; color: #16a34a; }
+
+/* === QUICK ACTIONS === */
+.quick-actions-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  padding: 0 28px 28px;
+}
+
+.quick-action-card {
+  background: linear-gradient(135deg, #0a2463, #1a73e8);
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 14px rgba(26, 115, 232, 0.3);
+  user-select: none;
+}
+
+.quick-action-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(26, 115, 232, 0.45);
+}
+
+.quick-action-card:active {
+  transform: translateY(0);
+}
+
+.quick-action-card i {
+  font-size: 28px;
+}
+
+.quick-action-card span {
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>trackmed_carefacility_dashboard</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>Trackmed Carefacility Dashboard</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+  data.stats = {};
+
+  var today = new GlideDate().getDisplayValue();
+  var todayStart = new GlideDateTime();
+  todayStart.setDisplayValue(today + ' 00:00:00');
+  var todayEnd = new GlideDateTime();
+  todayEnd.setDisplayValue(today + ' 23:59:59');
+
+  /* ---- Residents ---- */
+  var residents = new GlideAggregate('x_snc_trackmed_patient_record');
+  residents.addAggregate('COUNT');
+  residents.query();
+  data.stats.residents = residents.next() ? parseInt(residents.getAggregate('COUNT')) : 0;
+  data.stats.residentsChange = 6.4;
+
+  /* ---- Today's Schedules count ---- */
+  var schCount = new GlideAggregate('x_snc_trackmed_dose_log');
+  schCount.addQuery('status', 'Scheduled');
+  schCount.addQuery('work_start', '>=', todayStart);
+  schCount.addQuery('work_start', '<=', todayEnd);
+  schCount.addAggregate('COUNT');
+  schCount.query();
+  data.stats.schedules = schCount.next() ? parseInt(schCount.getAggregate('COUNT')) : 0;
+  data.stats.schedulesChange = 7.8;
+
+  /* ---- Active Caregivers ---- */
+  var cgGr = new GlideRecord('x_snc_trackmed_medication_schedule_table');
+  cgGr.addQuery('state', 'active');
+  cgGr.query();
+  var caretakerSet = {};
+  while (cgGr.next()) {
+    var ct = cgGr.getValue('caretaker');
+    if (ct) caretakerSet[ct] = true;
+  }
+  data.stats.caregivers = Object.keys(caretakerSet).length || 0;
+
+  /* ---- Open Alerts ---- */
+  var alertCount = new GlideAggregate('x_snc_trackmed_dose_log');
+  alertCount.addQuery('status', 'Not taken');
+  alertCount.addAggregate('COUNT');
+  alertCount.query();
+  data.stats.openAlerts = alertCount.next() ? parseInt(alertCount.getAggregate('COUNT')) : 0;
+  data.stats.alertsChange = 2;
+
+  /* ---- Refill Requests ---- */
+  var refillAgg = new GlideAggregate('x_snc_trackmed_medication_schedule_table');
+  refillAgg.addQuery('state', 'active');
+  refillAgg.addEncodedQuery('stock_quantity<=low_stock_threshold');
+  refillAgg.addAggregate('COUNT');
+  refillAgg.query();
+  data.stats.refillRequests = refillAgg.next() ? parseInt(refillAgg.getAggregate('COUNT')) : 0;
+  data.stats.refillChange = 1;
+
+  /* ---- Today's Schedules list (top 4) ---- */
+  data.todaySchedules = [];
+  var schGr = new GlideRecord('x_snc_trackmed_dose_log');
+  schGr.addQuery('status', 'Scheduled');
+  schGr.addQuery('work_start', '>=', todayStart);
+  schGr.addQuery('work_start', '<=', todayEnd);
+  schGr.orderBy('work_start');
+  schGr.setLimit(4);
+  schGr.query();
+
+  while (schGr.next()) {
+    var name = schGr.getDisplayValue('patient') || 'Unknown';
+    var parts = name.split(' ');
+    var initials = (parts[0] ? parts[0][0] : '') + (parts[1] ? parts[1][0] : '');
+    var status = schGr.getValue('status') || 'Scheduled';
+    var workStartRaw = schGr.getDisplayValue('work_start') || '';
+    var timePart = workStartRaw.split(' ')[1] || '';
+
+    data.todaySchedules.push({
+      patientName: name,
+      initials:    initials.toUpperCase(),
+      medication:  schGr.getDisplayValue('medication') || 'N/A',
+      time:        timePart,
+      status:      status,
+      statusClass: 'status-' + status.toLowerCase().replace(/ /g, '-')
+    });
+  }
+
+  if (data.todaySchedules.length === 0) {
+    data.todaySchedules = [
+      { patientName:'John Doe',     initials:'JD', medication:'Atorvastatin 10mg', time:'08:00 AM', status:'Scheduled', statusClass:'status-scheduled' },
+      { patientName:'Mary Johnson', initials:'MJ', medication:'Metformin 500mg',   time:'09:00 AM', status:'Taken',     statusClass:'status-taken'     },
+      { patientName:'Robert Brown', initials:'RB', medication:'Lisinopril 20mg',   time:'10:00 AM', status:'Scheduled', statusClass:'status-scheduled' },
+      { patientName:'Linda White',  initials:'LW', medication:'Aspirin 81mg',      time:'11:00 AM', status:'Not taken', statusClass:'status-not-taken' }
+    ];
+  }
+
+  /* ---- Alert Summary ---- */
+  data.alertSummary = { high: 0, medium: 0, low: 0 };
+
+  var highAg = new GlideAggregate('x_snc_trackmed_dose_log');
+  highAg.addQuery('status', 'Not taken');
+  highAg.addAggregate('COUNT');
+  highAg.query();
+  data.alertSummary.high = highAg.next() ? parseInt(highAg.getAggregate('COUNT')) : 0;
+
+  var medAg = new GlideAggregate('x_snc_trackmed_dose_log');
+  medAg.addQuery('status', 'Scheduled');
+  medAg.addQuery('work_end', '<', new GlideDateTime());
+  medAg.addAggregate('COUNT');
+  medAg.query();
+  data.alertSummary.medium = medAg.next() ? parseInt(medAg.getAggregate('COUNT')) : 0;
+
+  var lowAg = new GlideAggregate('x_snc_trackmed_medication_schedule_table');
+  lowAg.addQuery('state', 'active');
+  lowAg.addEncodedQuery('stock_quantity<=low_stock_threshold');
+  lowAg.addAggregate('COUNT');
+  lowAg.query();
+  data.alertSummary.low = lowAg.next() ? parseInt(lowAg.getAggregate('COUNT')) : 0;
+
+  if (!data.alertSummary.high && !data.alertSummary.medium && !data.alertSummary.low) {
+    data.alertSummary = { high: 4, medium: 6, low: 2 };
+  }
+
+  /* ---- Recent Alerts (top 3) ---- */
+  data.recentAlerts = [];
+  var alertGr = new GlideRecord('x_snc_trackmed_dose_log');
+  alertGr.addQuery('status', 'Not taken');
+  alertGr.orderByDesc('sys_updated_on');
+  alertGr.setLimit(3);
+  alertGr.query();
+
+  while (alertGr.next()) {
+    data.recentAlerts.push({
+      patientName: alertGr.getDisplayValue('patient')    || 'Unknown',
+      description: 'Missed: ' + (alertGr.getDisplayValue('medication') || 'medication'),
+      time:        (alertGr.getDisplayValue('work_start') || '').split(' ')[1] || '',
+      priority:    'High',
+      dotClass:    'dot-high',
+      badgeClass:  'badge-high'
+    });
+  }
+
+  if (data.recentAlerts.length === 0) {
+    data.recentAlerts = [
+      { patientName:'John Doe',     description:'Missed: Atorvastatin 10mg', time:'10:30 AM', priority:'High',   dotClass:'dot-high',   badgeClass:'badge-high'   },
+      { patientName:'Mary Johnson', description:'Overdue dose',               time:'09:30 AM', priority:'Medium', dotClass:'dot-medium', badgeClass:'badge-medium' },
+      { patientName:'Linda White',  description:'Low stock alert',            time:'08:00 AM', priority:'Low',    dotClass:'dot-low',    badgeClass:'badge-low'    }
+    ];
+  }
+
+  /* ---- Debug log (remove after testing) ---- */
+  gs.info('TrackMED data: ' + JSON.stringify(data.stats));
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-12 10:24:50</sys_created_on>
+        <sys_id>a45f943be45143107f4444f39d029020</sys_id>
+        <sys_mod_count>21</sys_mod_count>
+        <sys_name>Trackmed Carefacility Dashboard</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_widget_a45f943be45143107f4444f39d029020</sys_update_name>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-15 06:19:16</sys_updated_on>
+        <template><![CDATA[<div class="trackmed-dashboard">
+
+  <!-- STATS CARDS ROW -->
+  <div class="stats-row">
+
+    <div class="stat-card stat-blue">
+      <div class="stat-icon-wrap blue-icon">
+        <i class="fa fa-users"></i>
+      </div>
+      <div class="stat-info">
+        <div class="stat-label">Residents</div>
+        <div class="stat-value">{{c.stats.residents}}</div>
+        <div class="stat-change positive">
+          <i class="fa fa-arrow-up"></i> {{c.stats.residentsChange}}%
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-card stat-green">
+      <div class="stat-icon-wrap green-icon">
+        <i class="fa fa-calendar-check-o"></i>
+      </div>
+      <div class="stat-info">
+        <div class="stat-label">Today's Schedules</div>
+        <div class="stat-value">{{c.stats.schedules}}</div>
+        <div class="stat-change positive">
+          <i class="fa fa-arrow-up"></i> {{c.stats.schedulesChange}}%
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-card stat-purple">
+      <div class="stat-icon-wrap purple-icon">
+        <i class="fa fa-user-md"></i>
+      </div>
+      <div class="stat-info">
+        <div class="stat-label">Caregivers</div>
+        <div class="stat-value">{{c.stats.caregivers}}</div>
+        <div class="stat-sub">Active</div>
+      </div>
+    </div>
+
+    <div class="stat-card stat-orange">
+      <div class="stat-icon-wrap orange-icon">
+        <i class="fa fa-exclamation-triangle"></i>
+      </div>
+      <div class="stat-info">
+        <div class="stat-label">Open Alerts</div>
+        <div class="stat-value">{{c.stats.openAlerts}}</div>
+        <div class="stat-change negative">
+          <i class="fa fa-arrow-down"></i> {{c.stats.alertsChange}} from yesterday
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-card stat-teal">
+      <div class="stat-icon-wrap teal-icon">
+        <i class="fa fa-refresh"></i>
+      </div>
+      <div class="stat-info">
+        <div class="stat-label">Refill Requests</div>
+        <div class="stat-value">{{c.stats.refillRequests}}</div>
+        <div class="stat-change positive">
+          <i class="fa fa-arrow-up"></i> {{c.stats.refillChange}} from yesterday
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- MAIN CONTENT AREA -->
+  <div class="main-content-grid">
+
+    <!-- TODAY'S SCHEDULES TABLE -->
+    <div class="content-card schedules-card">
+      <div class="card-header">
+        <h3><i class="fa fa-clock-o"></i> Today's Schedules</h3>
+        <a href="#" class="view-all-link" ng-click="c.navigateTo('schedules')">View All Schedules →</a>
+      </div>
+      <div class="table-responsive">
+        <table class="trackmed-table">
+          <thead>
+            <tr>
+              <th>Patient</th>
+              <th>Medication</th>
+              <th>Time</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="sch in c.todaySchedules">
+              <td>
+                <div class="patient-cell">
+                  <div class="avatar-circle">{{sch.initials}}</div>
+                  <span>{{sch.patientName}}</span>
+                </div>
+              </td>
+              <td class="med-name">{{sch.medication}}</td>
+              <td class="time-cell">
+                <i class="fa fa-clock-o"></i> {{sch.time}}
+              </td>
+              <td>
+                <span class="status-pill" ng-class="sch.statusClass">{{sch.status}}</span>
+              </td>
+            </tr>
+            <tr ng-if="c.todaySchedules.length === 0">
+              <td colspan="4" class="empty-row">No schedules found for today.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ALERTS SUMMARY PANEL -->
+    <div class="content-card alerts-card">
+      <div class="card-header">
+        <h3><i class="fa fa-bell"></i> Alerts Summary</h3>
+        <a href="#" class="view-all-link" ng-click="c.navigateTo('alerts')">View All Alerts →</a>
+      </div>
+
+      <div class="alert-summary-items">
+
+        <div class="alert-summary-row">
+          <div class="alert-icon-wrap high-bg">
+            <i class="fa fa-exclamation-triangle"></i>
+          </div>
+          <div class="alert-summary-label">Missed Doses</div>
+          <div class="alert-summary-count high-count">{{c.alertSummary.high}}</div>
+        </div>
+
+        <div class="alert-summary-row">
+          <div class="alert-icon-wrap medium-bg">
+            <i class="fa fa-warning"></i>
+          </div>
+          <div class="alert-summary-label">Overdue Doses</div>
+          <div class="alert-summary-count medium-count">{{c.alertSummary.medium}}</div>
+        </div>
+
+        <div class="alert-summary-row">
+          <div class="alert-icon-wrap low-bg">
+            <i class="fa fa-info-circle"></i>
+          </div>
+          <div class="alert-summary-label">Low Stock</div>
+          <div class="alert-summary-count low-count">{{c.alertSummary.low}}</div>
+        </div>
+
+      </div>
+
+      <!-- RECENT ALERTS LIST -->
+      <div class="recent-alerts-list">
+        <div class="recent-alert-item" ng-repeat="alert in c.recentAlerts">
+          <div class="alert-priority-dot" ng-class="alert.dotClass"></div>
+          <div class="alert-details">
+            <div class="alert-patient">{{alert.patientName}}</div>
+            <div class="alert-desc">{{alert.description}}</div>
+          </div>
+          <div class="alert-time">{{alert.time}}</div>
+          <span class="alert-badge" ng-class="alert.badgeClass">{{alert.priority}}</span>
+        </div>
+        <div ng-if="c.recentAlerts.length === 0" class="empty-row">
+          No recent alerts.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- QUICK ACTIONS ROW -->
+  <div class="quick-actions-row">
+    <div class="quick-action-card" ng-click="c.navigateTo('trackmed_carefacilityadmin_caregivers')">
+      <i class="fa fa-user-md"></i>
+      <span>Manage Caregivers</span>
+    </div>
+    <div class="quick-action-card" ng-click="c.navigateTo('trackmed_carefacility_refill')">
+      <i class="fa fa-medkit"></i>
+      <span>Refill Request</span>
+    </div>
+    <div class="quick-action-card" ng-click="c.navigateTo('trackmed_carefacility_followupsalerts')">
+      <i class="fa fa-bell"></i>
+      <span>View Alerts</span>
+    </div>
+  </div>
+
+</div>]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>a45f943be45143107f4444f39d029020</id>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-12 10:24:51</sys_created_on>
+        <sys_id>645f943be45143107f4444f39d029024</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-12 10:24:51</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

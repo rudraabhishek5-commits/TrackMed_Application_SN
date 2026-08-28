@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller=function() {  /* widget controller */  var c = this;};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/* ==========================================
+   CARD
+========================================== */
+
+.tm-card{
+    background:#FFFFFF;
+    border:1px solid #E5E7EB;
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 4px 18px rgba(15,23,42,.06);
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.tm-card-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.tm-card-title{
+    margin:0;
+    font-size:18px;
+    font-weight:700;
+    color:#0F172A;
+}
+
+.tm-link{
+    text-decoration:none;
+    color:#2563EB;
+    font-size:13px;
+    font-weight:600;
+}
+
+.tm-link:hover{
+    color:#1D4ED8;
+    text-decoration:none;
+}
+
+/* ==========================================
+   TABLE
+========================================== */
+
+.tm-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.tm-table thead{
+    background:#F8FAFC;
+}
+
+.tm-table th{
+    padding:12px;
+    font-size:12px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.5px;
+    color:#64748B;
+    text-align:left;
+}
+
+.tm-table td{
+    padding:14px 12px;
+    border-top:1px solid #F1F5F9;
+    color:#0F172A;
+    font-size:13px;
+}
+
+/* ==========================================
+   ROW HOVER
+========================================== */
+
+.tm-table tbody tr{
+    transition:.2s;
+}
+
+.tm-table tbody tr:hover{
+    background:#F8FAFC;
+}
+
+/* ==========================================
+   PATIENT LINK
+========================================== */
+
+.tm-patient-link{
+    text-decoration:none;
+    color:#0F172A;
+    font-weight:600;
+}
+
+.tm-patient-link:hover{
+    color:#2563EB;
+}
+
+/* ==========================================
+   COUNT BADGES
+========================================== */
+
+.tm-count{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:34px;
+    padding:4px 8px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:700;
+}
+
+.taken-count{
+    background:#ECFDF5;
+    color:#16A34A;
+}
+
+.missed-count{
+    background:#FEF2F2;
+    color:#DC2626;
+}
+
+/* ==========================================
+   ADHERENCE PILLS
+========================================== */
+
+.tm-pill{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:70px;
+    padding:5px 12px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:700;
+}
+
+.taken{
+    background:#ECFDF5;
+    color:#16A34A;
+    border:1px solid #BBF7D0;
+}
+
+.pending{
+    background:#FFFBEB;
+    color:#D97706;
+    border:1px solid #FCD34D;
+}
+
+.missed{
+    background:#FEF2F2;
+    color:#DC2626;
+    border:1px solid #FECACA;
+}
+
+/* ==========================================
+   EMPTY STATE
+========================================== */
+
+.tm-empty{
+    text-align:center;
+    color:#64748B;
+    padding:25px !important;
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media(max-width:768px){
+
+    .tm-card{
+        overflow-x:auto;
+    }
+
+    .tm-table{
+        min-width:700px;
+    }
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>trackmed_patient_stats</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>TrackMed Patient Stats</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+    data.rows = [];
+    
+    // MANUALLY ADD FAKE DATA HERE
+    // Format: { name: "Patient Name", scheduled: X, taken: X, missed: X, adherence: X }
+    
+    var fakePatients = [
+        { name: "Nagayya", scheduled: 28, taken: 28, missed: 0, adherence: 100 },
+        { name: "Aarav Sharma", scheduled: 30, taken: 28, missed: 2, adherence: 93 },
+        { name: "Abhishek", scheduled: 25, taken: 22, missed: 3, adherence: 88 },
+        { name: "Kajal_az", scheduled: 31, taken: 29, missed: 2, adherence: 94 },
+
+    ];
+    
+    // Process the fake data
+    for (var i = 0; i < fakePatients.length; i++) {
+        var fp = fakePatients[i];
+        
+        data.rows.push({
+            name: fp.name,
+            scheduled: fp.scheduled,
+            taken: fp.taken,
+            missed: fp.missed,
+            pct: fp.adherence  // adherence percentage
+        });
+    }
+    
+    // Sort by adherence percentage (lowest to highest)
+    data.rows.sort(function(a, b) {
+        return a.pct - b.pct;
+    });
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-11 06:39:04</sys_created_on>
+        <sys_id>b30262170811c3107f44f76f9beca442</sys_id>
+        <sys_mod_count>24</sys_mod_count>
+        <sys_name>TrackMed Patient Stats</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_widget_b30262170811c3107f44f76f9beca442</sys_update_name>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-15 05:57:22</sys_updated_on>
+        <template><![CDATA[<div class="tm-card">
+
+    <div class="tm-card-head">
+        <h4 class="tm-card-title">
+            Patient Statistics — Missed Doses (This Month)
+        </h4>
+
+       
+    </div>
+
+    <div class="table-responsive">
+
+        <table class="tm-table">
+
+            <thead>
+                <tr>
+                    <th>Patient</th>
+                    <th>Scheduled</th>
+                    <th>Taken</th>
+                    <th>Missed</th>
+                    <th>Adherence</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr ng-repeat="r in data.rows">
+
+                    <td>
+                        <a class="tm-patient-link"
+                           href="?id=trackmed_patient&sys_id={{r.sys_id}}">
+                            {{r.name}}
+                        </a>
+                    </td>
+
+                    <td>{{r.scheduled}}</td>
+
+                    <td>
+                        <span class="tm-count taken-count">
+                            {{r.taken}}
+                        </span>
+                    </td>
+
+                    <td>
+                        <span class="tm-count missed-count">
+                            {{r.missed}}
+                        </span>
+                    </td>
+
+                    <td>
+
+                        <span class="tm-pill"
+                              ng-class="{
+                              'taken'  : r.pct >= 90,
+                              'pending': r.pct >= 70 && r.pct < 90,
+                              'missed' : r.pct < 70
+                              }">
+
+                            {{r.pct}}%
+
+                        </span>
+
+                    </td>
+
+                </tr>
+
+                <tr ng-if="!data.rows.length">
+                    <td colspan="5" class="tm-empty">
+                        No dose records found
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>b30262170811c3107f44f76f9beca442</id>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-11 06:39:04</sys_created_on>
+        <sys_id>370262170811c3107f44f76f9beca445</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-11 06:39:04</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

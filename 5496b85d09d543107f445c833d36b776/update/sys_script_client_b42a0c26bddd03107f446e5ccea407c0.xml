@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description/>
+        <field>x_snc_trackmed_user_type</field>
+        <global>true</global>
+        <isolate_script>true</isolate_script>
+        <messages/>
+        <name>Hidefields</name>
+        <order/>
+        <script><![CDATA[function onChange(control, oldValue, newValue, isLoading) {
+
+    if (isLoading || newValue == '')
+        return;
+
+    var allFields = [
+        'department',
+        'user_password',
+        'password_needs_reset',
+        'locked_out',
+        'x_snc_trackmed_d_guardian_name',
+        'x_snc_trackmed_d_doctor_name',
+        'x_snc_trackmed_d_pateint_name',
+        'x_snc_trackmed_d_caregiver_name',
+        'x_snc_trackmed_d_rel_care_pat',
+        'x_snc_trackmed_d_care_facili_centre',
+        'company'
+    ];
+
+    // Make all fields visible first
+    for (var i = 0; i < allFields.length; i++) {
+        g_form.setVisible(allFields[i], true);
+    }
+
+    // Hospital Supervisor
+    if (newValue == 'hospital_admin') {
+
+        hideFields([
+            'department',
+            'user_password',
+            'password_needs_reset',
+            'locked_out',
+            'x_snc_trackmed_d_guardian_name',
+            'x_snc_trackmed_d_doctor_name',
+            'x_snc_trackmed_d_pateint_name',
+            'x_snc_trackmed_d_caregiver_name',
+            'x_snc_trackmed_d_rel_care_pat',
+            'x_snc_trackmed_d_care_facili_centre'
+        ]);
+
+    }
+
+    // Care Facility Supervisor
+    else if (newValue == 'organization_admin') {
+
+        hideFields([
+            'department',
+            'user_password',
+            'password_needs_reset',
+            'locked_out',
+            'x_snc_trackmed_d_guardian_name',
+            'x_snc_trackmed_d_doctor_name',
+            'x_snc_trackmed_d_pateint_name',
+            'x_snc_trackmed_d_caregiver_name',
+            'x_snc_trackmed_d_rel_care_pat',
+            'x_snc_trackmed_d_care_facili_centre'
+        ]);
+
+    }
+
+    // Doctor
+    else if (newValue == 'doctor') {
+
+        hideFields([
+            'department',
+            'user_password',
+            'password_needs_reset',
+            'locked_out',
+            'x_snc_trackmed_d_guardian_name',
+            'x_snc_trackmed_d_doctor_name',
+            'x_snc_trackmed_d_pateint_name',
+            'x_snc_trackmed_d_caregiver_name',
+            'x_snc_trackmed_d_rel_care_pat',
+            'x_snc_trackmed_d_care_facili_centre'
+        ]);
+
+    }
+
+    // Pharmacist
+    else if (newValue == 'pharmacist') {
+
+        hideFields([
+            'department',
+            'user_password',
+            'password_needs_reset',
+            'locked_out',
+            'x_snc_trackmed_d_guardian_name',
+            'x_snc_trackmed_d_pateint_name',
+            'x_snc_trackmed_d_caregiver_name',
+            'x_snc_trackmed_d_rel_care_pat',
+            'x_snc_trackmed_d_care_facili_centre',
+            'x_snc_trackmed_d_doctor_name'
+        ]);
+
+    }
+
+    // Caretaker
+    else if (newValue == 'care_taker') {
+
+        hideFields([
+            'department',
+            'user_password',
+            'password_needs_reset',
+            'locked_out',
+            'x_snc_trackmed_d_guardian_name',
+            'x_snc_trackmed_d_doctor_name',
+            'x_snc_trackmed_d_caregiver_name',
+            'x_snc_trackmed_d_rel_care_pat',
+            'x_snc_trackmed_d_care_facili_centre'
+        ]);
+
+    }
+
+    // Guardian
+    else if (newValue == 'guardian') {
+
+        hideFields([
+            'department',
+            'user_password',
+            'password_needs_reset',
+            'locked_out',
+		   'x_snc_trackmed_d_caregiver_name',
+
+            'x_snc_trackmed_d_guardian_name',
+            'x_snc_trackmed_d_doctor_name'
+        ]);
+
+    }
+
+    // Helper Function
+    function hideFields(fields) {
+
+        for (var j = 0; j < fields.length; j++) {
+            g_form.setVisible(fields[j], false);
+        }
+
+        // Refresh form layout if supported
+        if (typeof g_form.layoutSections === 'function') {
+            g_form.layoutSections();
+        }
+    }
+
+}]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-08 16:34:27</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>b42a0c26bddd03107f446e5ccea407c0</sys_id>
+        <sys_mod_count>12</sys_mod_count>
+        <sys_name>Hidefields</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sys_script_client_b42a0c26bddd03107f446e5ccea407c0</sys_update_name>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-08 18:39:54</sys_updated_on>
+        <table>sys_user</table>
+        <type>onChange</type>
+        <ui_type>0</ui_type>
+        <view/>
+    </sys_script_client>
+</record_update>

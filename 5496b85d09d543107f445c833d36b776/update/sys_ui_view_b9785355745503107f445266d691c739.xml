@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_view">
+    <sys_ui_view action="INSERT_OR_UPDATE">
+        <group/>
+        <hidden>false</hidden>
+        <name>Hosp_CM</name>
+        <roles/>
+        <sys_class_name>sys_ui_view</sys_class_name>
+        <sys_created_by>meghanaa.penumetsa</sys_created_by>
+        <sys_created_on>2026-06-05 05:28:56</sys_created_on>
+        <sys_id>b9785355745503107f445266d691c739</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Hosp_CM</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sys_ui_view_b9785355745503107f445266d691c739</sys_update_name>
+        <sys_updated_by>abhishek.pathak</sys_updated_by>
+        <sys_updated_on>2026-06-06 16:55:31</sys_updated_on>
+        <title>Hosp_CM</title>
+        <user/>
+    </sys_ui_view>
+</record_update>

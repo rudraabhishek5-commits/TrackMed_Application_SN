@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function() {
+
+    var c = this;
+
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.tm-schedule-card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,.08);
+}
+
+.card-header {
+    margin-bottom: 20px;
+}
+
+.card-header h3 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.card-header p {
+    margin: 5px 0 0;
+    color: #6b7280;
+}
+
+.tm-table {
+    width: 100%;
+}
+
+.tm-table thead th {
+    background: #f8fafc;
+    color: #64748b;
+    padding: 14px;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.tm-table td {
+    padding: 16px;
+    border-bottom: 1px solid #edf2f7;
+    vertical-align: middle;
+}
+
+.tm-table tbody tr:hover {
+    background: #f8fafc;
+}
+
+.patient-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #14b8a6;
+    color: #fff;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.patient-name {
+    font-weight: 600;
+}
+
+.status-badge {
+    padding: 7px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    min-width: 90px;
+    display: inline-block;
+    text-align: center;
+}
+
+.scheduled {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.taken {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.nottaken {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.text-success {
+    color: #10b981;
+    font-size: 20px;
+}
+
+.text-danger {
+    color: #ef4444;
+    font-size: 20px;
+}
+
+.empty-row {
+    text-align: center;
+    color: #64748b;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>trackmed_cargiver_schedule</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>Trackmed Cargiver Schedule</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    data.schedules = [];
+    data.total = 0;
+
+    var start = gs.beginningOfToday();
+    var end = gs.endOfToday();
+
+    var gr = new GlideRecord('x_snc_trackmed_dose_log');
+
+    // Show all records for admins
+    if (!gs.hasRole('x_snc_trackmed.admin')) {
+        gr.addQuery('care_taker', gs.getUserID());
+    }
+
+    gr.addQuery('work_start', '>=', start);
+    gr.addQuery('work_start', '<=', end);
+
+    gr.orderBy('work_start');
+    gr.query();
+
+    while (gr.next()) {
+
+        var patientName = gr.patient.getDisplayValue() || '';
+
+        data.schedules.push({
+            patient: patientName,
+            medication: gr.medication.getDisplayValue(),
+            work_start: gr.work_start.getDisplayValue(),
+            status: gr.status.getDisplayValue(),
+            confirmed: gr.caregiver_confirmed == true,
+            initials: patientName ? patientName.charAt(0).toUpperCase() : '',
+            caregiver: gr.care_taker.getDisplayValue()
+        });
+
+        data.total++;
+    }
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>vignesh.pitchai</sys_created_by>
+        <sys_created_on>2026-06-13 18:37:20</sys_created_on>
+        <sys_id>aca9174459a503107f44615fbac43e5f</sys_id>
+        <sys_mod_count>10</sys_mod_count>
+        <sys_name>Trackmed Cargiver Schedule</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_widget_aca9174459a503107f44615fbac43e5f</sys_update_name>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-17 06:43:04</sys_updated_on>
+        <template><![CDATA[<div class="tm-schedule-card">
+
+    <div class="card-header">
+        <div>
+            <h3>Today's Dose Schedule</h3>
+            <p>{{c.data.total}} Records Found</p>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+
+        <table class="table tm-table">
+
+            <thead>
+                <tr>
+                    <th>Patient</th>
+                    <th>Medication</th>
+                    <th>Schedule Time</th>
+                    <th>Status</th>
+                    <th>Confirmed</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr ng-repeat="item in c.data.schedules">
+
+                    <td>
+                        <div class="patient-info">
+                            <div class="avatar">
+                                {{item.initials}}
+                            </div>
+
+                            <div class="patient-name">
+                                {{item.patient}}
+                            </div>
+                        </div>
+                    </td>
+
+                    <td>
+                        {{item.medication}}
+                    </td>
+
+                    <td>
+                        {{item.work_start}}
+                    </td>
+
+                    <td>
+                        <span class="status-badge"
+
+                              ng-class="{
+                                'scheduled': item.status == 'Scheduled',
+                                'taken': item.status == 'Taken',
+                                'nottaken': item.status == 'Not Taken'
+                              }">
+
+                            {{item.status}}
+
+                        </span>
+                    </td>
+
+                    <td class="text-center">
+
+                        <i class="fa fa-check-circle text-success"
+                           ng-if="item.confirmed"></i>
+
+                        <i class="fa fa-times-circle text-danger"
+                           ng-if="!item.confirmed"></i>
+
+                    </td>
+
+                </tr>
+
+                <tr ng-if="c.data.total == 0">
+                    <td colspan="5" class="empty-row">
+                        No records found
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>aca9174459a503107f44615fbac43e5f</id>
+        <sys_created_by>vignesh.pitchai</sys_created_by>
+        <sys_created_on>2026-06-13 18:37:20</sys_created_on>
+        <sys_id>2ca9174459a503107f44615fbac43e64</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>vignesh.pitchai</sys_updated_by>
+        <sys_updated_on>2026-06-13 18:37:20</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

@@ -1,0 +1,770 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function($scope, $timeout) {
+
+  var c = this;
+
+  c.$onInit = function() {
+
+    $timeout(function() {
+
+      // Scroll reveal animation
+      var els = document.querySelectorAll('.trackmed-landing .reveal');
+
+      if ('IntersectionObserver' in window) {
+
+        var io = new IntersectionObserver(function(entries) {
+
+          entries.forEach(function(entry) {
+
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in');
+              io.unobserve(entry.target);
+            }
+
+          });
+
+        }, {
+          threshold: 0.15
+        });
+
+        els.forEach(function(el) {
+          io.observe(el);
+        });
+
+      } else {
+
+        els.forEach(function(el) {
+          el.classList.add('in');
+        });
+
+      }
+
+      // Smooth scrolling for section links
+      document.querySelectorAll('.trackmed-landing a[href^="#"]').forEach(function(a) {
+
+        a.addEventListener('click', function(ev) {
+
+          var id = a.getAttribute('href');
+
+          if (id.length > 1) {
+
+            var target = document.querySelector(id);
+
+            if (target) {
+              ev.preventDefault();
+              target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+              });
+            }
+          }
+
+        });
+
+      });
+
+    }, 0);
+
+  };
+
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/* ====== ROOT ====== */
+.trackmed-landing {
+  --navy-deep: #041A3D;
+  --navy: #0a2452;
+  --primary: #2563EB;
+  --primary-glow: #4F46E5;
+  --accent: #0EA5E9;
+  --success: #22c55e;
+  --fg: #f8fafc;
+  --muted: #94a3b8;
+  --border: rgba(255,255,255,0.10);
+  --card-bg: rgba(255,255,255,0.05);
+  --shadow-glow: 0 20px 60px -20px rgba(37,99,235,0.55);
+  --grad-text: linear-gradient(135deg,#fff 0%,#cfe2ff 50%,#a5b4fc 100%);
+  --grad-cta: linear-gradient(135deg,#2563EB,#4F46E5);
+
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+
+  background: var(--navy-deep);
+  color: var(--fg);
+
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.trackmed-landing *,
+.trackmed-landing *:before,
+.trackmed-landing *:after {
+  box-sizing: border-box;
+}
+
+/* ====== BACKGROUND ====== */
+.trackmed-landing .bg-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      60% 50% at 80% -10%,
+      rgba(79,70,229,0.25),
+      transparent 60%
+    ),
+    radial-gradient(
+      50% 40% at 0% 30%,
+      rgba(37,99,235,0.20),
+      transparent 60%
+    ),
+    var(--navy-deep);
+}
+.bg-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  animation: gridPan 12s linear infinite;
+  opacity: 0.6;
+}
+.bg-glow {
+  position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+  width: 900px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(37,99,235,0.35), transparent 70%);
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+.bg-scan {
+  position: absolute; left: 0; right: 0; height: 1px;
+  background: linear-gradient(to right, transparent, rgba(14,165,233,0.8), transparent);
+  animation: scan 6s linear infinite;
+}
+.star {
+  position: absolute; width: 4px; height: 4px; border-radius: 50%;
+  background: #fff; box-shadow: 0 0 12px #fff;
+  animation: twinkle 3s ease-in-out infinite;
+}
+.star.s1 { top: 12%; left: 15%; animation-delay: 0s; }
+.star.s2 { top: 22%; right: 18%; background: var(--accent); box-shadow:0 0 14px var(--accent); animation-delay: .6s; }
+.star.s3 { top: 60%; left: 8%; animation-delay: 1.2s; }
+.star.s4 { top: 75%; right: 12%; background: var(--primary-glow); box-shadow:0 0 14px var(--primary-glow); animation-delay: 1.8s; }
+.star.s5 { top: 40%; left: 50%; animation-delay: 2.4s; }
+
+/* ====== NAV ====== */
+.trackmed-landing .nav {
+  position: sticky; top: 0; z-index: 50; padding: 16px 0;
+  backdrop-filter: blur(18px);
+  background: rgba(4,26,61,0.7);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 32px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  min-height:90px;
+}
+.logo { display: flex; align-items: center; gap: 8px; font-weight: 700; }
+.logo-mark {
+  display: grid; place-items: center; width: 28px; height: 28px;
+  background: var(--grad-cta); border-radius: 8px; color: #fff;
+  box-shadow: 0 0 20px rgba(37,99,235,0.6);
+}
+.logo-img {
+  height: 120px;
+  width: auto;
+  display: block;
+}
+
+/* Footer logo now matches the header logo size exactly (was 40px) */
+.footer .logo-img {
+  height: 120px;
+}
+.logo-text { font-size: 18px; letter-spacing: -.02em; }
+.nav-links { display: flex; gap: 28px; }
+.nav-links a { color: var(--muted); font-size: 14px; transition: color .2s; }
+.nav-links a:hover { color: var(--fg); }
+@media (max-width: 768px){ .nav-links{display:none;} }
+
+/* ====== BUTTONS ====== */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 10px 18px; border-radius: 12px;
+  font-size: 14px; font-weight: 600; cursor: pointer;
+  transition: transform .2s, filter .2s, background .2s;
+}
+.btn-primary {
+  background: var(--grad-cta); color: #fff;
+  box-shadow: var(--shadow-glow);
+}
+.btn-primary:hover { transform: translateY(-1px); filter: brightness(1.1); }
+.btn-ghost {
+  background: rgba(255,255,255,0.05); color: var(--fg);
+  border: 1px solid var(--border); backdrop-filter: blur(8px);
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.1); }
+.btn-lg { padding: 14px 28px; font-size: 16px; }
+
+/* ====== HERO ====== */
+.hero { position: relative; z-index: 1; padding: 120px 24px 80px; max-width: 1200px; margin: 0 auto; }
+.hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+@media (max-width: 900px){ .hero-grid { grid-template-columns: 1fr; } }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 12px; border-radius: 999px;
+  background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+  color: var(--muted); font-size: 12px;
+}
+.hero-copy h1 {
+  margin-top: 20px;
+  font-size: clamp(36px, 5vw, 60px); font-weight: 700;
+  line-height: 1.05; letter-spacing: -.03em;
+}
+.grad {
+  background: var(--grad-text); -webkit-background-clip: text;
+  background-clip: text; color: transparent;
+}
+.soft { color: rgba(248,250,252,0.9); }
+.hero-copy p { margin-top: 20px; color: var(--muted); font-size: 17px; line-height: 1.6; max-width: 540px; }
+.hero-cta { margin-top: 28px; display: flex; gap: 12px; flex-wrap: wrap; }
+.trust { margin-top: 32px; display: flex; gap: 24px; flex-wrap: wrap; color: var(--muted); font-size: 12px; }
+
+/* Illustration */
+.hero-illu {
+  position: relative;
+  height: 480px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.hero,
+.section,
+.cta,
+.footer,
+.nav {
+  width: 100%;
+  max-width: 100%;
+}
+.ring { position: absolute; border: 1px solid var(--border); border-radius: 50%; }
+.r1 { width: 380px; height: 380px; }
+.r2 { width: 280px; height: 280px; border-color: rgba(255,255,255,0.05); }
+.shield {
+  position: relative; z-index: 2;
+  width: 200px; height: 240px;
+  background: linear-gradient(160deg, var(--primary), var(--primary-glow));
+  clip-path: path('M100 0 L200 40 L200 140 Q200 220 100 240 Q0 220 0 140 L0 40 Z');
+  display: grid; place-items: center;
+  box-shadow: 0 30px 80px rgba(37,99,235,0.6);
+  animation: float 6s ease-in-out infinite;
+}
+.shield-cross { font-size: 80px; color: #fff; font-weight: 300; line-height: 1; }
+.pill {
+  position: absolute; width: 40px; height: 12px; border-radius: 999px;
+  animation: float 6s ease-in-out infinite;
+}
+.p1 { top: 10%; left: 10%; background: var(--primary); box-shadow: 0 0 20px var(--primary); }
+.p2 { top: 20%; right: 8%; background: var(--accent); box-shadow: 0 0 20px var(--accent); animation-delay: 1.2s; }
+.p3 { bottom: 22%; left: 12%; background: var(--success); box-shadow: 0 0 20px var(--success); animation-delay: .8s; }
+.p4 { bottom: 14%; right: 10%; background: #ec4899; box-shadow: 0 0 20px #ec4899; animation-delay: 2s; }
+
+.float-card {
+  position: absolute; z-index: 3;
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 14px; border-radius: 14px;
+  background: rgba(255,255,255,0.08); backdrop-filter: blur(18px);
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 40px -15px rgba(0,0,0,0.6);
+}
+.fc-top { top: 30px; left: 20px; }
+.fc-bot { bottom: 40px; right: 20px; }
+.ic { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 10px; font-size: 16px; }
+.ic-green { background: rgba(34,197,94,0.15); color: var(--success); }
+.ic-blue { background: rgba(37,99,235,0.2); color: var(--accent); }
+.ic-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+.ic-value { font-size: 14px; font-weight: 600; }
+
+/* ====== HERO HEARTS (background only, section 1) ====== */
+/* Simple floating, transparent (outline-only) hearts with a heartbeat line inside.
+   Confined to .hero, sitting behind the text/illustration via z-index 0. */
+.hero-hearts {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  perspective: 900px;
+}
+.float-heart {
+  position: absolute;
+  transform-style: preserve-3d;
+  animation-name: heartFloat3D;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+.float-heart svg { width: 100%; height: auto; display: block; overflow: visible; }
+.heart-outline {
+  fill: none;
+  stroke: rgba(255,255,255,0.22);
+  stroke-width: 3;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.heart-pulse-line {
+  fill: none;
+  stroke: rgba(255,255,255,0.55);
+  stroke-width: 2.4;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  animation: heartbeatPulse 1.8s ease-in-out infinite;
+}
+
+.fh1 { top: 6%;  left: 4%;  width: 64px; opacity: .50; animation-duration: 7s;   animation-delay: 0s; }
+.fh2 { top: 60%; left: 10%; width: 42px; opacity: .35; animation-duration: 8s;   animation-delay: 1.2s; }
+.fh3 { top: 14%; left: 50%; width: 34px; opacity: .30; animation-duration: 6.5s; animation-delay: .6s; }
+.fh4 { top: 74%; left: 46%; width: 50px; opacity: .40; animation-duration: 9s;   animation-delay: 2s; }
+.fh5 { top: 32%; left: 90%; width: 56px; opacity: .45; animation-duration: 7.5s; animation-delay: 1.6s; }
+.fh6 { top: 45%; left: 25%; width: 38px; opacity: .35; animation-duration: 7.8s; animation-delay: .4s; }
+.fh7 { top: 8%;  left: 72%; width: 46px; opacity: .42; animation-duration: 8.6s; animation-delay: 2.4s; }
+.fh8 { top: 85%; left: 15%; width: 40px; opacity: .33; animation-duration: 7.2s; animation-delay: 1.8s; }
+
+
+@media (max-width: 560px){
+  .fh3, .fh5 { display: none; }
+}
+
+/* ====== HERO CORNER CLOCK (section 1 only, not the header) ====== */
+/* A clock face anchored so its center sits exactly on the section's
+   top-right corner — only one quarter of the dial is visible, and the
+   hands keep moving to read as a live "status" widget. */
+.hero-clock-wrap {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 180px;
+  height: 180px;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+}
+.hero-clock { position: absolute; top: -180px; right: -180px; width: 360px; height: 360px; }
+.clock-hand { transform-box: view-box; transform-origin: 90px 90px; }
+.hand-min { animation: clockSpin 30s linear infinite; }
+.hand-sec { animation: clockSpin 6s linear infinite; }
+
+@media (max-width: 768px){
+  .hero-clock-wrap { width: 60px; height: 60px; }
+  .hero-clock { top: -60px; right: -60px; width: 120px; height: 120px; }
+}
+
+/* ====== SECTIONS ====== */
+.section { position: relative; z-index: 1; padding: 80px 24px; max-width: 1200px; margin: 0 auto; }
+.section-head { text-align: center; margin-bottom: 48px; }
+.section-head h2 { margin-top: 12px; font-size: clamp(28px, 4vw, 42px); font-weight: 700; letter-spacing: -.02em; }
+.section-head p { margin-top: 12px; color: var(--muted); }
+
+.grid-3, .grid-4, .grid-5 { display: grid; gap: 20px; }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-5 { grid-template-columns: repeat(5, 1fr); }
+@media (max-width: 900px){
+  .grid-3, .grid-4, .grid-5 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px){
+  .grid-3, .grid-4, .grid-5 { grid-template-columns: 1fr; }
+}
+
+.card {
+  padding: 24px; border-radius: 18px;
+  background: var(--card-bg); border: 1px solid var(--border);
+  backdrop-filter: blur(18px);
+  transition: transform .3s, border-color .3s, box-shadow .3s;
+}
+.card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(37,99,235,0.4);
+  box-shadow: 0 20px 50px -20px rgba(37,99,235,0.4);
+}
+.card-ic {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: rgba(37,99,235,0.15); color: var(--accent);
+  display: grid; place-items: center; font-size: 20px;
+  margin-bottom: 16px;
+}
+.card h3 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+.card p { color: var(--muted); font-size: 14px; line-height: 1.5; }
+
+/* ====== CTA ====== */
+.cta { position: relative; z-index: 1; padding: 80px 24px; }
+.cta-inner {
+  max-width: 900px; margin: 0 auto; padding: 60px 40px;
+  text-align: center; border-radius: 24px;
+  background: var(--grad-cta);
+  box-shadow: var(--shadow-glow);
+}
+.cta-inner h2 { font-size: clamp(28px, 4vw, 40px); font-weight: 700; }
+.cta-inner p { margin: 16px 0 28px; color: rgba(255,255,255,0.85); }
+/* Pale green so the button reads clearly against the blue gradient (was white/invisible) */
+.cta-inner .btn-primary { background: #BBF7D0; color: #065F46; }
+.cta-inner .btn-primary:hover { background: #A7F3C8; }
+
+/* ====== FOOTER ====== */
+.footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 32px 24px; }
+.footer-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+  color: var(--muted); font-size: 14px;
+}
+.footer-links { display: flex; gap: 20px; }
+.footer-links a:hover { color: var(--fg); }
+
+/* ====== ANIMATIONS ====== */
+@keyframes float {
+  0%,100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-14px) rotate(3deg); }
+}
+@keyframes pulseGlow {
+  0%,100% { opacity: .55; transform: translateX(-50%) scale(1); }
+  50% { opacity: .9; transform: translateX(-50%) scale(1.06); }
+}
+@keyframes gridPan {
+  0% { background-position: 0 0; }
+  100% { background-position: 48px 48px; }
+}
+@keyframes scan {
+  0% { top: -5%; opacity: 0; }
+  10% { opacity: .6; }
+  100% { top: 105%; opacity: 0; }
+}
+@keyframes twinkle {
+  0%,100% { opacity: .2; }
+  50% { opacity: 1; }
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.reveal { opacity: 0; }
+.reveal.in { animation: rise .7s ease-out forwards; }
+
+/* Floating 3D heart bob/tilt (hero background) */
+@keyframes heartFloat3D {
+  0%,100% { transform: translateY(0)    rotateX(0deg)  rotateY(0deg)   scale(1); }
+  25%     { transform: translateY(-16px) rotateX(8deg)  rotateY(16deg) scale(1.05); }
+  50%     { transform: translateY(3px)   rotateX(-6deg) rotateY(-10deg) scale(.97); }
+  75%     { transform: translateY(-10px) rotateX(6deg)  rotateY(10deg) scale(1.03); }
+}
+/* Heartbeat line glow/thickness pulse, inside each heart */
+@keyframes heartbeatPulse {
+  0%,100% { opacity: .45; stroke-width: 2; }
+  15%     { opacity: 1;   stroke-width: 3; }
+  30%     { opacity: .45; stroke-width: 2; }
+  45%     { opacity: .85; stroke-width: 2.6; }
+  60%     { opacity: .45; stroke-width: 2; }
+}
+/* Corner clock hands */
+@keyframes clockSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+html,
+body,
+.container,
+.container-fluid,
+.row,
+.col-md-12 {
+  overflow-x: hidden !important;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>megha_landing_widget</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>megha_landing_widget</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+  data.brand = 'TrackMED';
+  data.year = new GlideDateTime().getYearLocalTime();
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>meghanaa.penumetsa</sys_created_by>
+        <sys_created_on>2026-06-12 09:44:23</sys_created_on>
+        <sys_id>b30698f3e41143107f4444f39d029021</sys_id>
+        <sys_mod_count>44</sys_mod_count>
+        <sys_name>megha_landing_widget</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_widget_b30698f3e41143107f4444f39d029021</sys_update_name>
+        <sys_updated_by>navata.sri</sys_updated_by>
+        <sys_updated_on>2026-06-17 09:46:53</sys_updated_on>
+        <template><![CDATA[<div class="trackmed-landing">
+  <!-- Animated background -->
+  <div class="bg-layer">
+    <div class="bg-grid"></div>
+    <div class="bg-glow"></div>
+    <div class="bg-scan"></div>
+    <span class="star s1"></span>
+    <span class="star s2"></span>
+    <span class="star s3"></span>
+    <span class="star s4"></span>
+    <span class="star s5"></span>
+  </div>
+
+  <!-- Navbar -->
+  <header class="nav">
+    <div class="nav-inner">
+      <div class="logo">
+        <!--<span class="logo-mark">+</span>-->
+        <!--<span class="logo-text">TrackMED</span>-->
+        <img src="/trackmed_logo.png" alt="TrackMED Logo" class="logo-img">
+      </div>
+      <nav class="nav-links">
+        <a href="#solution">Solution</a>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#who">Who it's for</a>
+        <a href="#how">How it works</a>
+      </nav>
+      <a href="/trackmed?id=trackmed_login" class="btn btn-primary">Login →</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+
+    <!-- Floating transparent 3D hearts (background, section 1 only) -->
+    <div class="hero-hearts" aria-hidden="true">
+      <div class="float-heart fh1">
+        <svg viewBox="0 0 100 90">
+          <path class="heart-outline" d="M50 82 C50 82 8 56 8 30 C8 12 24 4 38 12 C44 16 50 24 50 30 C50 24 56 16 62 12 C76 4 92 12 92 30 C92 56 50 82 50 82 Z"/>
+          <polyline class="heart-pulse-line" points="18,42 36,42 43,22 51,62 59,42 82,42"/>
+        </svg>
+      </div>
+      <div class="float-heart fh2">
+        <svg viewBox="0 0 100 90">
+          <path class="heart-outline" d="M50 82 C50 82 8 56 8 30 C8 12 24 4 38 12 C44 16 50 24 50 30 C50 24 56 16 62 12 C76 4 92 12 92 30 C92 56 50 82 50 82 Z"/>
+          <polyline class="heart-pulse-line" points="18,42 36,42 43,22 51,62 59,42 82,42"/>
+        </svg>
+      </div>
+      <div class="float-heart fh3">
+        <svg viewBox="0 0 100 90">
+          <path class="heart-outline" d="M50 82 C50 82 8 56 8 30 C8 12 24 4 38 12 C44 16 50 24 50 30 C50 24 56 16 62 12 C76 4 92 12 92 30 C92 56 50 82 50 82 Z"/>
+          <polyline class="heart-pulse-line" points="18,42 36,42 43,22 51,62 59,42 82,42"/>
+        </svg>
+      </div>
+      <div class="float-heart fh4">
+        <svg viewBox="0 0 100 90">
+          <path class="heart-outline" d="M50 82 C50 82 8 56 8 30 C8 12 24 4 38 12 C44 16 50 24 50 30 C50 24 56 16 62 12 C76 4 92 12 92 30 C92 56 50 82 50 82 Z"/>
+          <polyline class="heart-pulse-line" points="18,42 36,42 43,22 51,62 59,42 82,42"/>
+        </svg>
+      </div>
+      <div class="float-heart fh5">
+        <svg viewBox="0 0 100 90">
+          <path class="heart-outline" d="M50 82 C50 82 8 56 8 30 C8 12 24 4 38 12 C44 16 50 24 50 30 C50 24 56 16 62 12 C76 4 92 12 92 30 C92 56 50 82 50 82 Z"/>
+          <polyline class="heart-pulse-line" points="18,42 36,42 43,22 51,62 59,42 82,42"/>
+        </svg>
+      </div>
+    </div>
+<div class="float-heart fh6">
+  <svg viewBox="0 0 100 90">
+    <path class="heart-outline" d="M50 82 C50 82 8 56 8 30 C8 12 24 4 38 12 C44 16 50 24 50 30 C50 24 56 16 62 12 C76 4 92 12 92 30 C92 56 50 82 50 82 Z"/>
+    <polyline class="heart-pulse-line" points="18,42 36,42 43,22 51,62 59,42 82,42"/>
+  </svg>
+</div>
+<div class="float-heart fh7">
+  <svg viewBox="0 0 100 90">
+    <path class="heart-outline" d="M50 82 C50 82 8 56 8 30 C8 12 24 4 38 12 C44 16 50 24 50 30 C50 24 56 16 62 12 C76 4 92 12 92 30 C92 56 50 82 50 82 Z"/>
+    <polyline class="heart-pulse-line" points="18,42 36,42 43,22 51,62 59,42 82,42"/>
+  </svg>
+</div>
+<div class="float-heart fh8">
+  <svg viewBox="0 0 100 90">
+    <path class="heart-outline" d="M50 82 C50 82 8 56 8 30 C8 12 24 4 38 12 C44 16 50 24 50 30 C50 24 56 16 62 12 C76 4 92 12 92 30 C92 56 50 82 50 82 Z"/>
+    <polyline class="heart-pulse-line" points="18,42 36,42 43,22 51,62 59,42 82,42"/>
+  </svg>
+</div>
+
+    <!-- 1/4 corner clock, top-right of section 1 only (not the header) -->
+    <div class="hero-clock-wrap" aria-hidden="true">
+      <svg class="hero-clock" viewBox="0 0 180 180">
+        <circle cx="90" cy="90" r="84" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+        <g stroke="rgba(255,255,255,0.25)" stroke-width="2" stroke-linecap="round">
+          <line x1="90" y1="10" x2="90" y2="20" transform="rotate(0 90 90)"/>
+          <line x1="90" y1="10" x2="90" y2="20" transform="rotate(30 90 90)"/>
+          <line x1="90" y1="10" x2="90" y2="20" transform="rotate(60 90 90)"/>
+          <line x1="90" y1="10" x2="90" y2="20" transform="rotate(90 90 90)"/>
+          <line x1="90" y1="10" x2="90" y2="20" transform="rotate(120 90 90)"/>
+          <line x1="90" y1="10" x2="90" y2="20" transform="rotate(150 90 90)"/>
+          <line x1="90" y1="10" x2="90" y2="20" transform="rotate(180 90 90)"/>
+          <line x1="90" y1="10" x2="90" y2="20" transform="rotate(210 90 90)"/>
+          <line x1="90" y1="10" x2="90" y2="20" transform="rotate(240 90 90)"/>
+          <line x1="90" y1="10" x2="90" y2="20" transform="rotate(270 90 90)"/>
+          <line x1="90" y1="10" x2="90" y2="20" transform="rotate(300 90 90)"/>
+          <line x1="90" y1="10" x2="90" y2="20" transform="rotate(330 90 90)"/>
+        </g>
+        <line class="clock-hand hand-hour" x1="90" y1="90" x2="90" y2="55" stroke="rgba(255,255,255,0.55)" stroke-width="3.5" stroke-linecap="round" transform="rotate(300 90 90)"/>
+        <line class="clock-hand hand-min" x1="90" y1="90" x2="90" y2="38" stroke="rgba(255,255,255,0.65)" stroke-width="2.4" stroke-linecap="round"/>
+        <line class="clock-hand hand-sec" x1="90" y1="90" x2="90" y2="28" stroke="var(--accent)" stroke-width="1.4" stroke-linecap="round"/>
+        <circle cx="90" cy="90" r="3.5" fill="rgba(255,255,255,0.7)"/>
+      </svg>
+    </div>
+
+    <div class="hero-grid">
+      <div class="hero-copy reveal">
+        <span class="eyebrow">✦ Built for modern care facilities</span>
+        <h1>
+          <span class="grad">Smarter Medication Management</span>
+          <span class="soft">for Modern Care Facilities</span>
+        </h1>
+        <p>
+        Care that sees the person, not the chart.
+				Every record is a life entrusted to you.
+				TrackMED gives your team the clarity to honour that trust every single day.
+        </p>
+        <div class="hero-cta">
+          <a href="/trackmed?id=trackmed_login" class="btn btn-primary">Login →</a>
+          <a href="#solution" class="btn btn-ghost">Learn More</a>
+        </div>
+        <div class="trust">
+          <span>]]>🛡<![CDATA[ HIPAA-aligned</span>
+          <span>✓ 99.9% uptime</span>
+          <span>♥ Trusted by care teams</span>
+          <span>]]>💊<![CDATA[ Medication adherence</span>
+        </div>
+      </div>
+
+      <div class="hero-illu">
+        <div class="ring r1"></div>
+        <div class="ring r2"></div>
+        <div class="shield">
+          <div class="shield-cross">+</div>
+        </div>
+        <span class="pill p1"></span>
+        <span class="pill p2"></span>
+        <span class="pill p3"></span>
+        <span class="pill p4"></span>
+
+        <div class="float-card fc-top">
+          <div class="ic ic-green">✓</div>
+          <div>
+            <div class="ic-label">Adherence</div>
+            <div class="ic-value">98.2%</div>
+          </div>
+        </div>
+        <div class="float-card fc-bot">
+          <div class="ic ic-blue">]]>🔔<![CDATA[</div>
+          <div>
+            <div class="ic-label">Alerts today</div>
+            <div class="ic-value">3 resolved</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Challenges -->
+  <section id="solution" class="section">
+    <div class="section-head reveal">
+      <span class="eyebrow">The reality on the floor</span>
+      <h2>Care teams are stretched thin</h2>
+      <p>The day-to-day challenges that put residents and your license at risk.</p>
+    </div>
+    <div class="grid-5">
+      <div class="card reveal"><div class="card-ic">⏰</div><h3>Missed Doses</h3><p>Late or forgotten administrations put residents at risk.</p></div>
+      <div class="card reveal"><div class="card-ic">]]>📋<![CDATA[</div><h3>Manual Tracking</h3><p>Paper MARs and spreadsheets that lose context.</p></div>
+      <div class="card reveal"><div class="card-ic">]]>📦<![CDATA[</div><h3>Inventory Shortages</h3><p>Running out at the worst possible moment.</p></div>
+      <div class="card reveal"><div class="card-ic">]]>💬<![CDATA[</div><h3>Communication Gaps</h3><p>Shift handoffs that drop critical details.</p></div>
+      <div class="card reveal"><div class="card-ic">⚠️</div><h3>Compliance Risks</h3><p>Audit anxiety from incomplete documentation.</p></div>
+    </div>
+  </section>
+
+  <!-- Solutions -->
+  <section class="section">
+    <div class="section-head reveal">
+      <span class="eyebrow">The TrackMED solution</span>
+      <h2>One platform for the whole med cycle</h2>
+    </div>
+    <div class="grid-3">
+      <div class="card reveal"><div class="card-ic">]]>👥<![CDATA[</div><h3>Patient Management</h3><p>Complete medical profiles with allergies, conditions, and history.</p></div>
+      <div class="card reveal"><div class="card-ic">]]>💊<![CDATA[</div><h3>Medication Management</h3><p>Track every drug, dose, schedule, and interaction in one place.</p></div>
+      <div class="card reveal"><div class="card-ic">]]>📅<![CDATA[</div><h3>Smart Scheduling</h3><p>Automated reminders for nurses and caregivers.</p></div>
+      <div class="card reveal"><div class="card-ic">]]>📈<![CDATA[</div><h3>Real-Time Monitoring</h3><p>Live adherence dashboards across every wing.</p></div>
+      <div class="card reveal"><div class="card-ic">]]>🔔<![CDATA[</div><h3>Smart Alerts</h3><p>Missed dose? Inventory low? Everyone knows instantly.</p></div>
+      <div class="card reveal"><div class="card-ic">]]>📊<![CDATA[</div><h3>Reports & Analytics</h3><p>Audit-ready compliance reports in one click.</p></div>
+    </div>
+  </section>
+
+  <!-- Who -->
+  <section id="who" class="section">
+    <div class="section-head reveal">
+      <span class="eyebrow">Built for</span>
+      <h2>Trusted across care settings</h2>
+    </div>
+    <div class="grid-4">
+      <div class="card reveal"><div class="card-ic">]]>🏥<![CDATA[</div><h3>Rehabilitation Centers</h3></div>
+      <div class="card reveal"><div class="card-ic">]]>🧠<![CDATA[</div><h3>Alzheimer's Care</h3></div>
+      <div class="card reveal"><div class="card-ic">]]>🩺<![CDATA[</div><h3>Parkinson's Facilities</h3></div>
+      <div class="card reveal"><div class="card-ic">]]>🏠<![CDATA[</div><h3>Long-Term Care</h3></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="cta-inner reveal">
+      <h2>Ready to give your care team time back?</h2>
+      <p>Join the facilities choosing TrackMED for safer, calmer medication rounds.</p>
+      <a href="/trackmed?id=trackmed_login" class="btn btn-primary">Login →</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="logo">
+        <!--<span class="logo-mark">+</span>-->
+        <!--<span class="logo-text">TrackMED</span>-->
+        <img src="/trackmed_logo.png" alt="TrackMED Logo" class="logo-img">
+      </div>
+      <p>© 2026 TrackMED. Built for modern care.</p>
+      <div class="footer-links">
+        <a href="/trackmed?id=trackmed_login">Privacy</a><a href="#">Support</a><a href="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+</div>]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>b30698f3e41143107f4444f39d029021</id>
+        <sys_created_by>meghanaa.penumetsa</sys_created_by>
+        <sys_created_on>2026-06-12 09:44:23</sys_created_on>
+        <sys_id>fb0698f3e41143107f4444f39d029024</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>meghanaa.penumetsa</sys_updated_by>
+        <sys_updated_on>2026-06-12 09:44:23</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

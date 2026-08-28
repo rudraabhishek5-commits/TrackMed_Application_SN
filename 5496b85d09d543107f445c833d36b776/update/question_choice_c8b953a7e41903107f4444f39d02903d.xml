@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="question_choice">
+    <question_choice action="INSERT_OR_UPDATE">
+        <inactive>false</inactive>
+        <order>22</order>
+        <published_ref/>
+        <question display_value="Refill Priority">9bf85327e41903107f4444f39d0290ef</question>
+        <sys_class_name>question_choice</sys_class_name>
+        <sys_created_by>navata.sri</sys_created_by>
+        <sys_created_on>2026-06-12 05:20:57</sys_created_on>
+        <sys_id>c8b953a7e41903107f4444f39d02903d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Urgent</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>question_choice_c8b953a7e41903107f4444f39d02903d</sys_update_name>
+        <sys_updated_by>navata.sri</sys_updated_by>
+        <sys_updated_on>2026-06-12 05:20:57</sys_updated_on>
+        <text>Urgent</text>
+        <value>urgent</value>
+    </question_choice>
+    <fx_price action="delete_multiple" query="id=c8b953a7e41903107f4444f39d02903d"/>
+</record_update>

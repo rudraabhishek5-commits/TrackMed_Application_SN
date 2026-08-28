@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function() {
+
+    var c = this;
+
+    c.filters = [
+        "All",
+        "Given",
+        "Due Now",
+        "Missed",
+        "Upcoming"
+    ];
+
+    c.selectedFilter = "All";
+
+    c.selectedDate = new Date();
+
+    updateDate();
+
+    c.previousDay = function() {
+
+        c.selectedDate.setDate(
+            c.selectedDate.getDate() - 1
+        );
+
+        updateDate();
+    };
+
+    c.nextDay = function() {
+
+        c.selectedDate.setDate(
+            c.selectedDate.getDate() + 1
+        );
+
+        updateDate();
+    };
+
+    c.selectFilter = function(filter) {
+
+        c.selectedFilter = filter;
+
+        console.log(
+            "Selected Filter: " + filter
+        );
+
+        /*
+        Later you can broadcast an event
+        to refresh the Timeline widget.
+        */
+    };
+
+    function updateDate() {
+
+        var options = {
+            weekday: 'short',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        };
+
+        c.currentDate =
+            c.selectedDate.toLocaleDateString(
+                'en-US',
+                options
+            );
+    }
+
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/* =====================================
+   HEADER
+===================================== */
+
+.automed-page-header{
+
+    position:relative;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:35px;
+
+    border-radius:24px;
+
+    margin-bottom:25px;
+
+    overflow:hidden;
+
+    background:linear-gradient(
+        -45deg,
+        #1B5E20,
+        #2E7D32,
+        #43A047,
+        #66BB6A
+    );
+
+    background-size:400% 400%;
+
+    animation:gradientMove 12s ease infinite;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+}
+
+/* =====================================
+   ANIMATED GRADIENT
+===================================== */
+
+@keyframes gradientMove{
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0% 50%;
+    }
+}
+
+/* =====================================
+   BLOBS
+===================================== */
+
+.automed-page-header::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:250px;
+    height:250px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.08);
+
+    right:-80px;
+    top:-80px;
+
+    animation:blob1 8s infinite ease-in-out;
+}
+
+.automed-page-header::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+    height:180px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.06);
+
+    left:-60px;
+    bottom:-60px;
+
+    animation:blob2 10s infinite ease-in-out;
+}
+
+@keyframes blob1{
+
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-20px);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+}
+
+@keyframes blob2{
+
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(20px);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+}
+
+/* =====================================
+   HEADER CONTENT
+===================================== */
+
+.header-left{
+
+    position:relative;
+    z-index:2;
+}
+
+.header-badge{
+
+    display:inline-block;
+
+    background:rgba(255,255,255,.15);
+
+    padding:8px 15px;
+
+    border-radius:30px;
+
+    color:white;
+
+    font-size:13px;
+    font-weight:600;
+
+    margin-bottom:15px;
+
+    backdrop-filter:blur(8px);
+}
+
+.header-left h1{
+
+    margin:0;
+
+    color:white;
+
+    font-size:38px;
+
+    font-weight:700;
+}
+
+.header-left p{
+
+    margin-top:8px;
+
+    color:rgba(255,255,255,.9);
+
+    font-size:16px;
+}
+
+/* =====================================
+   RIGHT SECTION
+===================================== */
+
+.header-right{
+
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+    position:relative;
+    z-index:2;
+}
+
+/* =====================================
+   NAV BUTTONS
+===================================== */
+
+.nav-btn{
+
+    width:50px;
+    height:50px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.15);
+
+    color:white;
+
+    backdrop-filter:blur(8px);
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.nav-btn:hover{
+
+    transform:translateY(-3px) scale(1.08);
+
+    background:rgba(255,255,255,.25);
+}
+
+/* =====================================
+   DATE CARD
+===================================== */
+
+.schedule-date-card{
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    padding:12px 20px;
+
+    border-radius:14px;
+
+    background:rgba(255,255,255,.15);
+
+    color:white;
+
+    font-weight:600;
+
+    backdrop-filter:blur(10px);
+
+    border:1px solid rgba(255,255,255,.15);
+}
+
+.schedule-date-card i{
+
+    animation:calendarPulse 2s infinite;
+}
+
+@keyframes calendarPulse{
+
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.15);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+}
+
+/* =====================================
+   FILTERS
+===================================== */
+
+.schedule-filters{
+
+    display:flex;
+    gap:12px;
+
+    flex-wrap:wrap;
+
+    margin-top:20px;
+}
+
+.schedule-filters button{
+
+    border:none;
+
+    padding:12px 22px;
+
+    border-radius:30px;
+
+    background:white;
+
+    color:#1B5E20;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
+.schedule-filters button:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+
+.schedule-filters button.active{
+
+    background:#1B5E20;
+
+    color:white;
+
+    animation:activeGlow 2s infinite alternate;
+}
+
+@keyframes activeGlow{
+
+    from{
+        box-shadow:0 0 10px rgba(27,94,32,.3);
+    }
+
+    to{
+        box-shadow:0 0 20px rgba(27,94,32,.6);
+    }
+}
+
+/* =====================================
+   FLOATING MEDICAL ICONS
+===================================== */
+
+.floating-medical{
+
+    position:absolute;
+
+    color:rgba(255,255,255,.08);
+
+    z-index:1;
+}
+
+.icon1{
+
+    top:15%;
+    right:15%;
+
+    font-size:50px;
+
+    animation:floatIcon 6s infinite;
+}
+
+.icon2{
+
+    bottom:15%;
+    left:10%;
+
+    font-size:65px;
+
+    animation:floatIcon 8s infinite;
+}
+
+.icon3{
+
+    top:50%;
+    right:40%;
+
+    font-size:45px;
+
+    animation:floatIcon 7s infinite;
+}
+
+@keyframes floatIcon{
+
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-15px);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+}
+
+/* =====================================
+   MOBILE
+===================================== */
+
+@media(max-width:768px){
+
+    .automed-page-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:20px;
+    }
+
+    .header-left h1{
+
+        font-size:28px;
+    }
+
+    .header-right{
+
+        width:100%;
+
+        justify-content:center;
+    }
+
+    .schedule-filters{
+
+        justify-content:center;
+    }
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>medschedulecontainer1</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>MedScheduleContainer1</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    data.today = new GlideDateTime().getDisplayValue();
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-09 17:09:18</sys_created_on>
+        <sys_id>842f92f2bdd107107f446e5ccea40765</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>MedScheduleContainer1</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_widget_842f92f2bdd107107f446e5ccea40765</sys_update_name>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-11 04:11:45</sys_updated_on>
+        <template><![CDATA[<div class="automed-page-header">
+
+    <div class="header-left">
+        <h1>Medication Schedule</h1>
+        <p>Manage and monitor medication schedules</p>
+    </div>
+
+    <div class="header-right">
+
+        <button class="nav-btn" ng-click="c.previousDay()">
+            <i class="fa fa-chevron-left"></i>
+        </button>
+
+        <span class="schedule-date">
+            {{c.currentDate}}
+        </span>
+
+        <button class="nav-btn" ng-click="c.nextDay()">
+            <i class="fa fa-chevron-right"></i>
+        </button>
+
+    </div>
+
+</div>
+
+<div class="schedule-filters">
+
+    <button
+        ng-repeat="filter in c.filters"
+        ng-click="c.selectFilter(filter)"
+        ng-class="{'active': c.selectedFilter == filter}">
+        {{filter}}
+    </button>
+
+</div>]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>842f92f2bdd107107f446e5ccea40765</id>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-09 17:09:18</sys_created_on>
+        <sys_id>c82f92f2bdd107107f446e5ccea40768</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-09 17:09:18</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

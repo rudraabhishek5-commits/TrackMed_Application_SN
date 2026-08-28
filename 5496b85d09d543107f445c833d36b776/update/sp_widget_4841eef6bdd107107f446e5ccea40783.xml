@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function() {
+
+    var c = this;
+
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/* ===================================
+   KPI CONTAINER
+=================================== */
+
+.automed-kpi-container{
+
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+
+    margin-top:20px;
+}
+
+/* ===================================
+   KPI CARD
+=================================== */
+
+.kpi-card{
+
+    flex:1;
+    min-width:220px;
+
+    padding:28px;
+
+    border-radius:22px;
+
+    text-align:center;
+
+    color:white;
+
+    position:relative;
+
+    overflow:hidden;
+
+    cursor:pointer;
+
+    transition:.4s;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.15);
+
+    animation:cardEntry .8s ease forwards;
+
+    opacity:0;
+}
+
+/* ===================================
+   ENTRY ANIMATION
+=================================== */
+
+.kpi-card:nth-child(1){
+    animation-delay:.1s;
+}
+
+.kpi-card:nth-child(2){
+    animation-delay:.2s;
+}
+
+.kpi-card:nth-child(3){
+    animation-delay:.3s;
+}
+
+.kpi-card:nth-child(4){
+    animation-delay:.4s;
+}
+
+@keyframes cardEntry{
+
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* ===================================
+   HOVER
+=================================== */
+
+.kpi-card:hover{
+
+    transform:
+        translateY(-8px)
+        scale(1.03);
+
+    box-shadow:
+        0 20px 40px rgba(0,0,0,.20);
+}
+
+/* ===================================
+   SHIMMER EFFECT
+=================================== */
+
+.kpi-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:-100%;
+
+    width:100%;
+    height:100%;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.25),
+        transparent
+    );
+
+    transition:.8s;
+}
+
+.kpi-card:hover::before{
+
+    left:100%;
+}
+
+/* ===================================
+   FLOATING CIRCLE
+=================================== */
+
+.kpi-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:120px;
+    height:120px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.12);
+
+    top:-40px;
+    right:-40px;
+}
+
+/* ===================================
+   ICON
+=================================== */
+
+.kpi-icon{
+
+    font-size:42px;
+
+    margin-bottom:15px;
+
+    animation:iconFloat 4s ease-in-out infinite;
+}
+
+@keyframes iconFloat{
+
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-8px);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+}
+
+/* ===================================
+   VALUE
+=================================== */
+
+.kpi-value{
+
+    font-size:42px;
+
+    font-weight:700;
+
+    margin-bottom:10px;
+
+    animation:numberPulse 3s infinite;
+}
+
+@keyframes numberPulse{
+
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.05);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+}
+
+/* ===================================
+   LABEL
+=================================== */
+
+.kpi-label{
+
+    font-size:16px;
+
+    font-weight:600;
+
+    color:rgba(255,255,255,.95);
+}
+
+/* ===================================
+   GIVEN CARD
+=================================== */
+
+.given{
+
+    background:linear-gradient(
+        135deg,
+        #1B5E20,
+        #66BB6A
+    );
+}
+
+/* ===================================
+   DUE CARD
+=================================== */
+
+.due{
+
+    background:linear-gradient(
+        135deg,
+        #E65100,
+        #FFB74D
+    );
+
+    animation:
+        cardEntry .8s ease forwards,
+        dueGlow 2s infinite;
+}
+
+@keyframes dueGlow{
+
+    0%{
+        box-shadow:
+            0 0 0 rgba(255,183,77,.4);
+    }
+
+    50%{
+        box-shadow:
+            0 0 25px rgba(255,183,77,.5);
+    }
+
+    100%{
+        box-shadow:
+            0 0 0 rgba(255,183,77,.4);
+    }
+}
+
+/* ===================================
+   MISSED CARD
+=================================== */
+
+.missed{
+
+    background:linear-gradient(
+        135deg,
+        #B71C1C,
+        #EF5350
+    );
+}
+
+/* ===================================
+   UPCOMING CARD
+=================================== */
+
+.upcoming{
+
+    background:linear-gradient(
+        135deg,
+        #0D47A1,
+        #64B5F6
+    );
+}
+
+/* ===================================
+   MOBILE
+=================================== */
+
+@media(max-width:768px){
+
+    .kpi-card{
+
+        min-width:100%;
+    }
+
+    .kpi-value{
+
+        font-size:34px;
+    }
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>automed_kpi_summary</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>Automed Kpi Summary</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    data.given = 24;
+    data.due_now = 5;
+    data.missed = 3;
+    data.upcoming = 18;
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-09 17:18:35</sys_created_on>
+        <sys_id>4841eef6bdd107107f446e5ccea40783</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>Automed Kpi Summary</sys_name>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sp_widget_4841eef6bdd107107f446e5ccea40783</sys_update_name>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-11 04:19:10</sys_updated_on>
+        <template><![CDATA[<div class="automed-kpi-container">
+
+    <div class="kpi-card given">
+        <div class="kpi-value">{{c.data.given}}</div>
+        <div class="kpi-label">Given</div>
+    </div>
+
+    <div class="kpi-card due">
+        <div class="kpi-value">{{c.data.due_now}}</div>
+        <div class="kpi-label">Due Now</div>
+    </div>
+
+    <div class="kpi-card missed">
+        <div class="kpi-value">{{c.data.missed}}</div>
+        <div class="kpi-label">Missed</div>
+    </div>
+
+    <div class="kpi-card upcoming">
+        <div class="kpi-value">{{c.data.upcoming}}</div>
+        <div class="kpi-label">Upcoming</div>
+    </div>
+
+</div>]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>4841eef6bdd107107f446e5ccea40783</id>
+        <sys_created_by>bhanu.reddy</sys_created_by>
+        <sys_created_on>2026-06-09 17:18:35</sys_created_on>
+        <sys_id>4441223abdd107107f446e5ccea4075a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>bhanu.reddy</sys_updated_by>
+        <sys_updated_on>2026-06-09 17:18:35</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>
