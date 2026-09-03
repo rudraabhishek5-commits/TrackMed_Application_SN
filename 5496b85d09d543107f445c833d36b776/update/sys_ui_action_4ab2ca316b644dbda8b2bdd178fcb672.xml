@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_action">
+    <sys_ui_action action="INSERT_OR_UPDATE">
+        <action_name>calculate_adherence</action_name>
+        <active>true</active>
+        <client>false</client>
+        <client_script_v2/>
+        <comments/>
+        <condition/>
+        <form_action>true</form_action>
+        <form_button>true</form_button>
+        <form_button_icon/>
+        <form_button_v2>false</form_button_v2>
+        <form_context_menu>false</form_context_menu>
+        <form_link>false</form_link>
+        <form_menu_button_v2>false</form_menu_button_v2>
+        <form_style>primary</form_style>
+        <format_for_configurable_workspace>false</format_for_configurable_workspace>
+        <hint/>
+        <isolate_script>false</isolate_script>
+        <list_action>false</list_action>
+        <list_banner_button>false</list_banner_button>
+        <list_button>false</list_button>
+        <list_button_icon/>
+        <list_choice>false</list_choice>
+        <list_context_menu>false</list_context_menu>
+        <list_link>false</list_link>
+        <list_save_with_form_button>false</list_save_with_form_button>
+        <list_style/>
+        <messages/>
+        <name>Adherence</name>
+        <onclick/>
+        <order>100</order>
+        <script><![CDATA[var patientId = current.sys_id.toString();
+
+var totalAgg = new GlideAggregate('x_snc_trackmed_dose_log');
+totalAgg.addQuery('patient', patientId);
+totalAgg.addAggregate('COUNT');
+totalAgg.query();
+var totalCount = 0;
+if (totalAgg.next()) {
+    totalCount = parseInt(totalAgg.getAggregate('COUNT'), 10);
+}
+
+var takenAgg = new GlideAggregate('x_snc_trackmed_dose_log');
+takenAgg.addQuery('patient', patientId);
+takenAgg.addQuery('status', 'Taken');
+takenAgg.addAggregate('COUNT');
+takenAgg.query();
+var takenCount = 0;
+if (takenAgg.next()) {
+    takenCount = parseInt(takenAgg.getAggregate('COUNT'), 10);
+}
+
+var adherence = 0;
+if (totalCount > 0) {
+    adherence = Math.round((takenCount / totalCount) * 100);
+}
+
+gs.addInfoMessage('Adherence: ' + adherence + '% (' + takenCount + ' taken out of ' + totalCount + ' total dose logs)');
+action.setRedirectURL(current);]]></script>
+        <show_form_icon_only>false</show_form_icon_only>
+        <show_insert>true</show_insert>
+        <show_list_icon_only>false</show_list_icon_only>
+        <show_multiple_update>false</show_multiple_update>
+        <show_query>false</show_query>
+        <show_update>true</show_update>
+        <sys_class_name>sys_ui_action</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-03 17:58:29</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>4ab2ca316b644dbda8b2bdd178fcb672</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Adherence</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="TrackMed" source="x_snc_trackmed">5496b85d09d543107f445c833d36b776</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TrackMed">5496b85d09d543107f445c833d36b776</sys_scope>
+        <sys_update_name>sys_ui_action_4ab2ca316b644dbda8b2bdd178fcb672</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-03 17:58:29</sys_updated_on>
+        <table>x_snc_trackmed_patient_record</table>
+        <ui11_compatible>false</ui11_compatible>
+        <ui16_compatible>false</ui16_compatible>
+    </sys_ui_action>
+</record_update>
